@@ -1,0 +1,244 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|c:\\users\\dibas\\onedrive\\desktop\\thehighinnovation.pos.web\\layout\\mainlayout.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|solutionrelative:layout\\mainlayout.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|c:\\users\\dibas\\onedrive\\desktop\\thehighinnovation.pos.web\\model\\globalstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|solutionrelative:model\\globalstate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|c:\\users\\dibas\\onedrive\\desktop\\thehighinnovation.pos.web\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|solutionrelative:wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|c:\\users\\dibas\\onedrive\\desktop\\thehighinnovation.pos.web\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|solutionrelative:layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|c:\\users\\dibas\\onedrive\\desktop\\thehighinnovation.pos.web\\layout\\mainlayout.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|solutionrelative:layout\\mainlayout.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|c:\\users\\dibas\\onedrive\\desktop\\thehighinnovation.pos.web\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|solutionrelative:layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|c:\\users\\dibas\\onedrive\\desktop\\thehighinnovation.pos.web\\pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|solutionrelative:pages\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|c:\\users\\dibas\\onedrive\\desktop\\thehighinnovation.pos.web\\pages\\login.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|solutionrelative:pages\\login.razor.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|c:\\users\\dibas\\onedrive\\desktop\\thehighinnovation.pos.web\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|c:\\users\\dibas\\onedrive\\desktop\\thehighinnovation.pos.web\\model\\response\\category\\categoryrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|solutionrelative:model\\response\\category\\categoryrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|c:\\users\\dibas\\onedrive\\desktop\\thehighinnovation.pos.web\\pages\\login.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|solutionrelative:pages\\login.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|c:\\users\\dibas\\onedrive\\desktop\\thehighinnovation.pos.web\\model\\request\\product\\createproductrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|solutionrelative:model\\request\\product\\createproductrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|c:\\users\\dibas\\onedrive\\desktop\\thehighinnovation.pos.web\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|c:\\users\\dibas\\onedrive\\desktop\\thehighinnovation.pos.web\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0F31CB7B-22A6-4E35-A37B-C86B3A6C26C1}|TheHighInnovation.POS.WEB.csproj|solutionrelative:app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainLayout.razor.css",
+              "DocumentMoniker": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Layout\\MainLayout.razor.css",
+              "RelativeDocumentMoniker": "Layout\\MainLayout.razor.css",
+              "ToolTip": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Layout\\MainLayout.razor.css",
+              "RelativeToolTip": "Layout\\MainLayout.razor.css",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-06-05T05:10:02.868Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GlobalState.cs",
+              "DocumentMoniker": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Model\\GlobalState.cs",
+              "RelativeDocumentMoniker": "Model\\GlobalState.cs",
+              "ToolTip": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Model\\GlobalState.cs",
+              "RelativeToolTip": "Model\\GlobalState.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T05:06:30.36Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MainLayout.razor.cs",
+              "DocumentMoniker": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Layout\\MainLayout.razor.cs",
+              "RelativeDocumentMoniker": "Layout\\MainLayout.razor.cs",
+              "ToolTip": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Layout\\MainLayout.razor.cs",
+              "RelativeToolTip": "Layout\\MainLayout.razor.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-05T05:05:19.606Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "Layout\\MainLayout.razor",
+              "ToolTip": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "Layout\\MainLayout.razor",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-05T05:04:19.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Login.razor.css",
+              "DocumentMoniker": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Pages\\Login.razor.css",
+              "RelativeDocumentMoniker": "Pages\\Login.razor.css",
+              "ToolTip": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Pages\\Login.razor.css",
+              "RelativeToolTip": "Pages\\Login.razor.css",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2024-06-03T18:45:00.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "CategoryRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Model\\Response\\Category\\CategoryRequestDto.cs",
+              "RelativeDocumentMoniker": "Model\\Response\\Category\\CategoryRequestDto.cs",
+              "ToolTip": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Model\\Response\\Category\\CategoryRequestDto.cs",
+              "RelativeToolTip": "Model\\Response\\Category\\CategoryRequestDto.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-03T18:40:11.123Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CreateProductRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Model\\Request\\Product\\CreateProductRequestDto.cs",
+              "RelativeDocumentMoniker": "Model\\Request\\Product\\CreateProductRequestDto.cs",
+              "ToolTip": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Model\\Request\\Product\\CreateProductRequestDto.cs",
+              "RelativeToolTip": "Model\\Request\\Product\\CreateProductRequestDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-03T18:39:59.692Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Login.razor.cs",
+              "DocumentMoniker": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Pages\\Login.razor.cs",
+              "RelativeDocumentMoniker": "Pages\\Login.razor.cs",
+              "ToolTip": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Pages\\Login.razor.cs",
+              "RelativeToolTip": "Pages\\Login.razor.cs",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAYwEwAAABMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-03T18:25:34.172Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Login.razor",
+              "DocumentMoniker": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Pages\\Login.razor",
+              "RelativeDocumentMoniker": "Pages\\Login.razor",
+              "ToolTip": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Pages\\Login.razor",
+              "RelativeToolTip": "Pages\\Login.razor",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-03T18:19:20.661Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\wwwroot\\index.html",
+              "RelativeDocumentMoniker": "wwwroot\\index.html",
+              "ToolTip": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\wwwroot\\index.html",
+              "RelativeToolTip": "wwwroot\\index.html",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-06-03T18:16:43.692Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Layout\\NavMenu.razor",
+              "RelativeDocumentMoniker": "Layout\\NavMenu.razor",
+              "ToolTip": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Layout\\NavMenu.razor",
+              "RelativeToolTip": "Layout\\NavMenu.razor",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-05T04:59:55.472Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-03T17:50:04.125Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-03T17:45:45.843Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "App.razor",
+              "DocumentMoniker": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\App.razor",
+              "RelativeDocumentMoniker": "App.razor",
+              "ToolTip": "C:\\Users\\dibas\\OneDrive\\Desktop\\TheHighInnovation.POS.WEB\\App.razor",
+              "RelativeToolTip": "App.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-06-03T17:45:44.247Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
