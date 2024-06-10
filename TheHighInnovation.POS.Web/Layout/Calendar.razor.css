@@ -1,0 +1,974 @@
+﻿* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background: black;
+  color: #ccc;
+  font: normal normal 400 12pt / 2cap "Figtree", sans-serif;
+}
+
+#calendar {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  overflow: hidden;
+}
+
+#calendar section:not(:first-of-type) {
+  width: 100%;
+  height: 100%;
+  display: none;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+#calendar section:first-of-type {
+  position: fixed;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+  opacity: 0;
+}
+
+#calendar section:first-of-type code {
+  width: 0;
+  height: 0;
+  font-size: 0px;
+  line-height: 0;
+  visibility: hidden;
+  opacity: 0;
+}
+
+#calendar section:first-of-type #LoveYaLikeASister {
+  font-family: "Love Ya Like A Sister";
+}
+
+#calendar section:first-of-type #KaushanScript {
+  font-family: "Kaushan Script";
+}
+
+#calendar section:first-of-type #MarckScript {
+  font-family: "Marck Script";
+}
+
+#calendar section:first-of-type #Peralta {
+  font-family: "Peralta";
+}
+
+#calendar section:first-of-type #Limelight {
+  font-family: "Limelight";
+}
+
+#calendar section:first-of-type #Borel {
+  font-family: "Borel";
+}
+
+#calendar section:first-of-type #Aclonica {
+  font-family: "Aclonica";
+}
+
+#calendar section:first-of-type #GrechenFuemen {
+  font-family: "Grechen Fuemen";
+}
+
+#calendar section:first-of-type #Shojumaru {
+  font-family: "Shojumaru";
+}
+
+#calendar section:first-of-type #StyleScript {
+  font-family: "Style Script";
+}
+
+#calendar section:first-of-type #Carattere {
+  font-family: "Carattere";
+}
+
+#calendar:has(#nextJanuary:checked) #january,
+#calendar:has(#prevJanuary:checked) #january,
+#calendar:has(#nextFebruary:checked) #february,
+#calendar:has(#prevFebruary:checked) #february,
+#calendar:has(#nextMarch:checked) #march,
+#calendar:has(#prevMarch:checked) #march,
+#calendar:has(#nextApril:checked) #april,
+#calendar:has(#prevApril:checked) #april,
+#calendar:has(#nextMay:checked) #may,
+#calendar:has(#prevMay:checked) #may,
+#calendar:has(#nextJune:checked) #june,
+#calendar:has(#prevJune:checked) #june,
+#calendar:has(#nextJuly:checked) #july,
+#calendar:has(#prevJuly:checked) #july,
+#calendar:has(#nextAugust:checked) #august,
+#calendar:has(#prevAugust:checked) #august,
+#calendar:has(#nextSeptember:checked) #september,
+#calendar:has(#prevSeptember:checked) #september,
+#calendar:has(#nextOctober:checked) #october,
+#calendar:has(#prevOctober:checked) #october,
+#calendar:has(#nextNovember:checked) #november,
+#calendar:has(#prevNovember:checked) #november,
+#calendar:has(#nextDecember:checked) #december,
+#calendar:has(#prevDecember:checked) #december {
+  display: flex;
+}
+
+#calendar section header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+#calendar section header input {
+  display: none;
+}
+
+#calendar section header label {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: 1px solid var(--strongBorder);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#calendar section header label:hover {
+  background-color: var(--strongBorder);
+  transition: all 0.3s ease;
+}
+
+#calendar section header label:active {
+  transform: scale(0.9);
+  transition: all 0.05s ease;
+}
+
+#calendar section header label i {
+  color: var(--strongText);
+  line-height: 0;
+  font-size: 100%;
+  transition: all 0.3s ease;
+}
+
+#calendar section header label:hover i {
+  filter: invert(100%);
+  transition: all 0.3s ease;
+}
+
+#calendar section header label:first-of-type::after {
+  position: absolute;
+  left: 50px;
+  content: "Previous";
+  pointer-events: none;
+  color: var(--weakText);
+}
+
+#calendar section header label:last-of-type::after {
+  position: absolute;
+  right: 50px;
+  content: "Next";
+  pointer-events: none;
+  color: var(--weakText);
+}
+
+#calendar section header h2 {
+  margin: 0;
+  font-size: 230%;
+  line-height: 100%;
+  color: var(--strongText);
+  font-weight: 400;
+}
+
+#calendar section ul {
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: stretch;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+}
+
+#calendar section ul::-webkit-scrollbar {
+  width: 15px;
+}
+
+#calendar section ul::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+#calendar section ul::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#calendar section ul::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+#calendar section ul li {
+  width: calc(100% / 7);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-top: 1px solid var(--strongBorder);
+  border-right: 1px solid var(--strongBorder);
+}
+
+#calendar section ul .exterior {
+  background-color: var(--exteriorBg);
+}
+
+#calendar section ul li time {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--weakBorder);
+  border-bottom: 1px solid var(--weakBorder);
+  color: var(--strongText);
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+#calendar section ul li:not(.exterior):hover time {
+  background-color: var(--eventBg);
+  transition: all 0.2s ease;
+}
+
+#calendar section ul li figure {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  height: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  border-top: 1px solid var(--weakBorder);
+  z-index: 1;
+  overflow: hidden;
+}
+
+#calendar section ul li figure:has(svg) {
+  background-color: var(--eventBg);
+}
+
+#calendar section ul li:not(.exterior) figure::after {
+  position: absolute;
+  bottom: 0;
+  right: 100%;
+  width: 100%;
+  height: 100%;
+  background-color: var(--exteriorBg);
+  content: "";
+  z-index: -1;
+  transition: all 0.6s ease;
+}
+
+#calendar section ul li:hover figure:has(svg)::after {
+  right: 0;
+  transition: all 0.3s ease;
+}
+
+#calendar section ul li figure figcaption {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  color: var(--weakText);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 5px 5px 5px 0;
+}
+
+#calendar section ul li figure figcaption svg {
+  fill: var(--strongText);
+  min-width: 17px;
+  height: auto;
+  margin: 0 10px;
+  animation: a 5s linear infinite;
+}
+
+@keyframes a {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+#calendar section ul li figure figcaption abbr {
+  margin: 0;
+  color: var(--weakText);
+  font-weight: 500;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  text-decoration: none;
+  cursor: help;
+  top: 1px;
+  transition: all 0.2s ease;
+}
+
+#calendar section ul li:hover figure figcaption abbr {
+  color: var(--strongText);
+  transition: all 0.2s ease;
+}
+
+#calendar #january {
+  background-image: linear-gradient(
+    135deg,
+    #ffffff,
+    #fcfdfe,
+    #f3f9fd,
+    #e6f3fb,
+    #d5ebf8,
+    #c3e2f5,
+    #b0daf3,
+    #9ed1f0,
+    #8dc9ed,
+    #80c3eb,
+    #77bfea,
+    #74bde9
+  );
+  --strongText: black;
+  --weakText: #333;
+  --strongBorder: black;
+  --weakBorder: #777;
+  --exteriorBg: rgba(0, 0, 0, 0.25);
+  --eventBg: rgba(255, 255, 255, 0.3);
+}
+
+#calendar #january header h2 {
+  font-family: "Snowburst One", sans-serif;
+  font-weight: 600;
+}
+
+#calendar #january ul {
+  background-image: linear-gradient(
+    135deg,
+    #ffffff,
+    #fcfdfe,
+    #f3f9fd,
+    #e6f3fb,
+    #d5ebf8,
+    #c3e2f5,
+    #b0daf3,
+    #9ed1f0,
+    #8dc9ed,
+    #80c3eb,
+    #77bfea,
+    #74bde9
+  );
+}
+
+#calendar #february {
+  background-image: linear-gradient(
+    135deg,
+    #cb032c,
+    #ce042d,
+    #d5062f,
+    #df0933,
+    #eb0e38,
+    #ed2145,
+    #ea3756,
+    #e84c66,
+    #e75f74,
+    #e66d80,
+    #e67787,
+    #e67a8a
+  );
+  --strongText: white;
+  --weakText: #ddd;
+  --strongBorder: white;
+  --weakBorder: #bbb;
+  --exteriorBg: rgba(0, 0, 0, 0.3);
+  --eventBg: rgba(0, 0, 0, 0.1);
+}
+
+#calendar #february header h2 {
+  font-family: "Love Ya Like A Sister", cursive;
+}
+
+#calendar #february ul {
+  background-image: linear-gradient(
+    135deg,
+    #cb032c,
+    #ce042d,
+    #d5062f,
+    #df0933,
+    #eb0e38,
+    #ed2145,
+    #ea3756,
+    #e84c66,
+    #e75f74,
+    #e66d80,
+    #e67787,
+    #e67a8a
+  );
+}
+
+#calendar #march {
+  background-image: linear-gradient(
+    135deg,
+    #07b50d,
+    #00b520,
+    #00b342,
+    #00af6d,
+    #00a8a2,
+    #009ed7,
+    #0091ff,
+    #007fff,
+    #0067ff,
+    #1b49f1,
+    #7429d9,
+    #8415cf
+  );
+  --strongText: white;
+  --weakText: #eee;
+  --strongBorder: white;
+  --weakBorder: #ccc;
+  --exteriorBg: rgba(0, 0, 0, 0.3);
+  --eventBg: rgba(0, 0, 0, 0.1);
+}
+
+#calendar #march header h2 {
+  font-family: "Kaushan Script", cursive;
+}
+
+#calendar #march ul {
+  background-image: linear-gradient(
+    135deg,
+    #07b50d,
+    #00b520,
+    #00b342,
+    #00af6d,
+    #00a8a2,
+    #009ed7,
+    #0091ff,
+    #007fff,
+    #0067ff,
+    #1b49f1,
+    #7429d9,
+    #8415cf
+  );
+}
+
+#calendar #april {
+  background-image: linear-gradient(
+    135deg,
+    #fbff82,
+    #f8ff82,
+    #f1ff84,
+    #e6ff85,
+    #d9ff87,
+    #ccff8a,
+    #beff8c,
+    #b1ff8f,
+    #a7ff91,
+    #9eff92,
+    #99ff94,
+    #97ff94
+  );
+  --strongText: black;
+  --weakText: #444;
+  --strongBorder: black;
+  --weakBorder: #888;
+  --exteriorBg: rgba(0, 0, 0, 0.25);
+  --eventBg: rgba(255, 255, 255, 0.2);
+}
+
+#calendar #april header h2 {
+  font-family: "Marck Script", cursive;
+}
+
+#calendar #april ul {
+  background-image: linear-gradient(
+    135deg,
+    #fbff82,
+    #f8ff82,
+    #f1ff84,
+    #e6ff85,
+    #d9ff87,
+    #ccff8a,
+    #beff8c,
+    #b1ff8f,
+    #a7ff91,
+    #9eff92,
+    #99ff94,
+    #97ff94
+  );
+}
+
+#calendar #may {
+  background-image: linear-gradient(
+    135deg,
+    #fff8f2,
+    #fff7f1,
+    #fff4ef,
+    #ffefec,
+    #ffe7e8,
+    #ffe3e9,
+    #ffdeec,
+    #ffdaf1,
+    #ffd5f7,
+    #ffd2fe,
+    #fcd0ff,
+    #facfff
+  );
+  --strongText: #333;
+  --weakText: #555;
+  --strongBorder: #333;
+  --weakBorder: #999;
+  --exteriorBg: rgba(0, 0, 0, 0.25);
+  --eventBg: rgba(255, 255, 255, 0.3);
+}
+
+#calendar #may header h2 {
+  font-family: "Peralta", serif;
+}
+
+#calendar #may ul {
+  background-image: linear-gradient(
+    135deg,
+    #fff8f2,
+    #fff7f1,
+    #fff4ef,
+    #ffefec,
+    #ffe7e8,
+    #ffe3e9,
+    #ffdeec,
+    #ffdaf1,
+    #ffd5f7,
+    #ffd2fe,
+    #fcd0ff,
+    #facfff
+  );
+}
+
+#calendar #june {
+  background-image: linear-gradient(
+    135deg,
+    #ffbc82,
+    #ffb985,
+    #ffb28c,
+    #ffab96,
+    #ffa5a3,
+    #ffb2bf,
+    #ffc0d7,
+    #ffcfea,
+    #ffdcf6,
+    #ffe6fc,
+    #ffedfe,
+    #fff0ff
+  );
+  --strongText: black;
+  --weakText: #444;
+  --strongBorder: black;
+  --weakBorder: #777;
+  --exteriorBg: rgba(0, 0, 0, 0.25);
+  --eventBg: rgba(255, 255, 255, 0.2);
+}
+
+#calendar #june header h2 {
+  font-family: "Limelight", sans-serif;
+  position: relative;
+  top: 2px;
+}
+
+#calendar #june ul {
+  background-image: linear-gradient(
+    135deg,
+    #ffbc82,
+    #ffb985,
+    #ffb28c,
+    #ffab96,
+    #ffa5a3,
+    #ffb2bf,
+    #ffc0d7,
+    #ffcfea,
+    #ffdcf6,
+    #ffe6fc,
+    #ffedfe,
+    #fff0ff
+  );
+}
+
+#calendar #july {
+  background-image: linear-gradient(
+    135deg,
+    #eb7b68,
+    #eb7c66,
+    #ec7e60,
+    #ed8356,
+    #ef8b4b,
+    #f1983d,
+    #f4a82f,
+    #f7bb21,
+    #fad014,
+    #fce30a,
+    #fef203,
+    #fff700
+  );
+  --strongText: black;
+  --weakText: #333;
+  --strongBorder: black;
+  --weakBorder: #666;
+  --exteriorBg: rgba(0, 0, 0, 0.3);
+  --eventBg: rgba(255, 255, 255, 0.2);
+}
+
+#calendar #july header h2 {
+  font-family: "Borel", cursive;
+  position: relative;
+  top: 12px;
+}
+
+#calendar #july ul {
+  background-image: linear-gradient(
+    135deg,
+    #eb7b68,
+    #eb7c66,
+    #ec7e60,
+    #ed8356,
+    #ef8b4b,
+    #f1983d,
+    #f4a82f,
+    #f7bb21,
+    #fad014,
+    #fce30a,
+    #fef203,
+    #fff700
+  );
+}
+
+#calendar #august {
+  background-image: linear-gradient(
+    135deg,
+    #9c2304,
+    #9e2504,
+    #a42904,
+    #ae3104,
+    #b93a03,
+    #c64603,
+    #d45402,
+    #e16302,
+    #ed7101,
+    #f67c01,
+    #fd8500,
+    #ff8800
+  );
+  --strongText: white;
+  --weakText: #ddd;
+  --strongBorder: #eee;
+  --weakBorder: #bbb;
+  --exteriorBg: rgba(0, 0, 0, 0.35);
+  --eventBg: rgba(0, 0, 0, 0.15);
+}
+
+#calendar #august header h2 {
+  font-family: "Aclonica", sans-serif;
+}
+
+#calendar #august ul {
+  background-image: linear-gradient(
+    135deg,
+    #9c2304,
+    #9e2504,
+    #a42904,
+    #ae3104,
+    #b93a03,
+    #c64603,
+    #d45402,
+    #e16302,
+    #ed7101,
+    #f67c01,
+    #fd8500,
+    #ff8800
+  );
+}
+
+#calendar #september {
+  background-image: linear-gradient(
+    135deg,
+    #af562e,
+    #b25430,
+    #ba4e38,
+    #c44546,
+    #cd395c,
+    #d03178,
+    #ca3499,
+    #b742bb,
+    #9853d9,
+    #6e62ee,
+    #3a6bfb,
+    #006eff
+  );
+  --strongText: white;
+  --weakText: #ccc;
+  --strongBorder: white;
+  --weakBorder: #aaa;
+  --exteriorBg: rgba(0, 0, 0, 0.35);
+  --eventBg: rgba(0, 0, 0, 0.15);
+}
+
+#calendar #september header h2 {
+  font-family: "Grechen Fuemen", cursive;
+}
+
+#calendar #september ul {
+  background-image: linear-gradient(
+    135deg,
+    #af562e,
+    #b25430,
+    #ba4e38,
+    #c44546,
+    #cd395c,
+    #d03178,
+    #ca3499,
+    #b742bb,
+    #9853d9,
+    #6e62ee,
+    #3a6bfb,
+    #006eff
+  );
+}
+
+#calendar #october {
+  background-image: linear-gradient(
+    135deg,
+    #632033,
+    #641f35,
+    #661e3a,
+    #691c42,
+    #6d194e,
+    #72165d,
+    #76136f,
+    #73107b,
+    #670d7f,
+    #5c0a83,
+    #540985,
+    #510886
+  );
+  --strongText: white;
+  --weakText: #ccc;
+  --strongBorder: #ddd;
+  --weakBorder: #888;
+  --exteriorBg: rgba(0, 0, 0, 0.35);
+  --eventBg: rgba(0, 0, 0, 0.15);
+}
+
+#calendar #october header h2 {
+  font-family: "Shojumaru", sans-serif;
+}
+
+#calendar #october ul {
+  background-image: linear-gradient(
+    135deg,
+    #632033,
+    #641f35,
+    #661e3a,
+    #691c42,
+    #6d194e,
+    #72165d,
+    #76136f,
+    #73107b,
+    #670d7f,
+    #5c0a83,
+    #540985,
+    #510886
+  );
+}
+
+#calendar #november {
+  background-image: linear-gradient(
+    135deg,
+    #6b3908,
+    #6e3b09,
+    #77420a,
+    #834d0d,
+    #925b11,
+    #a26c15,
+    #b27e1b,
+    #c18f21,
+    #ce9f27,
+    #d5ab2f,
+    #d5b039,
+    #d5b23d
+  );
+  --strongText: white;
+  --weakText: white;
+  --strongBorder: white;
+  --weakBorder: #ccc;
+  --exteriorBg: rgba(0, 0, 0, 0.3);
+  --eventBg: rgba(0, 0, 0, 0.15);
+}
+
+#calendar #november header h2 {
+  font-family: "Style Script", cursive;
+  position: relative;
+  top: 4px;
+}
+
+#calendar #november ul {
+  background-image: linear-gradient(
+    135deg,
+    #6b3908,
+    #6e3b09,
+    #77420a,
+    #834d0d,
+    #925b11,
+    #a26c15,
+    #b27e1b,
+    #c18f21,
+    #ce9f27,
+    #d5ab2f,
+    #d5b039,
+    #d5b23d
+  );
+}
+
+#calendar #december {
+  background-image: linear-gradient(
+    135deg,
+    #298f29,
+    #318d23,
+    #41870f,
+    #537e00,
+    #637300,
+    #726500,
+    #7e5500,
+    #874400,
+    #8c3200,
+    #8e2100,
+    #8f1104,
+    #8f0808
+  );
+  --strongText: white;
+  --weakText: #ccc;
+  --strongBorder: white;
+  --weakBorder: #aaa;
+  --exteriorBg: rgba(0, 0, 0, 0.35);
+  --eventBg: rgba(0, 0, 0, 0.15);
+}
+
+#calendar #december header h2 {
+  font-family: "Carattere", cursive;
+  position: relative;
+  top: 4px;
+}
+
+#calendar #december ul {
+  background-image: linear-gradient(
+    135deg,
+    #298f29,
+    #318d23,
+    #41870f,
+    #537e00,
+    #637300,
+    #726500,
+    #7e5500,
+    #874400,
+    #8c3200,
+    #8e2100,
+    #8f1104,
+    #8f0808
+  );
+}
+
+@media (max-width: 1500px) {
+  #calendar section ul li {
+    width: calc(100% / 6);
+  }
+}
+
+@media (max-width: 1200px) {
+  #calendar section ul li {
+    width: calc(100% / 5);
+  }
+}
+
+@media (max-width: 1000px) {
+  #calendar section ul li {
+    width: calc(100% / 4);
+  }
+}
+
+@media (max-width: 800px) {
+  #calendar section ul li {
+    width: calc(100% / 3);
+  }
+}
+
+@media (max-width: 600px) {
+  #calendar section ul li {
+    width: calc(100% / 2);
+  }
+  #calendar section ul .exterior {
+    display: none;
+  }
+}
+
+@media (max-width: 500px) {
+  #calendar section header label::after {
+    display: none;
+  }
+  #calendar section ul li {
+    width: 100%;
+  }
+  #calendar section ul li figure {
+    height: unset;
+    min-height: 35px;
+  }
+  #calendar section ul li figure figcaption {
+    white-space: wrap;
+  }
+  #calendar section ul li figure figcaption abbr {
+    white-space: wrap;
+  }
+}
+
+@media (max-width: 360px) {
+  #calendar section header h2 {
+    font-size: 170%;
+  }
+}
+
+@media (max-height: 540px) {
+  #calendar section ul li time {
+    border-bottom: unset;
+  }
+}

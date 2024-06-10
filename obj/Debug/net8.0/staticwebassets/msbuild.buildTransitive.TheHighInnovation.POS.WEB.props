@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\TheHighInnovation.POS.WEB.props" />
-</Project>

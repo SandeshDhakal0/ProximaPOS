@@ -1,0 +1,10 @@
+﻿:root {
+    --search-button-background: #fff;
+    --tablehead-background: #c7d7d8;
+    --search-button-color: #111;
+    --color-white: #fff;
+    --color-trashbutton: #ff1a00; /* background color of clear input button in admin page*/
+    --page-background-color: #213C74;
+    --our--commonblue-color: #082248;
+    --vendor--cardcolor: #c7d7d8;
+}

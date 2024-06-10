@@ -1,0 +1,50 @@
+﻿@using TheHighInnovation.POS.Model.Request.VendorManagement
+@using TheHighInnovation.POS.Model.Response.Base
+@using TheHighInnovation.POS.Web.Services.Base
+@inject BaseService BaseService
+
+<div class="form-group">
+    <select style="background-color: #b3c6ec; width: 40px !important; border: none; border-radius: 5px; height: 4vh; margin:3px;" @onchange="OnUnitChanged">
+        <option value="">Select a Unit</option>
+        @if (_unitDTO != null)
+        {
+            foreach (var unit in _unitDTO)
+            {
+                <option value="@unit.Measure" selected="@((SelectedUnit == unit.Measure).ToString())">@unit.Measure</option>
+            }
+        }
+    </select>
+</div>
+
+@code {
+    [Parameter] public string SelectedUnit { get; set; }
+    
+    [Parameter] public EventCallback<string> SelectedUnitChanged { get; set; }
+
+    private IEnumerable<UnitDTO> _unitDTO;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _unitDTO = await GetUnitsAsync();
+    }
+
+    private async Task<IEnumerable<UnitDTO>> GetUnitsAsync()
+    {
+        try
+        {
+            var unit = await BaseService.GetAsync<Derived<IEnumerable<UnitDTO>>>("VendorManagement/get-unit");
+            return unit?.Result ?? Enumerable.Empty<UnitDTO>();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return Enumerable.Empty<UnitDTO>();
+        }
+    }
+    
+    private void OnUnitChanged(ChangeEventArgs e)
+    {
+        SelectedUnit = e.Value.ToString();
+        SelectedUnitChanged.InvokeAsync(SelectedUnit);
+    }
+}
