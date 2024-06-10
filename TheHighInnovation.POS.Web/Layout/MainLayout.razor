@@ -1,0 +1,85 @@
+﻿@inherits LayoutComponentBase
+
+<div>
+    <CascadingValue Value="@_globalState">
+        @if (_globalState.UserId != 0)
+        {
+            <header>
+                <NavMenu />
+            </header>
+
+            @if (_globalState.RoleType == 0)
+            {
+                @if (_globalState.PageNumber == 1)
+                {
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="sidebar">
+                                <NavPanel />
+                            </div>
+                        </div>
+                        <div class="col-10">
+                            <main>
+                                <article class="content px-4">
+                                    @Body
+                                </article>
+                            </main>
+                        </div>
+                    </div>
+                }
+                else if (_globalState.PageNumber == 4)
+                {
+                    <div class="row">
+                        <div class="col-2">
+                            <div class="sidebar">
+                                <NavPanel />
+                            </div>
+                        </div>
+                        <div class="col-10">
+                            <main>
+                                <article class="content px-4">
+                                    @Body
+                                </article>
+                            </main>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-12">
+                        <main>
+                            <article class="content px-4">
+                                @Body
+                            </article>
+                        </main>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="row">
+                    <main>
+                        <article class="content px-4">
+                            @Body
+                        </article>
+                    </main>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="row">
+                <main>
+                    <article class="content px-4">
+                        @Body
+                    </article>
+                </main>
+            </div>
+        }
+
+        <div class="footer">
+            <Footer />
+        </div>
+        <ReloadComponent />
+    </CascadingValue>
+</div>

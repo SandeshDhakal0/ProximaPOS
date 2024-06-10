@@ -1,0 +1,77 @@
+﻿.verticalnav {
+    margin-left: -1.6vh;
+    width: 18%;
+    position:fixed;
+    height: 93vh;
+    background-color: #23344f;
+    padding: 1vh;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top:7vh;
+}
+.dropdown-container {
+    display: none;
+    margin-left:1vh;
+}
+.dropdown-container a, .dropdown-btn {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+}
+.navdropdown button {
+    background-color: none;
+    padding: 0;
+    padding-left: -2vh;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    width: 100%;
+    margin-bottom:1vh;
+}
+.dropdownlink{
+   height:38vh;
+}
+.navedit {
+    width: 120%;
+    border-radius: 0;
+    text-transform: capitalize;
+    height: 7vh;
+    letter-spacing: 1px;
+    font-weight: 300;
+    font-size: 16px;
+    padding-top: 2.5%;
+    color: #fff;
+    border-radius: 0px 10px 10px 0px;
+}
+.fa-product-hunt{
+    font-size:18px;
+    
+}
+.fa-caret-down {
+    
+    margin-top: 5px;
+    margin-left: 5vw;
+}
+.productlink{
+    border-left:2px solid #fff;
+
+    height:5vh;
+
+}
+.lastproductlink{
+   
+  padding-bottom:0;
+  height:1.9vh;
+  margin-top:0;
+    
+}
+

@@ -1,0 +1,21 @@
+﻿<div class="modal fade show" style="display:block; background-color: rgba(10,10,10,.8);" role="dialog">
+    <div class="modal-dialog scrolldiv modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">@Title</h4>
+            </div>
+            <div class="modal-body">
+                @ChildContent
+            </div>
+            <div class="modal-footer justify-content-start">
+                <button type="button" class="addproductbtnmodal" @onclick=@ModalOk>@OkLabel</button>
+                @if (ShowCloseButton)
+                {
+                    <button type="button" class="btn btn-secondary" @onclick="ModalCancel">Close</button>
+                }
+             
+            </div>
+            
+        </div> 
+    </div>
+</div>

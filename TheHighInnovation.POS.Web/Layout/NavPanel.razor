@@ -1,0 +1,114 @@
+﻿@using TheHighInnovation.POS.Web.Services.Base
+
+@inject NavigationManager NavManager;
+@inject BaseService BaseService;
+
+<nav class="flex-column verticalnav">
+	
+	@if (_globalState is { RoleType: 0, OrganizationId: null })
+	{
+		<div class="nav-item px-3 navedit">
+			<NavLink class="nav-link" href="module" Match="NavLinkMatch.All">
+				<i class="fa-brands fa-dailymotion"></i> &nbsp; Module
+			</NavLink>
+		</div>
+		<div class="nav-item px-3 navedit">
+			<NavLink class="nav-link" href="service" Match="NavLinkMatch.All">
+				<i class="fa-brands fa-servicestack"></i> &nbsp; Service
+			</NavLink>
+		</div>
+		<div class="nav-item px-3 navedit">
+			<NavLink class="nav-link" href="organization" Match="NavLinkMatch.All">
+				<i class="fa-solid fa-building-ngo"></i> &nbsp; Organization
+			</NavLink>
+		</div>
+		<div class="nav-item px-3 navedit">
+			<NavLink class="nav-link" href="company" Match="NavLinkMatch.All">
+				<i class="fa-solid fa-building"></i> &nbsp; Company
+			</NavLink>
+		</div>
+		<div class="nav-item px-3 navedit">
+			<NavLink class="nav-link" href="role" Match="NavLinkMatch.All">
+				<i class="fa-solid fa-person-burst"></i> &nbsp; Role
+			</NavLink>
+		</div>
+	}
+
+
+	@if (_globalState.PageNumber == 4)
+	{
+		<div class="nav-item px-3 navedit">
+			<NavLink class="nav-link" href="vendor" Match="NavLinkMatch.All">
+				<i class="fa-solid fa-list"></i> &nbsp; Vendor
+			</NavLink>
+		</div>
+		
+		<div class="nav-item px-3 navedit navdropdown">
+			<button class="dropdown-btn d-flex" @onclick="ToggleDropdown">
+				<i class="fa fa-product-hunt" aria-hidden="true"></i> &nbsp; Product Master
+				
+				<i class="fa fa-caret-down"></i>
+			</button>
+			<div class="dropdown-container dropdownpart" style="@(_isDropdownOpen ? "display:block;" : "display:none;")">
+				<span class="d-flex productlink">
+					<NavLink class="nav-link dropdownlink" href="inventory-category" Match="NavLinkMatch.All"><s class="linecut">&ensp;&ensp;</s>Category</NavLink>
+				</span>
+				<span class="d-flex productlink">
+					<NavLink class="nav-link dropdownlink" href="inventory-unit" Match="NavLinkMatch.All"><s class="linecut">&ensp;&ensp;</s>Unit</NavLink>
+				</span>
+				<span class="d-flex productlink">
+					<NavLink class="nav-link dropdownlink" href="product-service" Match="NavLinkMatch.All"><s class="linecut">&ensp;&ensp;</s>Product</NavLink>
+				</span>
+				<span class="d-flex productlink">
+					<NavLink class="nav-link dropdownlink" href="productmanagement" Match="NavLinkMatch.All"><s class="linecut">&ensp;&ensp;</s>Purchase Receipt</NavLink>
+				</span>
+				<span class="d-flex productlink">
+					<NavLink class="nav-link dropdownlink" href="kharidkhata" Match="NavLinkMatch.All"><s class="linecut">&ensp;&ensp;</s>Kharid Khata</NavLink>
+				</span>
+				<span class="d-flex productlink lastproductlink">
+					<NavLink class="nav-link dropdownlink" href="inventoryrecords" Match="NavLinkMatch.All"><s class="linecut">&ensp;&ensp;</s>Purchase Receipt Record</NavLink>
+				</span>
+			
+			</div>
+		</div>
+	}
+	
+		else{
+		<div class="nav-item px-3 navedit">
+			<NavLink class="nav-link" href="category" Match="NavLinkMatch.All">
+				<i class="fa-solid fa-list"></i> &nbsp; Categories
+			</NavLink>
+		</div>
+		<div class="nav-item px-3 navedit">
+			<NavLink class="nav-link" href="product" Match="NavLinkMatch.All">
+				<i class="fa-solid fa-icons"></i> &nbsp; Products
+			</NavLink>
+		</div>
+		<div class="nav-item px-3 navedit">
+			<NavLink class="nav-link" href="employees" Match="NavLinkMatch.All">
+				<i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp; Employees
+			</NavLink>
+		</div>
+		<div class="nav-item px-3 navedit">
+			<span @onclick="LogoutHandler">
+				<i class="fa-solid fa-right-from-bracket"></i> &nbsp; Logout
+			</span>
+		</div>
+		}
+</nav>
+@* <script>
+	var dropdown = document.getElementsByClassName("dropdown-btn");
+	var i;
+
+	for (i = 0; i < dropdown.length; i++) {
+		dropdown[i].addEventListener("click", function () {
+			this.classList.toggle("active");
+			var dropdownContent = this.nextElementSibling;
+			if (dropdownContent.style.display === "block") {
+				dropdownContent.style.display = "none";
+			} else {
+				dropdownContent.style.display = "block";
+			}
+		});
+	}
+</script> *@

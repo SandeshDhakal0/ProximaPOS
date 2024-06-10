@@ -1,0 +1,55 @@
+﻿@* @using Blazored.Typeahead *@
+@using TheHighInnovation.POS.Model.Request.VendorManagement
+@using TheHighInnovation.POS.Model.Response.Base
+@using TheHighInnovation.POS.Web.Services.Base
+@inject BaseService BaseService
+
+<BlazoredTypeahead SearchMethod="FetchProduct"
+                   TValue="ProductListShort"
+                   TItem="ProductListShort"
+                   Value="selectedProduct"
+                   ValueChanged="SaveProductValue"
+                   ValueExpression="@(() => selectedProduct)">
+    @* <SelectedTemplate>@context.ProductName</SelectedTemplate> *@
+    @* <ResultTemplate>@context.ProductName</ResultTemplate> *@
+    <NotFoundTemplate>
+        Vendor Not Found.
+    </NotFoundTemplate>
+</BlazoredTypeahead>
+
+@code {
+    [Parameter] public EventCallback<ProductListShort> ValueChanged { get; set; }
+    [Parameter] public ProductListShort Value { get; set; }
+    private ProductListShort selectedProduct;
+
+    protected override void OnParametersSet()
+    {
+        selectedProduct = Value;
+    }
+
+    private async Task<IEnumerable<ProductListShort>> FetchProduct(string searchText)
+    {
+        var parameters = new Dictionary<string, string>
+        {
+            { "productname", searchText }
+        };
+
+        try
+        {
+            var products = await BaseService.GetAsync<Derived<IEnumerable<ProductListShort>>>("productmanagement/get-product-name", parameters);
+            return products.Result;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching vendors: {ex.Message}");
+            return Enumerable.Empty<ProductListShort>();
+        }
+    }
+
+    private async Task SaveProductValue(ProductListShort productList)
+    {
+        selectedProduct = productList;
+        await ValueChanged.InvokeAsync(productList);
+    }
+
+}
