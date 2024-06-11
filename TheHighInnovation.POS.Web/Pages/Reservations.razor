@@ -1,0 +1,526 @@
+﻿@page "/reservation"
+@using TheHighInnovation.POS.Model
+@using TheHighInnovation.POS.Model.Request.Filter
+@using TheHighInnovation.POS.Model.Request.Reservation
+@using TheHighInnovation.POS.Model.Response.Base
+@using TheHighInnovation.POS.Model.Response.Reservation
+@using TheHighInnovation.POS.Web.Services.Base
+@using System.Text.Json
+@using TheHighInnovation.POS.Model.Request.Customer
+@inject NavigationManager NavigationManager
+@inject IJSRuntime _jsRuntime
+
+@inject BaseService BaseService;
+<div class="reservationpage">
+    @{
+        const string detailed = "Detailed";
+        const string quick = "Quick";
+    }
+    <div class="buttons"> 
+        <button class="btn btn-sm landpagebutton" @onclick="() => OpenReservationModal(detailed)">Detailed</button>
+   
+    <button class="btn btn-sm landpagebutton" @onclick="RoomDetailsModal">Rooms</button>
+    <button class="btn btn-sm landpagebutton" @onclick="GoToCalendar" >Calendar</button>
+         
+     </div>
+
+    @if (IsRoomDetails)
+    {
+        <div class="modal show" style="display:block; background-color: rgba(10,10,10,.8);" role="dialog">
+            <div class="modal-dialog modal-lg scrolldiv">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-center">Room Details</h4>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label>From:</label>
+                                <input type="date" id="date-arrival" @bind="frontRoomDetails.ArrivalDate" class="form-control"/>
+                            </div>
+                            <div class="col-sm-3">
+                                <label>To:</label>
+                                <input type="date" id="date-arrival" @bind="frontRoomDetails.DepartureDate" class="form-control" />
+                            </div>
+                            <div class="col-sm-3">
+                                <button @onclick="SearchRoomDate"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>                       
+                    </div>
+                    <div class="modal-body">
+                      
+                            <div class="room-list">
+                            @if (roomsList != null)
+                                {
+                                foreach (var roomdetails in roomsList)
+                                    {
+                                        <div class="room-item">
+                                        @switch (roomdetails.AvailabilityStatus)
+                                            {
+                                               case "Reserved":
+                                                <button class="roombuttonreserved">
+                                                    @roomdetails.Description <br />@roomdetails.RoomName <br />
+                                                    @roomdetails.ArrivalDate <br /> @roomdetails.DepartureDate <br />
+                                                </button>
+                                                break;
+                                            case "Available":
+                                                <button class="roombutton">@roomdetails.Description <br />@roomdetails.RoomName  @roomdetails.ArrivalDate <br /> @roomdetails.DepartureDate <br /></button>
+                                                    break;
+                                                case "Booked":
+                                                <button class="roombuttonbooked">
+                                                    @roomdetails.Description <br />@roomdetails.RoomName <br />
+                                                    @roomdetails.ArrivalDate <br /> @roomdetails.DepartureDate <br /></button>
+                                                    break;
+                                            }
+                                    </div>
+                                }
+                            } 
+                            else
+                            {
+                                <span>@_message</span>
+                            }
+                        </div>
+                            <div>
+                                <br>
+                                <div class="modal-footer justify-content-start">
+                                    <button class="roomcancel" @onclick="RoomsCancelActionButton">Cancel</button>                                   
+                                </div>
+                            </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    @{
+        const string All = "";
+        const string checkedIn = "Checked-In";
+        const string checkedOut = "Checked-Out";
+        const string booked = "Booked";
+    }
+
+    
+
+    <div class="radiobuttonpart">
+
+        <div class="row">
+            <div class="col-3 d-flex">
+                <label for="search-customer" class="searchcuslabel">Search Customer</label>
+                <input type="text" id="search-customer" @bind="FilterReservation.SearchCustomer" class="form-control searchcusinput" />
+            </div>
+            <div class="col-3 d-flex">
+                <label for="roomno" class="roomnolabel">Room No</label>
+                <input type="text" id="search-customer" class="form-control roomnoinput" />
+            </div>
+            <div class="col-3 d-flex">
+                <label for="reservno" class="reservnolabel">Reservation No:</label>
+                <input type="text" id="reservno" class="form-control reservnoinput" />
+            </div>
+            <div class="col-3">
+                <ul>
+                    <li>
+                        <input type="radio" id="all" name="filter-radio" class="radiobutton" @onclick="() => UpdateFilter(All)">
+                        <label class="form-check-label" for="all">All</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="checked-in" name="filter-radio" class="radiobutton" @onclick="() => UpdateFilter(checkedIn)">
+                        <label class="form-check-label" for="checked-in">Checked-In</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="checked-out" name="filter-radio" class="radiobutton" @onclick="() => UpdateFilter(checkedOut)">
+                        <label class="form-check-label" for="checked-out">Checked-Out</label>
+                    </li>
+                    <li>
+                        <input type="radio" id="booked" name="filter-radio" class="radiobutton" @onclick="() => UpdateFilter(booked)" checked>
+                        <label class="form-check-label" for="booked">Booked</label>
+                    </li>
+                </ul>
+               
+            </div>
+           
+          
+            
+        </div>
+    </div>
+
+    <div class="filtercontainer">
+        <div class="d-flex">
+            <div class="d-flex">
+                <label class="arrivaldatelabel" for="date-arrival">Arrival Date</label>
+                <input type="date" id="date-arrival" @bind="FilterReservation.ArrivalDate" class="form-control arrivaldateinput" />
+                <input type="time" id="time-arrival" class="form-control arrivaltimeinput" />
+            </div>
+
+            <div class="d-flex">
+                <label class="departdatelabel" for="date-departure">Departure Date</label>
+                <input type="date" id="date-departure" @bind="FilterReservation.DepartureDate" class="form-control departdateinput" />
+                <input type="time" id="time-departure" class="form-control departtimeinput" />
+            </div>
+
+            <div>
+                <button class="searchbuttonreservation" @onclick="() => SearchButton(FilterReservation.SearchCustomer,FilterReservation.ArrivalDate,FilterReservation.DepartureDate)">
+                    <i class="fa-solid fa-filter"></i> Filter
+                </button>
+               
+            </div>
+        </div>
+    </div>
+
+    @if (Filter.IsInitialized)
+    {
+        <div class="container">
+        <div class="row searchlinegroup">
+                
+        </div>
+        </div>
+
+        <div class="tablediv">
+        <table class="landpagetable">
+            <thead class="tablehead">
+    <tr>
+        <th>Reserv No</th>
+        <th>Customer Name</th>
+        <th>Company</th>
+        <th>Room Type</th>
+        <th>Rooms</th>
+        <th>Adult</th>
+        <th>Meal</th>
+        <th>Check In</th>
+        <th>Check Out</th>
+        <th>Arrival Time</th>
+        <th>Departure Time</th>
+        <th>Current Status</th>
+        <th class="actioniconsaction">Action</th>
+    </tr>
+    </thead>
+            <tbody >
+
+
+    @if (ReservationList is not null)
+    {
+        @foreach (var item in ReservationList)
+        {
+                <tr class="tablebody">
+                <td>@item.Id</td>
+                <td>@item.GuestDetails</td>
+                <td>@item.Company</td>
+                <td>@item.RoomType</td>
+                <td>@item.Rooms</td>
+                <td>@item.Adult</td>
+                <td>@item.Meal</td>
+                <td>@item.ArrivalDate</td>
+                <td>@item.DepartureDate</td>          
+                <td>@item.ArrivalTime</td>
+                <td>@item.DepartureTime</td>
+                <td>@item.CurrentStatus</td>
+                <td class="actioniconsrow"> 
+                            @if (item.CurrentStatus is not ("Checked-Out" or "Cancelled"))
+                    {
+                    <span @onclick="() => GetReservationById(item.Id)"><i class="fas fa-edit editicon"></i></span>                   
+                    }
+                            @if (item.CurrentStatus is not ("Checked-Out" or "Checked-In" or "Cancelled"))
+                    {
+                        <span>
+                            <i class="fa-solid fa-bookmark" @onclick="() => GetRoomDetails(item.Id)"></i>
+                        </span>
+                    }
+                  
+                    @if (item.CurrentStatus is not ("Checked-In" or "Checked-Out" or "Cancelled"))
+                    {
+                        <span @onclick="() => CheckInCustomer(item.Id)">
+                            <i class="fa fa-check checkinicon" aria-hidden="true"></i>
+                        </span>
+                    }  
+                    @if(item.CurrentStatus is not ("Checked-In" or "Checked-Out" or "Cancelled"))
+                    {
+                        <span>
+                             <i class="fa-solid fa-cancel" @onclick="() => CancelReservation(item.Id)"></i>
+                        </span>
+
+                    }
+                </td>
+            </tr>
+        }        
+    }
+    </tbody>
+</table>
+
+            @if (_pagerDto.TotalPages > 0)
+            {
+                <div class="row">
+                    <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
+                        <div class="col">
+                            @if (_pagerDto.TotalPages > 0)
+                            {
+                                <span class="selecttext">Current Entries:</span>
+                                <select class="selectcompany" @onchange="HandlePaginationChange" style="height:5vh;">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+
+                        <ul class="pagination justify-content-end">
+                            @if (_pagerDto.CurrentPage > 1)
+                            {
+                                <li class="page-item pointer px-1">
+                                    <a class="page-link" @onclick="() => OnPagination(1)">First</a>
+                                </li>
+                                <li class="page-item pointer px-1">
+                                    <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
+                                </li>
+                            }
+                            @if (_pagerDto.TotalPages > 1)
+                            {
+                                for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+                                {
+                                    var currentPageItem = pageItem;
+                                    <li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
+                                        <a class="page-link" @onclick="() => OnPagination(currentPageItem)">@currentPageItem</a>
+                                    </li>
+                                }
+                            }
+
+                            @if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
+                            {
+                                <li class="page-item pointer px-1">
+                                    <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
+                                </li>
+                                <li class="page-item pointer px-1">
+                                    <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+            }
+</div>
+}
+
+    @if (IsReservationModalOpen)
+    {
+        <ModalDialog OnClose="@OnUpsertReservation" OkLabel="@_dialogOkLabel">
+                
+            <form>
+             <div class="modal-header d-flex">
+                    <div id="date-picker-container" class="arrivaldate">
+                        <label for="date-from">check-in</label>
+                        <input type="date" id="date-checkin" @bind-value="ReservationModel.ArrivalDate" @bind-value:event="oninput" @onchange="UpdateNights">
+                    </div>
+                    <div class="arrivalTime">
+                     
+                        <input type="time" @bind=_arrivalTime>
+                    </div>
+                    <div id="date-picker-container" class="departuredate">
+                        <label for="date-from">check-out</label>
+                        <input type="date" id="date-checkout" @bind-value="ReservationModel.DepartureDate" @bind-value:event="oninput" @onchange="UpdateNights">
+                    </div>
+                    <div class="departuretime">
+                      
+                        <input type="time" @bind=_departureTime>
+                    </div>
+                    <div class="noofnight">
+                        <p id="num-nights">No of Night: <strong>@NumberOfNights &nbsp; </strong></p>
+                    </div>
+             </div>
+
+                <div class="form-group d-flex">
+                <div class="fullname">
+                <label for="fname">First Name:</label>
+                <input type="text" id="fname" @bind=_firstName name="fname"><br><br>
+                </div>
+                    <div class="halfname">
+                        <label for="hname">Last Name:</label>
+                        <input type="text" id="hname" name="hname" @bind=_lastName><br><br>
+                    </div>
+                    <div class="mobilenumber">
+                        <label for="contactnumber">Mobile Number:</label>
+                       
+                        <input name="contactnumber"  type="text" @bind="_contactNumber" @oninput="OnContactNumberChanged" />
+                        @if (showDropdown && Customers != null)
+                        {
+                            <select @onchange="OnCustomerSelected">
+                                <option value="">Select a customer</option>
+                                <option value="@Customers.Id">@Customers.FirstName @Customers.LastName</option>
+                            </select>
+                        }
+                    </div>
+               
+                </div>
+                <div class="addressandcompanyname d-flex">
+                    
+                
+                    <div class="address">
+                        <label for="address">Address</label>
+                        <input class="address" type="text" id="address" @bind="_addCustomer.p_address" name="address" />
+                    </div>
+                    
+                 
+                    <div class="companyname">
+                        <label for="companyselection">Company Name</label>
+                        <input class="companyselect" id="companyselection" name="companyselection" @bind="_addCustomer.p_company"/>  
+                    </div>
+                </div>
+              
+              
+                <div class="nationalityrow d-flex">
+                    <div class="address">
+                        <label for="nationality">Nationality</label>
+                        <select class="nationality" type="text" id="nationality" name="nationality" @bind="ReservationModel.Nationality">
+                        <option value="nepal">Nepali</option>
+                            <option value="Indian">Indian</option>
+                            <option value="Chinese">Chinese</option>
+                        </select>
+                    </div>
+
+                    <div class="bookedby">
+                        <label for="bookedby">Booked by</label>
+                        <input class="bookedbyinput" id="bookedby" name="bookedby" @bind="ReservationModel.BookedBy" />
+                    </div>
+                   
+                    <div class="rooms">
+                        <label>Rooms</label>
+                        <input type="text" @bind=ReservationModel.Rooms /><br />
+                    </div>
+                    <div class="adultandchild">
+                        <label>Adult/Child</label>
+                        <span class="d-flex">
+                            <input type="text" @bind=ReservationModel.Adult /><br />
+                            <input class="childinput" type="text" @bind=ReservationModel.Child /><br />
+                        </span>
+                    </div>
+                   
+                </div>
+               <div class="moneythingroup d-flex">
+                    <div class="modeofPayment">
+                        <label>Payment Mode</label>
+                        <select type="text" @bind=ReservationModel.ModeOfReservation >
+                        <option>Cash</option>    
+                        <option>Qr</option>
+                        <option>Card</option>
+                        <option>Cash & Qr</option>
+                        </select>
+                    </div>
+                    <div class="initialpayment">
+                        <label for="initialpayment">Initial Payment</label>
+                        <input type="decimal"  @bind=ReservationModel.InitialPayment name="initialpayment" />
+                    </div>
+                    <div class="mealplan">
+                        <label for="mealplan">Meal-Plan</label>
+                        <input type="text" @bind=ReservationModel.Meal name="mealplan" /><br />
+                    </div>
+                   @*  <div class="discount">
+                        <label for="discount">Discount</label>
+                        <input type="number" name="discount" />
+                    </div> *@
+                    
+                </div>
+
+                <div class="form-group checkboxesrow d-flex">
+                 
+                        @if (_roomTypes is not null)
+                        {
+                            foreach (var roomType in _roomTypes)
+                            {
+                            <div class="checkboxeseach">
+                                <input type="checkbox"
+                                       class="form-check-input"
+                                       value="@roomType"
+                                       checked="@IsRoomTypeSelected(roomType)"
+                                       @onchange="() => HandleRoomType(roomType)" />
+
+                                <label>@roomType</label>
+                                <br />
+                                </div>
+                            }
+                        }
+                 
+                </div>
+
+                <div class="specialinstructiondiv">
+                    <textarea @bind="ReservationModel.SpecialInstruction" class="specialinstruction" placeholder="Special Instructions"></textarea>
+                </div>
+            </form>
+        </ModalDialog>
+    }
+    
+    
+    @if (IsBookedRoomDetails)
+    {
+        <div class="modal show" style="display:block; background-color: rgba(10,10,10,.8);" role="dialog">
+            <div class="modal-dialog modal-lg scrolldiv" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-center">Booked Room Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="mb-1" @onsubmit="SubmitReservationRooms">
+                            <div class="room-list">
+                                @if (roomsList != null)
+                                {
+                                    foreach (var room in roomsList)
+                                    {
+                                        <div class="room-item">
+                                            @switch (room.AvailabilityStatus)
+                                            {
+                                                case "Booked":
+                                                case "Selected":
+                                                    <input type="checkbox" @bind="@room.IsSelected"/>
+                                                    <button class="roombutton">@room.Description <br />@room.RoomName</button>
+                                                    break;
+                                                case "Available":
+                                                    <input type="checkbox" @bind="@room.IsSelected"/>
+                                                    <button class="roombutton">@room.Description <br />@room.RoomName</button>
+                                                    break;
+                                                case "Reserved":
+                                                    <input type="checkbox" checked disabled/>
+                                                    <button class="roombuttonreserved">@room.Description <br />@room.RoomName</button>
+                                                    break;
+                                                case "Occupied":
+                                                    <input type="checkbox" checked disabled />
+                                                    <button class="roombuttonoccupied">@room.Description <br />@room.RoomName</button>
+                                                    break;
+                                            }
+                                            
+                                        </div>
+                                    }
+                                }
+                            </div>
+                            <div>
+                                <br>
+                                <div class="modal-footer justify-content-start">
+                                    <button class="roomcancel" @onclick="RoomsModalActionButton">Cancel</button>
+                                    <button class="customersubmit" type="submit">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    }
+
+    @if(IsCalendar)
+    {
+        <div class="modal show" style="display:block; background-color: rgba(10,10,10,.8);" role="dialog">
+            <div class="modal-dialog modal-lg scrolldiv" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title text-center">Booked Room Details</h4>
+                    </div>
+                    <div class="modal-body">
+        <Calendar/>
+                    </div>
+                </div>
+            </div>
+            </div>
+    }
+
+</div>
+

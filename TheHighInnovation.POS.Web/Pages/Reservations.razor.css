@@ -1,0 +1,402 @@
+.reservationpage{
+    margin-top:4%;
+}
+
+.landpagebutton, .landpagebutton:hover {
+    background-color: #6259d2;
+    margin-left: 10px;
+    width: 110px;
+    height:35px;
+    color: #fff;
+    font-weight: 600;
+    border-radius:8px;
+    border:none;
+}
+.buttons{
+margin-bottom:3%;
+
+}
+.Headpart{
+    width:100vw;
+}
+.radiobuttonpart {
+width:107vw;
+margin-left:1vh;
+}
+.radiobutton {
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    border: 2px solid #999;
+    transition: 0.2s all linear;
+    margin-right: 5px;
+    position: relative;
+    top: 4px;
+}
+input[type='radio'] {
+
+  
+}
+.arrivaldatelabel,.departdatelabel{
+    font-size:12px;
+    font-weight:700;
+    margin-top:1vh;
+    margin-left:6vh;
+}
+.arrivaldateinput, .departdateinput {
+    border:1px solid #111;
+    border-radius: 10px;
+    margin-bottom:2vh;
+    width:15vw;
+    margin-top:-2px;
+    margin-left:1vh;
+}
+
+
+label {
+    font-size: 22px;
+}
+    .landpagetable {
+        width: 100%;
+    }
+.tablehead{
+    background-color:#d9d9d9;
+    height:40px;
+    text-align:center;
+}
+.tablebody {
+    text-align: center;
+    line-height:3;
+    border-bottom:1px solid #d9d9d9;
+}
+
+.editicon {
+    color: #04aed3;
+    font-size: 22px;
+}
+.selectcustomerinput{
+    background-color:#d9d9d9;
+    border:none;
+}
+input[type=radio]{
+    border:0px;
+    width:25px;
+}
+.radiobutton{
+    
+}
+.nationalityrow{
+    margin-top:3vh;
+    width:68vw;
+}
+.moneythingroup{
+    margin-top:3vh;
+}
+.guests {
+    margin-top: -1vh;
+    width: 10vw;
+}
+    .guests i{
+        font-size:22px;
+        margin-left:0.5vw;
+        margin-right:0.5vw;
+    }
+    .guests p{
+        text-align:center;
+      
+    }
+.form-group label, .addressandcompanyname label, .nationalityrow label, .moneythingroup label, .moneythingroup label {
+    font-size: 16px;
+}
+
+.mobilenumber, .companyname, .mealplan, .bookedby {
+    margin-left: 4vh;
+}
+.bookedby{
+    margin-left:-2vh;
+}
+.guests {
+    margin-left: 1.5vw;
+    margin-top: 1px;
+}
+.fullname input, .mobilenumber input, .addressandcompanyname input, .address select, .bookedby input, .mealplan input, .moneythingroup input, .moneythingroup select, .halfname input {
+    border: none;
+    border-radius: 5px;
+    height: 4vh;
+    background-color: #d9d9d9;
+    width: 33vw;
+}
+
+.moneythingroup .initialpayment input {
+    width: 20vw;
+    margin-left: 1.5vh;
+}
+.initialpayment label{
+    margin-left:1.5vh;
+}
+
+.adultandchild {
+    margin-left: -1.8vw;
+}
+.rooms input, .adultandchild input {
+    border: none;
+    border-radius: 5px;
+    height: 4vh;
+    background-color: #d9d9d9;
+    width: 5vw;
+    text-align: center;
+}
+
+.adultandchild .childinput {
+    margin-left: 2px;
+}
+.mobilenumber input {
+    margin-left: -2.8vw;
+}
+    .fullname input, .halfname input {
+        width: 16vw;
+    }
+
+
+    .bookedby input, .mealplan input, .address select {
+        width: 20vw;
+    }
+    
+.checkboxeseach {
+    margin-left: 3.2vw;
+    margin-right: 3.2vw;
+}
+.moneythingroup select  {
+    width:20vw;
+}
+.moneythingroup input {
+    width: 19vw;
+}
+.mealplan input {
+    width: 17.3vw;
+}
+.checkboxesrow {
+    width: 100%;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.checkboxesrow input {
+    width: 20px;
+    height: 20px;
+}
+.specialinstruction {
+    background-color: #d9d9d9;
+    border: none;
+    border-radius: 10px;
+    width: 98%;
+    padding:5px;
+    height: 15vh;
+}
+.addcustomerinputs {
+    background-color: #d9d9d9;
+    border: none;
+    border-radius:5px;
+    height:30px;
+}
+.sticknameandinput{
+    margin-bottom:0;
+}
+.customersubmit {
+    background-color: #ffd457;
+    border: none;
+    border-radius: 5px;
+    width: 90px;
+    height: 30px;
+    color: #fff;
+    font-size: 16px;
+    width: 90px;
+    height: 40px;
+}
+.roomcancel{
+background-color:#082248;
+color:#fff;
+font-size:16px;
+text-align:center;
+border:none;
+border-radius:5px;
+width:90px;
+height:40px;
+}
+
+/*small modal works*/
+
+.reserved {
+    height: 20px;
+    width: 20px;
+    background-color: #dc3545;
+    border-radius: 50%;
+    margin-left: 5vh;
+    box-shadow: inset 5px 5px 10px #dc3545, inset -5px -5px 10px #761c25;
+    color: #222;
+    font-size: 16px;
+}
+
+.available {
+    height: 20px;
+    text-align: right;
+    width: 20px;
+    background-color: green;
+    border-radius: 50%;
+    margin-left: 5vh;
+    box-shadow: inset 5px 5px 10px #17d08b, inset -5px -5px 10px #0c6a47;
+}
+.searchbuttonreservation {
+    width: 8vw;
+    border-radius:10px;
+    margin-left:3vw;
+    height: 5vh;
+    background-color: #2655b6;
+    color:#fff;
+    border:none;
+    box-shadow: inset 50px 10px 40px #112550;
+} 
+
+.inputreservation {
+    width: 82%;
+    height:5vh;
+}
+.reservationmodal {
+    margin-top: 5%;
+}
+.roombutton {
+    width: 10vh;
+    height: 9vh;
+    line-height:1;
+    margin-top: 6vh;
+    margin-right: 4vh;
+    border-radius: 15px;
+    border: none;
+    box-shadow: inset 5px 30px 35px #17d08b;
+    background-color: #0c6a47;
+    color:#fff;
+    font-size:12px;
+}
+.roombuttonreserved {
+    max-width: 10vh;
+    line-height: 1;
+    height: 9vh;
+    margin-top: 6vh;
+    margin-right: 4vh;
+    border-radius: 15px;
+    border: none;
+    box-shadow: inset -10px -10px 10px #761c25;
+    background-color: #e69f07;
+    color: #fff;
+    font-size: 12px;
+}
+.roombuttonbooked {
+    max-width: 10vh;
+    line-height: 1;
+    height: 9vh;
+    margin-top: 6vh;
+    margin-right: 4vh;
+    border-radius: 15px;
+    border: none;
+    box-shadow: inset -10px -10px 10px #761c25;
+    background-color: #dc3545;
+    color: #fff;
+    font-size: 12px;
+}
+
+.room-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.scrolldiv {
+    width: 100vh;
+    margin-top:9vh;
+}
+
+
+.searchcusinput, .roomnoinput, .reservnoinput {
+    height: 5vh;
+    width: 69%;
+    
+    background-color: #d9d9d9;
+}
+ul li{
+list-style:none;
+
+}
+.filtercontainer {
+    width:100vw;
+    margin-left:2vw;
+}
+.modal-header {
+    border: none;
+    margin-top: -6vh;
+    z-index: 999;
+}
+.selectcompany{
+    background-color:#d9d9d9;
+    border:none;
+    height:4vh !important;
+    border-radius:5px;
+    margin-top:5px;
+}
+.arrivaldate label, .arrivaltime label, .departuredate label, .departuretime label, .reservnolabel, .roomnolabel, .searchcuslabel {
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 1vh;
+    margin-right: 1vh;
+}
+.roomnolabel{
+    margin-left:3vh;
+}
+
+.arrivaltimeinput, .departtimeinput {
+    height:5vh;
+    width:8vw;
+    margin-left:1vw;
+
+    border:1px solid #111;
+}
+
+.arrivalTime {
+    margin-left: -4vw;
+    margin-top: 2px;
+}
+.departuretime{
+    margin-left:-4vw;
+    margin-top:2px;
+}
+.noofnight{
+    width:9.5vw;
+    padding-top:2.5vh;
+  
+}
+.actioniconsrow .editicon{
+    font-size:26px;
+    margin-right:10px;
+}
+.actioniconsrow .fa-bookmark {
+font-size:22px;
+margin-left:10px;
+}
+.actioniconsrow .checkinicon {
+    color: #229947;
+    font-size: 28px;
+    margin-left: 20px;
+    margin-right: 2px;
+}
+.actioniconsrow .fa-cancel{
+    font-size:24px;
+    margin-left:15px;
+   
+}
+/*Adult and room input designs*/
+
+
+
+
+
+
+
+

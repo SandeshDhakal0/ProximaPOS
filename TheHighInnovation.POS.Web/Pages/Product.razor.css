@@ -1,0 +1,219 @@
+.productpage {
+    margin-top: 3.1%;
+ /*   margin-left: -4.6vw;*/
+ height:92vh;
+    width: 150.1vh;
+    padding: 3vh;
+}
+
+.searchbutton, .clearbutton {
+    border: none;
+    border-radius: 10px;
+    width: 50px;
+   margin-left:1%;
+}
+
+.searchbutton {
+ 
+    height: 5vh;
+    margin-left: 2vh;
+  font-size:19px;
+}
+
+.searchbutton2 {
+    height: 4vh;
+    margin-top: 0.5vh;
+    background-color:#d9d9d9;
+}
+
+
+.clearbutton {
+    background-color: var(--color-trashbutton);
+    color: var(--color-white);
+    height: 5vh;
+    font-size: 22px;
+    line-height: 0;
+
+   
+}
+.clearbutton2 {
+    height: 4vh;
+   
+}
+
+.required {
+    letter-spacing: 3px;
+
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 1vh;
+}
+
+
+
+
+
+
+
+.filterby, .textshow, .selecttext, .searchtext {
+    font-size: 16px;
+
+}
+.searchtext {
+    margin-left: 14vw;
+    margin-right:-3px;
+}
+
+    .filterby {
+        font-weight: 500;
+        margin-top: 3.5vh;
+    }
+
+
+.filter-section, .showentries {
+
+    border: none;
+}
+
+.form-select, .showentries, .selectcompany {
+    border-radius: 5px;
+   
+}
+.selectcompany {
+    background-color: #d9d9d9;
+    border:none;
+}
+.form-select {
+    width: 15vw;
+    margin-left: -5vw;
+    height: 5vh;
+}
+
+.addproductbtn {
+    height: 35px;
+    width: 25%;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--our--commonblue-color);
+    color: #fff;
+}
+
+.modalsize {
+    height: 30%;
+}
+
+.searchlinegroup, .tablediv {
+    margin-top: 2%;
+    margin-left:2vw;
+
+    
+}
+
+.searchinput {
+    border: 1px solid #dcdfe8;
+    border-radius: 10px;
+    width: 200px;
+    height: 30px;
+    margin-top: 0.5vh;
+  margin-right:-6vw;
+   
+}
+
+.form-label {
+    font-size: 18px;
+    text-transform: capitalize;
+}
+
+.tablediv {
+   border:1px solid #fff;
+   border-top:none;
+   border-radius:10px;
+    margin-bottom: 2%;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout:fixed;
+}
+
+    .table th, .table td {
+        font-size: 16px;
+        font-weight: 500;
+   
+    }
+    .table .th1{
+        border-radius:10px 0 0 10px;
+    }
+    .table .th6 {
+        border-radius: 0 10px 10px 0;
+    }
+    .table td {
+        width: 8%;
+    }
+    .table th {
+        background-color: #dcdfe8;
+        color: #110a57;
+        
+    }
+    thead{
+        border:none;
+    
+    }
+
+ .table .td1 {
+        width: 75%;
+    }
+.table .th1{
+    width:70%;
+}
+
+
+  
+    .table tbody {
+        display: block;
+        max-height: 44vh;
+        overflow-y: scroll;
+        border:1px solid #fff;
+        border-radius:5px;
+        border-top:none;
+    }
+
+        .table thead, .table tbody tr {
+            display: table;
+            width: 100%;
+            
+        }
+            .table tbody tr:nth-child(odd){
+                background-color:red;
+            }
+            ::-webkit-scrollbar {
+                width: 10px;
+                background-color: transparent;
+            }
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 10px;
+}
+
+.table .productimage {
+    height: 40px;
+    width: 40px;
+    border-radius: 10px;
+    margin-top: 1vh;
+}
+
+.table .productdesc {
+    line-height: 0;
+    font-size: 12px;
+}
+
+.table .actionicons .fa-trash {
+    color: red;
+}
+
+.table .actionicons {
+    font-size: 22px;
+    margin-left: 3vh;
+}

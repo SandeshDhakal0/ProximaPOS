@@ -1,0 +1,128 @@
+﻿@page "/admin-dashboard"
+@using TheHighInnovation.POS.Web.Services.Base
+@using TheHighInnovation.POS.Model.Response.Dashboard
+@using TheHighInnovation.POS.Model.Response.Organization
+@using TheHighInnovation.POS.Model
+@using TheHighInnovation.POS.Web.Models
+<div class="dashboardpage">
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-8">
+               <div class="row">
+                    <div class="col smallcards card">
+                       <table>
+                           <thead>
+                            <th class="th1"><i class="fa-solid fa-group-arrows-rotate"></i> Total</th>
+                               <th class="th2"> Sales</th>
+                               <th class="th3">...</th>
+                           </thead>
+                           <tbody>
+                               <tr>
+                                   <td class="td1">Room Sales</td>
+                                   <td class="td2">88k</td>
+                                    <td class="td3"></td>
+                               </tr>
+                               <tr>
+                                   <td></td>
+                                   <td></td>
+                                    <td></td>
+                               </tr>
+                                <tr>
+                                    <td class="td1r2">Room Sales</td>
+                                    <td class="td2r2">88k</td>
+                                    <td class="td2sr2">button</td>
+                                </tr>
+                           </tbody>
+                       </table>
+                                   
+                                   
+                             
+                    </div>
+                    <div class="col smallcards card">
+                       sad 
+                    </div>
+                    <div class="col smallcards card">
+                        asd
+                    </div>
+                    <div class="col smallcards card">
+                        
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col smallcards card">
+                        </div>
+                        <div class="col smallcards card">
+                        </div>
+                        <div class="col smallcards card">
+                        </div>
+                    <div class="col smallcards card">
+                    </div>
+                    </div>
+            </div>
+            
+            <div class="col-4">
+               <div class="row verticalrow card">
+                    <span><P>@DashboardTransactionDto.CardTotal</P></span>
+               </div>
+                <div class="row verticalrow card"> <span><p>@DashboardTransactionDto.QrTotal</p></span></div>
+                <div class="row verticalrow card"> <span><p>@DashboardTransactionDto.CashTotal</p></span></div>
+
+            </div>
+        </div>
+        
+    </div>
+    <div class="container-fluid">
+        <div class="row chartrow">
+            <div class="col-5 card chartcards">
+                asd
+            </div>
+            <div class="col-5 card chartcards">
+                asd
+            </div>
+            <div class="col-2 card chartsidecard">
+                asd
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row belowchartrow">
+            <div class="col-4 card belowchartsidecard">
+                asd
+            </div>
+            <div class="col-4 card belowchartsidecard">
+                asd
+            </div>
+            <div class="col-4 card belowchartsidecard">
+                asd
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@inject BaseService BaseService
+
+@code {
+    [CascadingParameter]
+    private GlobalState GlobalState { get; set; }
+    
+    private DashboardTransactionDto DashboardTransactionDto { get; set; } = new();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        if (GlobalState.CompanyId is not null)
+        {
+            var parameters = new Dictionary<string, string>
+            {
+                { "companyId", GlobalState.CompanyId.ToString() },
+            };
+            
+            var result = await BaseService.GetAsync<Model.Response.Base.Derived<List<DashboardTransactionDto>>>("dashboard/get-sales-records", parameters);
+
+            DashboardTransactionDto = result?.Result.FirstOrDefault() ?? new();
+            
+        }
+    }
+}

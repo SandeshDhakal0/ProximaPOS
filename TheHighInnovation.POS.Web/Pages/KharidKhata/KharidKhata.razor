@@ -1,0 +1,274 @@
+﻿@page "/kharidkhata"
+@using BlazorBootstrap
+@using TheHighInnovation.POS.Model.Request.Filter
+@using TheHighInnovation.POS.Model.Response.KharidKhata
+@inject BaseService BaseService
+@inject SweetAlert SweetAlertService
+@using TheHighInnovation.POS.Web.Services.Base
+@using TheHighInnovation.POS.Web.Models
+@using TheHighInnovation.POS.Web.Services.Alert
+
+@inject IJSRuntime JS
+
+<div class="container-fluid pt-5 d-flex" style="justify-content:space-between;width:100%;">
+    <BsYearSelection  selectedValue="_kharidFilter.YearBs" selectedYearChange="OnYearChange"></BsYearSelection>
+    <BsMonthSelection    SelectedMonth="_kharidFilter.MonthBs" selectedMonthChange="OnMonthChange"></BsMonthSelection>
+    <button class="submitbtn" @onclick="HandleSubmit">Submit</button>
+    <button Class="exportbtn" @onclick="DownloadExcel">Export</button>
+</div>
+
+<div class="pt-4">
+    <div class="header">
+        <h1>खरिद खाता</h1>
+        <p>(नियम २६ को उपनियम (१) को खण्ड (छ) संग सम्बन्धित)</p>
+        <div class="details">
+            <span>करदाता दर्ता नं (PAN): ........................</span>
+            <span>करदाताको नाम: ........................</span>
+            <span>साल: ................</span>
+            <span>कर आवधिक: ................</span>
+        </div>
+    </div>
+      @if(_kharidFilter.IsInitialized)
+ {
+   <div class="tablediv">
+    <table>
+        <thead>
+            <tr>
+                <th rowspan="2">मिति</th>
+                <th rowspan="2">बीजक नं.</th>
+                <th rowspan="2">प्रज्ञापनपत्र नं.</th>
+                <th rowspan="2">आपूर्तिकर्ताको नाम</th>
+                <th colspan="2">आपूर्तिकर्ताको स्थायी लेखा नम्बर</th>
+                <th colspan="2">खरिद/पैठारी गरिएका वस्तु वा सेवाको विवरण</th>
+                <th rowspan="2">खरिद/पैठारी गरिएका वस्तु वा सेवाको परिमाण</th>
+                <th colspan="2">खरिद/पैठारी गरिएका वस्तु वा सेवा मापन गर्ने इकाइ</th>
+                <th colspan="2">जम्मा खरिद मूल्य (रु)</th>
+                <th>कर छुट हुने वस्तु वा सेवाको खरिद / पैठारी मूल्य (रु)</th>
+                    <th colspan="2">पूंजीगत करयोग्य खरिद / पैठारी</th>
+            </tr>
+            <tr>
+                <th>करयोग्य खरिद (पूंजीगत बाहेक)</th>
+                <th>करयोग्य पैठारी (पूंजीगत बाहेक)</th>
+                <th>पूंजीगत करयोग्य खरिद / पैठारी </th>
+                <th>मूल्य (रु)</th>
+                <th>कर (रु)</th>
+                <th>मूल्य (रु)</th>
+                <th>कर (रु)</th>
+                <th>मूल्य (रु)</th>
+                <th>कर (रु)</th>
+                    <th>मूल्य (रु)</th>
+                    <th>कर (रु)</th>
+            </tr>
+        </thead>
+         <tbody>
+                    @if(_kharidFilter != null)
+                    {
+                        @foreach (var item in _kharidList)
+                        {
+                            <tr>
+                                <td>@item.IssueDateBs</td>
+                                <td>@item.InvoiceNo</td>
+                                <td></td>
+                                <td>@item.VendorName</td>
+                                <td>@item.VendorPanVat</td>
+                                <td>@item.ProductName</td>
+                                <td>@item.Qty</td>
+                                <td>@item.Unit</td>
+                                <td>@item.Rate</td>
+                                <td>@item.TaxableAmount></td>
+                                <td>@item.VatAmount</td>
+                                <td>@item.TotalAmount</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        }
+                    }
+                    @if(!String.IsNullOrEmpty(_message))
+                    {
+                        <Alert Color="AlertColor.Warning" Dismissable="true"> <strong>Holy guacamole!</strong> You should check in on some of those fields below. </Alert>
+
+                    }
+                </tbody>
+    </table>
+    </div>
+                        @if (_pagerDto.TotalPages > 0)
+                        {
+                            <div class="row paginationpart">
+                                <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
+                                    <div class="col mt-1">
+                                        @if (_pagerDto.TotalPages > 0)
+                                        {
+                                            <span class="selecttext">Current Entries:</span>
+                                            <select class="selectcompany" @onchange="HandlePaginationChange">
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
+                                            </select>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+
+                                    <ul class="pagination justify-content-end">
+                                        @if (_pagerDto.CurrentPage > 1)
+                                        {
+                                            <li class="page-item pointer px-1">
+                                                <a class="page-link" @onclick="() => OnPagination(1)">First</a>
+                                            </li>
+                                            <li class="page-item pointer px-1">
+                                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
+                                            </li>
+                                        }
+                                        @if (_pagerDto.TotalPages > 1)
+                                        {
+                                            for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+                                            {
+                                                var currentPageItem = pageItem;
+                                                <li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
+                                                    <a class="page-link" @onclick="() => OnPagination(currentPageItem)">@currentPageItem</a>
+                                                </li>
+                                            }
+                                        }
+
+                                        @if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
+                                        {
+                                            <li class="page-item pointer px-1">
+                                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
+                                            </li>
+                                            <li class="page-item pointer px-1">
+                                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+
+                        }
+                        }
+</div>
+
+
+@code {
+    [CascadingParameter]
+    private GlobalState _globalState { get; set; }
+    private string? invoiceno { get; set; } = string.Empty;
+    private List<KharidKhataList> _kharidList { get; set; } = new();
+    private PagerDto _pagerDto { get; set; } = new();
+    private KharidKhataFilter _kharidFilter = new();
+    private string _message { get; set; } = string.Empty;
+    private List<ToastMessage> messages;
+    private string Message = string.Empty;
+    private string Type = string.Empty;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadKharidKhata(1);
+    }
+
+    private async Task LoadKharidKhata(int pagenumber)
+    {
+        try
+        {
+            var parameters = new Dictionary<string, string>
+            {
+                { "invoiceno", invoiceno.ToString()  },
+                { "yearbs", _kharidFilter.YearBs.ToString()},
+                { "monthbs", _kharidFilter.MonthBs.ToString() },
+                { "pageno", pagenumber.ToString() },
+                { "pagesize", _kharidFilter.PageSize.ToString() }
+            };
+
+            var karidList = await BaseService.GetAsync<Model.Response.Base.Derived<List<KharidKhataList>>>("KharidKhata/get-kharid-khata", parameters);
+            if(karidList != null)
+            {
+                _kharidList = karidList.Result;
+                _pagerDto = new PagerDto(karidList.TotalCount ?? 1, pagenumber, _kharidFilter.PageSize);
+            }
+            else
+            {
+                _message = "Nothing to display.";
+            }
+        }catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message.ToString());
+        }
+    }
+
+    private async Task HandleSubmit()
+    {
+        await LoadKharidKhata(1);
+    }
+
+    private async Task DownloadExcel()
+    {
+        try
+        {
+            if (await SweetAlertService.Ask("Do you want to download excel?"))
+            {
+                StateHasChanged();
+                var invoiceno = "";
+                var parameters = new Dictionary<string, string>
+                         {
+                             { "invoiceno", invoiceno },
+                             { "yearbs", _kharidFilter.YearBs.ToString() },
+                             { "monthbs", _kharidFilter.MonthBs.ToString() }
+                         };
+                var response = await BaseService.GetAsyncOnly("KharidKhata/download-kharid-khata", parameters);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var fileBytes = await response.Content.ReadAsByteArrayAsync();
+                    var monthyear = $@"{_kharidFilter.YearBs}/{_kharidFilter.MonthBs}";
+
+                    var fileName = $"KharidKhata/{monthyear}.xlsx";
+                    var done = JS.InvokeAsync<object>("saveAsFile", fileName, Convert.ToBase64String(fileBytes));
+                    await SweetAlertService.Alert("Success", "File is Downloaded", "success");
+                }
+                else
+                {
+                    await SweetAlertService.Alert("Warning", "The data is not available", "warning");
+                }
+
+            }
+        }
+        catch(Exception)
+        {
+            SweetAlertService.ShowMessage(ToastType.Warning, "Export Failed", "Please Try Again");
+        }
+    }
+
+
+
+    private Task OnYearChange(int year)
+    {
+        _kharidFilter.YearBs = year;
+        return Task.CompletedTask;
+    }
+
+    private Task OnMonthChange(int month)
+    {
+        _kharidFilter.MonthBs = month;
+        return Task.CompletedTask;
+    }
+
+    private async Task HandlePaginationChange(ChangeEventArgs e)
+    {
+        if (e.Value == null) return;
+
+        var pageSize = int.Parse(e.Value.ToString()!);
+
+        _kharidFilter.PageSize = pageSize;
+
+        await OnPagination(1);
+    }
+
+    private async Task OnPagination(int pageNumber)
+    {
+
+        await LoadKharidKhata(pageNumber);
+    }
+}

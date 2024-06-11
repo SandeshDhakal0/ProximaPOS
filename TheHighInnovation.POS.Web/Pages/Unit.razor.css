@@ -1,0 +1,72 @@
+.unitpage {
+    margin-top: 4%;
+}
+
+.buttondiv{
+    text-align:right;
+}
+.addbutton {
+    border: none;
+    border-radius: 5px;
+    background-color: var(--our--commonblue-color);
+    color: #fff;
+    width: 10vw;
+    height: 5vh;
+    margin-bottom: 1vh;
+}
+.unitnameinput{
+    border:none;
+    background-color:#d9d9d9;
+    height:5vh;
+    width:15vw;
+    border-radius:5px;
+    padding-left:10px;
+}
+.unittable {
+    width: 100%;
+    border-collapse: collapse;
+}
+    .unittable tr th, td {
+        height: 5vh;
+        text-align: center;
+    }
+    .unittable thead {
+        background-color: var(--our--commonblue-color);
+        color: #fff;
+        border-radius: 5px;
+    }
+    .unittable tbody {
+        max-height: 65vh;
+        display: block;
+        width: 100%;
+        overflow-y: scroll;
+    }
+
+        .unittable thead, .unittable tbody tr {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+        }
+
+.paginationpart{
+    margin-top:2VH;
+}
+.selectcompany{
+    border:none;
+    height:4vh;
+    width:3.5vw;
+    background-color:#d9d9d9;
+    border-radius:5px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 10px;
+    
+}

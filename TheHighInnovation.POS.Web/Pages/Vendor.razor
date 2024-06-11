@@ -1,0 +1,217 @@
+﻿@page "/vendor"
+@using System.Text.Json
+@using TheHighInnovation.POS.Model
+@using TheHighInnovation.POS.Model.Request.VendorManagement
+@using TheHighInnovation.POS.Model.Response.Base
+@using TheHighInnovation.POS.Web.Services.Alert
+@using TheHighInnovation.POS.Web.Services.Base
+@inject BaseService BaseService
+@inject SweetAlert SweetAlertService
+
+<div class="Vendorpage">
+     
+                <div class="row">
+                    <div class="col-8 d-flex">
+                        <p class="noofvendor">10 vendors</p>
+                        <select class="vendordropdown">
+                           <option selected disabled> Filter</option>
+                           <option>1</option>
+                           <option>2</option>
+                       </select>
+                    </div>                  
+                    <div class="col-2">
+                        <button class="addvendorbutton" @onclick="openaddvendordialogue">Add Vendor</button>
+                    </div>
+                    @if(_openaddvendordialogue){
+                        <ModalDialog OnClose="@OnUpsertVendor" OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
+                         
+                           <div class="modal-body">
+                              <div class="container">
+                                  <div class="row">
+                                      <div class="col">                                            
+                                            <div>
+                                                <label for="companyname" class="companynamelabel">Company Name</label>
+                                                <input type="text" name="companyname" class="companynameinput" @bind="_vendorRequestDto.CompanyName" />
+                                            </div>
+                                            <div>
+                                                <label for="contactperson" class="contactpersonlabel">Contact Person</label>
+                                                <input type="text" name="contactperson" class="contactpersoninput" @bind="_vendorRequestDto.ContactPerson"/>
+                                            </div>
+                                      </div>
+                                        <div class="col">
+                                            <div>
+                                                <label for="Panvat" class="Panvatlabel">PAN/VAT</label>
+                                                <input type="text" name="Panvat" class="Panvatinput" @oninput="HandleInput" @bind="_vendorRequestDto.PanVatNo" />
+                                            </div>
+                                            <div>
+                                                <label for="address" class="addresslabel">Address</label>
+                                                <input type="text" name="address" class="addressinput" @bind="_vendorRequestDto.Address" />
+                                            </div>
+                                            <div>
+                                                <label for="phonenumber" class="phonenumberlabel">Contact Person Number</label>
+                                                <input type="text" name="phonenumber" class="phonenumberinput" @bind="_vendorRequestDto.ContactNo" />
+                                            </div>
+                                            <div>
+                                                <label for="email" class="emaillabel">Email</label>
+                                                <input type="text" name="email" class="emailinput" @bind="_vendorRequestDto.Email" />
+                                            </div>
+                                        </div>
+                                  </div>
+                              </div>
+                           </div>
+                            @if (!string.IsNullOrEmpty(_message))
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    @_message
+                                </div>
+                            }
+
+                       </ModalDialog>
+                    }
+                </div>
+
+               <div class="container-fluid">
+                   <div class="row inputsrow">
+                       <div class="col-4 vendorname">
+                            <label>Vendor Name:</label>
+                            <input @bind="_vendorRequestDto.CompanyName" />
+                       </div>
+                       <div class="col-4 panvatvendor">
+                            <lable>Pan/Vat</lable>
+                            <input @bind="_vendorRequestDto.PanVatNo"/>
+                       </div>
+                        <div class="col-4 isavtivevendor">
+                            <input type="checkbox" id="myCheckbox" @bind="_vendorRequestDto.IsActive" @bind:event="oninput" name="myCheckbox">
+                            <label for="myCheckbox" >IsActive</label>
+                            <button class="searchbutotn" @onclick="HandleSearch">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                       
+                   </div>
+                   @if(vendorFilter.IsInitialized)
+                   {
+                        <div class="containerbindcards">
+                            <div class="row cardsrow">
+                       @if (_vendorList != null)
+                            {
+                                @foreach (var item in _vendorList)
+                                {
+                                <div class="card vendorcard">
+                            
+                                    <div class="card-head d-flex">
+                                    <div>
+                                        <i class="fa fa-bookmark" aria-hidden="true"></i>
+                                    </div>
+                                        @if(@item.IsActive == true)
+                                        {
+                                            <span class="activepart d-flex" @onclick="() =>DeleteVendor(item.Id,false)"><p>IsActive</p></span>
+                                                <span class="threedots d-flex" @onclick="() =>GetVendorById(item.Id)"><i class="fa-solid fa-ellipsis"></i></span>
+                                            }
+                                            else{
+
+                                                <span class="notactivepart d-flex" @onclick="() =>DeleteVendor(item.Id,true)"><p>Deactivated</p></span>
+                                                <span class="threedots d-flex"><i class="fa-solid fa-ellipsis"></i></span>
+                                                }
+
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="nameandcashier">
+                                            <span class="name">@item.CompanyName</span>
+                                           @*  <br />
+                                                <span class="cashier">@item.Pan_VatNo</span> *@
+                                        </div>
+
+
+                                        <div class="nesteddiv">
+
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <span>
+                                                        <span class="labeltexts">Vendor Id<br />
+
+                                                            <p class="maintext">@item.VendorCode</p>
+                                                        </span>
+                                                    </span>
+                                                    <span>
+                                                        <span class="labeltexts">PAN/VAT<br />
+                                                                <p class="maintext">@item.Pan_VatNo</p>
+                                                        </span>
+                                                    </span>
+                                                    <span class="mail maintext d-flex"><i class="fa-solid fa-envelope"></i>@item.Email</span>
+                                                    <span class="number maintext d-flex"><i class="fa fa-phone" aria-hidden="true"></i>@item.ContactNo</span>
+                                                </div>
+                                                <div class="col-4">
+                                                    <span class="labeltexts">
+                                                        Date Hired<br />
+                                                        <p class="maintext">17/03/2024</p>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                
+                        </div> 
+                            }
+                        }
+                   </div>
+                            </div>
+                        @if (_pagerDto.TotalPages > 0)
+                        {
+                            <div class="row paginationpart">
+                                <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
+                                    <div class="col mt-1">
+                                        @if (_pagerDto.TotalPages > 0)
+                                        {
+                                            <span class="selecttext">Current Entries:</span>
+                                            <select class="selectcompany" @onchange="HandlePaginationChange" style="height:5vh;">
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
+                                            </select>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+
+                                    <ul class="pagination justify-content-end">
+                                        @if (_pagerDto.CurrentPage > 1)
+                                        {
+                                            <li class="page-item pointer px-1">
+                                                <a class="page-link" @onclick="() => OnPagination(1)">First</a>
+                                            </li>
+                                            <li class="page-item pointer px-1">
+                                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
+                                            </li>
+                                        }
+                                        @if (_pagerDto.TotalPages > 1)
+                                        {
+                                            for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+                                            {
+                                                var currentPageItem = pageItem;
+                                                <li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
+                                                    <a class="page-link" @onclick="() => OnPagination(currentPageItem)">@currentPageItem</a>
+                                                </li>
+                                            }
+                                        }
+
+                                        @if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
+                                        {
+                                            <li class="page-item pointer px-1">
+                                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
+                                            </li>
+                                            <li class="page-item pointer px-1">
+                                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+
+                        }
+                   }
+               </div>
+            </div>
+      

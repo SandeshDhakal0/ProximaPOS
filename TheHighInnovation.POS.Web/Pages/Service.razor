@@ -1,0 +1,89 @@
+﻿@page "/service"
+@using TheHighInnovation.POS.Web.Services.Base
+@using TheHighInnovation.POS.Model.Response.Service
+@inject BaseService BaseService
+
+
+<div class="servicepage">
+<div class="row mt-3 mb-3">
+	<div class="col-4">
+		<h3>Service Index</h3>
+	</div>
+	<div class="col-8 text-end">
+			<button class="addservicebtn" type="button" @onclick="() => OpenUpsertServiceDialog()">
+			 Add a new service
+		</button>
+	</div>
+</div>
+<div class="row searchlinegroup">
+	<div class="col-8">
+		<span class="textshow">Show</span>: <input type="text" class="showentries"/>
+			<span class="selecttext">Entries:</span><select class="selectservice">
+			<option selected disabled>Service</option>
+			<option>Service1</option>
+			<option>Service2</option>
+		</select>
+	</div>
+	<div class="col-4" style="text-align:right;">
+		<span class="searchtext">Search:</span> <Input type="text" class="searchinput"/>
+	</div>
+</div>
+<div class="tablediv">
+<table class="table">
+	<thead>
+	<tr>
+		<th class="th1">
+			
+				Service
+			
+		</th>
+		<th>
+			Description
+		</th>
+					<th class="th6">
+						Action
+					</th>
+	</tr>
+	</thead>
+	<tbody>
+	@{
+		IEnumerable<ServiceResponseDto> services = _services;
+
+		if(services != null && services.Any())
+		{
+			foreach (var service in services)
+			{
+				<tr>
+					<td>@service.Name</td>
+					<td>@service.Description</td>
+					<td style="text-align:center;">
+						<i class="fa-solid fa-pen-to-square" @onclick="() => OpenUpsertServiceDialog(service.Id)"></i>
+					</td>
+				</tr>
+			}
+		}
+	}
+	</tbody>
+</table>
+	</div>
+@if (_showUpsertServiceDialog)
+{
+	<ModalDialog Title="@_dialogTitle" OnClose="@OnUpsertServiceDialogClose" OkLabel="@_dialogOkLabel">
+		<form>
+			<div class="mb-3">
+				<label class="form-label">&nbsp;Title</label>
+				<input type="text" class="form-control" @bind="_serviceModel.Name" placeholder="Enter a service title">
+			</div>
+			<div class="mb-3">
+				<label class="form-label">&nbsp;Description</label>
+				<textarea type="text" class="form-control" @bind="_serviceModel.Description" placeholder="Enter the description"></textarea>
+			</div>
+		</form>
+
+		@if (!string.IsNullOrEmpty(_upsertServiceErrorMessage))
+		{
+			<span>@_upsertServiceErrorMessage</span>
+		}
+	</ModalDialog>
+}
+</div>

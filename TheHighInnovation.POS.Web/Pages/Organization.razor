@@ -1,0 +1,88 @@
+﻿s@page "/organization"
+@using TheHighInnovation.POS.Model.Response.Organization
+@using TheHighInnovation.POS.Web.Services.Base
+@inject BaseService BaseService
+
+<div class="organizationpage">
+<div class="row mt-3 mb-3">
+    <div class="col-4">
+        <h3>Organization Index</h3>
+    </div>
+    <div class="col-8 text-end">
+            <button class="addorganizationbtn" type="button" @onclick="() => OpenUpsertOrganizationDialog()">
+             Add a new organization
+        </button>
+    </div>
+</div>
+<div class="row searchlinegroup">
+	<div class="col-8">c
+		<span class="textshow">Show</span>: <input type="text" class="showentries"/>
+            <span class="selecttext">Entries:</span><select class="selectorganization">
+			<option selected disabled>Organization</option>
+			<option>Organization 1</option>
+                <option>Organization 2</option>
+		</select>
+	</div>
+	<div class="col-4" style="text-align:right;">
+		<span class="searchtext">Search:</span> <Input type="text" class="searchinput"/>
+	</div>
+</div>
+<div class="tablediv">
+<table class="table">
+    <thead>
+    <tr>
+        <th class="th1">
+         
+                Organization Name
+         
+        </th>
+        <th>
+           
+                Location
+           
+        </th>
+        <th class="th6">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        var organizations = _organizations;
+
+        if (organizations != null && organizations.Any())
+        {
+            foreach (var organization in organizations)
+            {
+                <tr>
+                    <td>@organization.Name</td>
+                    <td>@organization.Location</td>
+                    <td style="text-align:center;">
+                        <i class="fa-solid fa-pen-to-square" @onclick="() => OpenUpsertOrganizationDialog(organization.Id)"></i>
+                    </td>
+                </tr>
+            }
+        }
+    }
+    </tbody>
+</table>
+    </div>
+
+@if (_showUpsertOrganizationDialog)
+{
+    <ModalDialog Title="@_dialogTitle" OnClose="@OnUpsertOrganizationDialogClose" OkLabel="@_dialogOkLabel">
+        <form>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Title</label>
+                <input type="text" class="form-control" @bind="_organizationModel.Name" placeholder="Enter a organization title" required="required">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Location</label>
+                <textarea type="text" class="form-control" @bind="_organizationModel.Location" placeholder="Enter the location" required="required"></textarea>
+            </div>
+        </form>
+        @if (string.IsNullOrEmpty(_upsertOrganizationErrorMessage))
+        {
+            <span>@_upsertOrganizationErrorMessage</span>
+        }
+    </ModalDialog>
+}
+</div>

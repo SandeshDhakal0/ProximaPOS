@@ -1,0 +1,92 @@
+﻿@page "/landing-page"
+@using TheHighInnovation.POS.Web.Models
+@inject NavigationManager NavManager;
+<div class="landingpage container ">
+
+    <div class="row">
+             <div class="col">
+
+                <button @onclick="SwitchToCashierPanel" class="togobuttons">
+                <i class="fa fa-desktop icon" aria-hidden="true"></i>
+                </button>
+               <p class="label">POS</p>
+            </div>
+            <div class="col">
+        <button @onclick="SwitchToDashboard" class="togobuttons">
+           
+            <i class="fa fa-table icon" aria-hidden="true"></i>
+        </button>
+            <p class="label">Dashboard</p>
+        </div>
+        
+            <div class="col">
+            <button @onclick="SwitchToReservation" class="togobuttons">
+                <i class="fa fa-building icon" aria-hidden="true"></i>
+                    
+                </button>
+            <p class="label">Reservation</p>
+            </div>
+        <div class="col">
+            <button @onclick="SwitchToSales" class="togobuttons">
+
+                <i class="fa-solid fa-square-poll-vertical icon"></i>
+            </button>
+            <p class="label">Sales </p>
+        </div>
+        <div class="col">
+            <button @onclick="SwitchToInventory" class="togobuttons">
+                <i class="fa-solid fa-list icon"></i>
+            </button>
+            <p class="label">Inventory</p>
+        </div>
+        <div class="col">
+            <button @onclick="SwitchToAdmin" class="togobuttons">
+                <i class="fas fa-user-cog icon"></i>
+            </button>
+            <p class="label">Settings</p>
+        </div>
+        
+       
+        
+    </div>
+        </div>
+
+@code {
+    [CascadingParameter] 
+    private GlobalState _globalState { get; set; }
+
+    private void SwitchToCashierPanel()
+    {
+        _globalState.PageNumber = 2;
+        NavManager.NavigateTo("/cashier-corner");
+    }
+
+    private void SwitchToReservation()
+    {
+        _globalState.PageNumber = 3;
+        NavManager.NavigateTo("/reservation");
+    }
+
+    private void SwitchToAdmin()
+    {
+        _globalState.PageNumber = 1;
+        NavManager.NavigateTo("/category");
+    }
+
+    private void SwitchToInventory()
+    {
+        _globalState.PageNumber = 4;
+        NavManager.NavigateTo("/vendor");
+    }
+
+    private void SwitchToSales()
+    {
+        _globalState.PageNumber = 5;
+        NavManager.NavigateTo("/sale");
+    }
+     private void SwitchToDashboard()
+    {
+        _globalState.PageNumber = 6;
+        NavManager.NavigateTo("/admin-dashboard");
+    }
+}

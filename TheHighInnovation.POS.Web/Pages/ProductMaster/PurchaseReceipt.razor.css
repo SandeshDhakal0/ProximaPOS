@@ -1,0 +1,271 @@
+
+.Vendorpage{
+width:78vw;
+margin-top:4%;
+}
+/*our design*/
+/*Vendorname and PAN\VAT part edit which are blazored typehead so refer to app.css file as well for design edit*/
+.productmanagementvendorname, .panvattypehead {
+    height: 4vh;
+    width:400px;
+}
+
+.panvattypehead{
+    width:190px;
+}
+.productmanagementvendorname .vendornamelabel {
+    width: 190px;
+    font-size: 16px;
+}
+.panvatlabel{
+    width:160px;
+    margin-right:25px;
+    margin-left:0px;
+}
+.addiconbtn, .issuedateclearbtn, .duedatebsbtn {
+    border: 1px solid grey;
+    background-color: #d9d9d9;
+    border-radius: 5px;
+    margin-left: -1.8vw;
+    margin-right: 1vw;
+    z-index: 99;
+}
+    .issuedateclearbtn:hover,.addiconbtn:hover {
+        color: red;
+        background-color: #fff;
+    }
+
+/*Blazor component part of first division end*/
+/*simple none blazor components edit*/
+
+.issuedateadbox, .issuedatebsbox, .duedatebsbox {
+    margin-left: 15px;
+}
+
+.branchbox, .mopbox {
+    width: 400px;
+}
+.billnobox{
+    width:400px;
+}
+.invoicebox {
+    margin-left: -50px;
+}
+  
+    .issuedatebsbox {
+        width: 250px;
+    }
+.issuedatebslabel{
+    width:250px;
+}
+.issuedateadlabel{
+    width:110px;
+}
+.issuedateadinput, .issuedatebsinput, .branchinput, .duedateadinput, .buedatebsinput, .receiptypeselect, .mopinput {
+    border: none;
+    background-color: #d9d9d9;
+    height: 4vh;
+    border-radius: 5px;
+    width: 125px;
+    padding: 5px;
+}
+.receiptypelabel{
+    width:95px;
+}
+.receiptypeselect {
+    margin-left: 23px;
+    width: 220px;
+    height:4vh;
+    padding-top:0;
+}
+    .duedateadinput {
+        margin-left: 8px;
+    }
+.billnolabel{
+    margin-left:12px;
+}
+.buedatebsinput {
+    margin-left: 13px;
+}
+.branchlabel {
+    width: 95px;
+}
+.branchinput {
+    margin-left: 23px;
+    width: 220px;
+}
+.moplabel{
+    width:50px;
+}
+.mopinput{
+    margin-left:60px;
+}
+input{
+    border:none;
+    background-color:#d9d9d9;
+    border-radius:5px;
+    height:4vh;
+    margin-top:3px;
+    width:300px;
+   
+}
+.invoicelabel {
+    width:85px;
+}
+.invoiceinput, .billnoinput {
+    height: 4vh;
+    width: 90px;
+    border: none;
+    border-radius: 5px;
+    background-color: #d9d9d9;
+    margin-left: 13px;
+    margin-right: 15px;
+}
+    .billnoinput{
+        margin-left:45px;
+        margin-right:-20px;
+    }
+.mopbox{
+margin-left:-1.5vw;
+}
+
+.addproductbtn {
+    margin-left: 120px;
+    border: none;
+    border-radius: 5px;
+    height: 4.5vh;
+    background-color: var(--our--commonblue-color);
+    color:#fff;
+    padding-top:0;
+    width:130px;
+}
+
+/*Table elements design*/
+
+.tablehead th{
+   background-color:#c7d7db;
+   border:none !important;
+}
+
+
+
+.uom, .quantity, .unit, .rate, .discount, .discountamount, .amount {
+    background-color: #b3c6ec;
+    width: 40px !important;
+    border: none;
+    border-radius: 5px;
+    height: 4vh;
+}
+.unit, .rate, .discount, .discountamount, .amount {
+    width: 5vw !important;
+}
+.quantitytd{
+    width:100px !important;
+}
+.deletebutton{
+    border:none;
+    border-radius:2px;
+   color:#111;
+   font-size:20px;
+   background-color:none;
+}
+.deletebutton:hover{
+    color:red;
+}
+
+
+
+/*  last table part part*/
+td{
+   border:1px;
+  font-weight:500 !important;
+}
+.remarks_td{
+    margin-top:0;
+}
+.remarkstextarea {
+    border: none;
+    border-radius: 5px;
+    background-color: #f0f2f2;
+    height: 15vh;
+    width: 40vw;
+    resize: none;
+}
+.quantitytd{
+    text-align:center;
+    padding-left:2vw !important;
+}
+.bottombilltable {
+    width: 80vw;
+    margin-left: -1vw;
+    padding-top: -5vh;
+}
+.first_tr{
+    border-top:none !important;
+}
+.bottombilltable tr, .rounded_off_td, .net_amt_td, .parid_amt_td {
+    border: 2px solid #c7d7db;
+    padding: -10px;
+}
+.remarks_nested_table tr, .rounded_off_td, .net_amt_td, .parid_amt_td {
+    border-top: none !important;
+    border-bottom: none !important;
+    border-right: none !important;
+    
+}
+.gross_amt_tr {
+    border-top: none !important;
+    border-bottom: none !important;
+    border-right: none !important;
+}
+.gross_amt_label{
+   margin-right:1vw;
+}
+.rounded_off_amt_label {
+    margin-right: 1.7vw;
+}
+ .net_amt_label{
+     margin-right:1.9vw;
+ }
+.paid_amt_label{
+    margin-right:1.6vw;
+}
+.inwords_colon{
+    padding-right:14px;
+}
+.in_words_label{
+    margin-right:4.1vw;
+}
+td {
+   
+    height: 4.8vh;
+    padding-left: 15px;
+}
+.due_amt_label {
+    margin-left: -15px;
+    margin-right:20px;
+}
+
+
+
+   
+
+.submitbutton{
+    background-color:#082248;
+    color:#fff;
+    border:none;
+    height:5vh;
+    width:8vw;
+    border-radius:10px;
+    font-weight:400;
+    font-size:18px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+
+   
+}
+.submitbuttondiv{
+    margin-top:3px;
+    text-align:right;
+
+}

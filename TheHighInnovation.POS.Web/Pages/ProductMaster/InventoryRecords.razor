@@ -1,0 +1,377 @@
+﻿@page "/inventoryrecords"
+@using BlazorBootstrap
+
+@using System.Text.Json
+@using TheHighInnovation.POS.Model
+@using TheHighInnovation.POS.Model.Request.Filter
+@using TheHighInnovation.POS.Model.Request.VendorManagement
+@using Blazored.Typeahead
+@using TheHighInnovation.POS.Web.Services.Base
+@using TheHighInnovation.POS.Web.Models
+
+@inject NavigationManager NavigationManager
+@inject BaseService BaseService
+
+
+<div class="container inventoryrcdpage">
+    <div class="row">
+        <div class="col-4">
+            <label class="vendornamelabel">Vendor Name</label>
+ 
+            <BlazoredTypeahead class="inventoryrecords"
+                            SearchMethod="FetchVendors"
+                           TValue="VendorListShort"                           
+                           TItem="VendorListShort"
+                           Value="selectedVendor"
+                           ValueChanged="SaveValue"
+                           ValueExpression="@(() => selectedVendor)">
+            <SelectedTemplate>@context.CompanyName</SelectedTemplate>
+            <ResultTemplate>@context.CompanyName</ResultTemplate>
+            <NotFoundTemplate>
+                Vendor Not Found.
+            </NotFoundTemplate>
+        </BlazoredTypeahead>
+           
+
+        </div>
+        <div class="col-4">
+            <label class="batcchidlabel">Batch ID</label>
+            <select class="batchidoptions">
+               
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+            </select>
+        </div>
+        <div class="col-4">
+            <Button Class="btn-primary" Style="background-color:var(--our--commonblue-color);margin-top:3.5vh;border:none; height:5.3vh;border-radius:5px; margin-left:-15px;" @onclick="SearchHandle">
+                <i class="fa fa-search searchicon" aria-hidden="true"></i>
+
+        </Button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+             @if(inventoryFilter.IsInitialized)
+                   {
+                
+                @if (purchaseReceipt.Count > 0)
+            {
+                <table id="example" class="display">
+                    <thead class="tablehead">
+                        <tr>
+                            <th>VendorName</th>
+                            <th>VendorId</th>
+                            <th>Receipt</th>
+                            <th>IssueDate</th>
+                            <th>InvoiceNo</th>
+                            <th>PaymentStatus</th>                            
+                        </tr>
+                    </thead>
+                    <tbody class="tablebody">
+
+                            @if (purchaseReceipt != null)
+                        {
+                                @foreach (var item in purchaseReceipt)
+                            {
+                                <tr>
+                                    <td>@item.VendorName</td>
+                                    <td>@item.VendorId</td>
+                                    <td><i class="fa-solid fa-receipt" @onclick ="() =>OpenReceipt(item.Id)"></i></td>
+                                    <td>@item.IssueDate</td>
+                                    <td>@item.InvoiceNo</td>
+                                    <td>@item.PaymentStatus</td>                                    
+                                </tr>                                
+                            }
+                        }
+
+                    </tbody>
+                </table>
+
+                    @if (OpenReceiptModel)
+                    {
+                        @if (vendorwisepeoductbyidMap != null)
+                        {
+                            <ModalDialog  Title="Receipt" OnClose="CloseRecepitModel">
+                                @foreach (var products in vendorwisepeoductbyidMap)
+                                {
+                                    <div class="row tableabhove">
+                                        <div class="col-8 leftpart">
+                                            <p><span class="vendorname">Vendor Name:</span>@products.VendorName</p>
+                                            <p><span class="vendorid">Vendor ID: 222 </span></p>
+                                            </div>
+                                            <div class="col-4 rightpart">
+                                            <p><span class="panvatno">PAN/VAT :</span> @products.Pan_VatNo</p>
+                                            <p><span class="issuedate">Date :</span>@products.IssueDateAd</p>
+                                        </div>
+                                    </div>
+                                   
+                                }
+                            <table id="example" class="display modaltable">
+                                <thead class="thead">
+                                    <tr>
+                                        <th>ProductName</th>
+                                        <th>Item Qty</th>
+                                        <th>Unit</th>
+                                        <th>Rate</th>
+                                        <th>Disc%</th>
+                                        <th colspan="2">DiscAmount</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody class="tbody">                                    
+                                        @foreach (var products in vendorwisepeoductbyidMap )
+                                        {
+                                           
+                                          @foreach(var item in products.ProductDetails)
+                                            {
+                                                <tr class="tablerowbody">
+                                                    <td>@item.ProductName</td>
+                                                    <td>@item.Qty</td>
+                                                    <td>@item.Unit</td>
+                                                    <td>@item.Rate</td>
+                                                    <td>@item.DiscPercent</td>
+                                                    <td colspan="2">@item.Disc</td>
+                                                    <td>@(Convert.ToDecimal(item.Rate) + Convert.ToDecimal(item.Rate))</td>
+                                                </tr>
+                                                totalCostSalesSum += Convert.ToDecimal(item.Rate) + Convert.ToDecimal(item.Rate);
+                                                taxAmount = totalCostSalesSum * taxRate;
+                                                netamount = totalCostSalesSum + taxAmount + taxAmount  ;                                                
+                                            }
+                                            <tr class="grossamountrow">
+                                                <td colspan="5"></td>
+                                                <td class="grossamountxt">Gross Amount</td>
+                                                <td class="mid">:</td>
+                                                <td class="grossamountsum">@totalCostSalesSum</td>
+                                            </tr>
+                                            <tr class="remarksrow">
+                                                <td colspan="5"class="remarkscard txt">Remarks</td>
+                                                <td class="productdistxt">Product Discount</td>
+                                                <td class="mid">:</td>
+                                                <td class="productdisnum">0</td>
+                                            </tr>
+                                            <tr class="discountrow">
+                                                <td colspan="5"></td>
+                                                <td class="discounttxt">Discount</td>
+                                                <td class="mid">:</td>
+                                                <td class="discountnum">0</td>
+                                            </tr>
+                                             <tr class="taxableamtrow">
+                                                <td colspan="5"></td>
+                                                <td class="taxabletxt">Taxable Amount</td>
+                                                <td class="mid">:</td>
+                                                <td class="taxablenum">@taxAmount </td>
+                                            </tr>
+                                            <tr class="vatrow">
+                                                <td colspan="5"></td>
+                                                <td class="vattxt">Vat 13%</td>
+                                               <td class="mid">:</td>
+                                                <td class="taxamt">@taxAmount</td>
+                                            </tr>
+                                            <tr class="billpreprow">
+                                                <td class="billpreptxtlg" colspan="5">Bill Prepared By: Sandesh Dhakal</td>
+                                                <td class="billpreptxtsm">rounded off</td>
+                                                <td class="mid">:</td>
+                                                <td class="billprepnum">0</td>
+                                            </tr>
+                                            <tr class="netamtrow">
+                                                <td class="netamttxtlg" colspan="5">In Words: number thousand number hundred</td>
+                                                <td class="netamttxtsm">Net Amount</td>
+                                                <td class="mid">:</td>
+                                                <td class="netamtnum">@netamount</td>
+                                            </tr>
+
+                                                                                                                           
+                                        }  
+                                        
+                                </tbody>
+                            </table>
+                        </ModalDialog>
+                        }                       
+                    }
+                }
+            }
+        </div>
+    </div>
+    @if (_pagerDto.TotalPages > 0)
+    {
+        <div class="row paginationpart">
+            <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
+                <div class="col mt-1">
+                    @if (_pagerDto.TotalPages > 0)
+                    {
+                        <span class="selecttext">Current Entries:</span>
+                        <select class="selectcompany" @onchange="HandlePaginationChange">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+
+                <ul class="pagination justify-content-end">
+                    @if (_pagerDto.CurrentPage > 1)
+                    {
+                        <li class="page-item pointer px-1">
+                            <a class="page-link" @onclick="() => OnPagination(1)">First</a>
+                        </li>
+                        <li class="page-item pointer px-1">
+                            <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
+                        </li>
+                    }
+                    @if (_pagerDto.TotalPages > 1)
+                    {
+                        for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+                        {
+                            var currentPageItem = pageItem;
+                            <li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
+                                <a class="page-link" @onclick="() => OnPagination(currentPageItem)">@currentPageItem</a>
+                            </li>
+                        }
+                    }
+
+                    @if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
+                    {
+                        <li class="page-item pointer px-1">
+                            <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
+                        </li>
+                        <li class="page-item pointer px-1">
+                            <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+    }    
+</div>
+@code {
+   
+    decimal taxableamount = 0;
+    decimal totalCostSalesSum = 0;
+    decimal taxRate = 0.13m; 
+    decimal taxAmount = 0;
+    decimal netamount = 0;
+    [CascadingParameter]
+    private GlobalState GlobalState { get; set; }
+    private VendorListShort selectedVendor;
+    private List<GetPurchaseReceipt> purchaseReceipt;
+    private InventoryRecordsFilter inventoryFilter = new();
+    private List<VendorWiseProductById> vendorwisepeoductbyid;
+    private List<VendorWiseProductByIdMap> vendorwisepeoductbyidMap;
+
+    private PagerDto _pagerDto { get; set; } = new();
+    private bool OpenReceiptModel = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        selectedVendor = new();    
+        await LoadInventoryRecords(1);
+    }
+
+    private async Task SearchHandle()
+    {
+        await LoadInventoryRecords(1);
+    }
+
+    private async Task<IEnumerable<VendorListShort>> FetchVendors(string searchText)
+    {
+        var parameters = new Dictionary<string, string>
+        {
+            { "vendorname", searchText },
+        };
+
+        try
+        {
+            var vendors = await BaseService.GetAsync<Model.Response.Base.Derived<IEnumerable<VendorListShort>>>("VendorManagement/get-vendor-for-search", parameters);
+            return vendors.Result;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching vendors: {ex.Message}");
+            return Enumerable.Empty<VendorListShort>();
+        }
+    }
+
+    private void SaveValue(VendorListShort vendorListShort)
+    {
+        selectedVendor = vendorListShort;
+    }
+
+    private async Task LoadInventoryRecords(int pageNumber)
+    {
+        try
+        {
+            var parameters = new Dictionary<string, string>
+                    {
+                        { "pageno", pageNumber.ToString() },
+                        { "pagesize", inventoryFilter.PageSize.ToString() },
+                        { "vendorid", selectedVendor?.Id.ToString() ?? "0"},
+                    };
+
+            var inventoryList = await BaseService.GetAsync<Model.Response.Base.Derived<List<GetPurchaseReceipt>>>("PurchaseReceipt/get-purchase-receipt-records", parameters);
+            if(inventoryList != null && inventoryList.Result != null)
+            {
+                purchaseReceipt = inventoryList.Result;
+                _pagerDto = new PagerDto(inventoryList.TotalCount ?? 1, pageNumber, inventoryFilter.PageSize);
+                inventoryFilter.IsInitialized = true;
+            }
+
+        }catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message.ToString());
+        }
+    }
+    private async Task HandlePaginationChange(ChangeEventArgs e)
+    {
+        if (e.Value == null) return;
+
+        var pageSize = int.Parse(e.Value.ToString()!);
+
+        inventoryFilter.PageSize = pageSize;
+
+        await OnPagination(1);
+    }
+
+    private async Task OnPagination(int pageNumber)
+    {
+
+        await LoadInventoryRecords(pageNumber);
+    }
+
+    private async Task OpenReceipt(int vendorinventoryid)
+    {
+        OpenReceiptModel = true;
+        try
+        {
+            if (vendorinventoryid != 0 || vendorinventoryid != null)
+            {
+                var parameters = new Dictionary<string, string>
+                    {
+                        { "purchasereceiptid", vendorinventoryid.ToString() }
+                    };
+
+                var productList = await BaseService.GetAsync<Model.Response.Base.Derived<List<VendorWiseProductByIdMap>>>("PurchaseReceipt/get-purchase-receipt-by-id", parameters);
+                if (productList != null)
+                {
+                    vendorwisepeoductbyidMap = productList.Result ?? [];                    
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message.ToString());
+        }
+
+    }
+
+    private void CloseRecepitModel()
+    {
+        OpenReceiptModel = false;
+    }
+}

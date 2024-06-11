@@ -1,0 +1,338 @@
+﻿@page "/add-product"
+@using Blazored.Typeahead
+@using System.Text.Json
+@using TheHighInnovation.POS.Model.Request.VendorManagement
+@using TheHighInnovation.POS.Model.Response.Base
+@using TheHighInnovation.POS.Web.Services.Alert
+@using TheHighInnovation.POS.Web.Services.Base
+@inject BaseService BaseService
+@inject SweetAlert SweetAlertService
+
+
+<div class="container pt-5">
+    <h2>Add Product</h2>
+    <div class="row">
+        <div class="col-3">
+            <div class="form-group">
+                <label for="productName">Product Name:</label>
+                <input type="text" id="productName" name="productName" @bind="productFormList.ProductName">
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" name="category" @bind="selectedCategory">
+                    @if (categoryList != null)
+                    {
+                        <option disabled selected>Select Category</option>
+                        @foreach (var item in categoryList)
+                        {
+                            <option value="@item.Id">@item.CategoryName</option>
+                        }
+                    }
+                    else
+                    {
+                        <option value="">Not found</option>
+                    }
+                </select>
+
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="form-group">
+                <button class="btn-sm btn-primary plusbutton" @onclick="AddCategory"><i class="fa-solid fa-plus"></i></button>
+            </div>
+        </div>
+        <div class="col-4">
+        <div class="form-group">
+            <label for="barcode">Barcode:</label>
+            <input type="text" id="barcode" name="barcode" @bind="productFormList.BarcodeCode">
+        </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" @bind="productFormList.Description">
+    </div>
+    <div class="form-group">
+        <label for="unit">Unit*:</label>
+        <div class="unit-input">
+            <BlazoredTypeahead SearchMethod="FetchUnit" @bind-Values="_selectedUnit" TItem="UnitDTO" TValue="UnitDTO" Disabled="_isDisabledMulti" EnableDropDown="true" placeholder="Search by measure...">
+                <SelectedTemplate Context="unit">
+                    @unit.Measure
+                </SelectedTemplate>
+                <ResultTemplate Context="unit">
+                    @unit.Measure
+                </ResultTemplate>
+            </BlazoredTypeahead>
+
+            @if (OpenaddcategoryModel)
+            {
+                <ModalDialog OnClose="@OnUpsertCategory" OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div>
+                                        <label for="categoryname" class="categoryname">Category Name</label>
+                                        <input type="text" name="categoryname" class="categorynameinput" @bind="_categoryResponseDTO.CategoryName" />
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div>
+                                        <label for="categorydescription" class="categorydescription">Category Description</label>
+                                        <textarea type="text" name="categorydescription" class="categorydescriptioninput" @bind="_categoryResponseDTO.CategoryDescription"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </ModalDialog>
+            }
+        </div>        
+    </div>
+
+    @if(_selectedUnit != null && _selectedUnit.Any())
+    {
+        @if (_selectedUnit.Any(u => u.Measure == "Carton") || _selectedUnit.Any(u => u.Measure == "Bora"))
+        {
+            <div class="row mt-3">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="unitSize">Unit Size:</label>
+                       <p>1 per unit : </p> <input type="text" id="unitsize" name="cartonSize" class="form-control" @bind="productFormList.UnitSize">
+                    </div>
+                </div>
+            </div>
+        }
+    }
+       
+    <div class="form-group">
+        <label for="defaultUnit">Default Unit:</label>
+        <select id="defaultUnit" name="defaultUnit" @bind="productFormList.DefaultUnit">
+            <option value="">Select a Unit</option>
+            @if (_unitDTO != null)
+            {
+                @foreach (var unit in _unitDTO)
+                {
+                    <option value="@unit.Measure">@unit.Measure</option>
+                }
+            }
+        </select>
+    </div>    
+    
+    <div class="form-group">
+        <label for="salesRate">Sales Rate:</label>
+        <input type="text" id="salesRate" name="salesRate" @bind="productFormList.SellingPrice">
+    </div>
+    <div class="form-group">
+        <label for="isTaxable">Is Taxable:</label>
+        <label class="switch">
+            <input type="checkbox" id="isTaxable" name="isTaxable" @bind="productFormList.Taxable">
+            <span class="slider round"></span>
+        </label>
+    </div>
+    <div class="form-group">
+        <label for="productStatus">Product Status:</label>
+        <label class="switch">
+            <input type="checkbox" id="productStatus" name="productStatus" @bind="productFormList.IsActive">
+            <span class="slider round"></span>
+        </label>
+    </div>
+    <div class="form-actions">
+        <button type="button" class="add-sku-btn" @onclick="ShowSKU">ADD SKU</button>        
+    </div>
+    @if(IsShowSku)
+    {
+        <div class="form-group">
+            <label for="defaultUnit">Sku:</label>
+           <input type="text" @bind=productFormList.SKU />
+        </div>
+    }
+    <div class="form-actions">
+    <button type="submit" class="save-btn" @onclick="CreateProduct">SAVE</button>
+    </div>
+</div>
+
+
+
+@code {
+    private string productName;
+    private int selectedCategory;
+    private string defaultUnit;
+    private string salesRate;
+    private bool isTaxable;
+    private bool productStatus;
+    private List<CategoryDropDownList> categoryList;
+    private IEnumerable<UnitDTO> _unitDTO;
+    private IList<UnitDTO> _selectedUnit = new List<UnitDTO>();
+    private bool _isDisabledMulti;
+    private ProductFormList productFormList = new();
+    private List<ProductStoreDTO> productStore = new List<ProductStoreDTO>();
+    private bool IsShowSku = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await FetchCategories();
+        _unitDTO = await GetUnitsAsync();
+        productFormList = new();
+        productStore = new();
+        _selectedUnit = new List<UnitDTO>();
+    }
+    private string? _dialogTitle { get; set; }
+    private string? _dialogOkLabel { get; set; }
+    private bool OpenaddcategoryModel = false;
+
+
+    private async Task AddCategory()
+    {
+        OpenaddcategoryModel = true;
+        _dialogTitle = "Add a new Category";
+        _dialogOkLabel = "Add";
+    }
+    private CategoryResponseDTO _categoryResponseDTO = new();
+    private async Task OnUpsertCategory(bool isClosed)
+    {
+        try
+        {
+            if (isClosed)
+            {
+                OpenaddcategoryModel = false;
+                return;
+            }
+
+            var category = new
+            {
+                p_id = _categoryResponseDTO.Id > 0 ? _categoryResponseDTO.Id : 0,
+                p_category_name = _categoryResponseDTO.CategoryName,
+                p_category_description = _categoryResponseDTO.CategoryDescription
+            };
+
+            var jsonRequest = JsonSerializer.Serialize(category);
+            var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
+            var apiEndpoint = "VendorManagement/upsert-category";
+            var result = await BaseService.PostAsync<Derived<object>>(apiEndpoint, content);
+            if (result.Status == "Success")
+            {
+                OpenaddcategoryModel = false;
+                await SweetAlertService.Alert("Success", result.Message, "success");
+                await Fetchcategories();
+                ClearCategoryForm();
+
+            }
+        }
+        catch (Exception ex)
+        {
+            OpenaddcategoryModel = true;
+
+            Console.WriteLine(ex.ToString());
+        }
+    }
+    private void ClearCategoryForm()
+    {
+        _categoryResponseDTO = new();
+
+    }
+    private async Task Fetchcategories()
+    {
+        try
+        {
+            var category = await BaseService.GetAsync<Derived<List<CategoryDropDownList>>>("VendorManagement/get-category-list");
+
+            if (category != null)
+            {
+                categoryList = category.Result;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message.ToString());
+        }
+    }
+
+    private async Task FetchCategories()
+    {
+        try
+        {
+            var category = await BaseService.GetAsync<Derived<List<CategoryDropDownList>>>("VendorManagement/get-category-list");
+            if (category != null)
+            {
+                categoryList = category.Result;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
+    private async Task<IEnumerable<UnitDTO>> GetUnitsAsync()
+    {
+        try
+        {
+            var unit = await BaseService.GetAsync<Derived<IEnumerable<UnitDTO>>>("VendorManagement/get-unit");
+            return unit?.Result ?? Enumerable.Empty<UnitDTO>();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return Enumerable.Empty<UnitDTO>();
+        }
+    }
+
+    private async Task<IEnumerable<UnitDTO>> FetchUnit(string searchTerm)
+    {        
+        if (string.IsNullOrWhiteSpace(searchTerm))
+        {
+            return _unitDTO;
+        }
+        return _unitDTO.Where(u => u.Measure.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
+    }
+
+    private async Task CreateProduct()
+    {
+        try
+        {
+            string unitString = string.Join(",", _selectedUnit.Select(u => u.Measure));
+
+            var product = new ProductStoreDTO
+                {
+                    p_product_name = productFormList.ProductName,
+                    p_barcode_code = productFormList.BarcodeCode,
+                    p_description = productFormList.Description,
+                    p_category_id = selectedCategory,
+                    p_sales_price = productFormList.SellingPrice,
+                    p_is_active = productFormList.IsActive,
+                    p_taxable = productFormList.Taxable,
+                    p_unit= unitString,
+                    p_default_size = productFormList.DefaultUnit,
+                    p_unit_size = productFormList.UnitSize,
+                    p_sku = productFormList.SKU
+                };
+
+            var jsonRequestvendor = JsonSerializer.Serialize(product);
+            var content = new StringContent(jsonRequestvendor, System.Text.Encoding.UTF8, "application/json");
+            var apiEndpoint = "productmanagement/create-product";
+            var result = await BaseService.PostAsync<Derived<object>>(apiEndpoint, content);
+            if(result != null)
+            {
+                await SweetAlertService.Alert("Success", "The Product is created", "success");
+                StateHasChanged();
+                productFormList = new();
+                await OnInitializedAsync();
+            }
+
+        }catch(Exception ex)
+        {
+            Console.WriteLine(ex.StackTrace.ToString());
+            await SweetAlertService.Alert("Error", "The Barcode already exist","error");
+        }
+    }
+    
+    private void ShowSKU()
+    {
+        IsShowSku = true;
+        StateHasChanged();
+    }
+}

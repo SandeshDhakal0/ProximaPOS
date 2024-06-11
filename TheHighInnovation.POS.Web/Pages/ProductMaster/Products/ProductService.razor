@@ -1,0 +1,408 @@
+﻿@page "/product-service"
+@using System.Text.Json
+@using Blazored.Typeahead
+@using TheHighInnovation.POS.Model.Request.Filter
+@using TheHighInnovation.POS.Model.Request.VendorManagement
+@using TheHighInnovation.POS.Model.Request.VendorManagement.ProductsDTO
+@using TheHighInnovation.POS.Web.Models
+@using TheHighInnovation.POS.Web.Services.Base
+@inject IJSRuntime JS
+@inject BaseService BaseService
+
+@inject NavigationManager NavManager
+
+@if (productFilter.IsInitialized)
+    {
+<div class="productspage">
+    <header>
+        <h1>Product</h1>
+        <div class="actions">
+            <button class="btn">Import Product</button>
+            <button class="btn" @onclick="OpenAddProduct">Add Product</button>
+        </div>
+    </header>
+
+    <div class="filters">
+      @*   <button class="filter-btn">Filter</button>
+        <input type="date" id="from-date" name="from-date" value="2024-03-01">
+        <input type="date" id="to-date" name="to-date" value="2024-03-31"> *@
+        <input type="text" id="search" placeholder="Search..." @bind="productname">
+        <button class="btn btn-primary" @onclick="HandleSearch">Search</button>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>BarCode</th>
+                <th>CategoryName</th>
+                <th>Unit</th>
+                <th>Default Unit</th>
+                <th>Unit Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+                @if(_productList != null)
+                {
+                    @foreach(var item in _productList)
+                    {
+                        <tr>
+                        <td>@item.ProductName</td>
+                        <td>@item.Barcode</td>
+                        <td>@item.CategoryName</td>
+                        <td>@item.Unit</td>
+                        <td>@item.DefaultUnit</td>
+                        <td>@item.SalesPrice</td>
+                        @if (item.IsActive == true)
+                        {
+                                <td class="status active">Active</td>
+                            }
+                            else
+                            {
+                                <td class="status active" style="color:red;">InActive</td>
+                            }
+                        <td>
+                            <button class="edit-btn" @onclick="()=>OpenEditModal(item.Id)"><i class="fas fa-edit"></i></button>
+                            <button class="delete-btn">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                }                    
+                }
+              
+            
+        </tbody>
+    </table>
+</div>
+
+    @if (_pagerDto.TotalPages > 0)
+    {
+        <div class="row paginationpart">
+            <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
+                <div class="col mt-1">
+                    @if (_pagerDto.TotalPages > 0)
+                    {
+                        <span class="selecttext">Current Entries:</span>
+                        <select class="selectcompany" @onchange="HandlePaginationChange" style="height:5vh;">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+
+                <ul class="pagination justify-content-end">
+                    @if (_pagerDto.CurrentPage > 1)
+                    {
+                        <li class="page-item pointer px-1">
+                            <a class="page-link" @onclick="() => OnPagination(1)">First</a>
+                        </li>
+                        <li class="page-item pointer px-1">
+                            <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
+                        </li>
+                    }
+                    @if (_pagerDto.TotalPages > 1)
+                    {
+                        for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+                        {
+                            var currentPageItem = pageItem;
+                            <li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
+                                <a class="page-link" @onclick="() => OnPagination(currentPageItem)">@currentPageItem</a>
+                            </li>
+                        }
+                    }
+
+                    @if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
+                    {
+                        <li class="page-item pointer px-1">
+                            <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
+                        </li>
+                        <li class="page-item pointer px-1">
+                            <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
+    }
+    }
+
+@if (OpenEditModel)
+{
+    <ModalDialog OnClose="@CloseEditModal"  OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
+        <div class="modal-body">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <div class="d-flex">
+                            <div class="namebox">
+                            <label class="namelabel">Product Name</label>
+                            <input class="nameinput" type="text" @bind="_productListUpdate.ProductName" />
+                            </div>
+
+                            <div class="barcodebox">
+                            <label class="barcodelabel">Barcode</label>
+                            <input class="barcodeinput" type="text" @bind="_productListUpdate.Barcode" />
+                            </div>
+
+                         </div>
+                        <div class="d-flex m-3">
+                            <div class="categorybox">
+                            <label class="categorylabel">Categeory:</label>
+                            <select class="categoryselect" id="category" name="category" @bind="_productListUpdate.CategoryId">
+                                @if (_categoryListupdate != null)
+                                {
+                                    <option disabled selected>Select Category</option>
+                                    @foreach (var item in _categoryListupdate)
+                                    {
+                                        <option value="@item.Id">@item.CategoryName</option>
+                                    }
+                                }
+                            </select>
+                            </div>
+                            <div class="descriptionbox">
+                            <label class="descriptionlabel">Description</label>
+                            <input class="descriptioninput" type="text" @bind="_productListUpdate.Description" />
+                            </div>
+                        </div>
+
+                        
+                        
+
+                        <div class="d-flex">
+                            <div class="spbox">
+                        <label class="splabel">Salesprice</label>
+                        <input class="spinput" type="text" @bind="_productListUpdate.SalesPrice" />
+                        </div>
+                        <div class="isactivebox">
+                        <label class="isactivelabel"> Is Active</label>
+                        <div class="switch">
+                            <input type="checkbox" class="isactiveswitch" id="productStatus" name="productStatus" @bind="_productListUpdate.Taxable">
+                            <span class="slider-round"></span>
+                        </div>
+                            </div>
+                            <div class="productstatusbox">
+                        <label class="productstatuslabel" for="productStatus">Product Status:</label>
+                        <div class="switch">
+                            <input type="checkbox" class="productstatusswitch" id="productStatus" name="productStatus" @bind="_productListUpdate.IsActive">
+                            <span class="slider-round"></span>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="unitclass mt-3">
+                            <label class="unitlabel">Unit</label>
+                            <BlazoredTypeahead SearchMethod="FetchUnit" class="unitinput"
+                                               @bind-Values="_selectedUnit" TItem="UnitDTO"
+                                               TValue="UnitDTO" EnableDropDown="true" placeholder="Search by measure...">
+                                <SelectedTemplate Context="unit">
+                                    @unit.Measure
+                                </SelectedTemplate>
+                                <ResultTemplate Context="unit">
+                                    @unit.Measure
+                                </ResultTemplate>
+                            </BlazoredTypeahead>
+                        </div>
+                        <label>Default Unit</label>
+                        <UnitLayout SelectedUnit="@_productListUpdate.DefaultUnit"></UnitLayout>
+                    </div>
+                   
+                </div>
+            </div>
+         
+        </div>
+
+    </ModalDialog>
+}
+
+
+
+@code {
+    [CascadingParameter]
+    private GlobalState globalState { get; set; }
+    private List<ProductListMain> _productList = new();
+
+    private List<CategoryDropDownList> _categoryListupdate;
+    private IEnumerable<UnitDTO> _unitDTO;
+    private ProductListUpdate _productListUpdate = new();
+    private ProductFormList productFormList = new();
+    private string productname = "";
+    private static string lastScannedBarcode = "";
+    private IList<UnitDTO> _selectedUnit = new List<UnitDTO>();
+    private PagerDto _pagerDto { get; set; } = new();
+    private ProductServiceFilter productFilter = new();
+
+    /*edit products modal work */
+    private string? _dialogTitle { get; set; }
+    private string? _dialogOkLabel { get; set; }
+    private bool OpenEditModel = false;
+
+    private async Task OpenEditModal(int productid)
+    {
+
+        var parameters = new Dictionary<string, string>
+        {
+            { "productid", productid.ToString() },
+        };
+        var productListUpdate = await BaseService.GetAsync<Model.Response.Base.Derived<ProductListUpdate>>("productmanagement/get-product-by-id", parameters);
+        _productListUpdate = productListUpdate.Result;
+        var unitsString = _productListUpdate.Unit;
+
+        _selectedUnit = unitsString.Split(',')
+                                   .Select((measure, index) => new UnitDTO { Id = index + 1, Measure = measure.Trim() })
+                                   .ToList();
+        OpenEditModel = true;
+        _dialogTitle = "Edit Product";
+        _dialogOkLabel = "Update";
+
+    }
+
+    private async Task HandlePaginationChange(ChangeEventArgs e)
+    {
+        if (e.Value == null) return;
+
+        var pageSize = int.Parse(e.Value.ToString()!);
+
+        productFilter.PageSize = pageSize;
+
+        await OnPagination(1);
+    }
+
+    private async Task OnPagination(int pageNumber)
+    {
+
+        await GetProductList(pageNumber);
+    }
+
+    private async Task CloseEditModal(bool isClosed)
+    {
+        try
+        {
+            if (isClosed)
+            {
+                OpenEditModel = false;
+                return;
+            }
+            string unitString = string.Join(",", _selectedUnit.Select(u => u.Measure));
+            var updateProduct = new
+            {
+                p_id = _productListUpdate.Id,
+                p_productcode = _productListUpdate.ProductCode,
+                p_productname = _productListUpdate.ProductName,
+                p_categoryid = _productListUpdate.CategoryId,
+                p_barcode = _productListUpdate.Barcode,
+                p_description = _productListUpdate.Description,
+                p_unit = unitString,
+                p_salesprice = _productListUpdate.SalesPrice,
+                p_sku = _productListUpdate.SKU,
+                p_taxable = _productListUpdate.Taxable,
+                p_isactive = _productListUpdate.IsActive,
+                p_defaultunit = _productListUpdate.DefaultUnit,
+                p_unitsize = _productListUpdate.UnitSize
+            };
+            var jsonRequest = JsonSerializer.Serialize(updateProduct);
+            var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
+            var apiEndpoint = "productmanagement/update-product";
+            var result = await BaseService.PostAsync<Model.Response.Base.Derived<object>>(apiEndpoint, content);
+        }
+        catch(Exception ex)
+        {      
+            Console.WriteLine(ex.ToString());
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetProductList(1);
+        await Fetchcategories();
+        _unitDTO = await GetUnitsAsync();
+        productFormList = new();
+
+        _selectedUnit = new List<UnitDTO>();
+
+    }
+
+    private void OpenAddProduct()
+    {
+        NavManager.NavigateTo("/add-product");
+    }
+
+    private async Task GetProductList(int pageNumber)
+    {
+        try
+        {
+            var parameters = new Dictionary<string, string>
+        {
+            { "productname", productname },
+            {"pageno" , pageNumber.ToString() },
+            { "pagesize",productFilter.PageSize.ToString()},
+        };
+            var productList = await BaseService.GetAsync<Model.Response.Base.Derived<List<ProductListMain>>>("productmanagement/get-product-list", parameters);
+            if (productList != null)
+            {
+                _productList = productList.Result;
+                _pagerDto = new PagerDto(productList.TotalCount ?? 1, pageNumber, productFilter.PageSize);
+                productFilter.IsInitialized = true;
+            }
+        }catch(Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        }
+
+    }
+
+    private async Task HandleSearch()
+    {
+        await GetProductList(1);
+        StateHasChanged();
+    }
+
+    private async Task Fetchcategories()
+    {
+        try
+        {
+            var category = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryDropDownList>>>("VendorManagement/get-category-list");
+
+            if (category != null)
+            {
+                _categoryListupdate = category.Result;
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message.ToString());
+        }
+    }
+
+    private async Task<IEnumerable<UnitDTO>> GetUnitsAsync()
+    {
+
+        try
+        {
+            var unit = await BaseService.GetAsync<Model.Response.Base.Derived<IEnumerable<UnitDTO>>>("VendorManagement/get-unit");
+            return unit?.Result ?? Enumerable.Empty<UnitDTO>();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return Enumerable.Empty<UnitDTO>();
+        }
+    }
+
+    private async Task<IEnumerable<UnitDTO>> FetchUnit(string searchTerm)
+    {
+        if (string.IsNullOrWhiteSpace(searchTerm))
+        {
+            return _unitDTO;
+        }
+        return _unitDTO.Where(u => u.Measure.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
+    }
+
+}

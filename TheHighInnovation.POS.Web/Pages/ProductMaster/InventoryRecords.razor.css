@@ -1,0 +1,83 @@
+.inventoryrcdpage
+{
+    margin-top:3%;
+    padding:2vh;
+   
+    margin-left:-3vh;
+    width:105%;
+    height:92vh;
+}
+.vendornamelabel, .batcchidlabel {
+    line-height: 1;
+    font-size: 12px;
+}
+.batchidoptions {
+    height: 5.5vh;
+    width: 100%;
+    border: 1px solid #adaca8;
+    border-radius: 5px;
+    
+    background-color: #d9d9d9;
+}
+.tablehead {
+    background-color: var(--tablehead-background);
+}
+.display {
+    margin-top: 2vh;
+    width:98%;
+}
+.display thead th,tbody td {
+    padding:15px;
+}
+
+.selectcompany{
+    border:none;
+    background-color:#d9d9d9;
+    height:4vh;
+ 
+    border-radius:5px;
+    margin-top:1vh;
+}
+
+/*Modal Ddesign starts from here*/
+.tableabhove{
+    width:100%;
+}
+.rightpart {
+    float: right;
+    margin-right:-10vw;
+    padding-left:8vw;
+}
+.vendorname, .vendorid, .panvatno, .issuedate {
+    font-size: 16px;
+    font-weight: 600;
+    padding-right: 5px;
+}
+
+.thead  {
+    background-color: var(--tablehead-background);
+}
+
+
+
+.taxablenum, .taxabletxt, .discounttxt, .discountnum, .productdistxt, .productdisnum, .billpreptxtlg, .billprepnum, .vatrow, .mid {
+    border-bottom: 3px solid var(--tablehead-background);
+}
+.mid{
+    font-weight:700;
+    font-size:22px;
+}
+.taxabletxt, .discounttxt, .productdistxt, .vattxt, .remarksrow, .discountrow, .taxableamtrow, .vatrow, .billpreprow, .netamtrow, .grossamountrow, .grossamountxt, .netamttxtsm {
+    border-left: 3px solid var(--tablehead-background);
+}
+.discountnum, .productdisnum, .taxablenum, .taxamt, .billprepnum, .billpreptxtsm {
+    border-right: 3px solid var(--tablehead-background);
+}
+
+.netamtrow, .billpreptxtsm, .tablerowbody, .grossamountrow {
+    border: 3px solid var(--tablehead-background);
+}
+.billpreptxtsm{
+    border-right:none;
+}
+

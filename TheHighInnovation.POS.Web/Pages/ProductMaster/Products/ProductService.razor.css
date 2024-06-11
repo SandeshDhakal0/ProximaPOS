@@ -1,0 +1,169 @@
+﻿.productspage{
+    margin-top:4%;
+}
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+    header h1 {
+        margin: 0;
+    }
+
+.actions .btn {
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+    .actions .btn:hover {
+        background-color: #0056b3;
+    }
+
+.filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+    .filters input[type="date"], .filters input[type="text"] {
+        padding: 10px;
+        margin-left: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .filters .filter-btn {
+        background-color: #6c757d;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+        .filters .filter-btn:hover {
+            background-color: #5a6268;
+        }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    --column-count: 7;
+}
+
+thead th,
+tbody td {
+    padding: 10px;
+    text-align: left;
+}
+
+thead th {
+    background-color: #4CAF50;
+    color: white;
+    position: sticky; /* Make the headers sticky */
+    top: 0; /* Stick to the top of the viewport */
+    z-index: 1; /* Ensure the headers stay above other elements */
+}
+
+tbody {
+    display: block;
+    max-height: 57vh;
+    overflow-y: scroll;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    border-top: none;
+}
+
+table thead,
+table tbody tr {
+    display: table;
+    width: 100%;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+    background-color: #ddd;
+}
+
+/* Ensure each cell in the table head has the same width as its corresponding cell in the table body */
+thead th,
+tbody td {
+    width: calc(100% / var(--column-count));
+}
+
+th[colspan="2"] {
+    width: 100%;
+}
+
+.status.active {
+    color: #28a745;
+}
+
+.status.inactive {
+    color: #dc3545;
+}
+
+.edit-btn, .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+    .edit-btn:hover, .delete-btn:hover {
+        color: #007bff;
+    }
+
+    .delete-btn:hover {
+        color: #dc3545;
+    }
+
+.barcodebox {
+    margin-left: 10%;
+}
+.descriptionbox {
+    margin-left: 15.5%;
+}
+.categorybox{
+    margin-left:-2%;
+}
+.nameinput, .barcodeinput, .descriptioninput, .categoryselect, .spinput {
+    width:25vw;
+    height:5vh;
+    border:none;
+    background-color:#d9d9d9;
+    border-radius:5px;
+    padding:5px;
+}
+.spbox {
+    
+    width:45%;
+
+}
+.isactivebox, .productstatusbox {
+    margin-left: 8vw;
+    text-align: center;
+}
+
+.selectcompany{
+    background-color:#d9d9d9;
+    border:none;
+    border-radius:5px;
+    height:4vh !important;
+    width:3vw;
+}

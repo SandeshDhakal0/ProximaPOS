@@ -1,0 +1,168 @@
+.searchbutton {
+    border: none;
+    background-color: #082248;
+    width: 100%;
+    height: 35px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    margin-top: 15%;
+}
+.nepali-datepicker {
+    font-family:  sans-serif;
+}
+.required {
+    letter-spacing: 3px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.filterby {
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+
+
+.form-select , .form-control {
+    border: none;
+    border-radius: 10px;
+    background-color: #d9d9d9;
+}
+
+
+
+.salepage {
+    margin-top: 2.8%;
+
+
+}
+
+
+.searchlinegroup {
+    margin-top: 2%;
+    margin-bottom:2%;
+}
+
+.textshow {
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+.showentries {
+    width: 50px;
+    background-color: #efefef;
+    border: none;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.selecttext {
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.selectrole {
+    background-color: #efefef;
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+}
+
+.searchtext {
+    font-size: 16px;
+}
+#from{
+border:none;
+border-radius:5px;
+background-color:#efefef;
+padding:5px;
+margin-right:3%;
+}
+#to {
+    border: none;
+    border-radius: 5px;
+    background-color: #efefef;
+    padding: 5px;
+    margin-right:3%;
+}
+.searchinput {
+    border: 1px solid #dcdfe8;
+    border-radius: 10px;
+    height: 30px;
+    width: 200px;
+}
+
+
+.saletable{
+    width:100%;
+   
+}
+    .saletable tbody {
+        display: block;
+        max-height:50vh;
+        overflow-y: scroll;
+    }
+    .saletable thead, .saletable tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 10px;
+}
+
+.saletable th{
+    background-color:#f4f5fa;
+    border-radius:10px;
+    height:50px;
+}
+    .saletable thead{
+        text-align:center;
+    }
+    .saletable tbody tr {
+        height: 30px;
+        width:100%;
+        text-align:center;
+    }
+
+.dateandtime {
+    line-height: 2px;
+    width:10%;
+    
+   
+}
+    .dateandtime p {
+        text-align: left;
+        margin-left: 13px;
+    }
+    .paginationgroup{
+        margin-top:3%;
+        margin-right:5%;
+    }
+.paginationgroup button {
+    border: 1px solid #e9e9e9;
+    background: #fff;
+    margin-left: 10px;
+    width: 35px;
+    height: 35px;
+}
+.paginationgroup button:hover {
+    background: #111;
+    color: #fff;
+}
+.paginationgroup .backandnext {
+    width: 90px;
+}
+.paginationgroup .fa-arrow-left {
+    font: 6px;
+}
+

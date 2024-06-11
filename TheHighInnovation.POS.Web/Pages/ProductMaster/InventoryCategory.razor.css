@@ -1,0 +1,137 @@
+﻿.inventorycategorypage {
+   margin-top:5%;
+   margin-left:-1vw;
+}
+
+
+.search-panel {
+ 
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.search-panel input[type="text"], .search-panel select {
+    padding: 10px;
+    margin-right: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+}
+
+
+
+.search-panel button:hover {
+    background-color: #0056b3;
+}
+.categorynamelabel, .categorycodelabel, .categorydescription {
+    margin-top: 6px;
+    font-weight: 500;
+    font-size: 16px;
+}
+.categorycodelabel {
+    margin-left:5vw;
+}
+.categorynameinput, .categorycodeinput {
+    border: none;
+    border-radius: 10px;
+    height: 5vh;
+  margin-left:1vh;
+    background-color: #d9d9d9;
+}
+.categorydescription{
+    vertical-align:top;
+}
+.categorydescriptioninput {
+    background-color: #d9d9d9;
+    height: 15vh;
+    width: 20vw;
+    border:none;
+    border-radius:10px;
+}
+.categorytable {
+    width: 98%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+    .categorytable th, .categorytable td {
+
+        padding: 10px 10px;
+        text-align: center;
+
+    }
+    .categorytable th {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+    .categorytable thead, .categorytable tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+.categorytable thead th {
+    background-color: var(--tablehead-background);
+    color: #111;
+    text-align:center;
+}
+
+.categorytable tbody tr:nth-child(odd) {
+    background-color: #d1d1d1;
+}
+
+    .categorytable tbody tr:hover {
+        background-color: var(--tablehead-background);
+    }
+.addbutton {
+    justify-content: end;
+    border: none;
+    background-color: var(--our--commonblue-color);
+    color:#fff;
+    height: 5vh;
+    width: 10vw;
+    border-radius: 10px;
+    margin-left: 65vw;
+    margin-bottom: 2vh;
+}
+.searchbutton {
+ 
+    background-color: var(--our--commonblue-color);
+    border: none;
+    border-radius: 10px;
+   width:3vw;
+   height:5vh;
+    color: white;
+    cursor: pointer;
+}
+.updatebutton {
+    color: dodgerblue;
+    font-size: 20px;
+    cursor: pointer;
+}
+.categorytable tbody {
+    max-height: 50vh;
+    display:block;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 10px;
+}
+.thfirst{
+    border-radius:10px 0 0 0;
+}
+.thlast{
+    border-radius:0 10px 0 0;
+}
+.paginationpart select {
+    border: none;
+    background-color: #d9d9d9;
+    border-radius:5px;
+    height:4vh !important;
+}

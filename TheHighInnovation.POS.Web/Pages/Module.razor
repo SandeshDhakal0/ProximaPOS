@@ -1,0 +1,117 @@
+﻿@page "/module"
+@using TheHighInnovation.POS.Model.Response.Module
+@using TheHighInnovation.POS.Web.Services.Base
+@inject BaseService BaseService
+<div class="modulepage">
+
+<div class="row mt-3 mb-3">
+    <div class="col-4">
+        <h3>Module Index</h3>
+    </div>
+    <div class="col-8 text-end">
+        <button class="modulebtn" type="button" @onclick="() => OpenUpsertModuleDialog()">
+            Add a new module
+        </button>
+    </div>
+</div>
+<div class="row searchlinegroup">
+	<div class="col-8">
+		<span class="textshow">Show</span>: <input type="text" class="showentries"/>
+			<span class="selecttext">Entries:</span><select class="selectmodule">
+			<option selected disabled>Module</option>
+			<option>Module1</option>
+			<option>Module2</option>
+		</select>
+	</div>
+	<div class="col-4" style="text-align:right;">
+		<span class="searchtext">Search:</span> <Input type="text" class="searchinput"/>
+	</div>
+</div>
+<div class="tablediv">
+<table class="table">
+    <thead>
+    <tr>
+        <th class="th1">
+                Module
+        </th>
+        <th>
+                Sequence
+        </th>
+        <th>
+                Parent Module
+        </th>
+        <th class="th6">
+			    Action
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        IEnumerable<ModuleResponseDto> modules = _modules;
+
+        if(modules != null && modules.Any())
+        {
+            foreach (var module in modules)
+            {
+                <tr>
+                    <td>@module.Name</td>
+                    <td>@module.SequenceNumber</td>
+                    <td>@module.ParentModuleName</td>
+                    <td style="text-align:center;">
+                        <i class="fa-solid fa-pen-to-square" @onclick="() => OpenUpsertModuleDialog(module.Id)"></i>
+                    </td>
+                </tr>
+            }
+        }
+    }
+    </tbody>
+</table>
+    </div>
+
+@if (_showUpsertModuleDialog)
+{
+    <ModalDialog Title="@_dialogTitle" OnClose="@OnUpsertModuleDialogClose" OkLabel="@_dialogOkLabel">
+        <form>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Title</label>
+                <input type="text" class="form-control" @bind="_moduleModel.Name" placeholder="Enter a module title">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Parent Module</label>
+                <select class="form-control" @bind="_moduleModel.ParentModuleId">
+                    <option selected="selected" disabled="disabled">Select an Parent Module</option>
+                    @foreach (var item in _modules)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Sequence</label>
+                <input type="number" class="form-control" @bind="_moduleModel.SequenceNumber" placeholder="Enter a module sequence">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;URL</label>
+                <input type="text" class="form-control" @bind="_moduleModel.URL" placeholder="Enter a URL">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Module Type</label>
+                <select class="form-control" @bind="_moduleModel.ModuleType">
+                    <option selected="selected" disabled="disabled">Select a Module Type</option>
+                    <option value="1">Cashier Menu</option>
+                    <option value="2">Transaction Menu</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Image Icon</label>
+                <input type="text" class="form-control" @bind="_moduleModel.Icon" placeholder="Enter a Icon URL from Font Awesome CDN">
+            </div>
+        </form>
+
+        @if (!string.IsNullOrEmpty(_upsertModuleErrorMessage))
+        {
+            <span>@_upsertModuleErrorMessage</span>
+        }
+    </ModalDialog>
+}
+</div>

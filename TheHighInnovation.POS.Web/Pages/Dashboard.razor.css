@@ -1,0 +1,48 @@
+.dashboardpage {
+    margin-top: 2.5%;
+    background-color: var(--page-background-color);
+    height:90vh;
+    width:100vw;
+    margin-left:-1.8vw;
+}
+.smallcards{
+    height:15vh;
+    width:100%;
+    margin:1.5vh;
+    border-radius:15px;
+}
+.verticalrow{
+    height:8vh;
+    border-radius:15px;
+    margin-top:3vh;
+    width:95%;
+    margin-left:1vh;
+    margin-bottom:3vh;
+}
+.chartrow{
+    margin-top:2vh;
+    margin-bottom:2vh;
+}
+.chartcards {
+    background-color: #fff;
+    height: 25vh;
+    width: 39.4vw;
+    margin-right: 2vh;
+}
+.belowchartsidecard{
+    height:23vh;
+    margin-right:2vh;
+    width:32.2%;
+}
+.belowchartrow{
+    margin-left:1vh;
+}
+.chartrow{
+    margin-left:0.8vh;
+}
+.th1{
+    width:7vw;
+}
+thead,tbody{
+font-size:12px;
+}
