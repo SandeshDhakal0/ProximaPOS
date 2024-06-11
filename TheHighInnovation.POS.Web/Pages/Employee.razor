@@ -1,0 +1,240 @@
+﻿@page "/employees"
+@using TheHighInnovation.POS.Model.Response.Employee
+@using TheHighInnovation.POS.Web.Services.Base
+@inject BaseService BaseService
+<div class="employeepage">
+    <div class="row mt-3 mb-3">
+        <div class="col-4">
+            <h3>Employee Index</h3>
+        </div>
+        <div class="col-8 text-end">
+            <button class="addemployeebtn" type="button" @onclick="() => OpenUpsertEmployeeDialog()">
+                Add a new employee
+            </button>
+        </div>
+    </div>
+    @* <div class="card filter-section">
+        <div class="card-body">
+            <form @onsubmit="@HandleFilter">
+                <div class="row">
+                    <div class="col-2 mt-1">
+                        <label class="filterby d-flex">Filter By:  <i class="fa fa-filter"></i></label>
+                    </div>
+                    @if (_globalState.OrganizationId is null)
+                    {
+                        <div class="col">
+                            <label class="required">Organization</label>
+                            <select aria-required="true" class="form-select" required @onchange="OnOrganizationSelection">
+                                <option disabled="" label="Select an Organization" selected="" value=""></option>
+                                @if (_organizations != null)
+                                {
+                                    foreach (var item in _organizations)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    }
+                     <div class="col">
+                        <label class="required">Company</label>
+                        <select aria-required="true" class="form-select" required @onchange="OnCompanySelection">
+                            
+                            <option value="" disabled selected> Select a Company</option>
+                            
+                            @if (_companies != null)
+                            {
+                                foreach (var item in _companies)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div> 
+                    <div class="col text-center">
+                        <button type="submit" value="Search" data-bs-toggle="tooltip" data-bs-placement="top" title="Click here, to search records" class="searchbutton">
+                            <span class="mdi mdi-magnify search-icon"></span> Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div> *@
+    @if (Filter.IsInitialized)
+    {
+        <div class=" container row searchlinegroup">
+            <div class="chooseentries col-6">
+                @if (_pagerDto.TotalPages > 0)
+                {
+                    <span class="selecttext">Current Entries:</span>
+                    <select class="selectcompany" @onchange="HandlePaginationChange">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+              
+                }
+            </div>
+            <div class="d-flex searchbutton searchbuttongroups col-6">
+                <span class="searchtext">Search:</span> <input type="text" class="searchinput" @bind="Filter.Search"/>
+                <button type="button" value="Search" @onclick="HandleFilter" data-bs-toggle="tooltip" data-bs-placement="top" title="Click here, to search records" class="searchbuttond">
+                	<i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button type="button" title="Clear" class="clearbuttond">
+                    <i class="fa-solid fa-eraser"></i>
+                </button>
+           </div>
+            </div>
+        
+     
+        <div class="tablediv">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="th1">
+          
+                        Full Name
+        
+                    </th>
+                    <th>
+           
+                        Email Address
+           
+                    </th>
+                    <th>
+            
+                        Company
+        
+                    </th>
+                    <th class="th6">
+           
+                        Role
+            
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                @{
+                    IEnumerable<EmployeeResponseDto> employees = _employees;
+
+                    if(employees != null && employees.Any())
+                    {
+                        foreach (var module in employees)
+                        {
+                            <tr>
+                                <td>@module.FullName</td>
+                                <td>@module.EmailAddress</td>
+                                <td>@module.CompanyName</td>
+                                <td style="text-align:center;">@module.RoleName</td>
+                            </tr>
+                        }
+                    }
+                }
+                </tbody>
+            </table>
+        </div>
+    }
+    
+</div>
+
+
+@if (_showUpsertEmployeeDialog)
+{
+    <ModalDialog Title="@_dialogTitle" OnClose="@OnUpsertEmployeeDialogClose" OkLabel="@_dialogOkLabel">
+        <form>
+            <div class="mb-3">
+                @if (_globalState.OrganizationId is null)
+                {
+                    <label class="form-label">&nbsp;Organizations</label>
+                    <select class="form-control" @onchange="HandleOrganizationChange" required="required">
+                	    <option selected="selected" disabled="disabled">Select an Organization</option>
+                        @if(_organizations != null)
+                        {
+                	        @foreach (var item in _organizations)
+                            {
+                    	        <option value="@item.Id">@item.Name</option>
+                            }
+                        }
+                    </select>
+                }
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Company</label>
+                <select class="form-control" @onchange="HandleCompanyChange" required="required">
+                	<option selected="selected" disabled="disabled">Select a Company</option>
+                    @if(_companies != null)
+                    {
+                	    @foreach (var item in _companies)
+                        {
+                    	    <option value="@item.Id">@item.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Title</label>
+                <input type="text" class="form-control" @bind="_employeeModel.FullName" placeholder="Enter a full name" required="required">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Email Address</label>
+                <input type="text" class="form-control" @bind="_employeeModel.EmailAddress" placeholder="Enter the email address" required="required">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Contact Number</label>
+                <input type="text" class="form-control" @bind="_employeeModel.ContactNumber" placeholder="Enter the contact number" required="required">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Password</label>
+                <input type="password" class="form-control" @bind="_employeeModel.Password" placeholder="Enter the password" required="required">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Citizenship Number</label>
+                <input type="text" class="form-control" @bind="_employeeModel.CitizenshipNumber" placeholder="Enter the citizenship number" required="required">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;PAN Number</label>
+                <input type="text" class="form-control" @bind="_employeeModel.PAN" placeholder="Enter the pan number" required="required">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Date of Birth</label>
+                <input type="date" class="form-control" @bind="_employeeModel.DateOfBirth" placeholder="Enter the dob" required="required">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Gender</label>
+                <select class="form-control" @bind="_employeeModel.Gender" required="required">
+                	<option selected="selected" disabled="disabled">Select a Gender</option>
+                	<option value="Male">Male</option>
+                	<option value="Female">Female</option>
+                	<option value="N/A">N/A</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">&nbsp;Is Admin</label>
+                <select class="form-control" @onchange="HandleAdminChange" required="required">
+                    <option selected="selected" disabled="disabled">Select an Admin Status</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            @if (_showRoles)
+            {
+                <label class="form-label">&nbsp;Roles</label>
+                <select class="form-control" @bind="_employeeModel.RoleId">
+                    <option selected="selected" disabled="disabled">Select a Type</option>
+                    @foreach (var item in _roles)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            }
+        </form>
+
+        @if (!string.IsNullOrEmpty(_upsertEmployeeErrorMessage))
+        {
+            <span>
+                @_upsertEmployeeErrorMessage
+            </span>
+        }
+    </ModalDialog>
+}

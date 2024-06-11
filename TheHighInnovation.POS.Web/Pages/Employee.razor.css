@@ -1,0 +1,156 @@
+/* Global settings */
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 10px;
+}
+
+/* Layout and spacing adjustments */
+
+.employeepage {
+    margin-top: 1%;
+    /*   margin-left: -4.6vw;*/
+    height: 92vh;
+    width: 150.1vh;
+    padding: 3vh;
+}
+}
+
+
+    .filterby,
+    .employeepage h3 {
+        font-size: 24px;
+        font-weight: 500;
+        margin-top:0;
+        
+    }
+
+.searchlinegroup {
+    margin-top: 3%;
+}
+
+.chooseentries {
+    margin-top: 3vh;
+}
+
+/* Buttons and input styling */
+button,
+.selectemployee,
+.searchinput {
+   border:1px solid #d9d9d9;
+    border-radius: 10px;
+    
+
+}
+.searchtext {
+  color:#111;
+    margin-right:1vh;
+    line-height:2;
+}
+.addemployeebtn {
+    background-color: var(--our--commonblue-color);
+    color: var(--color-white);
+    font-size: 18px;
+    height: 5vh;
+  
+    border: none;
+    width: 27%;
+}
+
+.clearbuttond {
+    background-color: red;
+    color: #fff;
+    font-weight: 600;
+    width: 3vw;
+    margin-left:5px;
+    height:4vh;
+    border:none;
+}
+
+
+.searchbuttond {
+    width: 3vw;
+    height: 4vh;
+    font-size:18px;
+    margin-left:1vw;
+    border:none;
+    background-color:#d9d9d9;
+}
+.selectcompany{
+    border-radius:5px;
+    border:none;
+    background-color:#d9d9d9;
+    height:4vh;
+}
+/* Text styles */
+.required,
+.textshow,
+.selecttext {
+    font-size: 16px;
+    font-weight: 400;
+
+
+}
+
+.required {
+    letter-spacing: 3px;
+}
+
+/* Select and table styling */
+.form-select,
+.selectemployee,
+.showentries {
+    background-color: #d9d9d9;
+    height: 30px;
+}
+
+.tablediv {
+    border: 1px solid #dcdfe8;
+    border-radius: 10px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.table th {
+    background-color: #dcdfe8;
+    color: #110a57;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+    .table th.th1 {
+        border-radius: 10px 0 0 0;
+    }
+
+    .table th.th6 {
+        border-radius: 0 10px 0 0;
+        text-align: center;
+    }
+
+.table tbody {
+    display: block;
+    max-height: 40vh;
+    overflow-y: scroll;
+}
+
+    .table thead, .table tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+
+    }
+
+/* Utility classes */
+.searchbuttongroups {
+    margin-left: 13vw;
+    margin-top:3vh;
+    margin-right:-13vw;
+}
+
+.secondsearchpart {
+    margin-right: 5vh;
+}

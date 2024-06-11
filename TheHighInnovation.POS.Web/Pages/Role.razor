@@ -1,0 +1,252 @@
+﻿@page "/role"
+@using TheHighInnovation.POS.Model.Response.Role
+@using TheHighInnovation.POS.Web.Services.Base
+@inject BaseService BaseService
+<div class="rolepage">
+<div class="row mt-3 mb-3">
+	<div class="col-4">
+		<h3>Role Index</h3>
+	</div>
+	<div class="col-8 text-end">
+			<button class="addrolebtn" type="button" @onclick="() => OpenUpsertRoleDialog()">
+			 Add a new role
+		</button>
+	</div>
+</div>
+
+<div class="card filter-section">
+    <div class="card-body">
+        <form @onsubmit="@HandleFilter">
+            <div class="row">
+				<div class="col-1 mt-1">
+					<label class="filterby d-flex">Filter By:<i class="fa-solid fa-filter" style="font-size:18px;"></i></label>
+                </div>
+                <div class="col-4">
+					<label class="required">Organization</label>
+	                <select aria-required="true" class="form-select" required @onchange="OnOrganizationSelection">
+		                <option disabled="" label="Select an Organization" selected="" value=""></option>
+		                @if (_organizations != null)
+		                {
+			                foreach (var item in _organizations)
+			                {
+				                <option value="@item.Id">@item.Name</option>
+			                }
+		                }
+	                </select>
+                </div>
+                <div class="col-4">
+						<label class="required">Company</label>
+	                <select aria-required="true" class="form-select" required @onchange="OnCompanySelection">
+		                <option disabled="" label="Select a Company" selected="" value=""></option>
+		                @if (_companies != null)
+		                {
+			                foreach (var item in _companies)
+			                {
+				                <option value="@item.Id">@item.Name</option>
+			                }
+		                }
+	                </select>
+                </div>
+                <div class="col-3 text-center">
+						<button type="submit" value="Search" data-bs-toggle="tooltip" data-bs-placement="top" title="Click here, to search records" class="searchbutton">
+                        <span class="mdi mdi-magnify search-icon"></span> Search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Filter.IsInitialized)
+{
+	<div class="row searchlinegroup">
+		<div class="col-8">
+			@if (_pagerDto.TotalPages > 0)
+			{
+				<span class="selecttext">Current Entries:</span>
+				<select class="selectcompany" @onchange="HandlePaginationChange">
+						<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+				</select>
+			}
+			
+		</div>
+			<div class="col-4" style="text-align:right;">
+			<span class="searchtext">Search:</span> <Input type="text" class="searchinput"/>
+		</div>
+	</div>
+	<div class="tablediv">
+		<table class="table">
+			<thead>
+			<tr>
+				<th class="th1">
+					Role Name
+				</th>
+				<th>
+					Role Type
+				</th>
+				<th>
+					Seniority
+				</th>
+				<th>
+					Organization
+				</th>
+				<th>
+					Company
+				</th>
+				<th class="th6"> Action </th>
+			</tr>
+			</thead>
+			<tbody>
+			@{
+				IEnumerable<RoleResponseDto> roles = _roles;
+		
+				if (roles != null && roles.Any())
+				{
+					foreach (var role in roles)
+					{
+						<tr>
+							<td><span @onclick="() => OpenPermissionDialogBox(role.Id)">@role.Name</span></td>
+							<td>@role.TypeName</td>
+							<td>@role.Seniority</td>
+							<td>@role.OrganizationName</td>
+							<td>@role.CompanyName</td>
+							<td style="text-align:center;">
+								<i class="fa-solid fa-pen-to-square" @onclick="() => OpenUpsertRoleDialog(role.Id)"></i>
+							</td>
+						</tr>
+					}
+				}
+			}
+			</tbody>
+		</table>
+		@if (_pagerDto.TotalPages > 0)
+        {
+            <div class="row">
+                <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
+                    
+                </div>
+                <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+                    <ul class="pagination justify-content-end">
+                        @if (_pagerDto.CurrentPage > 1)
+                        {
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(1)">First</a>
+                            </li>
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
+                            </li>
+                        }
+                        @if (_pagerDto.TotalPages > 1)
+                        {
+                            for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+                            {
+        	                    var currentPageItem = pageItem; 
+        	                    <li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
+        		                    <a class="page-link" @onclick="() => OnPagination(currentPageItem)">@currentPageItem</a>
+        	                    </li>
+                            }
+                        }
+    
+                        @if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
+                        {
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
+                            </li>
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            
+        }
+	</div>
+}
+
+@if (_showUpsertRoleDialog)
+{
+	<ModalDialog Title="@_dialogTitle" OnClose="@OnUpsertRoleDialogClose" OkLabel="@_dialogOkLabel">
+		<form>
+			<div class="mb-3">
+				<label class="form-label">&nbsp;Company</label>
+				<select class="form-control" @bind="_roleModel.CompanyId" required="required">
+					<option selected="selected" disabled="disabled">Select a Company</option>
+					@if (_companies != null)
+					{
+						foreach (var item in _companies)
+						{
+							<option value="@item.Id">@item.Name</option>
+						}
+					}
+				</select>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">&nbsp;Title</label>
+				<input type="text" class="form-control" @bind="_roleModel.Name" placeholder="Enter a role title" required="required">
+			</div>
+			<div class="mb-3">
+				<label class="form-label">&nbsp;Description</label>
+				<textarea type="text" class="form-control" @bind="_roleModel.Description" placeholder="Enter the description" required="required"></textarea>
+			</div>
+			<div class="mb-3">
+				<label class="form-label">&nbsp;Seniority</label>
+				<input type="text" class="form-control" @bind="_roleModel.Seniority" placeholder="Enter a role seniority title" required="required">
+			</div>
+			<div class="mb-3">
+				<label class="form-label">&nbsp;Type</label>
+				<select class="form-control" @bind="_roleModel.Type" required="required">
+					<option selected="selected" disabled="disabled">Select a Type</option>
+					@if (_roleModel.Type == 1)
+					{
+						<option value="1">Admin</option>
+					}
+					<option value="2">Manager</option>
+					<option value="3">Cashier</option>
+					<option value="4">Others</option>
+				</select>
+			</div>
+		</form>
+
+		@if (!string.IsNullOrEmpty(_upsertRoleErrorMessage))
+		{
+			<span>
+				@_upsertRoleErrorMessage
+			</span>
+		}
+	</ModalDialog>
+}
+
+@if (_showUpsertPermissionDialog)
+{
+	<Modal Title="@_dialogTitle" OnClose="@OnUpsertPermissionDialogClose" OkLabel="Save">
+		@if (_modules != null)
+		{
+			<table class="table">
+				<thead>
+				<tr>
+					<th>Module Name</th>
+					<th>Assigned Status</th>
+					<th>Action</th>
+				</tr>
+				</thead>
+				<tbody>
+				@foreach (var module in _modules)
+				{
+					<tr>
+						<td>@module.ModuleName</td>
+						<td>@module.AssignedStatus</td>
+						<td>
+							<input type="checkbox" @bind="@module.IsChecked"/>
+						</td>
+					</tr>
+				}
+				</tbody>
+			</table>
+		}
+	</Modal>
+}
+</div>

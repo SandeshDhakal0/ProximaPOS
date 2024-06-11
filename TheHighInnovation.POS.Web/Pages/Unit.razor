@@ -1,0 +1,277 @@
+@page "/inventory-unit"
+@using System.Net.Http
+@using System.Text.Json
+@using TheHighInnovation.POS.Model
+@using TheHighInnovation.POS.Model.Request.Filter
+@using TheHighInnovation.POS.Web.Services.Alert
+@using TheHighInnovation.POS.Web.Services.Base
+@using TheHighInnovation.POS.Model.Response.Unit
+@using TheHighInnovation.POS.Web.Models
+
+@inject BaseService BaseService
+@inject SweetAlert SweetAlertService
+
+<div class="unitpage">
+    <div class="buttondiv"> 
+    <button class="addbutton justify-content-end" @onclick="OpenUnitUpsertModel">Add Unit</button>
+    </div>
+    @if (OpenUnitModel)
+    {
+        <ModalDialog OnClose="@OnUpsertCategory" OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div>
+                                <label for="unitname" class="categoryname">Unit</label>
+                                <input type="text" name="unitname" class="unitnameinput" @bind="_unitListResponseDTO.Measure" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (!string.IsNullOrEmpty(_message))
+            {
+                <div class="alert alert-danger" role="alert">
+                    @_message
+                </div>
+            }
+        </ModalDialog>
+    }
+
+    @if (unitFilter.IsInitialized)
+    {
+        @if (unitList != null)
+        {
+            <table class="unittable">
+                <thead>
+                    <tr>
+                        <th>Unit Id</th>
+                        <th>Unit</th>
+                        <th class="thlast">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in unitList)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Measure</td>
+                            <td>
+                                <i @onclick="() => LoadUnitForUpdate(item.Id,item.Measure)" class="fas fa-edit updatebutton"></i>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No units found.</p>
+        }
+
+        @if (_pagerDto.TotalPages > 0)
+        {
+            <div class="row paginationpart">
+                <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
+                    <div class="col mt-1">
+                        <span class="selecttext">Current Entries:</span>
+                        <select class="selectcompany" @onchange="HandlePaginationChange" style="height:5vh;">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+                    <ul class="pagination justify-content-end">
+                        @if (_pagerDto.CurrentPage > 1)
+                        {
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(1)">First</a>
+                            </li>
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
+                            </li>
+                        }
+                        @if (_pagerDto.TotalPages > 1)
+                        {
+                            @for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+                            {
+                                var currentPageItem = pageItem;
+                                <li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
+                                    <a class="page-link" @onclick="() => OnPagination(currentPageItem)">@currentPageItem</a>
+                                </li>
+                            }
+                        }
+                        @if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
+                        {
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
+                            </li>
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+@code {
+    private bool OpenUnitModel = false;
+    private bool isClosed = false;
+    private string? _message { get; set; }
+    private string? _dialogTitle { get; set; }
+    private string? _dialogOkLabel { get; set; }
+
+    private List<UnitList> unitList { get; set; } = new();
+    private UnitResponseDto _unitResponseDTO = new();
+    private UnitFilter unitFilter = new();
+    private UnitListPost _unitListResponseDTO = new();
+    private UnitById _unitById = new();
+    private PagerDto _pagerDto { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        unitFilter.IsInitialized = true;
+        await LoadUnitAsync(1);
+    }
+
+    private async Task LoadUnitAsync(int pageNumber)
+    {
+        try
+        {
+            var parameters = new Dictionary<string, string>
+            {
+                { "pageno", pageNumber.ToString() },
+                { "pagesize", unitFilter.PageSize.ToString() },
+                // { "unitcode", unitFilter.UnitCode ?? string.Empty },
+                // { "unitname", unitFilter.UnitName ?? string.Empty }
+            };
+
+            var result = await BaseService.GetAsync<Model.Response.Base.Derived<List<UnitList>>>("VendorManagement/get-unit-list", parameters);
+            if (result != null && result.Result != null)
+            {
+                unitList = result.Result;
+                _pagerDto = new PagerDto(result.TotalCount ?? 1, pageNumber, unitFilter.PageSize);
+                _message = "Units loaded successfully.";
+            }
+            else
+            {
+                _message = "No units found.";
+            }
+        }
+        catch (Exception ex)
+        {
+            _message = $"Failed to load units: {ex.Message}";
+        }
+    }
+
+    private void OpenUnitUpsertModel()
+    {
+        OpenUnitModel = true;
+        _dialogTitle = "Add a new Unit";
+        _dialogOkLabel = "Add";
+        ClearUnitForm();
+        _message = null;
+    }
+
+
+
+    private async Task OnUpsertCategory(bool isClosed)
+    {
+        try
+        {
+            if (isClosed)
+            {
+                OpenUnitModel = false;
+                return;
+            }
+
+            var unit = new
+            {
+                p_id = _unitListResponseDTO.Id ,
+                p_measure = _unitListResponseDTO.Measure,
+            };
+
+            var jsonRequest = JsonSerializer.Serialize(unit);
+            var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
+            var apiEndpoint = "VendorManagement/upsert-unit";
+            var result = await BaseService.PostAsync<Model.Response.Base.Derived<object>>(apiEndpoint, content);
+            if (result.Status == "Success")
+            {
+                OpenUnitModel = false;
+                await SweetAlertService.Alert("Success", result.Message, "success");
+                ClearUnitForm();
+                await OnInitializedAsync(); // Refresh unit list after upsert
+            }
+        }
+        catch (Exception ex)
+        {
+            OpenUnitModel = true;
+            _message = ex.Message;
+            Console.WriteLine(_message.ToString());
+        }
+    }
+
+    private void ClearUnitForm()
+    {
+        _unitListResponseDTO = new();
+        _message = null;
+    }
+
+    private async Task LoadUnitForUpdate(int unitId , string Measure)
+    {
+        OpenUnitModel = true;
+        _dialogOkLabel = "Update";
+        try
+        {
+            var parameters = new Dictionary<string, string>
+            {
+                { "Id", unitId.ToString() },
+                 { "Measure", Measure},
+            };
+            var unitList = await BaseService.GetAsync<Model.Response.Base.Derived<List<UnitById>>>("VendorManagement/get-unit-by-id", parameters);
+
+            
+            if(unitList != null)
+            {
+                _unitListResponseDTO = new UnitListPost
+                {
+                        Id = unitId,
+                        Measure = unitList.Result.First().Measure,
+                };
+            }
+        }catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message.ToString());
+        }
+
+    }
+
+    private void OpenUnitUpsertModelUpdate()
+    {
+        OpenUnitModel = true;
+        _dialogTitle = "Update Unit";
+        _dialogOkLabel = "Update";
+        _message = null;
+    }
+
+    private async Task HandlePaginationChange(ChangeEventArgs e)
+    {
+        if (e.Value == null) return;
+
+        var pageSize = int.Parse(e.Value.ToString()!);
+        unitFilter.PageSize = pageSize;
+        await OnPagination(1);
+    }
+
+    private async Task OnPagination(int pageNumber)
+    {
+        await LoadUnitAsync(pageNumber);
+    }
+}

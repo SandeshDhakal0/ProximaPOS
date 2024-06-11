@@ -1,0 +1,296 @@
+@page "/productmanagement"
+@using BlazorBootstrap
+@using TheHighInnovation.POS.Model.Request.VendorManagement
+@using TheHighInnovation.POS.Web.Services.Alert
+@using TheHighInnovation.POS.Web.Services.Base
+@using TheHighInnovation.POS.Model.Response.Base
+@using Blazored.Typeahead
+@inject IJSRuntime JS
+@inject NavigationManager NavigationManager
+@inject BaseService BaseService
+@inject SweetAlert SweetAlertService
+
+
+<Toasts class="" Messages="messages" AutoHide="true" StackLength="3" Placement="ToastsPlacement.BottomRight" />
+<div class="Vendorpage">
+    <div class="d-flex rowfirst">
+        <div class="productmanagementvendorname d-flex">
+      <label class="vendornamelabel">Vendor Name : </label>
+            <BlazoredTypeahead SearchMethod="FetchVendors"
+                               TValue="VendorListShort"
+                               TItem="VendorListShort"
+                               Value="selectedVendor"
+                               ValueChanged="SaveValue"
+                               ValueExpression="@(() => selectedVendor)">
+                <SelectedTemplate>@context.CompanyName</SelectedTemplate>
+                <ResultTemplate>@context.CompanyName</ResultTemplate> 
+                <NotFoundTemplate>
+                    Vendor Not Found.
+                </NotFoundTemplate>
+            </BlazoredTypeahead>
+                <button class="addiconbtn"><i class="fa-solid fa-plus"></i></button>                              
+            </div>
+        <div class="panvattypehead d-flex">
+            <label class="panvatlabel">VAT/PAN : </label>
+            <BlazoredTypeahead SearchMethod="FetchVendorsPanVat"
+                               TValue="VendorListShort"
+                               TItem="VendorListShort"
+                               Value="selectedVendor"
+                               ValueChanged="SaveValue"
+                               ValueExpression="@(() => selectedVendor)">
+                <SelectedTemplate>@context.PanVat</SelectedTemplate>
+                <ResultTemplate>@context.PanVat</ResultTemplate>
+                <NotFoundTemplate>
+                    Vendor Not Found.
+                </NotFoundTemplate>
+            </BlazoredTypeahead>
+        </div>  
+        <div class="issuedateadbox d-flex">
+            
+                <label class="issuedateadlabel" for="IssueDateAD">Issue Date AD:</label>
+                <input class="issuedateadinput" type="date" id="IssueDateAD" name="IssueDateAD" @bind="issueDate">          
+        </div>
+        <div class="issuedatebsbox d-flex">
+           
+                <label class="issuedatebslabel" for="IssueDateBS">Issue Date BS:</label>
+            <input type="text" class="issuedatebsinput" name="date" id="issue-date-picker-bs" placeholder="Select Date" @bind="selectedDates.SelectedDateIssueBs">
+                <button class="issuedateclearbtn" id="clear-issue-date" onclick="">&#x2715;</button>
+        </div>       
+    </div>
+  
+    <div class="d-flex rowsecond mt-2">
+       
+            <div class="branchbox d-flex">
+                <label class="branchlabel">Branch : </label>
+                <input class="branchinput" type="text" @bind="purchaseReceipt.p_branch" />
+            </div>
+       
+            <div class="invoicebox d-flex">
+                <label class="invoicelabel">Invoice No : </label>
+                <input class="invoiceinput" type="text" @bind="purchaseReceipt.p_invoice_no" />
+            </div>
+       
+            <div class="duedateadbox d-flex">
+                <label class="duedateadlabel" for="DueDateAD">Due Date AD : </label>
+                <input class="duedateadinput" type="date" id="DueDateAD" name="DueDateAD" @bind="dueDate">
+        
+            <div class="duedatebsbox d-flex">
+                <label class="duedatebslabel d-flex" for="DueDateBS">Due Date BS : </label>
+                <input class="buedatebsinput" type="text" name="date" id="due-date-picker-bs" placeholder="Select Date" @bind="selectedDates.SelectedDueDateBs">
+                <button class="duedatebsbtn" id="clear-due-date" onclick="">&#x2715;</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex mt-2 rowthird">
+
+        <div class="receiptypebox d-flex">
+            <label class="receiptypelabel">Receipt Type:</label>
+            <select class="form-select receiptypeselect" aria-label="Receipt Type" @bind="purchaseReceipt.p_receipt_type">
+                <option>Receipt Type</option>
+                <option value="1">Chaalan</option>
+                <option value="2">VatBill</option>
+                <option value="3">PanBill</option>
+            </select>
+        </div>
+        <div class="billnobox d-flex">
+           
+                <label class="billnolabel">Bill No : </label>
+                <input class="billnoinput" type="text" @bind="purchaseReceipt.p_bill_no" />
+            
+        </div>
+        <div class="mopbox d-flex">
+          
+                <label class="moplabel">MOP : </label>
+                <input class="mopinput" type="text" @bind="purchaseReceipt.p_mop" />
+           
+        </div>
+      
+      <div class="col-3">
+            <button class="addproductbtn" @onclick="AddProductRow">Add Product</button> 
+      </div>
+
+
+    </div>
+    
+    <div class="row">
+        <table id="productTable">
+            <thead class="tablehead">
+                <tr>
+                    <th>S.No</th>
+                    <th>Product/Barcode</th>
+                    <th style="margin-left:1vw;">UoM</th>
+                    <th>Qty</th>
+                    <th>Unit</th>
+                    <th>Rate</th>
+                    <th>Disc%</th>
+                    <th>Disc Amt</th>
+                    <th>Amount</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody class="tablebody">
+                @foreach (var product in Products)
+                {
+                    <tr>
+                        <td>@product.SerialNumber</td>
+                        <td class="productbarcodeinput">
+                            <BlazoredTypeahead SearchMethod="FetchProduct"
+                                               TValue="ProductListShort"
+                                               TItem="ProductListShort"
+                                               Value="product.SelectedProduct"
+                                               ValueChanged="@(selected => SaveProductValue(product, selected))"
+                                               ValueExpression="@(() => product.SelectedProduct)">
+                                <SelectedTemplate>@context.ProductName</SelectedTemplate>
+                                <ResultTemplate>@context.ProductName</ResultTemplate>
+                                <NotFoundTemplate>
+                                    Product Not Found.
+                                </NotFoundTemplate>
+                            </BlazoredTypeahead>
+                        </td>
+                        <td><div class="d-flex"><input class="uom" type="text" placeholder="uom" @bind="product.Uom"><UnitLayout SelectedUnit="@product.UomUnit" SelectedUnitChanged="@((unit)=> product.UomUnit = unit)"></UnitLayout></div></td>
+                        <td class="quantitytd"> <div class="d-flex"><input class="quantity" type="text" placeholder="Qty" @bind="product.Qty"></div></td>
+                        <td>
+                            <UnitLayout SelectedUnit="@product.Unit" SelectedUnitChanged="@((unit) => product.Unit = unit)"></UnitLayout>
+                        </td>
+                        <td><input class="rate" type="text" placeholder="Rate" @bind="product.Rate" ></td>
+                        <td><input class="discount" type="text" placeholder="Discount Percent"  @bind="product.DiscPercent"></td>
+                        <td><input class="discountamount" type="text" placeholder="Discount Amount" @bind="product.DiscAmount" ></td>
+                        <td>
+                            <input type="text" class="amount"
+                                   placeholder="Amount"
+                                   @bind-value="product.Amount"
+                                   @bind-value:event="oninput"
+                                   @onchange="@(e => OnAmountChanged(e, product))">
+                        </td>
+                        <td>
+                            <button class="deletebutton" @onclick="() => RemoveProductRow(product)">
+                                <i class="fa fa-trash delete_icon" aria-hidden="true"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }     
+            </tbody>
+        </table>
+    </div>
+  
+    <table class="mt-2 bottombilltable">
+        <tr class="first_tr">
+            <td ></td>
+            
+            <td>
+            <table>
+                    <tr class="gross_amt_tr">
+                        <td><label class="gross_amt_label">Gross Amount</label></td>
+               <td>:</td>
+                        <td class="gross_amt_amt_td">  <input class="gross_amt_input" disabled @bind="purchaseReceipt.p_gross_amount" /></td>
+                    </tr>
+                </table>
+            </td>
+            
+           
+        </tr>
+        
+         <tr>
+        <td class="remarks_td">
+            <label class="remarks_label">Remarks</label><br>
+                <textarea id="remarks" class="remarkstextarea" @bind="purchaseReceipt.p_remarks"></textarea>
+            </td>
+            
+            <td>
+              <table class="remarks_nested_table">
+              <tr>
+              		<td> Product Disc</td>
+               		<td>:</td>
+                        <td> <input disabled @bind="purchaseReceipt.p_product_discount" /></td>
+              </tr>
+              
+              <tr>
+              		<td> Discount</td>
+               		<td>:</td>
+                        <td><input @bind="purchaseReceipt.p_discount" /></td>
+              </tr>
+              
+              <tr>
+              		<td> Taxable Amount</td>
+               		<td>:</td>
+                        <td>   <input @bind="purchaseReceipt.p_taxable_amount" /></td>
+              </tr>
+               <tr>
+              		<td> VAT 13%</td>
+               		<td>:</td>
+                        <td>  <input @bind="purchaseReceipt.p_vat" /></td>
+              </tr>
+              </table>
+            </td>
+            
+           
+        </tr>
+          
+          
+          
+          
+          
+          
+          <tr>
+            <td>
+                Bill Prepared by &nbsp; :  &nbsp;  &nbsp;<input id="prepared-by" @bind="purchaseReceipt.p_bill_prepared_by" />
+
+            </td>
+            
+            <td>
+              <table>
+                    <td class="rounded_off_td"><label class="rounded_off_amt_label">Rounded Off</label></td>
+               <td>:</td>
+                    <td>  <input @bind="purchaseReceipt.p_rounded_off" /></td>
+              </table>
+            </td>
+            
+           
+        </tr>
+         <tr>
+            <td>
+                <label class="in_words_label">In Words  </label>
+                <span class="inwords_colon">:</span>
+                <input id="in-words" class="full-width" @bind="purchaseReceipt.p_amount_in_words" />
+            
+            </td>
+            
+            <td>
+              <table>
+                    <td class="net_amt_td"><label class="net_amt_label">Net Amount</label></td>
+               <td>:</td>
+                    <td>   <input @bind="purchaseReceipt.p_net_amount" /></td>
+              </table>
+            </td>
+            
+           
+        </tr>
+        <tr>
+            <td>
+            <table>
+                    <td><label class="due_amt_label">Due Amount</label></td>
+               <td>:</td>
+                    <td><input type="text" id="paid-amount-confirm" @bind="purchaseReceipt.p_remaining_amount"></td>
+              </table>
+            </td>
+            
+            <td>
+              <table>
+                    <td class="parid_amt_td"><label class="paid_amt_label">Paid Amount</label></td>
+               <td>:</td>
+            <td><input type="text"/></td>
+              </table>
+            </td>
+            
+           
+        </tr>
+</table>
+    <div class="submitbuttondiv">
+        <button class="submitbutton" @onclick="SubmitInventory">Submit</button>
+    </div>
+
+    </div>
+
+  
+

@@ -1,0 +1,128 @@
+@page "/scan"
+@using TheHighInnovation.POS.Model.Response.Scan
+@using TheHighInnovation.POS.Web.Services.Base
+@inject BaseService BaseService
+
+<div class="heading2 row">
+	<div class="col-4">
+		<h3>Scanned Products</h3>
+	</div>
+	<div class="col-8">
+		<form>
+
+			<button class="btn btn-outline-dark" type="button" @onclick="() => OpenUpsertScanDialog()">
+				<i class="fa-solid fa-plus"></i> &nbsp; Add a new Product
+			</button>
+
+				
+			
+		</form>
+</div>
+		
+</div>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>
+				<div class="d-flex">
+					Product Code
+				</div>
+			</th>
+			<th>
+				<div class="d-flex">
+					Title
+				</div>
+			</th>
+			<th>
+				<div class="d-flex">
+					Unit
+				</div>
+			</th>
+			<th>
+				<div class="d-flex">
+					Company ID
+				</div>
+			</th>
+			<th>
+				<div class="d-flex">
+					Image Link
+				</div>
+			</th><th>
+				<div class="d-flex">
+					Sales Price
+				</div>
+			</th><th>
+				<div class="d-flex">
+					Cost Price
+				</div>
+			</th>
+			
+		</tr>
+	</thead>
+	<tbody>
+		@{
+        var scans = _scan;
+
+        if (scans != null && scans.Any())
+        {
+            foreach (var scan in scans)
+            {
+                <tr>
+						<td>@scan.p_barcode</td>
+						<td>@scan.p_title</td>
+						<td>@scan.p_unit</td>
+						<td>@scan.p_companyid</td>
+						<td>@scan.p_imageurl</td>
+						<td>@scan.p_salesprice</td>
+						<td>@scan.p_costprice</td>
+
+                    <td>
+                        <i class="fa-solid fa-pen-to-square" @onclick="() => OpenUpsertScanDialog()"></i>
+                    </td>
+                </tr>
+            }
+        }
+    }
+	</tbody>
+</table>
+
+
+@if (_showUpsertScanDialog)
+{
+	<ModalDialog Title="@_dialogTitle" OnClose="@OnUpsertScanDialogClose" OkLabel="@_dialogOkLabel">
+		<form>
+			<div class="mb-3">
+				<label class="form-label">&nbsp;Barcode</label>
+				<input type="text" class="form-control" @bind="_scanModel.p_barcode" placeholder="Enter a Product Code">
+
+				<label class="form-label">&nbsp;Name</label>
+				<input type="text" class="form-control" @bind="_scanModel.p_title" placeholder="Enter a Product title">
+
+				<label class="form-label">&nbsp;Unit</label>
+				<input type="text" class="form-control" @bind="_scanModel.p_unit" placeholder="Unit">
+
+				<label class="form-label">&nbsp;Company ID</label>
+				<input type="text" class="form-control" @bind="_scanModel.p_companyid" placeholder="Enter Company ID">
+
+				<label class="form-label">&nbsp;Image Link</label>
+				<input type="text" class="form-control" @bind="_scanModel.p_imageurl" placeholder="Enter Image Link">
+
+				<label class="form-label">&nbsp;Salesprice</label>
+				<input type="text" class="form-control" @bind="_scanModel.p_salesprice" placeholder="Enter Product's Salesprice'">
+
+				<label class="form-label">&nbsp;Costprice</label>
+				<input type="text" class="form-control" @bind="_scanModel.p_costprice" placeholder="Enter Product's Costprice'">
+				
+				
+				
+
+				
+			</div>
+		</form>
+@if (!string.IsNullOrEmpty(_upsertScanErrorMessage))
+		{
+			<ErrorMessage Type="danger" Message="@_upsertScanErrorMessage" />
+		}
+	</ModalDialog>
+}

@@ -1,0 +1,25 @@
+﻿@page "/datepicker"
+@inject IJSRuntime JS
+
+<div class="container pt-5">
+    <div class="demo-wrapper">
+        <p>
+            <label>Date: </label>
+            <!-- Use @onchange to handle input events -->
+            <input type="text" value="" name="date" id="date-picker" placeholder="Select Date">
+            <!-- Button to clear the input -->
+            <button id="clear-bth" onclick="">&#x2715;</button>
+        </p>
+    </div>
+</div>
+
+@code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("leapfrogdatepicker");
+        }
+    }
+}
