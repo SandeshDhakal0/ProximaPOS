@@ -1,5 +1,9 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheHighInnovation.POS.Web", "TheHighInnovation.POS.Web.csproj", "{80EFD62E-7CDA-4B51-B564-8F75D38A4384}"
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheHighInnovation.POS.Web", "TheHighInnovation.POS.Web\TheHighInnovation.POS.Web.csproj", "{80EFD62E-7CDA-4B51-B564-8F75D38A4384}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,5 +15,11 @@ Global
 		{80EFD62E-7CDA-4B51-B564-8F75D38A4384}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80EFD62E-7CDA-4B51-B564-8F75D38A4384}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80EFD62E-7CDA-4B51-B564-8F75D38A4384}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3624D08B-E8F7-4062-8B2A-92097D296F7C}
 	EndGlobalSection
 EndGlobal
