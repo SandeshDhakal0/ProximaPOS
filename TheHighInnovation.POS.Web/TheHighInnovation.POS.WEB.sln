@@ -1,6 +1,5 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheHighInnovation.POS.Web", "TheHighInnovation.POS.Web\TheHighInnovation.POS.Web.csproj", "{80EFD62E-7CDA-4B51-B564-8F75D38A4384}"
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheHighInnovation.POS.Web", "TheHighInnovation.POS.Web.csproj", "{80EFD62E-7CDA-4B51-B564-8F75D38A4384}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
