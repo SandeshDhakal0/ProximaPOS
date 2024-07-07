@@ -7,4 +7,10 @@
     --page-background-color: #213C74;
     --our--commonblue-color: #082248;
     --vendor--cardcolor: #c7d7d8;
+    --cashier-corner-billtable-color: #ececeb;
+    --our--calculatorcancel-color: #e72929;
+    --our--calculatortender-color: #14ad5a;
+    /*used Only Cashier corner */
+    --our--functionbutton-color: #ececeb;
+    --our--modal-background-color: #d9d9d9;
 }

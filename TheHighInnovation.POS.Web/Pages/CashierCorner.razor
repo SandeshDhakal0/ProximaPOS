@@ -150,20 +150,25 @@
                                     <div class="card cardstyle" id="@($"p_{item.ItemId}")">
                                         @if (item.HasSubCategories)
                                         {
+                                            <a>
+                                                <img src="@image" alt="product" onerror="this.onerror=null;this.src='images/defaulticon.svg';"
+                                                     @onclick="() => OnCategoryClick(item.ItemId, item.ItemTitle)">
+                                            </a>
                                             <i class="fa fa-star cardstar" aria-hidden="true"></i>
-                                            <a><img src="@image" alt="product"
-                                                    @onclick="() => OnCategoryClick(item.ItemId, item.ItemTitle)"></a>
                                         }
                                         else
                                         {
                                             if (item.ItemType == "Product")
                                             {
-                                                <a><img src="@image" alt="product"
-                                                        @onclick="() => AddProductToTable(item.ItemId, item.ItemTitle)"></a>
+
+                                                <a>
+                                                    <img src="@image" alt="product" onerror="this.onerror=null;this.src='images/defaulticon.svg';"
+                                                         @onclick="() => AddProductToTable(item.ItemId, item.ItemTitle)">
+                                                </a>
                                             }
                                             else
                                             {
-                                                <a><img src="@image" alt="product"></a>
+                                                <a><img src="@image" onerror="this.onerror=null;this.src='images/defaulticon.svg';" alt="product"></a>
                                             }
                                         }
                                         <p class="card-text">@item.ItemTitle</p>
@@ -204,65 +209,118 @@
                     </section>
                     <section>
                         <section class="functionpart">
-                            @if (!_isDiscountSelected)
-                            {
-                                <a @onclick="SetDiscount" id="discountButton">
-                                          <button class="functionbutton" style="background-color: #FFD457;">
-                                            <i class="fa-percent buttonicons mb-0" aria-hidden="true"></i>
-                                            <br>Discount
-                                          </button>
-                                </a>
-                            }
-                            else
-                            {
-                                    <a @onclick="SetDiscount" id="discountButton">
-                                        <button class="functionbutton" style="background-color: #082248; color:#fff;">
-                                            <i class="fa-percent buttonicons mb-0" aria-hidden="true"></i>
-                                            <br>Discount
-                                        </button>
-                                    </a>
-                            }
+                            <span class="d-flex functionpartfirstrow">
 
-                            @if (!_isSaleSelected)
-                            {
-                                <a @onclick="SetSale" id="discountButton">
-                                          <button class="functionbutton" style="background-color: #FFD457;">
-                                            <i class="fa-percent buttonicons mb-0" aria-hidden="true"></i>
-                                            <br>Sale
-                                          </button>
+                                <span class="joineddisbtn">
+                                    @if (!_isDiscountSelectedbyprice)
+                                    {
+                                        <span class="discountbypercentage">
+                                            <a @onclick="ToggleDiscountbyprice" id="discountButtonPrice">
+                                                <button class="functionbutton">
+                                                    Dis
+                                                    <img src="/images/cashiercornericons/discountprice.png" class="discountpriceimage" />
+                                                </button>
+                                            </a>
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="discountbypercentage">
+                                            <a @onclick="ToggleDiscountbyprice" id="discountButtonPrice">
+                                                <button class="functionbutton" style="font-weight:600; color:red;">
+                                                    Dis
+                                                    <img src="/images/cashiercornericons/discountprice.png" class="discountpriceimage" />
+                                                </button>
+                                            </a>
+                                        </span>
+                                    }
+
+                                    @if (!_isDiscountSelectedbypercentage)
+                                    {
+                                        <span class="discountbyprice">
+                                            <a @onclick="ToggleDiscountbypercentage" id="discountButtonPercentage">
+                                                <button class="functionbutton">
+                                                    Dis
+                                                    <img src="/images/cashiercornericons/discountpercentage.png" class="discountpriceimage" />
+                                                </button>
+                                            </a>
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="discountbyprice">
+                                            <a @onclick="ToggleDiscountbypercentage" id="discountButtonPercentage">
+                                                <button class="functionbutton" style="font-weight:600; color:red;">
+                                                    Dis
+                                                    <img src="/images/cashiercornericons/discountpercentage.png" class="discountpriceimage" />
+                                                </button>
+                                            </a>
+                                        </span>
+                                    }
+
+
+                                </span>
+                                <a>
+                                    <button class="functionbutton">
+
+                                        <img src="/images/salesReturn.png" />
+                                        <br />
+                                        Sales Return
+                                    </button>
                                 </a>
-                            }
-                            else
-                            {
-                                    <a @onclick="SetSale" id="discountButton">
-                                        <button class="functionbutton" style="background-color: #082248; color:#fff;">
-                                            <i class="fa-percent buttonicons mb-0" aria-hidden="true"></i>
-                                            <br>Sale
+                                @if (!_isSaleSelected)
+                                {
+
+                                    <a @onclick="SetSale">
+                                        <button class="functionbutton">
+                                            <i class="fa-percent buttonicons" aria-hidden="true"></i>
+                                            <br />Sale
                                         </button>
                                     </a>
-                            }
-                            
-                            <a><button class="functionbutton">
-                                    <i class="fa fa-lock buttonicons" aria-hidden="true"></i>
-                                    <br>Lock</button>
-                            </a>
-                             
+
+                                }
+                                else
+                                {
+
+                                    <a @onclick="SetSale">
+                                        <button class="functionbutton" style="color:red;">
+                                            <i class="fa-percent buttonicons" aria-hidden="true"></i>
+                                            <br />Sale
+                                        </button>
+                                    </a>
+
+                                }
+                                <a>
+                                    <button class="functionbutton lockbutton">
+                                        <i class="fa fa-lock buttonicons" aria-hidden="true"></i>
+                                        <br>Lock
+                                    </button>
+                                </a>
+
+
+
+                            </span>
                             <a>
-                                <button class="functionbutton safedrop" id="safedropbutton" @onclick="ShowSafeDrop">
+                                <button class="functionbutton " id="safedropbutton" @onclick="ShowSafeDrop">
                                     <i class="fa-solid fa-vault buttonicons"></i>
-                                    <br>Safe Drop</button>
+                                    <br>Safe Drop
+                                </button>
                             </a>
-                           <br />
-                            <a><button class="functionbutton" id="searchbutton">
+
+                            <a>
+                                <button class="functionbutton" id="searchbutton">
                                     <i class="fa fa-search buttonicons" aria-hidden="true"></i>
-                                    <br>Search</button>
+                                    <br>Search
+                                </button>
                             </a>
-                            <a><button class="functionbutton">
+                            <a>
+                                <button class="functionbutton">
                                     <i class="fa fa-tag buttonicons" aria-hidden="true"></i>
-                                    <br>Price Check</button>
+                                    <br>Price Check
+                                </button>
                             </a>
                             <a @onclick="ShowHoldDialog">
-                                <button class="functionbutton">                                  
+                                <button class="functionbutton">
                                     <i class="fa-solid fa-pause buttonicons"></i>
                                     <br>Take Away
                                     <span class="holdbadge">@_holdProducts.Count</span>
@@ -270,39 +328,46 @@
                             </a>
                             <a @onclick="ShowHoldDialogtable">
                                 <button class="functionbutton">
-                                    <i class="fa-solid fa-hotel buttonicons"></i>
-                                    <br>Hold Table & Room
-                                    <span class="holdbadge holdbadgehotel">Table:@_holdTables.Count </span>
-                                    <span class="holdbadge holdbadgehotel">Rooms:@_holdRooms.Count </span>
-                                      
+
+                                    <i class="fa-solid fa-inbox buttonicons"></i>
+                                    <br>Hold Table
+                                    <span class="holdbadge holdbadgehotel">@_holdTables.Count </span>
+
+
                                 </button>
                             </a>
                             <a @onclick="ShowReservedDialogTable">
                                 <button class="functionbutton">
                                     <i class="fa-solid fa-hotel buttonicons"></i>
+                                    <span class="holdbadge holdbadgehotel">@_holdRooms.Count </span>
                                     <br>Reservations
                                 </button>
                             </a>
-                            <a @onclick="VoidItem"><button class="functionbutton">
+                            <a @onclick="VoidItem">
+                                <button class="functionbutton">
                                     <i class="fa fa-times buttonicons" aria-hidden="true"></i>
-                                    <br>Void Item</button>
+                                    <br>Void Item
+                                </button>
                             </a>
-                            
-                            <a @onclick="VoidTransaction"><button class="functionbutton">
+
+                            <a @onclick="VoidTransaction">
+                                <button class="functionbutton">
                                     <i class="fa-regular fa-circle-xmark buttonicons"></i>
-                                    <br>Void Transaction</button>
+                                    <br>Void Transaction
+                                </button>
                             </a>
-                            <a><button class="functionbutton">
+                            <a>
+                                <button class="functionbutton">
                                     <i class="fa fa-star buttonicons" aria-hidden="true"></i>
-                                    <br>Star</button>
+                                    <br>Star
+                                </button>
                             </a>
-                            <a><button class="functionbutton">
-                                    <i class="fa fa-print buttonicons" aria-hidden="true"></i>
-                                    <br>Print</button>
-                            </a>
-                            <a @onclick="ShowCloseTill"><button class="functionbutton" id="closetillbutton">
+
+                            <a @onclick="ShowCloseTill">
+                                <button class="functionbutton" id="closetillbutton">
                                     <i class="fa-solid fa-circle-dollar-to-slot buttonicons" aria-hidden="true"></i>
-                                    <br>Close Till</button>
+                                    <br>Close Till
+                                </button>
                             </a>
                         </section>
                     </section>
@@ -830,7 +895,7 @@
             <div class=" card maincard3">
                 <div class="container">
                     <form name="form1">
-                        <input id="calc" type="text" name="answer" @bind="_calculatorAmount"> <br> 
+                        <input id="calc" type="text" name="answer" @bind="_calculatorAmount"> <br>
                         <div class="calcbuttons">
                             <input type="button" class="double" value="1" @onclick="() => UpdateCalculatorAmount(1.ToString())">
                             <input type="button" class="double" value="2" @onclick="() => UpdateCalculatorAmount(2.ToString())">
@@ -848,28 +913,38 @@
                             <input type="button" class="double" value="00" @onclick="AddDoubleZeroValue">
                             <input type="button" class="double" value="C" @onclick="ClearCalculatorAmount">
                             <br>
+                            <div class="enterbuttongroup row">
+                                <div class="col-5">
+                                    <button class="dotabhovecancel" type="button" value="." @onclick="AddPointValue">.</button>
+                                </div>
+                                <div class="col-7">
+                                    @if (_calculatorAmount == "" && _selectedProduct != null)
+                                    {
+                                        <button type="button" class="enterbutton"><br>ENTER</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="enterbutton" @onclick="CalculateTotalAmount"><br>ENTER</button>
+                                    }
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
                 <div class="container calcbuttongroup">
                     <div class="row">
-                        <div class="col "><button class="dotabhovecancel" type="button" value="." @onclick="AddPointValue">.</button>
-                            <button type="button" class=" cancelbutton" @onclick="ClearCalculatorAmount">CANCEL</button></div>
                         <div class="col">
-                          
-                            @if(_calculatorAmount == "" && _selectedProduct != null){
-                                <button type="button" class="enterbutton"><i class="fa-solid fa-square-check tendericon"></i><br>ENTER</button>
-                            }
-                            else{
-                                <button type="button" class="enterbutton" @onclick="CalculateTotalAmount"><i class="fa-solid fa-square-check tendericon"></i><br>ENTER</button>
-                            }
-                            @if(_itemsToAdd.Any())
+                            <button type="button" class="cancelbutton" @onclick="ClearCalculatorAmount">CANCEL</button>
+                        </div>
+                        <div class="col">
+
+                            @if (_itemsToAdd.Any())
                             {
-                                <button type="button" class="enterbutton" @onclick="Tender"><i class="fa-solid fa-square-check tendericon"></i><br>TENDER</button>
+                                <button type="button" class="tenderbutton" @onclick="Tender"><br>TENDER</button>
                             }
                             else
                             {
-                                <button type="button" class="enterbutton" disabled><i class="fa-solid fa-square-check tendericon"></i><br>TENDER</button>
+                                <button type="button" class="tenderbutton" disabled><br>TENDER</button>
                             }
                         </div>
                     </div>

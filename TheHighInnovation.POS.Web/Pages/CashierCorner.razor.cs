@@ -1443,7 +1443,24 @@ public partial class CashierCorner()
         }
         
     }
-
+    private bool _isDiscountSelectedbypercentage = false;
+    private bool _isDiscountSelectedbyprice = false;
+    private void ToggleDiscountbypercentage()
+    {
+        _isDiscountSelectedbypercentage = !_isDiscountSelectedbypercentage;
+        if (_isDiscountSelectedbypercentage)
+        {
+            _isDiscountSelectedbyprice = false;
+        }
+    }
+    private void ToggleDiscountbyprice()
+    {
+        _isDiscountSelectedbyprice = !_isDiscountSelectedbyprice;
+        if (_isDiscountSelectedbyprice)
+        {
+            _isDiscountSelectedbypercentage = false;
+        }
+    }
     private void HandleCustomerSelection(int customerId)
     {
         var selectedCustomer = customersList.FirstOrDefault(x => x.Id == customerId);

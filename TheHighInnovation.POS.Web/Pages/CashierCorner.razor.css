@@ -1,11 +1,12 @@
-﻿.landingpage {
-    margin-top: 3.3%;
+﻿
+.landingpage {
+    margin-top: 3.2%;
+    padding-bottom: -1vh;
     width: 100%;
     height: 91vh;
 }
 /* ----------------------------------------------------------------------------left part----------------------------------------------------------------------------  */
 .maincard1 {
-    background-color: #D9D9D9;
     border: none;
     align-items: center;
     height: 100%;
@@ -13,16 +14,20 @@
     margin-left: -5%;
 }
 
-.tablescroll {
-    height: 50%;
-    overflow-y: scroll;
-    background-color: #fff;
-    border-radius: 10px;
+.but.selected {
+    background-color: red; /* Example background color for selected tab */
+    color: white; /* Example text color */
 }
 /* Scrollbar */
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 10px;
+    border-radius: 4px;
     background-color: #fff;
+}
+
+.showholdtablemodel {
+    display: block;
+    background-color: rgba(10,10,10,.8);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -31,30 +36,26 @@
 }
 
 .tableedit {
-    border-radius: 1.6vh;
     font-size: 14px;
-    width: 95%;
+    width: 100%;
+    height: 51vh;
     margin-top: 3%;
-    height: 45%;
+    background-color: var(--cashier-corner-billtable-color);
     overflow-y: scroll;
-    background-color: #fff;
 }
 
-.tableedit {
-    border-radius: 1.6vh;
-    font-size: 14px;
-    width: 95%;
-    margin-top: 3%;
-    height: 51vh;
-    overflow: scroll;
-    background-color: #fff;
-}
+    .tableedit table {
+        width: 97.5%;
+    }
+
+
+
 
 .Invoice th {
     position: sticky;
     top: 0;
     background-color: #082248;
-    z-index: 1;
+    z-index: 10;
 }
 
 .Invoice th, .Invoice td {
@@ -62,14 +63,16 @@
     padding: 8px;
 }
 
+.Invoice td {
+    border: 1px solid #111;
+}
+
 .tableedit thead th {
     padding: 0 0.5vh 0 0.5vh;
     width: 20%;
-    border-left: 1px solid #fff;
 }
 
 .tableedit td {
-    border-left: 1px solid black;
     padding: 1%;
     font-size: 12px;
     text-align: center;
@@ -87,11 +90,11 @@
 }
 
     .tableedit thead .th1 {
-        border-radius: 10px 0 0px 10px;
+        border-radius: 0px;
     }
 
     .tableedit thead .th4 {
-        border-radius: 0px 10px 10px 0px;
+        border-radius: 0px;
     }
 
 .tableedit .selectbtn {
@@ -104,21 +107,22 @@
 }
 
 .invoicebutton {
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin-top: 7%;
+    margin-bottom: 7%;
     text-align: center;
 }
 
 
 
+
     .invoicebutton button {
-        background-color: rgb(55, 179, 237);
-        color: #d9d9d9;
-        font-size: 44px;
+        background-color: var(--our--commonblue-color);
+        color: #fff;
+        font-size: 36px;
         border: none;
-        height: 10vh;
+        height: 8vh;
         border-radius: 1vh;
-        width: 30%;
+        width: 22%;
         text-align: center;
     }
 
@@ -132,8 +136,10 @@
 
 .maincard1 .invoicetable {
     background-color: #fff;
-    border-radius: 1.6vh;
-    width: 95%;
+    border-radius: 0 0 1.6vh 1.6vh;
+    width: 100%;
+    border: 1px solid #111;
+    border-top: none;
     height: 25%;
     font-weight: 300;
     padding-right: 5%;
@@ -146,6 +152,7 @@
         margin-left: 5%;
     }
 
+
         .maincard1 .invoicetable table tbody th {
             font-size: 12px;
             font-weight: 500;
@@ -156,22 +163,22 @@
         }
 /* ----------------------------------------------------------------------------middle part ------------------------------------------------------------------------------*/
 .maincard2 {
-    background-color: #D9D9D9;
     border: none;
     align-items: center;
     height: 100%;
     /*margin-left:-1.5%;*/
 }
 
+
 #goback {
     font-size: 28px;
-    background-color: #d9d9d9;
     width: 100%;
     color: #04AED3;
 }
 
+
 .cardstyle {
-    width: 15%;
+    width: 20%;
     height: 15vh;
     border-radius: 3.2vh;
     margin: 2%;
@@ -195,6 +202,7 @@
         letter-spacing: 1px;
         font-weight: 400;
         font-size: 14px;
+        padding-top: 5px;
     }
 
 .holdbuttoninsidehold {
@@ -247,6 +255,7 @@ tfoot {
     margin-left: 4vh;
 }
 
+
 .cardstyle img {
     width: 100%;
     height: 10vh;
@@ -263,7 +272,7 @@ tfoot {
 .productpart {
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 35vh;
+    height: 37vh;
     width: 86vh;
 }
 
@@ -282,7 +291,7 @@ tfoot {
 
 .functionpart {
     margin-left: 3%;
-    margin-top: 17%;
+    margin-top: 15.5%;
 }
 
 .functionbutton {
@@ -292,50 +301,109 @@ tfoot {
     margin: 1.3%;
     border-radius: 2vh;
     border: none;
-    background-color: #FFD457;
+    background-color: var(--our--functionbutton-color);
     color: #111;
     text-align: center;
     position: relative;
 }
 
-    .functionbutton .holdbadge {
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        background-color: #fff;
-        border: 2px solid #000;
-        padding: 2px 7px;
-        font-size: 10px;
-        font-weight: 700;
-        border-radius: 50%;
+
+.functionpartfirstrow .functionbutton {
+    margin-left: 27px;
+}
+
+.joineddisbtn {
+    display: flex;
+    flex-direction: column;
+}
+
+.lockbutton {
+    margin-left: 20px !important;
+}
+
+.joineddisbtn .functionbutton {
+    margin-left: 9%;
+}
+
+.discountpriceimage {
+    width: 30px;
+}
+
+.discountbyprice .functionbutton {
+    margin-top: -0.5vh;
+    font-size: 16px;
+    border-radius: 0 0 2vh 2vh;
+    height: 5.75vh;
+    border-top: 1px solid #082248;
+}
+
+    .discountbyprice .functionbutton .buttonicons {
+        font-size: 18px;
+        text-align: center;
     }
 
-        .functionbutton .holdbadge.holdbadgehotel {
-            padding: 1px 5px;
-            font-size: 9px;
-        }
+.discountbypercentage .functionbutton {
+    height: 6.25vh;
+    border-radius: 2vh 2vh 0 0 !important;
+    font-size: 16px;
+}
+
+    .discountbypercentage .functionbutton .buttonicons {
+        font-size: 18px;
+        text-align: center;
+    }
+
+.functionbutton .holdbadge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #fff;
+    border: 2px solid #000;
+    padding: 2px 7px;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 50%;
+}
+
+
+    .functionbutton .holdbadge.holdbadgehotel {
+        padding: 1px 5px;
+        font-size: 9px;
+    }
 
 .buttonicons {
     font-size: 6vh;
     text-align: center;
 }
 
-.modalsafedrop {
+.safedropbuttonsdiv {
+    width: 72vw;
+}
+
+.modalsafedrop, .modalsafedropbtntotamt {
     text-align: center;
-    background: #FFD457;
-    color: #082248;
+    width: 90%;
+    background-color: #ABBFE0;
     border: none;
     border-radius: 10px;
-    width: 15vw;
-    height: 7vh;
+    height: 6vh;
+    margin-left: 5%;
+    margin-top: 5% !important;
     font-size: 18px;
 }
+
+.modalsafedropbtntotamt {
+    background-color: #14AD5A;
+    color: #fff;
+}
+
 
 .modalsafedrophead {
     font-weight: 500;
     margin-bottom: 2vh;
     letter-spacing: 5px;
 }
+
 
 .modal-header p {
     text-align: center;
@@ -361,38 +429,49 @@ tfoot {
 .tableno {
     position: absolute;
     top: 22%;
-    left: 37%;
+    left: 27% !important;
     color: #fff;
     font-size: 18px;
     font-weight: 600;
 }
+
 .reservationcard {
     width: 20vh;
     text-align: center;
 }
-.image-text-tables.doubledigit {
-    left: 27%;
-}
-.customername{
-    font-size:14px;
-    font-weight:500;
-    padding:0;
-    line-height:0;
+
+.customername {
+    padding-left: 5px !important;
+    font-weight: 500;
+    line-height: 0;
 }
 
-.image-text-door {
+.image-text-table {
     position: absolute;
-    top: 6%;
-    left: 32%;
+    top: 26%;
+    left: 30%;
     font-size: 20px;
-    font-weight: 700;
     color: #fff;
     letter-spacing: 3px;
 }
 
-    .image-text-door.doubledigit {
-        left: 27%;
-    }
+
+.image-text-door.doubledigit {
+    left: 27%;
+}
+
+.maincard3 .dotabhovecancel {
+    height: 10vh;
+    width: 90%;
+    border: 1px solid #111;
+    margin-top: 0;
+    background-color: #f0f0f0;
+    color: #082248;
+    border-radius: 10px;
+    font-size: 24px;
+    line-height: 0;
+    font-weight: 800;
+}
 
 .holdroom {
     height: 100%;
@@ -403,6 +482,10 @@ tfoot {
     width: 100%;
 }
 
+    .booktablegroup::-webkit-scrollbar {
+        display: none;
+    }
+
 .holdroom img {
     height: 90px;
     width: 140px;
@@ -410,13 +493,46 @@ tfoot {
     margin-left: -4vh;
 }
 
+.safedropmaincard2 {
+    margin: -1% 0 0 -7.5% !important;
+    background-color: #ECECEB;
+    border-radius: 0px;
+    width: 115%;
+    height: 100%;
+    padding-left: 10%;
+}
+
 .safedropcard {
-    background-color: #D9D9D9;
     border: none;
     align-items: center;
     height: 100%;
 }
 
+.safedroptable {
+    border: 1px solid #111;
+    width: 71vw;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #fff;
+}
+
+    .safedroptable tr:nth-child(even) {
+        background-color: #fff;
+    }
+
+    .safedroptable tr {
+        border-bottom: 1px solid #625543 !important;
+        height: 7vh;
+    }
+
+    .safedroptable input {
+        border: none;
+        border-radius: 5px;
+        height: 4vh;
+        text-align: center;
+        width: 12vw;
+        background-color: #ECECEB;
+    }
 
 .safedropinput {
     width: 30vw;
@@ -436,8 +552,8 @@ tfoot {
     font-size: 28px;
 }
 
+
 .gobacksafedrop {
-    background-color: #D9D9D9;
     margin-top: 1vh;
     border-radius: 1vh 1vh 0vh 0vh;
     font-size: 4vh;
@@ -450,6 +566,7 @@ tfoot {
     margin-top: 2vh;
 }
 
+
 #closetilltab {
     text-align: left;
     width: 100%;
@@ -458,15 +575,13 @@ tfoot {
 
 .closetillcard {
     width: 70%;
-    margin-top: 7%;
-    border-radius: 40px;
-    height: 45%;
+    margin-top: 15%;
+    background-color: var(--our--modal-background-color);
+    height: 31%;
 }
 
 #gobackclosetill {
-    background-color: #D9D9D9;
-    margin-bottom: -1vh;
-    margin-top: 1vh;
+    margin-left: -7vw !important;
     border-radius: 1vh 1vh 0vh 0vh;
     font-size: 4vh;
     color: #04AED3;
@@ -474,41 +589,50 @@ tfoot {
 }
 
 .closetillcard .cardheadclosetill {
-    text-align: center;
-    font-size: 28px;
-    letter-spacing: 3px;
+    padding-left: 10px;
+    font-size: 20px;
+    margin-bottom: 2%;
+    letter-spacing: 1px;
     word-spacing: 5px;
 }
 
-    .closetillcard .cardheadclosetill label {
-        margin-bottom: 2%;
-        margin-top: 2%;
+.cardheadclosetill .title {
+    font-weight: 600;
+    margin-left: 35%;
+}
+
+.inputpart {
+    padding-left: 10px;
+}
+
+    .inputpart .enteramt {
+        font-size: 18px !important;
     }
 
-.closetillcard .cardinput {
-    width: 60%;
-    height: 40%;
-    border-radius: 10px;
-    border: 1px solid #111;
-    margin-left: 20%;
-    margin-top: 3%;
-}
-
-.closetillcard .cardbtngroup {
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 18%;
-}
-
-    .closetillcard .cardbtngroup .closetillbuttons {
-        background-color: #FFD457;
+    .inputpart .cardinput {
+        width: 98%;
         height: 7vh;
         border-radius: 10px;
         border: none;
+        padding-left: 10px;
+        margin-top: 0%;
+    }
+
+.closetillcard .cardbtngroup {
+    margin-top: 4%;
+    margin-bottom: auto;
+    margin-left: 6%;
+}
+
+    .closetillcard .cardbtngroup .closetillbuttons {
+        background-color: rgba(255, 255, 255, 1);
+        height: 5vh;
+        border-radius: 10px;
+        border: none !important;
         color: #111;
         font-weight: 500;
         font-size: 18px;
-        padding: 10px;
+        width: 85%;
     }
 
 
@@ -525,105 +649,116 @@ tfoot {
 }
 /* -------------------------------------------------------------------------------------right part------------------------------------------------------------------------------------------------------------- */
 .maincard3 {
-    background-color: #D9D9D9;
     border: none;
     align-items: center;
-    height: 100%;
+    height: 101%;
+    margin-bottom: -2vh;
+    margin-top: -2.5%;
+    margin-left: 3%;
     width: 112%;
+    border-left: 2px solid #111;
+    border-radius: 0px;
 }
 
     .maincard3 form {
         width: 95%;
+        margin-top: 2vh;
+        margin-bottom: 6.6%;
     }
 
-    .maincard3 input {
-        background-color: #f0f0f0;
-        border: none;
-        border-radius: 9px;
-        margin: 3% 1% 3% 1%;
-        width: 30%;
-        height: 11vh;
-        font-size: 22px;
-        font-weight: 500;
-        color: #111;
-    }
+.form1 {
+}
+
+.maincard3 input {
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 9px;
+    margin: 3% 1% 3% 1%;
+    width: 30%;
+    height: 11vh;
+    border: 1px solid #111;
+    font-size: 22px;
+    font-weight: 500;
+    color: #111;
+}
 
 
 
 .calcbuttongroup {
-    margin-top: 3%;
     margin-bottom: 1%;
-    margin-left: 2%;
+    margin-left: 1%;
 }
 
 .enterbutton {
-    width: 100%;
+    width: 125%;
     height: 10vh;
-    background: #FFD457;
-    color: #082248;
-    border: none;
+    border: 1px solid #111;
+    background: #f0f0f0;
     border-radius: 10px;
-    margin-top: 1vh;
-    font-size: 18px;
-    font-weight: 500;
-    margin-left: -2vh;
+    font-size: 22px;
+    letter-spacing: 1px;
+    line-height: 0;
+    margin-left: -1.3vw;
 }
+
+
+
+.enterbuttongroup {
+    width: 100%;
+}
+
+
+
 
 .tendericon {
-    color: #fff;
-    font-size: 3vh;
 }
 
-.maincard3 .dotabhovecancel {
-    width: 100%;
-    height: 10vh;
-    margin-bottom: 0.5vh;
-    background-color: #f0f0f0;
-    color: #082248;
-    border: none;
-    border-radius: 10px;
-    font-size: 18px;
-    font-weight: 800;
-    margin-top: 5%;
-}
-
-.cancelbutton {
-    background: #FFD457;
+.cancelbutton, .tenderbutton {
+    background: var(--our--calculatorcancel-color);
     color: #000;
-    height: 10vh;
-    width: 100%;
+    height: 8vh;
+    width: 95%;
     border: none;
-    border-radius: 10px;
-    margin-top: 5%;
-    font-size: 18px;
-    letter-spacing: 1vh;
-    font-weight: 500;
-    margin-bottom: -1vh;
-    margin-top: 3%;
+    border-radius: 5px;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: #fff;
+    line-height: 0;
 }
 
+.calcbuttons {
+    padding: 15px;
+}
+
+.tenderbutton {
+    background-color: var(--our--calculatortender-color);
+    margin-left: -15px;
+    width: 105%;
+}
 
 #calc {
     width: 99%;
     height: 10vh;
     margin-top: 3%;
-    border: none;
+    margin-bottom: -1vh;
+    border: 1px solid #111;
     background-color: #fff;
     border-radius: 15px;
 }
 
+
 #cash {
     margin-top: 4.3%;
 }
-#split{
-    margin-top:4.3%;
-}
 
-#cash .backarrow {
-    color: aqua;
-    font-size: 28px;
-    margin-top: 2vh;
-}
+
+
+    #cash .backarrow {
+        color: aqua;
+        font-size: 28px;
+        margin-top: 2vh;
+    }
+
 
     #cash .customername {
         font-size: 30px;
@@ -635,101 +770,105 @@ tfoot {
         font-size: 30px;
     }
 
-    #cash .billtable table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100px;
-        background-color: #eaf0f0;
-        color: white;
-        font-weight: 700;
-        font-size: 26px;
-        border-radius: 20px;
-        height: 10vh;
-        width: 100%;
-        margin-top: 13vh;
+    #cash .billtable {
+        border: 2px solid #111 !important;
+        border-top: none !important;
+        border-radius: 0 0 10px 10px;
+        padding: 3px;
+        width: 80%;
+        margin-left: 10% !important;
+        margin-top: 20%;
     }
 
-        #cash .billtable table th {
-            border: 1px solid #fff;
-            font-family: "Quicksand", sans-serif;
-            color: black;
-            font-size: 30px;
-            padding: 3vh;
+.billtable table {
+    width: 100%;
+}
+
+.billtable tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+
+
+#cash .billtable table td {
+    border: 1px solid #fff;
+    width: 50%;
+    padding: 2vh;
+    padding-left: 40px;
+    font-family: "Quicksand", sans-serif;
+    font-size: 28px;
+}
+
+#cash .maincard3 {
+    margin-left: -3%;
+    width: 100%;
+    padding-left: 7%;
+}
+
+/* tab content cash right part */
+/* #cash .maincard3 {
+            background-color: #D9D9D9;
+            border: none;
+            height: 100%;
+            width: 100%;
+            margin-top: 4%;
+            margin-left: 6%;
         }
 
-        #cash .billtable table td {
-            border: 1px solid #fff;
-            color: #d89f65;
-            width: 50%;
-            padding: 3vh;
-            font-family: "Quicksand", sans-serif;
-            font-size: 30px;
+        #cash .tenderbutton {
+            width: 100%;
+            height: 15vh;
+            background: #FFD457;
+            color: #082248;
+            border: none;
+            border-radius: 10px;
+            margin-top: 1vh;
+            font-size: 2px;
+            font-weight: 500;
         }
 
-    /* tab content cash right part */
-    #cash .maincard3 {
-        background-color: #D9D9D9;
-        border: none;
-        height: 100%;
-        width: 100%;
-        margin-top: 4%;
-        margin-left: 6%;
-    }
 
-    #cash .tenderbutton {
-        width: 100%;
-        height: 15vh;
-        background: #FFD457;
-        color: #082248;
-        border: none;
-        border-radius: 10px;
-        margin-top: 1vh;
-        font-size: 2px;
-        font-weight: 500;
-    }
-
-
-    #cash .enterbutton {
-        width: 100%;
-        height: 15vh;
-        margin-top: auto;
-        font-size: 20px;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        letter-spacing: 2px;
-    }
-
-        #cash .enterbutton .tendericon {
-            font-size: 10vh;
+        #cash .enterbutton {
+            width: 100%;
+            height: 15vh;
+            margin-top: auto;
+            font-size: 20px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            letter-spacing: 2px;
         }
 
+            #cash .enterbutton .tendericon {
+                font-size: 10vh;
+            }
+    */
 .maincard3 form {
     width: 100%;
     text-align: center;
 }
+/*
+    #cash .maincard3 input {
+        background-color: #f0f0f0;
+        border: none;
+        border-radius: 9px;
+        margin: 2% 2% 2% 2%;
+        width: 28%;
+        font-size: 18px;
+    }
 
-#cash .maincard3 input {
-    background-color: #f0f0f0;
-    border: none;
-    border-radius: 9px;
-    margin: 2% 2% 2% 2%;
-    width: 28%;
-    font-size: 18px;
-}
+    #cash #calc {
+        width: 90%;
+        margin-left: 5%;
+        height: 10vh;
+        margin-top: 3%;
+        border: none;
+        background-color: #fff;
+        border-radius: 15px;
+    }
 
-#cash #calc {
-    width: 90%;
-    margin-left: 5%;
-    height: 10vh;
-    margin-top: 3%;
-    border: none;
-    background-color: #fff;
-    border-radius: 15px;
-}
-
-#cash .calcbuttongroup {
-    margin-top: 10%;
-}
-
+    #cash .calcbuttongroup {
+        margin-top: 10%;
+    }
+    */
 .yesnobutton {
     border: none;
     width: 40%;
@@ -791,7 +930,7 @@ tfoot {
 
     #card .customer {
         font-family: "Quicksand", sans-serif;
-        font-size: 3vh;
+        font-size: 28px;
     }
 
     #card .tenderbutton {
@@ -800,8 +939,8 @@ tfoot {
         border: none;
         border-radius: 1vh;
         width: 50%;
-        margin-left: 53%;
-        margin-top: 15%;
+        margin-left: 1.5vh;
+        /*        margin-top: 15%;*/
         text-align: center;
         height: 72%;
         font-size: 10vh;
@@ -818,10 +957,10 @@ tfoot {
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 
-    #card .calcbuttons {
+    /*   #card .calcbuttons {
         margin-top: 40vh;
         margin-left: 5vh;
-    }
+    }*/
 
     #card .cardscard {
         height: 40vh;
@@ -837,9 +976,89 @@ tfoot {
         border-radius: 0;
     }
 
+
+    #card .backarrow {
+        font-size: 28px;
+        margin-top: 2vh;
+    }
+
+
+
+
+
+    #card .tenderbutton {
+        background-color: #14AD5A;
+        color: #FFFFFF;
+        border: none;
+        border-radius: 1vh;
+        width: 96%;
+        height: 70px;
+        text-align: center;
+        font-size: 32px;
+        font-weight: 400;
+        margin-top: 24vh;
+    }
+
+    #card .tender {
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        letter-spacing: 3px;
+        margin-top: 10px;
+        color: #FFFFFF;
+        font-weight: 400;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+
+    #card .cardscard {
+        width: 75%;
+        margin-top: 30vh;
+        font-family: "Quicksand", sans-serif;
+        font-size: 24px;
+        font-weight: 400;
+        justify-content: center;
+        text-align: center;
+        border: 1px solid #0C2144;
+        border-top: none;
+        height: 7vh;
+        margin-left: 11%;
+        border-radius: 0 0 5px 5px;
+        background-color: #ECECEB;
+        /*  padding-top:10px;*/
+    }
+
+        #card .cardscard p {
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+    #card .calcbuttons img {
+        margin-top: 22vh;
+        padding: 10px;
+        width: 97%;
+    }
+
+
+    #card .card-right {
+        width: 120% !important;
+    }
+
+    #card .cardrighttop {
+        background-color: #ECECEB !important;
+        height: 93.5vh;
+    }
+
+    #card .cardscard .card-amount {
+        display: flex;
+        gap: 40%;
+    }
+
 /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* -----------------------------------------------------------------------------------------------------------------------QR CONTENTS-------------------------------------------------------------------------------------------------------------------------*/
 /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
 #qr {
     margin-top: 4.3%;
 }
@@ -865,9 +1084,9 @@ tfoot {
     }
 
     #qr .qrcode {
-        width: 40%;
-        margin-left: 25%;
-        margin-top: 5%;
+        width: 20%;
+        /*   margin-left: 25%;
+        margin-top: 5%;*/
     }
 
     #qr .qrrightcard {
@@ -876,32 +1095,22 @@ tfoot {
         border-bottom: none;
         border-radius: 0px;
         height: 100%;
-        margin-top: 1.5%;
+        /*     margin-top: 1.5%;*/
         margin-left: 3.6vh;
         margin-right: -3.6vh;
     }
 
     #qr .calcbuttons {
-        margin-top: 60%;
-        margin-left: 2.8vw;
+        margin-top: 28%;
+        margin-left: 6%;
     }
 
 
-    #qr .tenderbutton {
-        background-color: #ffd457;
-        color: #fff;
-        border: none;
-        border-radius: 1vh;
-        width: 105.5%;
-        height: 16.2vh;
-        margin-top: 84%;
-        margin-left: -3.3vh;
-    }
 
-    #qr .tendericon {
+    /*    #qr .tendericon {
         font-size: 10vh;
         margin-top: -14px;
-    }
+    }*/
 
     #qr .tender {
         font-size: 20px;
@@ -913,13 +1122,12 @@ tfoot {
         font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     }
 
-    #qr .qramounttext {
-        font-size: 34px;
-        letter-spacing: 1px;
-        word-spacing: 10px;
-        font-weight: 500;
-        margin-top: 12%;
-        text-align: center;
+#qr {
+    margin-top: 4.3%;
+}
+
+    #qr .scantopay {
+        font-family: "Quicksand", sans-serif;
     }
 
     #qr .qramount {
@@ -931,60 +1139,135 @@ tfoot {
         text-align: center;
     }
 
+    #qr .backarrow {
+        font-size: 24px;
+        margin-top: 2vh;
+    }
+
+    #qr .customer {
+        font-family: "Quicksand", sans-serif;
+        font-size: 3vh;
+    }
+
+.splitbutton {
+    height: 17.5% !important;
+}
+
+
+#qr .qrcode {
+    width: 100%;
+    margin-top: 40%;
+    height: 70%;
+}
+
+#qr .qrrightcard {
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    border-radius: 0px;
+    height: 93.5vh;
+    /*    margin-right: -2vw !important;*/
+    background-color: #ECECEB;
+}
+
+
+
+
+#qr .tenderbutton {
+    background-color: #14AD5A;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 1vh;
+    width: 96%;
+    height: 70px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 400;
+    /*  margin-top: 15vh;*/
+}
+
+#qr .tender {
+    color: #ffffff;
+    font-size: 20px;
+    letter-spacing: 3px;
+    font-weight: 500;
+    margin-bottom: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#qr .qrsqr {
+    height: 7vh;
+    width: 75%;
+    margin-top: 30vh;
+    font-family: "Quicksand", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    justify-content: center;
+    text-align: center;
+    border: none;
+    margin-left: 11%;
+}
+
+
+
+#qr .qramount {
+    color: #ffd457;
+    font-family: "Quicksand", sans-serif;
+    font-size: 48px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#qr .qrsqr .qr-amount {
+    display: flex;
+    gap: 30%;
+}
+
+#qr .qrsqr p {
+    border-width: 0px 1px 1px 1px;
+    padding: 10px;
+}
+
+#qr .qrsqr {
+    background-color: #ECECEB;
+    border: 1px solid #0C2144;
+    border-radius: 0 0 5px 5px;
+    border-top: none;
+}
+
 
 .cashpage {
     overflow: hidden;
-    width: auto;
+    width: 100.87vw;
     border: none;
     margin: -2.6vh -2.6vh 0 -3.4vh;
     margin-right: 0;
 }
+
+
 /*----------------------------------------------------------------------------------------------------------- navbar----------------------------------------------------------------------------------------------------------------------------------------------- */
 .tab-cont {
-    background-color: #082248;
-    height: 93.7vh;
-    margin-top: 3.5%;
+    background-color: var(--cashier-corner-billtable-color);
+    height: 93vh;
+    margin-top: 3.7%;
+    border-right: 1px solid #082248;
 }
 
-
-    .tab-cont .but {
-        border: 0;
-        border-bottom: 2px solid #fff;
-        color: #fff;
-        font-size: 25px;
-        justify-content: center;
-        height: 16.5%;
-        width: 100%;
-        background-color: inherit;
-        font-weight: 800;
-        padding-top: 2.5vh;
+    .tab-cont button {
+        width: 112%;
+        margin-left: -5.5%;
+        height: 16.53%;
     }
 
-
-        .tab-cont .but.active {
-            color: #ffd457;
-        }
-
-active .nav-link {
-    color: red;
-}
-
-.tab-content {
-    height: 100%;
-    width: 100%;
+.cashpage .cardicon {
+    font-size: 7vh;
 }
 
 .cashpage .cashicon {
-    font-size: 8vh;
-    margin-bottom: 0;
-}
-
-.cashpage .spliticon {
     font-size: 7vh;
-    margin-bottom: 0;
 }
 
-.cashpage .cardicon {
+.cashpage .splitbutton {
     font-size: 7vh;
 }
 
@@ -1015,7 +1298,7 @@ active .nav-link {
 }
 
 .cashpage.cardnavtext {
-   margin-top:-1vh;
+    margin-top: -1vh;
 }
 /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* -----------------------------------------------------------------------------------------------------------------------CUSTOMER CONTENT-------------------------------------------------------------------------------------------------------------------------*/
@@ -1023,80 +1306,11 @@ active .nav-link {
 
 
 
+
 /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 /* -----------------------------------------------------------------------------------------------------------------------Split CONTENT-------------------------------------------------------------------------------------------------------------------------*/
 /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
-.tableone {
-    border: 1px solid #111;
-    border-radius: 5px;
-   
-    margin-top: 15vh;
-    margin-bottom:5vh;
-    width:80%;
-    margin-left:5vw;
-}
-.tableone tr {
-    border-bottom: 1px solid #d9d9d9;
-}
-    .tableone .plusbutton {
-        border: none;
-        width: 3vw;
-        background-color: var(--our--commonblue-color);
-        color:#fff;
-        font-size:28px;
-        padding-top:-20px !important;
-        font-weight:600;
-        margin-right:1vw;
-        margin-left:1vw;
-    }
-.totalamtamt{
-    padding-left:40px !important;
-    height:3vh;
-}
- .tableone table td
- {
-     height:5vh !important;
- }
-.tableone table {
-    width: 100%;
-    font-size: 18px;
-}
-    .tableone table td{
-        padding-left:15px;
-    }
 
-.tabletwo {
-    border: 1px solid #111;
-    border-radius: 5px;
-
-    margin-top: 15vh;
-    margin-bottom: 5vh;
-    width: 80%;
-    margin-left: 5vw;
-}
-    .tabletwo table {
-        width: 100%;
-        font-size: 18px;
-    }
-    .tabletwo .paymenttypeselect{
-        border:none;
-        width:70%;
-    }
-    .tabletwo .tendertd, .tabletwo .voidtd {
-        background-color: #14AD5A;
-        height: 6vh;
-        width: 5vw;
-        margin-right: 1vh;
-    }
-    .tabletwo tr{
-        border-bottom:1px solid #d9d9d9;
-    }
-    .tabletwo .voidtd {
-        background-color: #E72929;
-    }
-    .tabletwo table td {
-        padding-left: 15px;
-    }
 #customer {
     margin-top: 4.3%;
 }
@@ -1107,6 +1321,7 @@ active .nav-link {
         margin-top: 2vh;
     }
 
+
     #customer .customernamesearch {
         display: flex;
         width: 70%;
@@ -1116,6 +1331,7 @@ active .nav-link {
         border: 3px solid #dcdfe8;
         background: #fff;
     }
+
 
     #customer .addcustomerbutton {
         display: inline-flex;
@@ -1142,6 +1358,7 @@ active .nav-link {
 .table-responsive {
     margin-top: 3%;
 }
+
 
 .table {
     width: 100%;
@@ -1289,8 +1506,8 @@ active .nav-link {
 }
 
     #remarks .backarrow {
-        color: aqua;
-        font-size: 28px;
+        color: #111;
+        font-size: 24px;
         margin-top: 2vh;
     }
 
@@ -1306,34 +1523,47 @@ active .nav-link {
         height: 50vh;
         background-color: #f0f0f0;
         border: none;
-        border-radius: 20px;
+        border-radius: 2px;
         overflow: scroll;
     }
 
+.remarkscard::-webkit-scrollbar {
+    display: none !important;
+}
 
-    #remarks input[type=checkbox] {
-        margin: 3vh;
-        width: 5vh;
-        height: 5vh;
-        color: #082248;
-        justify-content: center;
-        border-color: #111;
-        vertical-align: middle;
-        font-size: 8px;
+#remarks input[type=checkbox] {
+    margin: 2vh;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    border-color: red;
+    vertical-align: middle;
+    font-size: 8px;
+}
+
+
+#remarks .remarksbuttonsdiv {
+    text-align: right;
+}
+
+    #remarks .remarksbuttonsdiv .remarksproceedbutton, #remarks .remarksbuttonsdiv .remarkscancelbutton {
+        width: 187px;
+        height: 8vh;
+        border: none;
+        border-radius: 7px;
+        margin-right: 10px;
+        font-size: 20px;
+        color: #fff;
+    }
+
+    #remarks .remarksbuttonsdiv .remarksproceedbutton {
+        background-color: var(--our--calculatortender-color);
+    }
+
+    #remarks .remarksbuttonsdiv .remarkscancelbutton {
+        background-color: var(--our--calculatorcancel-color);
     }
 
 .selectors {
-    font-size: 22px;
-}
-
-.selected .cashicon,
-.selected .cardicon,
-.selected .qricon,
-.selected .customericon,
-.selected .remarkicon {
-    color: #d89f65;
-}
-
-.selected .navtext {
-    color: #d89f65;
+    font-size: 20px;
 }
