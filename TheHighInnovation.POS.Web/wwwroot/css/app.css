@@ -8,9 +8,7 @@
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     
-    overflow:hidden;
-    touch-action: pan-y;
-    
+   
    
 }
 

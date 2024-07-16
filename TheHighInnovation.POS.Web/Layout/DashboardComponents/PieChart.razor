@@ -1,0 +1,22 @@
+﻿@inject IJSRuntime _JS;
+
+
+
+
+@* <canvas id="myPieChart" width="300" height="50"></canvas> *@
+<canvas id="myPieChart"></canvas>
+
+
+
+@code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await _JS.InvokeVoidAsync("initializePieChart");
+        }
+    }
+}
+
+

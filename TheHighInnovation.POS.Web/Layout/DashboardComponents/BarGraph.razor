@@ -1,0 +1,17 @@
+﻿@inject IJSRuntime _JS;
+
+
+
+<canvas id="myBarGraph"></canvas>
+@* <canvas id="myBarGraph" ></canvas> *@
+
+@code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await _JS.InvokeVoidAsync("initializeBarGraph");
+        }
+    }
+}
