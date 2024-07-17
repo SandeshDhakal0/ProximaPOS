@@ -1,8 +1,8 @@
 .Vendorpage {
     margin-top: 1%;
-       margin-left: -3vw;
+/*    margin-left: -3vw;*/
     height: 92vh;
-    width: 88vw;
+    /*width: 88vw;*/
     padding: 3vh;
 }
 
@@ -23,6 +23,7 @@
     font-weight: 600;
     font-size: 32px;
 }
+
 .fa-bookmark {
     font-size: 32px;
     color: var(--our--commonblue-color);
@@ -38,13 +39,14 @@
     margin-left: 12vw;
     text-align: center;
 }
+
 .containerbindcards {
-  
-   height:90vh;
- height:66vh;
- overflow-y:scroll;
- overflow-x:hidden;
+    height: 90vh;
+    height: 66vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
+
 ::-webkit-scrollbar {
     width: 15px;
     background-color: #fff;
@@ -55,22 +57,32 @@
     border-radius: 4px;
 }
 
-.cardsrow{
-    margin-left:2vw;
-}
+/*.cardsrow {
+    margin-left: 2vw;
+}*/
+
 .vendorcard {
+    padding: 10px;
     width: 30%;
-    height: 31vh;
-    margin-top: 1.5vh;
+    height: 40vh;
     background-color: var(--vendor--cardcolor);
+    background-color: #ECECEB;
     border: none;
-    margin-right: 4vh;
+    margin: 2.5vh;
+    margin-top: 1.5vh;
+    border-radius: 10px;
+    margin:2vh;
 }
-.paginationpart{
-    margin-top:3px;
-    margin-left:5.3vw;
-    width:75vw;
+
+.paginationpart {
+    margin:5vh 0 20vh 0;
+/*    margin-left: 4vw;*/
+/*    width: 75vw;*/
+text-align:center;
+padding-bottom:20px;
+
 }
+
     .paginationpart .selectcompany {
         background-color: #d9d9d9;
         border: none;
@@ -78,17 +90,21 @@
         height: 4vh !important;
         width: 3vw;
     }
-    .inputsrow {
-        width: 98vw;
-        margin-bottom: 1.5vh;
-        margin-top: 1.5vh;
-    }
-.isavtivevendor{
-    margin-top:-0.8vh;
+
+.inputsrow {
+    width: 98vw;
+    margin-bottom: 1.5vh;
+    margin-top: 1.5vh;
 }
-.selecttext{
-    margin-left:-4vw;
+
+.isavtivevendor {
+    margin-top: -0.8vh;
 }
+
+.selecttext {
+    margin-left: -4vw;
+}
+
 .vendorname input, .panvatvendor input {
     background-color: #d9d9d9;
     border: none;
@@ -96,43 +112,48 @@
     height: 4vh;
     width: 20vw;
 }
-    .panvatvendor{
-        margin-left:1.5vw;
-        margin-right:-1.5vw;
-    }
-    input[type="checkbox"] {
-        margin: 1vh;
-        margin-top: 2vh;
-        transform: scale(2);
-        cursor: pointer;
-        background-color: var(--vendor--cardcolor);
-    }
+
+.panvatvendor {
+    margin-left: 1.5vw;
+    margin-right: -1.5vw;
+}
+
+input[type="checkbox"] {
+    margin: 1vh;
+    margin-top: 2vh;
+    transform: scale(2);
+    cursor: pointer;
+    background-color: var(--vendor--cardcolor);
+}
+
 .searchbutotn {
     background-color: var(--our--commonblue-color);
-   margin-left:2vw;
-    width:4vw;
-    color:#fff;
-    border:none;
-    border-radius:5px;
-    height:4.5vh;
-    font-size:18px;
-
+    margin-left: 2vw;
+    width: 4vw;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    height: 4.5vh;
+    font-size: 18px;
 }
+
 .activepart {
     margin-left: 10vw;
-    height: 3.5vh;
+    margin-right:5px;
     cursor: pointer;
     width: 100%;
-    padding: 0px 0px 0 22px;
-    margin-right: 1vh;
     margin-top: 1vh;
-    border: 3px solid #00b300;
     border-radius: 10px;
-    background-color: rgb(7, 226, 144,25%);
-    color: #00b300;
     font-weight: 500;
     font-size: 12px;
+    /*    height: 3.5vh;*/
+    /*    padding: 0px 0px 0px 22px;*/
+    /*    margin-right: 1vh;*/ 
+    /*border: 3px solid #00b300;*/
+    /*background-color: rgb(7, 226, 144,25%);*/
+    /*   color: #00b300;*/
 }
+
 .notactivepart {
     margin-left: 11.5vw;
     height: 3.5vh;
@@ -158,71 +179,80 @@
     margin-top: 5px;
     cursor: pointer;
 }
-.nameandcashier{
-    text-align:center;
-    margin-bottom:1vh;
-}
-.name{
-    font-weight:600;
-    font-size:16px;
-}
-.cashier{
-font-size:14px;
-font-weight:600;
-color:#847c7c;
- }
 
-.nesteddiv{
-   background-color:#fff;
+.nameandcashier {
+    text-align: center;
+    margin-bottom: 1vh;
+}
+
+.name {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.cashier {
+    font-size: 14px;
+    font-weight: 600;
+    color: #847c7c;
+}
+
+.nesteddiv {
+    font-size: 12px;
+    font-weight: 600;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    /*background-color:#fff;
    width:110%;
    margin-left:-5%;
-   font-size:12px;
-   font-weight:600;
    padding:1vh;
    height:18.3vh;
    border-radius:10px;
+   height:17vh;*/
 }
-.labeltexts{
 
-  line-height:1;
-  margin-bottom:0;
-    color:#847c7c;
+.labeltexts {
+    line-height: 1;
+    margin-bottom: 0;
+    color: #847c7c;
 }
+
 .maintext {
-    color:#111;
-    margin-bottom:10px;
-    
+    color: #111;
+    margin-bottom: 10px;
 }
-.mail i {
 
+.mail i {
     margin-right: 1vh;
-    font-size:16px;
+    font-size: 16px;
 }
+
 .number {
     margin-top: -5px;
 }
-.number i{
-    margin-right: 1vh;
-    font-size: 16px;
-  margin-top:2px;
-}
+
+    .number i {
+        margin-right: 1vh;
+        font-size: 16px;
+        margin-top: 2px;
+    }
 
 /*Vendor modal design edits*/
-.fullnamelabel, .companynamelabel, .contactpersonlabel, .Panvatlabel, .addresslabel, .phonenumberlabel .emaillabel {
+/*.fullnamelabel, .companynamelabel, .contactpersonlabel, .Panvatlabel, .addresslabel, .phonenumberlabel .emaillabel {
     font-size: 16px;
-}
-.Panvatlabel, .addresslabel, .phonenumberlabel, .emaillabel {
+}*/
+/*.Panvatlabel, .addresslabel, .phonenumberlabel, .emaillabel {
     margin-left: 4vw;
-}
-.fullnameinput, .companynameinput, .contactpersoninput, .Panvatinput, .addressinput, .phonenumberinput, .emailinput {
+}*/
+/*.fullnameinput, .companynameinput, .contactpersoninput, .Panvatinput, .addressinput, .phonenumberinput, .emailinput {
     border: none;
     background-color: #d9d9d9;
     height: 3vh;
     width: 20vw;
     margin-top: 2vh;
     margin-left: 2vh;
-}
-.fullnameinput{
+}*/
+/*.fullnameinput{
     margin-left:7.8vh;
 }
 .contactpersoninput{
@@ -236,4 +266,7 @@ color:#847c7c;
 }
 .emailinput{
     margin-left:3vw;
+}*/
+.companynameinput, .contactpersoninput, .Panvatinput, .addressinput, .phonenumberinput, .emailinput {
+    background-color: #DCDFE8;
 }

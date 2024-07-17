@@ -12,50 +12,49 @@
      
                 <div class="row">
                     <div class="col-8 d-flex">
-                        <p class="noofvendor">10 vendors</p>
+                        <p class="noofvendor">VENDORS</p>
                         <select class="vendordropdown">
                            <option selected disabled> Filter</option>
-                           <option>1</option>
-                           <option>2</option>
+                           <option>Active</option>
+                           <option>Inactive</option>
                        </select>
                     </div>                  
                     <div class="col-2">
                         <button class="addvendorbutton" @onclick="openaddvendordialogue">Add Vendor</button>
                     </div>
+
                     @if(_openaddvendordialogue){
                         <ModalDialog OnClose="@OnUpsertVendor" OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
                          
                            <div class="modal-body">
                               <div class="container">
-                                  <div class="row">
-                                      <div class="col">                                            
-                                            <div>
-                                                <label for="companyname" class="companynamelabel">Company Name</label>
-                                                <input type="text" name="companyname" class="companynameinput" @bind="_vendorRequestDto.CompanyName" />
+                                  <div class="row form">                       
+                                            <div class="col-6 p-2 form-group">
+                                                <label for="companyname" class="companynamelabel">Company Name:</label> <br />
+                                                <input type="text" name="companyname" class="companynameinput form-control" placeholder="Enter Name" @bind="_vendorRequestDto.CompanyName" />
                                             </div>
-                                            <div>
-                                                <label for="contactperson" class="contactpersonlabel">Contact Person</label>
-                                                <input type="text" name="contactperson" class="contactpersoninput" @bind="_vendorRequestDto.ContactPerson"/>
+                                            <div class="col-6 p-2 form-group">
+                                                <label for="contactperson" class="contactpersonlabel">Contact Person:</label> <br />
+                                <input type="text" name="contactperson" class="contactpersoninput form-control" placeholder="Enter Number" @bind="_vendorRequestDto.ContactPerson" />
                                             </div>
-                                      </div>
-                                        <div class="col">
-                                            <div>
-                                                <label for="Panvat" class="Panvatlabel">PAN/VAT</label>
-                                                <input type="text" name="Panvat" class="Panvatinput" @oninput="HandleInput" @bind="_vendorRequestDto.PanVatNo" />
+
+                                            <div class="col-6 p-2 form-group">
+                                                <label for="Panvat" class="Panvatlabel">PAN/VAT:</label> <br />
+                                <input type="text" name="Panvat" class="Panvatinput form-control" placeholder="Enter PAN/VAT" @oninput="HandleInput" @bind="_vendorRequestDto.PanVatNo" />
                                             </div>
-                                            <div>
-                                                <label for="address" class="addresslabel">Address</label>
-                                                <input type="text" name="address" class="addressinput" @bind="_vendorRequestDto.Address" />
+                                            <div class="col-6 p-2 form-group">
+                                                <label for="address" class="addresslabel">Contact Person Number: </label> <br />
+                                <input type="text" name="address" class="addressinput form-control" placeholder="Enter Name" @bind="_vendorRequestDto.Address" />
                                             </div>
-                                            <div>
-                                                <label for="phonenumber" class="phonenumberlabel">Contact Person Number</label>
-                                                <input type="text" name="phonenumber" class="phonenumberinput" @bind="_vendorRequestDto.ContactNo" />
+                                            <div class="col-12 p-2 form-group">
+                                                <label for="phonenumber" class="phonenumberlabel">Address</label> <br />
+                                <input type="text" name="phonenumber" class="phonenumberinput form-control" placeholder="Enter Address" @bind="_vendorRequestDto.ContactNo" />
                                             </div>
-                                            <div>
-                                                <label for="email" class="emaillabel">Email</label>
-                                                <input type="text" name="email" class="emailinput" @bind="_vendorRequestDto.Email" />
+                                            <div class="col-6 p-2 form-group">
+                                                <label for="email" class="emaillabel">Email</label> <br />
+                                <input type="text" name="email" class="emailinput form-control" placeholder="Enter Email" @bind="_vendorRequestDto.Email" />
                                             </div>
-                                        </div>
+                       @*                  </div> *@
                                   </div>
                               </div>
                            </div>
@@ -71,7 +70,7 @@
                 </div>
 
                <div class="container-fluid">
-                   <div class="row inputsrow">
+                  @*  <div class="row inputsrow">
                        <div class="col-4 vendorname">
                             <label>Vendor Name:</label>
                             <input @bind="_vendorRequestDto.CompanyName" />
@@ -88,38 +87,47 @@
                             </button>
                         </div>
                        
-                   </div>
-                   @if(vendorFilter.IsInitialized)
-                   {
-                        <div class="containerbindcards">
+                   </div> *@
+        @if (vendorFilter.IsInitialized)
+        {
+            
                             <div class="row cardsrow">
+
                        @if (_vendorList != null)
                             {
                                 @foreach (var item in _vendorList)
                                 {
                                 <div class="card vendorcard">
-                            
+                                
                                     <div class="card-head d-flex">
-                                    <div>
+                       
                                         <i class="fa fa-bookmark" aria-hidden="true"></i>
-                                    </div>
+                              
                                         @if(@item.IsActive == true)
                                         {
-                                            <span class="activepart d-flex" @onclick="() =>DeleteVendor(item.Id,false)"><p>IsActive</p></span>
+                                         @*    <span class="activepart d-flex" @onclick="() =>DeleteVendor(item.Id,false)"><p>IActive</p></span> *@
+                                
+                                    <button class="btn small-btn btn-primary activepart" @onclick="() =>DeleteVendor(item.Id,false)">InActive</button>
+                                     
+                                 
+
                                                 <span class="threedots d-flex" @onclick="() =>GetVendorById(item.Id)"><i class="fa-solid fa-ellipsis"></i></span>
+                      
+
                                             }
                                             else{
 
                                                 <span class="notactivepart d-flex" @onclick="() =>DeleteVendor(item.Id,true)"><p>Deactivated</p></span>
-                                                <span class="threedots d-flex"><i class="fa-solid fa-ellipsis"></i></span>
+                                           @*      <span class="threedots d-flex"><i class="fa-solid fa-ellipsis"></i></span> *@
                                                 }
 
                                     </div>
                                     <div class="card-body">
                                         <div class="nameandcashier">
                                             <span class="name">@item.CompanyName</span>
-                                           @*  <br />
-                                                <span class="cashier">@item.Pan_VatNo</span> *@
+
+                                   
+                                               @*  <span class="cashier">@item.Pan_VatNo</span> *@
                                         </div>
 
 
@@ -147,6 +155,7 @@
                                                         <p class="maintext">17/03/2024</p>
                                                     </span>
                                                 </div>
+                                        
 
                                             </div>
                                         </div>                                        
@@ -156,7 +165,7 @@
                             }
                         }
                    </div>
-                            </div>
+                          
                         @if (_pagerDto.TotalPages > 0)
                         {
                             <div class="row paginationpart">
@@ -213,5 +222,5 @@
                         }
                    }
                </div>
-            </div>
-      
+               </div>
+     

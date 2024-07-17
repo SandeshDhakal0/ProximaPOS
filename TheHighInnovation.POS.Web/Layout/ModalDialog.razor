@@ -1,4 +1,5 @@
-﻿<div class="modal fade show" style="display:block; background-color: rgba(10,10,10,.8);" role="dialog">
+﻿
+<div class="modal fade show" style="display:block; background-color: rgba(10,10,10,.8);" role="dialog">
     <div class="modal-dialog scrolldiv modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,10 +9,10 @@
                 @ChildContent
             </div>
             <div class="modal-footer justify-content-start">
-                <button type="button" class="addproductbtnmodal" @onclick=@ModalOk>@OkLabel</button>
+                <button type="button" class="addproductbtnmodal btn btn-success" @onclick=@ModalOk>@OkLabel</button>
                 @if (ShowCloseButton)
                 {
-                    <button type="button" class="btn btn-secondary" @onclick="ModalCancel">Close</button>
+                    <button type="button" class="btn btn-danger" @onclick="ModalCancel">Cancle</button>
                 }
              
             </div>

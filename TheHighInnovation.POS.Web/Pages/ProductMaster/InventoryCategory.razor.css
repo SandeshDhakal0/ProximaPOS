@@ -3,6 +3,11 @@
    margin-left:-1vw;
 }
 
+.category-heading{
+    font-size:36px;
+    font-weight:300;
+}
+
 
 .search-panel {
  
@@ -22,30 +27,22 @@
 .search-panel button:hover {
     background-color: #0056b3;
 }
+
 .categorynamelabel, .categorycodelabel, .categorydescription {
     margin-top: 6px;
     font-weight: 500;
     font-size: 16px;
 }
-.categorycodelabel {
+/*.categorycodelabel {
     margin-left:5vw;
 }
-.categorynameinput, .categorycodeinput {
-    border: none;
-    border-radius: 10px;
-    height: 5vh;
-  margin-left:1vh;
-    background-color: #d9d9d9;
-}
+*/
 .categorydescription{
     vertical-align:top;
 }
-.categorydescriptioninput {
+.categorydescriptioninput, .categorynameinput {
     background-color: #d9d9d9;
-    height: 15vh;
-    width: 20vw;
-    border:none;
-    border-radius:10px;
+    border-radius: 10px;
 }
 .categorytable {
     width: 98%;
@@ -82,16 +79,17 @@
     .categorytable tbody tr:hover {
         background-color: var(--tablehead-background);
     }
+
+
 .addbutton {
-    justify-content: end;
     border: none;
     background-color: var(--our--commonblue-color);
-    color:#fff;
+    color: #fff;
     height: 5vh;
     width: 10vw;
     border-radius: 10px;
-    margin-left: 65vw;
-    margin-bottom: 2vh;
+    margin-left: 20vw;
+
 }
 .searchbutton {
  
@@ -134,4 +132,9 @@
     background-color: #d9d9d9;
     border-radius:5px;
     height:4vh !important;
+
+}
+.paginationpart{
+
+    padding:1vh;
 }

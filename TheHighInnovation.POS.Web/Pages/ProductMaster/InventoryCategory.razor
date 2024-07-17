@@ -5,19 +5,40 @@
 @inject SweetAlert SweetAlertService
 
 <div class="container-fluid inventorycategorypage">
-    <button class="addbutton justify-content-end" @onclick="OpenCategoryUpsertModel">Add Category</button>
-    <div class="search-panel">
-        <span class="categorynamelabel">Category Name:</span><input type="text" placeholder="Category Name" @bind="categoryFilter.CategoryName" class="categorynameinput">
-       <span class="categorycodelabel">Category Code:</span> <input type="text" placeholder="Category Code" @bind="categoryFilter.CategoryCode" class="categorycodeinput">
-        <button class="searchbutton" @onclick="HandleSearch"><i class="fa fa-search"></i></button>
-        
+
+    <div class="category-heading">
+     <p>Category</p>   
+    </div>
+
+    <div class="row row search-panel">
+       @*  <span class="categorynamelabel">Category Name:</span><input type="text" placeholder="Category Name" @bind="categoryFilter.CategoryName" class="categorynameinput"> *@
+   <div class="col-5">
+
+       <input type="text" placeholder="Search" @bind="categoryFilter.CategoryCode" class="categorycodeinput">
+        <button class="searchbutton" @onclick="HandleSearch"> <i class="fa fa-search"></i> </button>
+       </div>
+        <div class=" col-5">
+            <button class="addbutton justify-content-end" @onclick="OpenCategoryUpsertModel">Add Category</button>
+       </div>   
+    </div>
+@*     <div class="search-panel">
+
+    <div class="input-group">
+        <div class="form-outline" data-mdb-input-init>
+            <input type="search" id="form1" class="form-control" />
+            <label class="form-label" for="form1">Search</label>
+        </div>
+        <button type="button" class="btn btn-primary" data-mdb-ripple-init>
+            <i class="fas fa-search"></i>
+        </button>
+    </div> *@
     </div>
 
     @if (OpenCategoryModel)
     {
         <ModalDialog OnClose="@OnUpsertCategory" OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
             <div class="modal-body">
-                <div class="container">
+               @*  <div class="container">
                     <div class="row">
                         <div class="col">
                             <div>
@@ -25,14 +46,24 @@
                                 <input type="text" name="categoryname" class="categorynameinput" @bind="_categoryResponseDTO.CategoryName" />
                             </div>
                         </div>
-                        <div class="col">
-                            <div>
+                        <div class="col-12">
+                            <div class="col-12">
                                 <label for="categorydescription" class="categorydescription">Category Description</label>
                                 <textarea type="text" name="categorydescription" class="categorydescriptioninput" @bind="_categoryResponseDTO.CategoryDescription"></textarea>
                             </div>
                         </div>                       
                     </div>
-                </div>
+                </div> *@
+                <form>
+                    <div class="form-group col-6">
+                        <label for="categoryname" >Category Name</label>
+                    <input type="text" name="categoryname" class="categorynameinput form-control" @bind="_categoryResponseDTO.CategoryName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="categorydescription">Category Description</label>
+                    <textarea type="text" name="categorydescription" row="15" class="categorydescriptioninput form-control" @bind="_categoryResponseDTO.CategoryDescription"></textarea>
+                    </div>
+</form>
             </div>
             @if (!string.IsNullOrEmpty(_message))
             {
@@ -127,4 +158,3 @@
         }
     }
     
-</div>
