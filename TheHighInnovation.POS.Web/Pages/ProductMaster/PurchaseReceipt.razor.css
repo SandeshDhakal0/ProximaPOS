@@ -3,150 +3,162 @@
 width:78vw;
 margin-top:4%;
 }
-/*our design*/
-/*Vendorname and PAN\VAT part edit which are blazored typehead so refer to app.css file as well for design edit*/
-.productmanagementvendorname, .panvattypehead {
-    height: 4vh;
-    width:400px;
-}
 
-.panvattypehead{
-    width:190px;
-}
-.productmanagementvendorname .vendornamelabel {
-    width: 190px;
-    font-size: 16px;
-}
-.panvatlabel{
-    width:160px;
-    margin-right:25px;
-    margin-left:0px;
-}
-.addiconbtn, .issuedateclearbtn, .duedatebsbtn {
-    border: 1px solid grey;
-    background-color: #d9d9d9;
-    border-radius: 5px;
-    margin-left: -1.8vw;
-    margin-right: 1vw;
-    z-index: 99;
-}
-    .issuedateclearbtn:hover,.addiconbtn:hover {
-        color: red;
-        background-color: #fff;
-    }
 
-/*Blazor component part of first division end*/
-/*simple none blazor components edit*/
+/*First col of form part stylings*/
 
-.issuedateadbox, .issuedatebsbox, .duedatebsbox {
-    margin-left: 15px;
+/*For Blazoried components  stylings refer to app.css*/
+.firstcol, .secondcol, .thirdcol, .fourthcol {
+    max-width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
-
-.branchbox, .mopbox {
-    width: 400px;
-}
-.billnobox{
-    width:400px;
-}
-.invoicebox {
-    margin-left: -50px;
-}
-  
-    .issuedatebsbox {
-        width: 250px;
-    }
-.issuedatebslabel{
-    width:250px;
-}
-.issuedateadlabel{
-    width:110px;
-}
-.issuedateadinput, .issuedatebsinput, .branchinput, .duedateadinput, .buedatebsinput, .receiptypeselect, .mopinput {
-    border: none;
-    background-color: #d9d9d9;
-    height: 4vh;
-    border-radius: 5px;
-    width: 125px;
-    padding: 5px;
-}
-.receiptypelabel{
-    width:95px;
-}
-.receiptypeselect {
-    margin-left: 23px;
-    width: 220px;
-    height:4vh;
-    padding-top:0;
-}
-    .duedateadinput {
-        margin-left: 8px;
-    }
-.billnolabel{
-    margin-left:12px;
-}
-.buedatebsinput {
-    margin-left: 13px;
-}
-.branchlabel {
-    width: 95px;
-}
-.branchinput {
-    margin-left: 23px;
-    width: 220px;
-}
-.moplabel{
-    width:50px;
-}
-.mopinput{
-    margin-left:60px;
-}
-input{
-    border:none;
-    background-color:#d9d9d9;
-    border-radius:5px;
-    height:4vh;
-    margin-top:3px;
-    width:300px;
    
-}
-.invoicelabel {
-    width:85px;
-}
-.invoiceinput, .billnoinput {
-    height: 4vh;
-    width: 90px;
-    border: none;
-    border-radius: 5px;
-    background-color: #d9d9d9;
-    margin-left: 13px;
-    margin-right: 15px;
-}
-    .billnoinput{
-        margin-left:45px;
-        margin-right:-20px;
+    .firstcol .vendornamelabel {
+        line-height: 2.2;
+        font-weight: 500;
+        width: 16vw;
     }
-.mopbox{
-margin-left:-1.5vw;
-}
 
-.addproductbtn {
-    margin-left: 120px;
-    border: none;
-    border-radius: 5px;
-    height: 4.5vh;
-    background-color: var(--our--commonblue-color);
+
+.addiconbtn {
+    background-color: #0C2144;
     color:#fff;
-    padding-top:0;
-    width:130px;
+    margin-left:-3px;
+    width:4vw;
+    border-radius: 0px 10px 10px 0px;
+}
+    .addiconbtn:hover {
+        background-color: var(--inputbox-color);
+       
+        color: #111;
+    }
+
+.branchlabel {
+    width: 10vw;
+    line-height: 2.3;
+    font-weight: 500;
 }
 
-/*Table elements design*/
-
-.tablehead th{
-   background-color:#c7d7db;
-   border:none !important;
+.branchinput, .receiptypeselect {
+    background-color: var(--inputbox-color);
+    border: none;
+    height: 5vh;
+    border-radius: 10px;
+    width: 100%;
+}
+.receiptypelabel {
+    width: 10.5vw;
+    line-height: 2.3;
+    font-weight: 500;
 }
 
+.panvatlabel {
+    line-height: 2.4;
+    width: 8vw;
+    font-weight: 500;
+}
+/*panvatinput is blazorized input component */
+
+.invoicelabel {
+    width: 8vw;
+    line-height: 2.3;
+    font-weight: 500;
+}
+.invoiceinput {
+    background-color: var(--inputbox-color);
+    border: none;
+    height: 5vh;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.billnolabel {
+    width: 8vw;
+    line-height: 2.3;
+    font-weight: 500;
+}
+.billnoinput {
+    background-color: var(--inputbox-color);
+    border: none;
+    height: 5vh;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.issuedateadlabel, .duedateadlabel {
+    width:7.5vw;
+    line-height:1.2;
+    font-weight:500;
+}
+.issuedateadinput, .duedateadinput {
+    background-color: var(--inputbox-color);
+    border: none;
+    padding-left:5px;
+    height: 5vh;
+    border-radius: 10px;
+    width: 100%;
+}
+.moplabel {
+    width: 7.5vw;
+    font-weight: 500;
+    line-height:2.3;
+}
+.mopinput {
+    background-color: var(--inputbox-color);
+    border: none;
+    padding-left: 5px;
+    height: 5vh;
+    border-radius: 10px;
+    width: 100%;
+}
+.issuedatebslabel, .duedatebslabel {
+    width: 8vw;
+    line-height:1.1;
+    font-weight: 500;
+}
+.issuedateclearbtn, .duedatebsbtn {
+    background-color: #0C2144;
+    color: #fff;
+    margin-left: -3px;
+    font-size:22px;
+    width: 4vw;
+    height:5.3vh;
+    border:none;
+    border-radius: 0px 10px 10px 0px;
+}
+    .issuedateclearbtn:hover, .duedatebsbtn:hover {
+        background-color: red;
+       border:none;
+    }
+.issuedatebsinput, .buedatebsinput {
+    background-color: var(--inputbox-color);
+    border: none;
+    padding-left: 5px;
+    height: 5vh;
+    border-radius: 10px;
+    width: 100%;
+}
+.addproductbtndiv{
+    text-align:center;
+}
+.addproductbtn {
+    border: none;
+    background-color: #0C2144;
+    border-radius: 5px;
+    height: 4vh;
+    width: 73%;
+    margin-left:27%;
+    text-align: center;
+    color: #fff;
+    padding-top: -5px !important;
+}
+/*Tab.le elements design*/
+.tablehead th {
+    background-color: #c7d7db;
+    border: none !important;
+}
 
 
 .uom, .quantity, .unit, .rate, .discount, .discountamount, .amount {
@@ -169,6 +181,7 @@ margin-left:-1.5vw;
    font-size:20px;
    background-color:none;
 }
+
 .deletebutton:hover{
     color:red;
 }
