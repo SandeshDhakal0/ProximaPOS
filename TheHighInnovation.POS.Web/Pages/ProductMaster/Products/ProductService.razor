@@ -13,8 +13,8 @@
 
 @if (productFilter.IsInitialized)
     {
-<div class="productspage">
-    <header>
+ <div class="productspage">
+        @*    <header>
         <h1>Product</h1>
         <div class="actions">
             <button class="btn">Import Product</button>
@@ -22,15 +22,35 @@
         </div>
     </header>
 
-    <div class="filters">
+    <div class="filters"> *@
       @*   <button class="filter-btn">Filter</button>
         <input type="date" id="from-date" name="from-date" value="2024-03-01">
         <input type="date" id="to-date" name="to-date" value="2024-03-31"> *@
-        <input type="text" id="search" placeholder="Search..." @bind="productname">
+  @*       <input type="text" id="search" placeholder="Search..." @bind="productname">
         <button class="btn btn-primary" @onclick="HandleSearch">Search</button>
-    </div>
+    </div> *@
+        <div class="row product-top">
+
+            <div class="col-6 category-heading">
+                <p>Product</p>
+            </div>
+            <div class="offset-2 col-4 AddCatogeryBtn">
+                <button class="addbutton">Import Product</button>
+                <button class="addbutton justify-content-end">Add Product</button>
+            </div>
+        </div>
+
+
+        <div class="row row search-panel">
+            <div class="col-12">
+
+                <input type="text" placeholder="Search" class="categorycodeinput">
+                <button class="searchbutton"> @* <i class="fa fa-search"></i> *@ Search  </button>
+            </div>
+
+        </div>
     
-    <table>
+        <table class="product-table table table-striped table-hover">
         <thead>
             <tr>
                 <th>Product Name</th>
@@ -57,17 +77,28 @@
                         <td>@item.SalesPrice</td>
                         @if (item.IsActive == true)
                         {
-                                <td class="status active">Active</td>
+                  
+
+                                <td class="status active">
+                                    <div class="active-button">
+
+                                    Active
+                                    </div>
+                                    </td>
+                     
                             }
                             else
                             {
-                                <td class="status active" style="color:red;">InActive</td>
+
+                                <td class="status active" style="color:red;">
+                                    <div class="inactive-button">
+
+                                    InActive
+                                    </div>
+                                    </td>
                             }
                         <td>
                             <button class="edit-btn" @onclick="()=>OpenEditModal(item.Id)"><i class="fas fa-edit"></i></button>
-                            <button class="delete-btn">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </button>
                         </td>
                     </tr>
 

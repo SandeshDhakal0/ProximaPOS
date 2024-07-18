@@ -5,21 +5,25 @@
 @inject SweetAlert SweetAlertService
 
 <div class="container-fluid inventorycategorypage">
+    <div class="row">
 
-    <div class="category-heading">
+    <div class="col-6 category-heading">
      <p>Category</p>   
     </div>
+    <div class="col-6   AddCatogeryBtn">
+            <button class="addbutton justify-content-end" @onclick="OpenCategoryUpsertModel">Add Category</button>
+    </div>
+    </div>
+
 
     <div class="row row search-panel">
        @*  <span class="categorynamelabel">Category Name:</span><input type="text" placeholder="Category Name" @bind="categoryFilter.CategoryName" class="categorynameinput"> *@
-   <div class="col-5">
+   <div class="col-12">
 
        <input type="text" placeholder="Search" @bind="categoryFilter.CategoryCode" class="categorycodeinput">
-        <button class="searchbutton" @onclick="HandleSearch"> <i class="fa fa-search"></i> </button>
+        <button class="searchbutton" @onclick="HandleSearch"> @* <i class="fa fa-search"></i> *@ Search  </button>
        </div>
-        <div class=" col-5">
-            <button class="addbutton justify-content-end" @onclick="OpenCategoryUpsertModel">Add Category</button>
-       </div>   
+       
     </div>
 @*     <div class="search-panel">
 
@@ -78,11 +82,14 @@
     {
         @if (categoryList != null)
         {
-            <table class="categorytable">
+            <div class="table-container">
+
+          
+        <table class="categorytable table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th class="thfirst">Category Code</th>
-                        <th>Category Name</th>
+                    <th class="thfirst">Category Name</th>
+                        <th> Code</th>
                         <th>Description</th>
                         <th class="thlast">Actions</th>
 
@@ -92,16 +99,18 @@
                     @foreach (var item in categoryList)
                     {
                         <tr>
-                            <td>@item.CategoryCode</td>
                             <td>@item.CategoryName</td>
+                            <td>@item.CategoryCode</td>
                             <td>@item.CategoryDescription</td>
-                            <td>
+                            <td class="action-icon">
+                            <i class="fa-solid fa-trash trash-icon"></i>
                                <i @onclick="() => LoadCategoryForUpdate(item.Id)" class="fas fa-edit updatebutton"></i>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
+        </div>
         }
         else
         {

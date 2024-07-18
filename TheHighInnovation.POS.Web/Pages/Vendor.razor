@@ -19,7 +19,7 @@
                            <option>Inactive</option>
                        </select>
                     </div>                  
-                    <div class="col-2">
+                    <div class="offset-1 col-2">
                         <button class="addvendorbutton" @onclick="openaddvendordialogue">Add Vendor</button>
                     </div>
 
@@ -69,7 +69,8 @@
                     }
                 </div>
 
-               <div class="container-fluid">
+ <div class="container-fluid">
+
                   @*  <div class="row inputsrow">
                        <div class="col-4 vendorname">
                             <label>Vendor Name:</label>
@@ -91,7 +92,7 @@
         @if (vendorFilter.IsInitialized)
         {
             
-                            <div class="row cardsrow">
+                           <div class="row cardsrow">
 
                        @if (_vendorList != null)
                             {
@@ -107,7 +108,7 @@
                                         {
                                          @*    <span class="activepart d-flex" @onclick="() =>DeleteVendor(item.Id,false)"><p>IActive</p></span> *@
                                 
-                                    <button class="btn small-btn btn-primary activepart" @onclick="() =>DeleteVendor(item.Id,false)">InActive</button>
+                                    <button class="btn small-btn  activepart" @onclick="() =>DeleteVendor(item.Id,false)">InActive</button>
                                      
                                  
 
@@ -117,7 +118,7 @@
                                             }
                                             else{
 
-                                                <span class="notactivepart d-flex" @onclick="() =>DeleteVendor(item.Id,true)"><p>Deactivated</p></span>
+                                                <span class="notactivepart d-flex" @onclick="() =>DeleteVendor(item.Id,true)"><p>Active</p></span>
                                            @*      <span class="threedots d-flex"><i class="fa-solid fa-ellipsis"></i></span> *@
                                                 }
 
@@ -134,7 +135,7 @@
                                         <div class="nesteddiv">
 
                                             <div class="row">
-                                                <div class="col-8">
+                                                <div class="col-7">
                                                     <span>
                                                         <span class="labeltexts">Vendor Id<br />
 
@@ -149,7 +150,7 @@
                                                     <span class="mail maintext d-flex"><i class="fa-solid fa-envelope"></i>@item.Email</span>
                                                     <span class="number maintext d-flex"><i class="fa fa-phone" aria-hidden="true"></i>@item.ContactNo</span>
                                                 </div>
-                                                <div class="col-4">
+                                                <div class="col-5">
                                                     <span class="labeltexts">
                                                         Date Hired<br />
                                                         <p class="maintext">17/03/2024</p>
@@ -165,7 +166,8 @@
                             }
                         }
                    </div>
-                          
+          
+            
                         @if (_pagerDto.TotalPages > 0)
                         {
                             <div class="row paginationpart">
@@ -221,6 +223,7 @@
 
                         }
                    }
-               </div>
-               </div>
+
+ </div>
+ </div>
      

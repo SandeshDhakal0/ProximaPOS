@@ -1,5 +1,10 @@
 .unitpage {
-    margin-top: 4%;
+    margin-top: 3%;
+/*    overflow:hidden;
+    position:fixed;*/
+}
+.unit-head{
+    text-align:start;
 }
 
 .buttondiv{
@@ -8,8 +13,9 @@
 .addbutton {
     border: none;
     border-radius: 5px;
-    background-color: var(--our--commonblue-color);
-    color: #fff;
+    background-color: #ABBFE0;
+    /*    background-color: var(--our--commonblue-color);*/
+    color: black;
     width: 10vw;
     height: 5vh;
     margin-bottom: 1vh;
@@ -25,14 +31,26 @@
 .unittable {
     width: 100%;
     border-collapse: collapse;
+ 
+
 }
+.unittable th, td{
+    padding:10px;
+}
+     .action-icon{
+        text-align:end !important;
+    }
+     .thlast{
+         text-align:end !important;
+     }
     .unittable tr th, td {
         height: 5vh;
-        text-align: center;
+ 
     }
+
     .unittable thead {
-        background-color: var(--our--commonblue-color);
-        color: #fff;
+       /* background-color: var(--our--commonblue-color);*/
+      /*  color: #fff;*/
         border-radius: 5px;
     }
     .unittable tbody {
@@ -47,7 +65,14 @@
             width: 100%;
             table-layout: fixed;
         }
-
+.action-icon {
+    text-align: right !important;
+    padding-right: 20px;
+}
+.trash-icon {
+    color: #E72929;
+    cursor: pointer;
+}
 .paginationpart{
     margin-top:2VH;
 }
@@ -70,3 +95,52 @@
     border-radius: 10px;
     
 }
+
+/*top similar=======================================================*/
+.category-heading {
+    font-size: 36px;
+    font-weight: 300;
+}
+.AddCatogeryBtn {
+
+    padding: 2vh 0 0 20vh;
+}
+.addbutton {
+    border: none;
+    background-color: #ABBFE0;
+    /*    background-color: var(--our--commonblue-color);*/
+    color: #fff;
+    height: 7vh;
+    width: 10vw;
+    border-radius: 10px;
+    margin-left: 20vw;
+}
+.search-panel {
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+    .search-panel input[type="text"], .search-panel select {
+        padding: 10px;
+        margin-right: 10px;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        width: 50%;
+    }
+
+
+
+    .search-panel button:hover {
+        background-color: #0056b3;
+    }
+.searchbutton {
+    /*    background-color: var(--our--commonblue-color);*/
+    background-color: #ABBFE0;
+    border: none;
+    border-radius: 10px;
+    width: 15vh;
+    height: 8vh;
+    color: black;
+    cursor: pointer;
+}
+/*=================================================================*/
