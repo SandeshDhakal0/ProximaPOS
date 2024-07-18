@@ -162,18 +162,29 @@ tr:nth-child(even):hover {
     background-color:  #f2f2f2 !important;
 }
 .tablehead th {
-    background-color: none;
+    background-color: #fff !important;
     border: none !important;
+    font-weight:500;
+    font-size:17px;
   
 }
-
-.uom, .quantity, .unit, .rate, .discount, .discountamount, .amount {
-    background-color: #ECECEB;
-    width: 100% !important;
-    border: none;
-    border-radius: 5px;
-    height: 4vh;
+.deletebutton{
+    background:none;
+    border:none;
+    font-size:22px;
+    color:red;
+    opacity:0.5;
 }
+    .deletebutton:hover{
+        opacity:1;
+    }
+    .uom, .quantity, .unit, .rate, .discount, .discountamount, .amount {
+        background-color: #ECECEB;
+        width: 100% !important;
+        border: none;
+        border-radius: 5px;
+        height: 4vh;
+    }
 .tablebody tr td{
     border:none !important;
 
