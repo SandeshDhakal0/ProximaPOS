@@ -1,13 +1,18 @@
-﻿.productspage{
-    margin-top:4%;
+﻿.productspage {
+    margin-top: 3%;
+/*    background-color: #ECECEB;*/
 }
+/*.product-top{
+    padding:10px 0;
+}*/
 .container {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
 }
 
-header {
+
+/*header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,7 +22,7 @@ header {
     header h1 {
         margin: 0;
     }
-
+*/
 .actions .btn {
     background-color: #007bff;
     border: none;
@@ -61,6 +66,10 @@ table {
     table-layout: fixed;
     --column-count: 7;
 }
+.product-table {
+ /*   border: 1px solid #0C2144;
+    border-radius:10px;*/
+}
 
 thead th,
 tbody td {
@@ -69,8 +78,8 @@ tbody td {
 }
 
 thead th {
-    background-color: #4CAF50;
-    color: white;
+/*    background-color: #4CAF50;*/
+    color: black;
     position: sticky; /* Make the headers sticky */
     top: 0; /* Stick to the top of the viewport */
     z-index: 1; /* Ensure the headers stay above other elements */
@@ -91,13 +100,13 @@ table tbody tr {
     width: 100%;
 }
 
-tbody tr:nth-child(even) {
+/*tbody tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
 tbody tr:hover {
     background-color: #ddd;
-}
+}*/
 
 /* Ensure each cell in the table head has the same width as its corresponding cell in the table body */
 thead th,
@@ -109,12 +118,37 @@ th[colspan="2"] {
     width: 100%;
 }
 
-.status.active {
+/*.status.active {
     color: #28a745;
 }
 
 .status.inactive {
     color: #dc3545;
+}*/
+.active-button {
+    background-color: #14AD5A;
+    border-radius:10px;
+    color:black;
+    height:5vh;
+    width:10vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    cursor:pointer;
+   
+}
+.inactive-button {
+    background-color: #E72929;
+    border-radius: 10px;
+    color: black;
+    height: 5vh;
+    width: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
 }
 
 .edit-btn, .delete-btn {
@@ -166,4 +200,54 @@ th[colspan="2"] {
     border-radius:5px;
     height:4vh !important;
     width:3vw;
+}
+
+.category-heading {
+    font-size: 36px;
+    font-weight: 300;
+}
+
+.AddCatogeryBtn {
+    padding-top: 2vh;
+}
+
+.addbutton {
+    border: none;
+ /*   background-color: var(--our--commonblue-color);*/
+ background-color:#ABBFE0;
+    color: black;
+    height: 7vh;
+    width: 10vw;
+    border-radius: 10px;
+  /*  margin-left: 20vw;*/
+}
+
+.search-panel {
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+    .search-panel input[type="text"], .search-panel select {
+        padding: 10px;
+        margin-right: 10px;
+        border: 2px solid #ddd;
+        border-radius: 4px;
+        width: 50%;
+    }
+
+
+
+    .search-panel button:hover {
+        background-color: #0056b3;
+    }
+
+.searchbutton {
+    /*background-color: var(--our--commonblue-color);*/
+    background-color: #ABBFE0;
+    border-radius: 10px;
+    width: 15vh;
+    height: 8vh;
+    color: black;
+    cursor: pointer;
+    border:none;
 }

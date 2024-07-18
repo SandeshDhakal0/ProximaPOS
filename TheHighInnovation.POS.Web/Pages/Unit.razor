@@ -12,9 +12,27 @@
 @inject SweetAlert SweetAlertService
 
 <div class="unitpage">
-    <div class="buttondiv"> 
-    <button class="addbutton justify-content-end" @onclick="OpenUnitUpsertModel">Add Unit</button>
+    @* top similar ==================================================================================*@
+    <div class="row">
+
+        <div class="col-6 category-heading">
+            <p>Unit</p>
+        </div>
+        <div class="col-6   AddCatogeryBtn">
+            <button class="addbutton justify-content-end" >Add Category</button>
+        </div>
     </div>
+
+
+    <div class="row row search-panel">
+        <div class="col-12">
+
+            <input type="text" placeholder="Search" class="categorycodeinput">
+            <button class="searchbutton"> @* <i class="fa fa-search"></i> *@ Search  </button>
+        </div>
+
+    </div>
+    @* ================================================================================================== *@
     @if (OpenUnitModel)
     {
         <ModalDialog OnClose="@OnUpsertCategory" OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
@@ -43,7 +61,7 @@
     {
         @if (unitList != null)
         {
-            <table class="unittable">
+            <table class="unittable table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Unit Id</th>
@@ -57,7 +75,8 @@
                         <tr>
                             <td>@item.Id</td>
                             <td>@item.Measure</td>
-                            <td>
+                            <td class="action-icon">
+                                <i class="fa-solid fa-trash trash-icon"></i>
                                 <i @onclick="() => LoadUnitForUpdate(item.Id,item.Measure)" class="fas fa-edit updatebutton"></i>
                             </td>
                         </tr>

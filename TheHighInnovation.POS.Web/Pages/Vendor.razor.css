@@ -1,27 +1,31 @@
 .Vendorpage {
-    margin-top: 1%;
-/*    margin-left: -3vw;*/
+    margin-top: 3%;
     height: 92vh;
-    /*width: 88vw;*/
-    padding: 3vh;
+    margin-bottom:-2vh;
+
 }
 
 
 
 .vendordropdown {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
     border: none;
     background-color: #d9d9d9;
     border-radius: 10px;
-    height: 5vh;
-    width: 6vw;
+    height: 4vh;
+    width: 7vw;
     margin-left: 2vh;
-    margin-top: 8px;
-    padding: 5px;
+    margin-top: 2vh;
+/*    padding: 5px;*/
 }
 
 .noofvendor {
     font-weight: 600;
     font-size: 32px;
+    margin-left:1vw;
 }
 
 .fa-bookmark {
@@ -30,14 +34,18 @@
 }
 
 .addvendorbutton {
-    width: 10vw;
-    height: 5vh;
-    border: none;
-    border-radius: 10px;
-    background-color: #d9d9d9;
+     
+
     margin-top: 8px;
-    margin-left: 12vw;
+    margin-left:4vw;
     text-align: center;
+    border: none;
+    background-color: #ABBFE0;
+    color: black;
+    height: 7vh;
+    width: 10vw;
+    border-radius: 10px;
+    /*  margin-left: 20vw;*/
 }
 
 .containerbindcards {
@@ -75,9 +83,10 @@
 }
 
 .paginationpart {
-    margin:5vh 0 20vh 0;
-/*    margin-left: 4vw;*/
-/*    width: 75vw;*/
+/*    margin:5vh 0 10vh 0;*/
+margin-top:2vh;
+ /*   margin-left: 4vw;
+    width: 75vw;*/
 text-align:center;
 padding-bottom:20px;
 
@@ -136,10 +145,14 @@ input[type="checkbox"] {
     height: 4.5vh;
     font-size: 18px;
 }
-
+.activepart:hover {
+    background-color: #14AD5A;
+}
 .activepart {
+    color:#fff;
+    background-color: #14AD5A;
     margin-left: 10vw;
-    margin-right:5px;
+    margin-right: 3vh;
     cursor: pointer;
     width: 100%;
     margin-top: 1vh;
@@ -148,10 +161,20 @@ input[type="checkbox"] {
     font-size: 12px;
     /*    height: 3.5vh;*/
     /*    padding: 0px 0px 0px 22px;*/
-    /*    margin-right: 1vh;*/ 
+    /*    margin-right: 1vh;*/
     /*border: 3px solid #00b300;*/
     /*background-color: rgb(7, 226, 144,25%);*/
     /*   color: #00b300;*/
+}
+.inactivepart {
+    margin-left: 10vw;
+    margin-right: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1vh;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 12px;
 }
 
 .notactivepart {
@@ -182,12 +205,13 @@ input[type="checkbox"] {
 
 .nameandcashier {
     text-align: center;
-    margin-bottom: 1vh;
+    margin-bottom: 2vh;
 }
 
 .name {
     font-weight: 600;
     font-size: 16px;
+/*    margin-bottom:20px;*/
 }
 
 .cashier {
@@ -269,4 +293,98 @@ input[type="checkbox"] {
 }*/
 .companynameinput, .contactpersoninput, .Panvatinput, .addressinput, .phonenumberinput, .emailinput {
     background-color: #DCDFE8;
+}
+.cardsrow{
+    height:390px;
+    overflow-y:scroll;
+    scroll-behavior:smooth;
+}
+
+/*media quary=====================================================================================================*/
+@media screen and (max-width: 1200px) {
+    .addvendorbutton {
+        margin-left: 3vw;
+        height: 8vh;
+        width: 10vw;
+    }
+    .nameandcashier{
+        margin-bottom:3vh;
+    }
+    .vendorcard{
+        height:50vh;
+    }
+    .nesteddiv{
+        height:25vh;
+        font-size:10px;
+        margin-bottom:3vh;
+    }
+    .vendordropdown {
+        height: 5vh;
+        margin-left: 2vh;
+        margin-top: 3vh;
+        text-align:center;
+    }
+}
+@media screen and (max-width: 1175px){
+    .threedots{
+        margin-right:3vw;
+    }
+    .activepart {
+        margin-left: 9vw;
+    }
+    .inactivepart {
+        margin-left: 9vw;
+    }
+    .nesteddiv{
+        padding-bottom:20px;
+    }
+}
+@media screen and (max-width: 1080px) {
+    .activepart{
+        margin-left:7vw;
+    }
+    .inactivepart {
+        margin-left: 7vw;
+    }
+    .name{
+        font-size:12px;
+    }
+    .nesteddiv{
+        font-size:10px;
+   
+    }
+}
+@media screen and (max-width: 963px) {
+    .addvendorbutton{
+        font-size:14px;
+    }
+    .vendordropdown{
+        font-size:14px;
+    }
+    .activepart, .inactivepart{
+        margin-left:4vw;
+        margin-right:2vw;
+    }
+
+}
+@media screen and (min-width: 1200px) {
+    .vendorcard {
+        height: 55vh;
+    }
+    .nesteddiv{
+        font-size:12px;
+    }
+    .addvendorbutton{
+        margin-left:3vw;
+        height:8vh;
+    }
+    .vendordropdown{
+        height:5vh;
+        margin-top:3vh;
+    }
+}
+@media screen and (max-width: 1400px) {
+    .vendorcard{
+        height:30vh;
+    }
 }

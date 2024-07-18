@@ -1,6 +1,9 @@
 ﻿.inventorycategorypage {
-   margin-top:5%;
+   margin-top:3%;
+   margin-bottom:2%;
    margin-left:-1vw;
+/*   overflow:hidden;
+   position:fixed;*/
 }
 
 .category-heading{
@@ -20,23 +23,21 @@
     margin-right: 10px;
     border: 2px solid #ddd;
     border-radius: 4px;
+    width:50%;
 }
 
 
 
-.search-panel button:hover {
+/*.search-panel button:hover {
     background-color: #0056b3;
-}
+}*/
 
 .categorynamelabel, .categorycodelabel, .categorydescription {
     margin-top: 6px;
     font-weight: 500;
     font-size: 16px;
 }
-/*.categorycodelabel {
-    margin-left:5vw;
-}
-*/
+
 .categorydescription{
     vertical-align:top;
 }
@@ -44,16 +45,12 @@
     background-color: #d9d9d9;
     border-radius: 10px;
 }
-.categorytable {
-    width: 98%;
-    border-collapse: collapse;
-    border-spacing: 0;
-}
+
 
     .categorytable th, .categorytable td {
 
         padding: 10px 10px;
-        text-align: center;
+        text-align: start;
 
     }
     .categorytable th {
@@ -65,11 +62,18 @@
         display: table;
         width: 100%;
         table-layout: fixed;
+  
     }
+.categorytable .thfirst, .th{
+    text-align:start;
+}
+
+categorytable thead th, .thlast {
+    text-align:end;
+}
 .categorytable thead th {
-    background-color: var(--tablehead-background);
-    color: #111;
-    text-align:center;
+   /* background-color: var(--tablehead-background);*/
+ /*   color: #111;*/
 }
 
 .categorytable tbody tr:nth-child(odd) {
@@ -83,22 +87,26 @@
 
 .addbutton {
     border: none;
-    background-color: var(--our--commonblue-color);
-    color: #fff;
-    height: 5vh;
+    /* background-color: var(--our--commonblue-color);*/
+    color: black;
+    background-color: #ABBFE0;
+    height: 7vh;
     width: 10vw;
     border-radius: 10px;
     margin-left: 20vw;
-
+}
+.AddCatogeryBtn {
+/*    padding-left: 20vh;*/
+    padding:2vh 0 0 20vh;
 }
 .searchbutton {
- 
-    background-color: var(--our--commonblue-color);
+    /*    background-color: var(--our--commonblue-color);*/
     border: none;
+    background-color: #ABBFE0;
     border-radius: 10px;
-   width:3vw;
-   height:5vh;
-    color: white;
+    width: 15vh;
+    height: 8vh;
+    color: black;
     cursor: pointer;
 }
 .updatebutton {
@@ -121,11 +129,11 @@
     background-color: darkgrey;
     border-radius: 10px;
 }
-.thfirst{
-    border-radius:10px 0 0 0;
-}
-.thlast{
+
+.categorytable .thlast{
     border-radius:0 10px 0 0;
+    text-align:right !important;
+    padding-right:20px;
 }
 .paginationpart select {
     border: none;
@@ -138,3 +146,22 @@
 
     padding:1vh;
 }
+.action-icon {
+    text-align:right !important;
+    padding-right:20px;
+}
+.trash-icon {
+    color:#E72929;
+    cursor:pointer;
+}
+/*.table-container {
+    border-radius: 10px;
+    border: 1px solid #0C2144;*/
+/*    height:350px;*/
+
+
+/*}
+.categorytable {  
+    max-height:350px;
+}*/
+
