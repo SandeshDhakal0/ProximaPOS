@@ -120,8 +120,8 @@
         @if (_pagerDto.TotalPages > 0)
         {
             <div class="row paginationpart">
-                <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
-                    <div class="col mt-1">
+                <div class="col-lg-3 col-md-3 col-sm-4 d-flex justify-content-start">
+                    <div class="col ">
                         <span class="selecttext">Current Entries:</span>
                         <select class="selectcompany" @onchange="HandlePaginationChange" style="height:5vh;">
                             <option value="5">5</option>
@@ -131,7 +131,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+                <div class="col-lg-9 col-md-9 col-sm-8 d-flex pagination-wrapper justify-content-end align-items-center">
                     <ul class="pagination justify-content-end">
                         @if (_pagerDto.CurrentPage > 1)
                         {

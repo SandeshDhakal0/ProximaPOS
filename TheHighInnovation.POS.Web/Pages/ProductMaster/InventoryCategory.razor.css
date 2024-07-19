@@ -2,7 +2,8 @@
    margin-top:3%;
    margin-bottom:2%;
    margin-left:-1vw;
-/*   overflow:hidden;
+/*   height:100%;
+   overflow:hidden;
    position:fixed;*/
 }
 
@@ -93,7 +94,8 @@ categorytable thead th, .thlast {
     height: 7vh;
     width: 10vw;
     border-radius: 10px;
-    margin-left: 20vw;
+/*    margin-left: 20vw;*/
+margin-left:70%;
 }
 .AddCatogeryBtn {
 /*    padding-left: 20vh;*/
@@ -115,7 +117,7 @@ categorytable thead th, .thlast {
     cursor: pointer;
 }
 .categorytable tbody {
-    max-height: 50vh;
+    max-height: 45vh;
     display:block;
     overflow-y: scroll;
 }
@@ -139,8 +141,7 @@ categorytable thead th, .thlast {
     border: none;
     background-color: #d9d9d9;
     border-radius:5px;
-    height:4vh !important;
-
+    width:30px;
 }
 .paginationpart{
 
@@ -149,19 +150,11 @@ categorytable thead th, .thlast {
 .action-icon {
     text-align:right !important;
     padding-right:20px;
+
 }
 .trash-icon {
     color:#E72929;
     cursor:pointer;
 }
-/*.table-container {
-    border-radius: 10px;
-    border: 1px solid #0C2144;*/
-/*    height:350px;*/
 
-
-/*}
-.categorytable {  
-    max-height:350px;
-}*/
 

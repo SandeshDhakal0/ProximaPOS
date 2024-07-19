@@ -72,7 +72,7 @@
 .vendorcard {
     padding: 10px;
     width: 30%;
-    height: 40vh;
+ /*   height: 40vh;*/
     background-color: var(--vendor--cardcolor);
     background-color: #ECECEB;
     border: none;
@@ -226,13 +226,6 @@ input[type="checkbox"] {
     background-color: #ffffff;
     padding: 10px;
     border-radius: 10px;
-    /*background-color:#fff;
-   width:110%;
-   margin-left:-5%;
-   padding:1vh;
-   height:18.3vh;
-   border-radius:10px;
-   height:17vh;*/
 }
 
 .labeltexts {
@@ -293,6 +286,7 @@ input[type="checkbox"] {
 }*/
 .companynameinput, .contactpersoninput, .Panvatinput, .addressinput, .phonenumberinput, .emailinput {
     background-color: #DCDFE8;
+   
 }
 .cardsrow{
     height:390px;
@@ -301,90 +295,122 @@ input[type="checkbox"] {
 }
 
 /*media quary=====================================================================================================*/
-@media screen and (max-width: 1200px) {
-    .addvendorbutton {
-        margin-left: 3vw;
-        height: 8vh;
-        width: 10vw;
-    }
-    .nameandcashier{
-        margin-bottom:3vh;
-    }
-    .vendorcard{
-        height:50vh;
-    }
-    .nesteddiv{
-        height:25vh;
-        font-size:10px;
-        margin-bottom:3vh;
-    }
-    .vendordropdown {
-        height: 5vh;
-        margin-left: 2vh;
-        margin-top: 3vh;
-        text-align:center;
-    }
-}
-@media screen and (max-width: 1175px){
-    .threedots{
-        margin-right:3vw;
-    }
-    .activepart {
-        margin-left: 9vw;
-    }
-    .inactivepart {
-        margin-left: 9vw;
-    }
-    .nesteddiv{
-        padding-bottom:20px;
-    }
-}
-@media screen and (max-width: 1080px) {
-    .activepart{
-        margin-left:7vw;
-    }
-    .inactivepart {
-        margin-left: 7vw;
-    }
-    .name{
-        font-size:12px;
-    }
-    .nesteddiv{
-        font-size:10px;
-   
-    }
-}
-@media screen and (max-width: 963px) {
-    .addvendorbutton{
-        font-size:14px;
-    }
-    .vendordropdown{
-        font-size:14px;
-    }
-    .activepart, .inactivepart{
-        margin-left:4vw;
-        margin-right:2vw;
+/*@media screen and (max-width: 1400px) {
+  
+}*/
+
+
+/*
+    @media screen and (max-width: 1200px) {
+        .addvendorbutton {
+            margin-left: 3vw;
+            height: 8vh;
+            width: 10vw;
+        }
+
+        .nameandcashier {
+            margin-bottom: 3vh;
+        }
+
+        .vendorcard {
+            height: 50vh;
+        }
+
+        .nesteddiv {
+            height: 25vh;
+            font-size: 10px;
+            margin-bottom: 3vh;
+        }
+
+        .vendordropdown {
+            height: 5vh;
+            margin-left: 2vh;
+            margin-top: 3vh;
+            text-align: center;
+        }
     }
 
-}
-@media screen and (min-width: 1200px) {
-    .vendorcard {
-        height: 55vh;
+    @media screen and (max-width: 1175px) {
+        .threedots {
+            margin-right: 3vw;
+        }
+
+        .activepart {
+            margin-left: 9vw;
+        }
+
+        .inactivepart {
+            margin-left: 9vw;
+        }
+
+        .nesteddiv {
+            padding-bottom: 20px;
+        }
     }
-    .nesteddiv{
-        font-size:12px;
+
+    @media screen and (max-width: 1080px) {
+        .activepart {
+            margin-left: 7vw;
+        }
+
+        .inactivepart {
+            margin-left: 7vw;
+        }
+
+        .name {
+            font-size: 12px;
+        }
+
+        .nesteddiv {
+            font-size: 10px;
+        }
     }
-    .addvendorbutton{
-        margin-left:3vw;
-        height:8vh;
+
+    @media screen and (max-width: 963px) {
+        .addvendorbutton {
+            font-size: 14px;
+        }
+
+        .vendordropdown {
+            font-size: 14px;
+        }
+
+        .activepart, .inactivepart {
+            margin-left: 4vw;
+            margin-right: 2vw;
+        }
     }
-    .vendordropdown{
-        height:5vh;
-        margin-top:3vh;
+
+    @media screen and (min-width: 1201px) {
+        .vendorcard {
+            height: 55vh;
+        }
+
+        .nesteddiv {
+            font-size: 12px;
+        }
+        .nameandcashier{
+            margin-bottom:20px;
+        }
+        .addvendorbutton {
+            margin-left: 3vw;
+            height: 8vh;
+        }
+
+        .vendordropdown {
+            height: 5vh;
+            margin-top: 3vh;
+        }
     }
-}
-@media screen and (max-width: 1400px) {
-    .vendorcard{
-        height:30vh;
+
+    @media screen and (max-width: 1400px) {
+        .vendorcard {
+            height: 30vh;
+        }
     }
-}
+@media screen and (max-width: 995px) {
+    .card-body{
+   
+
+    }
+}*/
