@@ -19,7 +19,7 @@
     width: 7vw;
     margin-left: 2vh;
     margin-top: 2vh;
-/*    padding: 5px;*/
+
 }
 
 .noofvendor {
@@ -45,7 +45,7 @@
     height: 7vh;
     width: 10vw;
     border-radius: 10px;
-    /*  margin-left: 20vw;*/
+
 }
 
 .containerbindcards {
@@ -65,14 +65,10 @@
     border-radius: 4px;
 }
 
-/*.cardsrow {
-    margin-left: 2vw;
-}*/
-
 .vendorcard {
     padding: 10px;
     width: 30%;
- /*   height: 40vh;*/
+    height: 30vh;
     background-color: var(--vendor--cardcolor);
     background-color: #ECECEB;
     border: none;
@@ -83,10 +79,7 @@
 }
 
 .paginationpart {
-/*    margin:5vh 0 10vh 0;*/
 margin-top:2vh;
- /*   margin-left: 4vw;
-    width: 75vw;*/
 text-align:center;
 padding-bottom:20px;
 
@@ -159,12 +152,7 @@ input[type="checkbox"] {
     border-radius: 10px;
     font-weight: 500;
     font-size: 12px;
-    /*    height: 3.5vh;*/
-    /*    padding: 0px 0px 0px 22px;*/
-    /*    margin-right: 1vh;*/
-    /*border: 3px solid #00b300;*/
-    /*background-color: rgb(7, 226, 144,25%);*/
-    /*   color: #00b300;*/
+
 }
 .inactivepart {
     margin-left: 10vw;
@@ -254,36 +242,7 @@ input[type="checkbox"] {
         margin-top: 2px;
     }
 
-/*Vendor modal design edits*/
-/*.fullnamelabel, .companynamelabel, .contactpersonlabel, .Panvatlabel, .addresslabel, .phonenumberlabel .emaillabel {
-    font-size: 16px;
-}*/
-/*.Panvatlabel, .addresslabel, .phonenumberlabel, .emaillabel {
-    margin-left: 4vw;
-}*/
-/*.fullnameinput, .companynameinput, .contactpersoninput, .Panvatinput, .addressinput, .phonenumberinput, .emailinput {
-    border: none;
-    background-color: #d9d9d9;
-    height: 3vh;
-    width: 20vw;
-    margin-top: 2vh;
-    margin-left: 2vh;
-}*/
-/*.fullnameinput{
-    margin-left:7.8vh;
-}
-.contactpersoninput{
-    margin-left:3vh;
-}
-.addressinput{
-    margin-left:2.8vh;
-}
-.phonenumberinput {
-    width: 12vw;
-}
-.emailinput{
-    margin-left:3vw;
-}*/
+
 .companynameinput, .contactpersoninput, .Panvatinput, .addressinput, .phonenumberinput, .emailinput {
     background-color: #DCDFE8;
    
@@ -295,12 +254,10 @@ input[type="checkbox"] {
 }
 
 /*media quary=====================================================================================================*/
-/*@media screen and (max-width: 1400px) {
-  
-}*/
 
 
-/*
+
+
     @media screen and (max-width: 1200px) {
         .addvendorbutton {
             margin-left: 3vw;
@@ -381,9 +338,9 @@ input[type="checkbox"] {
         }
     }
 
-    @media screen and (min-width: 1201px) {
+/*    @media screen and (min-width: 1201px) {
         .vendorcard {
-            height: 55vh;
+            height: 45vh;
         }
 
         .nesteddiv {
@@ -401,14 +358,29 @@ input[type="checkbox"] {
             height: 5vh;
             margin-top: 3vh;
         }
-    }
+    }*/
+
+
 
     @media screen and (max-width: 1400px) {
         .vendorcard {
-            height: 30vh;
+            height: 55vh;
         }
+    
     }
-@media screen and (max-width: 995px) {
+    @media screen and (min-width: 1401px){
+        .vendorcard {
+            height: 50vh;
+        }
+    
+    }
+@media screen and (min-width: 1486px) {
+    .vendorcard {
+        height: 50vh;
+    }
+}
+
+    /*@media screen and (max-width: 995px) {
     .card-body{
    
 

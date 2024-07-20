@@ -1,7 +1,6 @@
 .unitpage {
     margin-top: 3%;
-/*    overflow:hidden;
-    position:fixed;*/
+    margin-bottom:-3%;
 }
 .unit-head{
     text-align:start;
@@ -14,8 +13,7 @@
     border: none;
     border-radius: 5px;
     background-color: #ABBFE0;
-    /*    background-color: var(--our--commonblue-color);*/
-    color: black;
+    color: black !important;
     width: 10vw;
     height: 5vh;
     margin-bottom: 1vh;
@@ -31,7 +29,7 @@
 .unittable {
     width: 100%;
     border-collapse: collapse;
- 
+
 
 }
 .unittable th, td{
@@ -49,15 +47,13 @@
     }
 
     .unittable thead {
-       /* background-color: var(--our--commonblue-color);*/
-      /*  color: #fff;*/
         border-radius: 5px;
     }
     .unittable tbody {
-        max-height: 65vh;
+  /*      max-height: 65vh;*/
         display: block;
-        width: 100%;
         overflow-y: scroll;
+        scroll-behavior:smooth;
     }
 
         .unittable thead, .unittable tbody tr {
@@ -84,7 +80,7 @@
     border-radius:5px;
 }
 
-::-webkit-scrollbar {
+/*::-webkit-scrollbar {
     width: 10px;
     
     background-color: transparent;
@@ -94,7 +90,7 @@
     background-color: darkgrey;
     border-radius: 10px;
     
-}
+}*/
 
 /*top similar=======================================================*/
 .category-heading {
@@ -108,7 +104,6 @@
 .addbutton {
     border: none;
     background-color: #ABBFE0;
-    /*    background-color: var(--our--commonblue-color);*/
     color: #fff;
     height: 7vh;
     width: 10vw;
@@ -134,7 +129,6 @@
         background-color: #0056b3;
     }
 .searchbutton {
-    /*    background-color: var(--our--commonblue-color);*/
     background-color: #ABBFE0;
     border: none;
     border-radius: 10px;
@@ -143,4 +137,99 @@
     color: black;
     cursor: pointer;
 }
+
+
 /*=================================================================*/
+
+
+
+@media screen and (max-width: 1100px) {
+    .addbutton {
+        height: 8vh;
+        font-size: 14px;
+    }
+
+    .searchbutton {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 996px) {
+    .addbutton {
+        font-size: 15px;
+        width: 11vw;
+        margin-left: 60%;
+    }
+
+    .searchbutton {
+        font-size: 15px;
+        height: 7vh;
+    }
+
+    .search-panel input[type="text"], .search-panel select {
+        padding: 5px;
+    }
+}
+
+
+@media screen and (max-width: 940px) {
+    .addbutton {
+        font-size: 14px;
+        height: 7vh;
+    }
+
+    .search-panel input[type="text"], .search-panel select {
+        padding: 5px;
+    }
+
+    .searchbutton {
+        height: 7vh;
+    }
+
+    .action-icon {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 886px) {
+    .addbutton {
+        font-size: 13px;
+    }
+
+    .searchbutton {
+        font-size: 13px;
+    }
+
+    .search-panel input[type="text"], .search-panel select {
+        padding: 5px;
+    }
+}
+
+@media screen and (max-width: 886px) {
+    .category-heading {
+        font-size: 32px;
+    }
+
+    .addbutton {
+        font-size: 12px;
+        height: 7vh;
+    }
+
+    .categorytable {
+        font-size: 13px;
+    }
+}
+
+
+@media screen and (max-width: 775px) {
+    .addbutton {
+        width: 20vh;
+        margin-left: 50%;
+    }
+}
+
+@media screen and (max-width: 730px) {
+    .addbutton{
+        margin-left:45%;
+    }
+}

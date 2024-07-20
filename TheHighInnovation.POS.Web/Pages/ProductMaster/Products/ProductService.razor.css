@@ -209,6 +209,8 @@ th[colspan="2"] {
 
 .AddCatogeryBtn {
     padding-top: 2vh;
+    padding-left:5vw;
+
 }
 
 .addbutton {
@@ -216,10 +218,11 @@ th[colspan="2"] {
  /*   background-color: var(--our--commonblue-color);*/
  background-color:#ABBFE0;
     color: black;
-    height: 7vh;
+    height: 8vh;
     width: 10vw;
     border-radius: 10px;
-  /*  margin-left: 20vw;*/
+/*    margin-left: 40%;*/
+    /*margin-right:1%;*/
 }
 
 .search-panel {
@@ -251,3 +254,122 @@ th[colspan="2"] {
     cursor: pointer;
     border:none;
 }
+
+@media screen and (max-width: 1194px) {
+    .AddCatogeryBtn{
+
+    }
+    .addbutton{
+        font-size:15px;
+
+    }
+    .searchbutton {
+
+        height: 9vh;
+    }
+}
+@media screen and (max-width: 1127px) {
+    .addbutton {
+        font-size: 14px;
+    }
+}
+    @media screen and (max-width: 1100px) {
+        .addbutton {
+            height: 8vh;
+            font-size: 14px;
+        }
+
+        .searchbutton {
+            font-size: 14px;
+        }
+    }
+
+
+    @media screen and (max-width: 1060px) {
+        .addbutton {
+            font-size: 13px;
+            font-weight: 400;
+        }
+    }
+
+    @media screen and (max-width: 997px) {
+        .AddCatogeryBtn{
+            padding-left:0 !important;
+        }
+        .addbutton {
+            font-size: 14px;
+            width: 12vw;
+        }
+
+        .searchbutton {
+            font-size: 15px;
+            height: 9vh;
+        }
+
+        .search-panel input[type="text"], .search-panel select {
+            padding: 5px;
+        }
+    }
+
+
+    @media screen and (max-width: 940px) {
+        .addbutton {
+            font-size: 14px;
+            height: 7vh;
+        }
+
+        .search-panel input[type="text"], .search-panel select {
+            padding: 5px;
+        }
+
+        .searchbutton {
+            height: 7vh;
+        }
+
+        .action-icon {
+            font-size: 15px;
+        }
+    }
+
+    @media screen and (max-width: 886px) {
+        .addbutton {
+            font-size: 13px;
+        }
+
+        .searchbutton {
+            font-size: 13px;
+        }
+
+        .search-panel input[type="text"], .search-panel select {
+            padding: 5px;
+        }
+    }
+
+    @media screen and (max-width: 886px) {
+        .category-heading {
+            font-size: 32px;
+        }
+
+        .addbutton {
+            font-size: 12px;
+            height: 7vh;
+        }
+
+        .categorytable {
+            font-size: 13px;
+        }
+    }
+
+
+    @media screen and (max-width: 775px) {
+        .addbutton {
+            width: 20vh;
+            margin-left: 50%;
+        }
+    }
+
+    @media screen and (max-width: 730px) {
+        .addbutton {
+            margin-left: 45%;
+        }
+    }
