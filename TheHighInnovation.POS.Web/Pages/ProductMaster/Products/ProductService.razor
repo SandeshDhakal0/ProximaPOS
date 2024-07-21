@@ -36,7 +36,7 @@
             </div>
             <div class="offset-lg-1 offset-md-2 offset-sm-1  offset-o col-4 AddCatogeryBtn">
                 <button class="addbutton">Import Product</button>
-                <button class="addbutton justify-content-end">Add Product</button>
+                <button class="addbutton justify-content-end" @onclick="OpenAddProduct">Add Product</button>
             </div>
         </div>
 
@@ -44,8 +44,8 @@
         <div class="row row search-panel">
             <div class="col-12">
 
-                <input type="text" placeholder="Search" class="categorycodeinput">
-                <button class="searchbutton"> @* <i class="fa fa-search"></i> *@ Search  </button>
+                <input type="text" placeholder="Search" id="search" @bind="productname"class="categorycodeinput">
+                <button class="searchbutton" @onclick="HandleSearch"> @* <i class="fa fa-search"></i> *@ Search  </button>
             </div>
 
         </div>
@@ -364,7 +364,7 @@
     {
         NavManager.NavigateTo("/add-product");
     }
-
+   
     private async Task GetProductList(int pageNumber)
     {
         try

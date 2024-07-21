@@ -11,7 +11,7 @@
 @inject SweetAlert SweetAlertService
 
 <Toasts class="" Messages="messages" AutoHide="true" StackLength="3" Placement="ToastsPlacement.BottomRight" />
-<div class="Vendorpage container-fluid">
+<div class="Vendorpage">
     <div class="row">
         <div class="col firstcol">
             <div class="vendorbox d-flex">
@@ -113,13 +113,13 @@
 
     
 
-    <div class="row">
+   
         <table id="productTable">
             <thead class="tablehead">
                 <tr>
                     <th>S.No</th>
                     <th>Product/Barcode</th>
-                    <th style="margin-left:1vw;">UoM</th>
+                    <th>UoM</th>
                     <th>Qty</th>
                     <th>Unit</th>
                     <th>Rate</th>
@@ -175,7 +175,7 @@
                             <input type="text" class="amount" placeholder="Amount" @bind-value="product.Amount" @bind-value:event="oninput" @onchange="@(e => OnAmountChanged(e, product))">
                         </td>
                         <td>
-                            <button class="deletebutton" @onclick="() => RemoveProductRow(product)">
+                            <button class="deletebutton" title="Delete Row" @onclick="() => RemoveProductRow(product)">
                                 <i class="fa fa-trash delete_icon" aria-hidden="true"></i>
                             </button>
                         </td>
@@ -183,20 +183,21 @@
                 }
             </tbody>
         </table>
-    </div>
 
-    <table class="mt-2 bottombilltable">
+  
+
+    <table class=" bottombilltable">
         <tr class="first_tr">
             <td></td>
             <td>
-                <table>
+                <table style="width:100%;" class="gross_amt_table">
                     <tr class="gross_amt_tr">
                         <td><label class="gross_amt_label">Gross Amount</label></td>
                         <td>:</td>
                         <td class="gross_amt_amt_td">
                             <input class="gross_amt_input" disabled @bind="purchaseReceipt.p_gross_amount" />
                         </td>
-                    </tr>
+                    </tr> 
                 </table>
             </td>
         </tr>
@@ -207,9 +208,9 @@
                 <textarea id="remarks" class="remarkstextarea" @bind="purchaseReceipt.p_remarks"></textarea>
             </td>
             <td>
-                <table class="remarks_nested_table">
+                <table class="remarks_nested_table" style="width:100%;">
                     <tr>
-                        <td> Product Disc</td>
+                        <td class="product_amt_td"> Product Disc</td>
                         <td>:</td>
                         <td><input disabled @bind="purchaseReceipt.p_product_discount" /></td>
                     </tr>
@@ -223,7 +224,7 @@
                         <td>:</td>
                         <td><input @bind="purchaseReceipt.p_taxable_amount" /></td>
                     </tr>
-                    <tr>
+                    <tr class="vat_td">
                         <td> VAT 13%</td>
                         <td>:</td>
                         <td><input @bind="purchaseReceipt.p_vat" /></td>
@@ -237,7 +238,7 @@
                 Bill Prepared by &nbsp; :  &nbsp;  &nbsp;<input id="prepared-by" @bind="purchaseReceipt.p_bill_prepared_by" />
             </td>
             <td>
-                <table>
+                <table style="width:100%;" class="rounded_offtable">
                     <td class="rounded_off_td"><label class="rounded_off_amt_label">Rounded Off</label></td>
                     <td>:</td>
                     <td><input @bind="purchaseReceipt.p_rounded_off" /></td>
@@ -252,7 +253,7 @@
                 <input id="in-words" class="full-width" @bind="purchaseReceipt.p_amount_in_words" />
             </td>
             <td>
-                <table>
+                <table class="net_amt_table" style="width:100%;">
                     <td class="net_amt_td"><label class="net_amt_label">Net Amount</label></td>
                     <td>:</td>
                     <td><input @bind="purchaseReceipt.p_net_amount" /></td>
@@ -262,14 +263,14 @@
 
         <tr>
             <td>
-                <table>
+                <table style="width:100%;" >
                     <td><label class="due_amt_label">Due Amount</label></td>
                     <td>:</td>
                     <td><input type="text" id="paid-amount-confirm" @bind="purchaseReceipt.p_remaining_amount"></td>
                 </table>
             </td>
             <td>
-                <table>
+                <table style="width:100%;" class="paid_amt_table">
                     <td class="parid_amt_td"><label class="paid_amt_label">Paid Amount</label></td>
                     <td>:</td>
                     <td><input type="text" /></td>

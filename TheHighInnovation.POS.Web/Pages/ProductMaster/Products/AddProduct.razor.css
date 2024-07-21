@@ -8,7 +8,14 @@
     align-items: center;
     height: 100vh;
 }
-
+.closeaddproductpagebutton{
+    background:none;
+    border:none;
+    font-size:28px;
+    margin-top:-2vw;
+    margin-left:80%;
+    font-weight:600;
+}
 .form-container {
     background-color: #f1f4f9;
     padding: 20px;

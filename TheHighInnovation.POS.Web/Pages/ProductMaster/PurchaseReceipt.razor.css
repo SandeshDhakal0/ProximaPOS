@@ -1,9 +1,13 @@
 
 .Vendorpage{
-width:78vw;
-margin-top:4%;
+    width:80vw;
+margin-top:4% !important;
+
 }
 
+::-webkit-scrollbar {
+   display:none;
+}
 
 /*First col of form part stylings*/
 
@@ -151,77 +155,117 @@ margin-top:4%;
     width: 73%;
     margin-left:27%;
     text-align: center;
-    color: #fff;
+    color: #fff; 
     padding-top: -5px !important;
 }
 /*Tab.le elements design*/
-tr:nth-child(even) {
+
+#productTable tr:nth-child(even) {
     background-color: #fff !important;
 }
-tr:nth-child(even):hover {
-    background-color:  #f2f2f2 !important;
+
+#productTable tr:nth-child(even):hover {
+    background-color: #f2f2f2 !important;
 }
-.tablehead th {
-    background-color: #fff !important;
-    border: none !important;
-    font-weight:500;
-    font-size:17px;
+.producttablediv {
   
+    border-radius: 10px 10px 0 0;
+    border-bottom: none;
+    width: 100%;
 }
-.deletebutton{
-    background:none;
-    border:none;
-    font-size:22px;
-    color:red;
-    opacity:0.5;
+#productTable {
+    width: 100%;
+    border: 1px solid #a8a8a8;
+    border-radius: 10px 10px 0 0 !important;
+    border-bottom: none;
+    width: 80vw;
+    margin-bottom: 1%;
 }
-    .deletebutton:hover{
-        opacity:1;
-    }
-    .uom, .quantity, .unit, .rate, .discount, .discountamount, .amount {
-        background-color: #ECECEB;
-        width: 100% !important;
+
+    #productTable th, #productTable td {
+
+     
         border: none;
-        border-radius: 5px;
-        height: 4vh;
     }
-.tablebody tr td{
-    border:none !important;
 
- 
-}
-/*.tablehead th {
-    background-color: #c7d7db;
-    border: none !important;
-}
+    #productTable th {
+        background-color: #fff !important;
+    }
 
 
-.uom, .quantity, .unit, .rate, .discount, .discountamount, .amount {
-    background-color: #ECECEB;
-    width: 40px !important;
-    border: none;
-    border-radius: 5px;
-    height: 4vh;
+
+    /* Specific column widths */
+    .tablehead th:nth-child(1), .tablebody td:nth-child(1) {
+        width: 5% !important; /* S.No */
+        
+    }
+
+.tablehead th:nth-child(2), .tablebody td:nth-child(2) {
+    text-align: center !important;
+    width: 19% !important; /* Product/Barcode */
 }
-.unit, .rate, .discount, .discountamount, .amount {
-    width: 5vw !important;
-}
-.quantitytd{
-    width:100px !important;
-}
-.deletebutton{
+
+    .tablehead th:nth-child(3), .tablebody td:nth-child(3) {
+        width: 10% !important; /* UoM */
+    }
+
+    .tablehead th:nth-child(4), .tablebody td:nth-child(4) {
+        width: 10% !important; /* Qty */
+    }
+
+    .tablehead th:nth-child(5), .tablebody td:nth-child(5) {
+        width: 8% !important; /* Unit */
+    }
+
+    .tablehead th:nth-child(6), .tablebody td:nth-child(6) {
+        width: 10% !important; /* Rate */
+    }
+
+    .tablehead th:nth-child(7), .tablebody td:nth-child(7) {
+        width: 10% !important; /* Disc% */
+    }
+
+    .tablehead th:nth-child(8), .tablebody td:nth-child(8) {
+        width: 10% !important; /* Disc Amt */
+    }
+
+    .tablehead th:nth-child(9), .tablebody td:nth-child(9) {
+        width: 10% !important; /* Amount */
+        
+    }
+
+    .tablehead th:nth-child(10), .tablebody td:nth-child(10) {
+        width: 7%; /* Action */
+    }
+
+
+
+
+
+.uom, .quantity, .rate, .discount, .discountamount, .amount {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: var(--inputbox-color);
     border:none;
-    border-radius:2px;
-   color:#111;
-   font-size:20px;
-   background-color:none;
+  border-radius:5px;
+    margin: 0;
+    width:100px;
+    height:4vh;
+}
+.deletebutton {
+    border: none;
+    border-radius: 2px;
+    color: #111;
+    font-size: 20px;
+    background-color: none;
 }
 
-.deletebutton:hover{
-    color:red;
-}
+    .deletebutton:hover {
+        color: red;
+    }
 
-*/
+
+
 /*last table part part*/
 td {
     border: 1px;
@@ -244,38 +288,52 @@ td {
 }
 .bottombilltable {
     width: 80vw;
-    margin-left: -1vw;
+
     padding-top: -5vh;
 }
 .first_tr{
     border-top:none !important;
 }
 .bottombilltable tr, .rounded_off_td, .net_amt_td, .parid_amt_td {
-    border: 2px solid #c7d7db;
+    border: 1px solid #a8a8a8;
     padding: -10px;
 }
-.remarks_nested_table tr, .rounded_off_td, .net_amt_td, .parid_amt_td {
+ .rounded_off_td, .net_amt_td, .parid_amt_td {
     border-top: none !important;
     border-bottom: none !important;
     border-right: none !important;
     
 }
-.gross_amt_tr {
+.remarks_nested_table input, .rounded_offtable input, .net_amt_table input, .paid_amt_table input, .gross_amt_table input {
+    background-color: var(--inputbox-color) !important;
+    border-radius: 5px;
+    border: none;
+}
+.remarks_nested_table .vat_td {
+    border-bottom: none;
+}
+.remarks_nested_table td{
+    border-right:none;
+}
+.product_amt_td {
     border-top: none !important;
+}
+.gross_amt_tr {
     border-bottom: none !important;
     border-right: none !important;
 }
 .gross_amt_label{
    margin-right:1vw;
 }
-.rounded_off_amt_label {
-    margin-right: 1.7vw;
+
+.net_amt_label {
+    margin-right: 1.9vw;
 }
- .net_amt_label{
-     margin-right:1.9vw;
- }
-.paid_amt_label{
-    margin-right:1.6vw;
+.rounded_off_amt_label{
+    margin-right:1.5vw;
+}
+.paid_amt_label {
+    margin-right: 1.6vw;
 }
 .inwords_colon{
     padding-right:14px;
@@ -284,7 +342,6 @@ td {
     margin-right:4.1vw;
 }
 td {
-   
     height: 4.8vh;
     padding-left: 15px;
 }
@@ -302,7 +359,7 @@ td {
     color:#fff;
     border:none;
     height:5vh;
-    width:8vw;
+    width:3vw;
     border-radius:10px;
     font-weight:400;
     font-size:18px;
@@ -311,8 +368,4 @@ td {
 
    
 }
-.submitbuttondiv{
-    margin-top:3px;
-    text-align:right;
 
-}

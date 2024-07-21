@@ -10,7 +10,11 @@
 
 
 <div class="container pt-5">
-    <h2>Add Product</h2>
+    <div class="d-flex">
+        <h2>Add Product</h2>
+        <button @onclick="CloseAddProduct" class="closeaddproductpagebutton">X</button>
+    </div>
+    
     <div class="row">
         <div class="col-3">
             <div class="form-group">
@@ -171,7 +175,7 @@
     private ProductFormList productFormList = new();
     private List<ProductStoreDTO> productStore = new List<ProductStoreDTO>();
     private bool IsShowSku = false;
-
+    @inject NavigationManager NavManager
     protected override async Task OnInitializedAsync()
     {
         await FetchCategories();
@@ -183,7 +187,10 @@
     private string? _dialogTitle { get; set; }
     private string? _dialogOkLabel { get; set; }
     private bool OpenaddcategoryModel = false;
-
+    private void CloseAddProduct()
+    {
+        NavManager.NavigateTo("/product-service");
+    }
 
     private async Task AddCategory()
     {
