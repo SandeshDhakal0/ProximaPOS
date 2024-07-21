@@ -22,7 +22,7 @@ margin-top:4% !important;
     .firstcol .vendornamelabel {
         line-height: 2.2;
         font-weight: 500;
-        width: 16vw;
+        width: 12vw;
     }
 
 
@@ -35,7 +35,7 @@ margin-top:4% !important;
 }
     .addiconbtn:hover {
         background-color: var(--inputbox-color);
-       
+        border: 1px solid #111;
         color: #111;
     }
 
@@ -47,7 +47,7 @@ margin-top:4% !important;
 
 .branchinput, .receiptypeselect {
     background-color: var(--inputbox-color);
-    border: none;
+    border: 1px solid #111;
     height: 5vh;
     border-radius: 10px;
     width: 100%;
@@ -72,7 +72,7 @@ margin-top:4% !important;
 }
 .invoiceinput {
     background-color: var(--inputbox-color);
-    border: none;
+    border: 1px solid #111;
     height: 5vh;
     border-radius: 10px;
     width: 100%;
@@ -85,7 +85,7 @@ margin-top:4% !important;
 }
 .billnoinput {
     background-color: var(--inputbox-color);
-    border: none;
+    border: 1px solid #111;
     height: 5vh;
     border-radius: 10px;
     width: 100%;
@@ -98,8 +98,8 @@ margin-top:4% !important;
 }
 .issuedateadinput, .duedateadinput {
     background-color: var(--inputbox-color);
-    border: none;
-    padding-left:5px;
+    border: 1px solid #111;
+    padding-left: 5px;
     height: 5vh;
     border-radius: 10px;
     width: 100%;
@@ -111,7 +111,7 @@ margin-top:4% !important;
 }
 .mopinput {
     background-color: var(--inputbox-color);
-    border: none;
+    border: 1px solid #111;
     padding-left: 5px;
     height: 5vh;
     border-radius: 10px;
@@ -138,7 +138,7 @@ margin-top:4% !important;
     }
 .issuedatebsinput, .buedatebsinput {
     background-color: var(--inputbox-color);
-    border: none;
+    border: 1px solid #111;
     padding-left: 5px;
     height: 5vh;
     border-radius: 10px;
@@ -245,12 +245,13 @@ margin-top:4% !important;
 .uom, .quantity, .rate, .discount, .discountamount, .amount {
     width: 100%;
     box-sizing: border-box;
+    border: 1px solid #111;
     background-color: var(--inputbox-color);
-    border:none;
-  border-radius:5px;
+  
+    border-radius: 5px;
     margin: 0;
-    width:100px;
-    height:4vh;
+    width: 100px;
+    height: 4vh;
 }
 .deletebutton {
     border: none;
@@ -277,14 +278,46 @@ td {
 .remarkstextarea {
     border: none;
     border-radius: 5px;
-    background-color: #f0f2f2;
+    background-color: #ECECEB;
+    border: 1px solid #111;
     height: 15vh;
-    width: 40vw;
+    width: 100%;
     resize: none;
 }
-.quantitytd{
-    text-align:center;
-    padding-left:2vw !important;
+.inwords_text_area input {
+    width: 100%;
+
+    height: 5vh;
+    background-color: #ECECEB;
+    border-radius: 5px;
+    border: 1px solid #111;
+}
+.dueandpaid_amount_table{
+    margin-left:-2.8%;
+}
+    .dueandpaid_amount_table input {
+      
+        width: 85%;
+        background-color: #ECECEB;
+        border: 1px solid #111;
+        border-radius: 5px;
+        margin-top: 2%;
+    }
+.dueandpaid_amount_table td{
+    border:none;
+}
+.submitbuttondiv {
+    margin-left: 1px;
+}
+    .submitbuttondiv input {
+        width: 15%;
+        border-radius: 5px;
+        background-color: #ECECEB;
+        border: 1px solid #111;
+    }
+.quantitytd {
+    text-align: center;
+    padding-left: 2vw !important;
 }
 .bottombilltable {
     width: 80vw;
@@ -294,11 +327,11 @@ td {
 .first_tr{
     border-top:none !important;
 }
-.bottombilltable tr, .rounded_off_td, .net_amt_td, .parid_amt_td {
+.bottombilltable tr, .rounded_off_td, .net_amt_td {
     border: 1px solid #a8a8a8;
     padding: -10px;
 }
- .rounded_off_td, .net_amt_td, .parid_amt_td {
+ .rounded_off_td, .net_amt_td {
     border-top: none !important;
     border-bottom: none !important;
     border-right: none !important;
@@ -306,8 +339,9 @@ td {
 }
 .remarks_nested_table input, .rounded_offtable input, .net_amt_table input, .paid_amt_table input, .gross_amt_table input {
     background-color: var(--inputbox-color) !important;
+    border: 1px solid #111;
     border-radius: 5px;
-    border: none;
+  
 }
 .remarks_nested_table .vat_td {
     border-bottom: none;
@@ -323,7 +357,7 @@ td {
     border-right: none !important;
 }
 .gross_amt_label{
-   margin-right:1vw;
+   margin-right:0.7vw;
 }
 
 .net_amt_label {
@@ -332,14 +366,16 @@ td {
 .rounded_off_amt_label{
     margin-right:1.5vw;
 }
-.paid_amt_label {
-    margin-right: 1.6vw;
-}
+
 .inwords_colon{
     padding-right:14px;
 }
 .in_words_label{
     margin-right:4.1vw;
+   
+}
+label{
+    font-weight:400!important;
 }
 td {
     height: 4.8vh;
@@ -347,25 +383,23 @@ td {
 }
 .due_amt_label {
     margin-left: -15px;
-    margin-right:20px;
+    margin-right:6px;
 }
 
 
 
-   
 
-.submitbutton{
-    background-color:#082248;
-    color:#fff;
-    border:none;
-    height:5vh;
-    width:3vw;
-    border-radius:10px;
-    font-weight:400;
-    font-size:18px;
-    text-transform:uppercase;
-    letter-spacing:1px;
 
-   
+.submitbutton {
+    background-color: #14AD5A;
+    color: #fff;
+    border: none;
+    height: 4vh;
+    width: 100%;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 

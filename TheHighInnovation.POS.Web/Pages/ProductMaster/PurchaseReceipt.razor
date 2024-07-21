@@ -210,22 +210,22 @@
             <td>
                 <table class="remarks_nested_table" style="width:100%;">
                     <tr>
-                        <td class="product_amt_td"> Product Disc</td>
+                        <td class="product_amt_td"><label>Product Disc</label> </td>
                         <td>:</td>
                         <td><input disabled @bind="purchaseReceipt.p_product_discount" /></td>
                     </tr>
                     <tr>
-                        <td> Discount</td>
+                        <td> <label>Discount</label></td>
                         <td>:</td>
                         <td><input @bind="purchaseReceipt.p_discount" /></td>
                     </tr>
                     <tr>
-                        <td> Taxable Amount</td>
+                        <td> <label>Taxable Amount</label></td>
                         <td>:</td>
                         <td><input @bind="purchaseReceipt.p_taxable_amount" /></td>
                     </tr>
                     <tr class="vat_td">
-                        <td> VAT 13%</td>
+                        <td> <label>VAT 13%</label></td>
                         <td>:</td>
                         <td><input @bind="purchaseReceipt.p_vat" /></td>
                     </tr>
@@ -234,9 +234,12 @@
         </tr>
 
         <tr>
-            <td>
-                Bill Prepared by &nbsp; :  &nbsp;  &nbsp;<input id="prepared-by" @bind="purchaseReceipt.p_bill_prepared_by" />
+            <td rowspan="2" class="inwords_text_area">
+                <label class="in_words_label">In Words  </label>
+      
+                <input id="in-words" class="full-width" @bind="purchaseReceipt.p_amount_in_words" />
             </td>
+            
             <td>
                 <table style="width:100%;" class="rounded_offtable">
                     <td class="rounded_off_td"><label class="rounded_off_amt_label">Rounded Off</label></td>
@@ -247,11 +250,7 @@
         </tr>
 
         <tr>
-            <td>
-                <label class="in_words_label">In Words  </label>
-                <span class="inwords_colon">:</span>
-                <input id="in-words" class="full-width" @bind="purchaseReceipt.p_amount_in_words" />
-            </td>
+           
             <td>
                 <table class="net_amt_table" style="width:100%;">
                     <td class="net_amt_td"><label class="net_amt_label">Net Amount</label></td>
@@ -261,25 +260,32 @@
             </td>
         </tr>
 
-        <tr>
-            <td>
-                <table style="width:100%;" >
-                    <td><label class="due_amt_label">Due Amount</label></td>
-                    <td>:</td>
-                    <td><input type="text" id="paid-amount-confirm" @bind="purchaseReceipt.p_remaining_amount"></td>
-                </table>
-            </td>
-            <td>
-                <table style="width:100%;" class="paid_amt_table">
-                    <td class="parid_amt_td"><label class="paid_amt_label">Paid Amount</label></td>
-                    <td>:</td>
-                    <td><input type="text" /></td>
-                </table>
-            </td>
-        </tr>
+        
     </table>
-
-    <div class="submitbuttondiv">
-        <button class="submitbutton" @onclick="SubmitInventory">Submit</button>
+    <table>
+        <td>
+            <table class="dueandpaid_amount_table" style="width:100%;">
+                <td class="parid_amt_td"><label class="paid_amt_label">Paid Amount :</label></td>
+                
+                <td><input type="text" /></td>
+                <td><label class="due_amt_label">Due Amount :</label></td>
+               
+                <td><input type="text" id="paid-amount-confirm" @bind="purchaseReceipt.p_remaining_amount"></td>
+                
+            </table>
+        </td>
+        <td>
+            <table style="width:100%;" class="paid_amt_table">
+            </table>
+        </td>
+    </table>
+    <div class="submitbuttondiv row">
+        <div class="col-10">
+            <div> Bill Prepared by: <input id="prepared-by" @bind="purchaseReceipt.p_bill_prepared_by" /></div>
+        </div>
+        <div class="col">
+            <button class="submitbutton" @onclick="SubmitInventory">Submit</button>
+        </div>
+        
     </div>
 </div>
