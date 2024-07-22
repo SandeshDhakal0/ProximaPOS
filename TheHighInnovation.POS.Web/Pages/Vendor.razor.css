@@ -364,7 +364,8 @@ input[type="checkbox"] {
 
     @media screen and (max-width: 1400px) {
         .vendorcard {
-            height: 55vh;
+   /*         height: 55vh;*/
+   height:48vh;
         }
     
     }

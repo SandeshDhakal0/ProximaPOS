@@ -9,141 +9,197 @@
 @inject SweetAlert SweetAlertService
 
 
-<div class="container pt-5">
+<div class="AddProducttContainer container pt-5">
     <div class="d-flex">
         <h2>Add Product</h2>
         <button @onclick="CloseAddProduct" class="closeaddproductpagebutton">X</button>
     </div>
     
     <div class="row">
-        <div class="col-3">
-            <div class="form-group">
+        <div class="col-6">
+            <form action="">
+
+            
+
+
+
+
+            <div class="form-group col-12">
                 <label for="productName">Product Name:</label>
                 <input type="text" id="productName" name="productName" @bind="productFormList.ProductName">
             </div>
-        </div>
-        <div class="col-3">
-            <div class="form-group">
-                <label for="category">Category:</label>
-                <select id="category" name="category" @bind="selectedCategory">
-                    @if (categoryList != null)
-                    {
-                        <option disabled selected>Select Category</option>
-                        @foreach (var item in categoryList)
-                        {
-                            <option value="@item.Id">@item.CategoryName</option>
-                        }
-                    }
-                    else
-                    {
-                        <option value="">Not found</option>
-                    }
-                </select>
 
-            </div>
+            <div class="row">
+        <div class="col-6">
+                        <div class="form-group">
+                            <label for="defaultUnit">Default Unit:</label>
+                            <select id="defaultUnit" name="defaultUnit" @bind="productFormList.DefaultUnit">
+                                <option value="">Select a Unit</option>
+                                @if (_unitDTO != null)
+                                {
+                                    @foreach (var unit in _unitDTO)
+                                    {
+                                        <option value="@unit.Measure">@unit.Measure</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        
         </div>
-        <div class="col-2">
-            <div class="form-group">
-                <button class="btn-sm btn-primary plusbutton" @onclick="AddCategory"><i class="fa-solid fa-plus"></i></button>
-            </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="text">Sales Rate:</label>
+                            <input type="text" placeholder="Enter code" class="form-control">
+                        </div>
+                        </div>
+
+
         </div>
-        <div class="col-4">
-        <div class="form-group">
+
+        <div class="form-group col-12">
             <label for="barcode">Barcode:</label>
             <input type="text" id="barcode" name="barcode" @bind="productFormList.BarcodeCode">
         </div>
+
+       </form>
+
+
+
+       </div>
+
+
+
+
+       <div class="col-6">
+<form>
+    <div class="row">
+        <div class="col-6">
+            <div class="row">
+                <div class="col-4">
+
+                           
+                        <div class="form-group">
+                            <label for="category">Category:</label>
+                            <select id="category" name="category" @bind="selectedCategory">
+                                @if (categoryList != null)
+                                {
+                                    <option disabled selected>Select Category</option>
+                                    @foreach (var item in categoryList)
+                                    {
+                                        <option value="@item.Id">@item.CategoryName</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="">Not found</option>
+                                }
+                            </select>
+
+                        </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-group">
+                            </div>
+                            <button class="btn-sm btn-primary plusbutton" @onclick="AddCategory"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        </div>
         </div>
+        <div class="col-6">
+                    <div class="form-group">
+                        <label for="unit">Unit*:</label>
+                        <div class="unit-input">
+                            <BlazoredTypeahead SearchMethod="FetchUnit" @bind-Values="_selectedUnit" TItem="UnitDTO" TValue="UnitDTO" Disabled="_isDisabledMulti" EnableDropDown="true" placeholder="Search by measure...">
+                                <SelectedTemplate Context="unit">
+                                    @unit.Measure
+                                </SelectedTemplate>
+                                <ResultTemplate Context="unit">
+                                    @unit.Measure
+                                </ResultTemplate>
+                            </BlazoredTypeahead>
+
+                            @if (OpenaddcategoryModel)
+                            {
+                                <ModalDialog OnClose="@OnUpsertCategory" OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div>
+                                                        <label for="categoryname" class="categoryname">Category Name</label>
+                                                        <input type="text" name="categoryname" class="categorynameinput" @bind="_categoryResponseDTO.CategoryName" />
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div>
+                                                        <label for="categorydescription" class="categorydescription">Category Description</label>
+                                                        <textarea type="text" name="categorydescription" class="categorydescriptioninput" @bind="_categoryResponseDTO.CategoryDescription"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </ModalDialog>
+                            }
+                        </div>
+                    </div>
+
+                    @if (_selectedUnit != null && _selectedUnit.Any())
+                    {
+                        @if (_selectedUnit.Any(u => u.Measure == "Carton") || _selectedUnit.Any(u => u.Measure == "Bora"))
+                        {
+                            <div class="row mt-3">
+                                <div class="col-3">
+                                    <div class="form-group">
+                                        <label for="unitSize">Unit Size:</label>
+                                        <p>1 per unit : </p> <input type="text" id="unitsize" name="cartonSize" class="form-control" @bind="productFormList.UnitSize">
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+
     </div>
+    </div>
+                <div class="form-group">
+                    <label for="isTaxable">Is Taxable:</label>
+                    <label class="switch">
+                        <input type="checkbox" id="isTaxable" name="isTaxable" @bind="productFormList.Taxable">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="productStatus">Product Status:</label>
+                    <label class="switch">
+                        <input type="checkbox" id="productStatus" name="productStatus" @bind="productFormList.IsActive">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+
+
+
     <div class="form-group">
         <label for="description">Description:</label>
         <input type="text" id="description" name="description" @bind="productFormList.Description">
     </div>
-    <div class="form-group">
-        <label for="unit">Unit*:</label>
-        <div class="unit-input">
-            <BlazoredTypeahead SearchMethod="FetchUnit" @bind-Values="_selectedUnit" TItem="UnitDTO" TValue="UnitDTO" Disabled="_isDisabledMulti" EnableDropDown="true" placeholder="Search by measure...">
-                <SelectedTemplate Context="unit">
-                    @unit.Measure
-                </SelectedTemplate>
-                <ResultTemplate Context="unit">
-                    @unit.Measure
-                </ResultTemplate>
-            </BlazoredTypeahead>
 
-            @if (OpenaddcategoryModel)
-            {
-                <ModalDialog OnClose="@OnUpsertCategory" OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
-                    <div class="modal-body">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">
-                                    <div>
-                                        <label for="categoryname" class="categoryname">Category Name</label>
-                                        <input type="text" name="categoryname" class="categorynameinput" @bind="_categoryResponseDTO.CategoryName" />
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div>
-                                        <label for="categorydescription" class="categorydescription">Category Description</label>
-                                        <textarea type="text" name="categorydescription" class="categorydescriptioninput" @bind="_categoryResponseDTO.CategoryDescription"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   
-                </ModalDialog>
-            }
-        </div>        
-    </div>
-
-    @if(_selectedUnit != null && _selectedUnit.Any())
-    {
-        @if (_selectedUnit.Any(u => u.Measure == "Carton") || _selectedUnit.Any(u => u.Measure == "Bora"))
-        {
-            <div class="row mt-3">
-                <div class="col-3">
-                    <div class="form-group">
-                        <label for="unitSize">Unit Size:</label>
-                       <p>1 per unit : </p> <input type="text" id="unitsize" name="cartonSize" class="form-control" @bind="productFormList.UnitSize">
-                    </div>
-                </div>
-            </div>
-        }
-    }
        
-    <div class="form-group">
-        <label for="defaultUnit">Default Unit:</label>
-        <select id="defaultUnit" name="defaultUnit" @bind="productFormList.DefaultUnit">
-            <option value="">Select a Unit</option>
-            @if (_unitDTO != null)
-            {
-                @foreach (var unit in _unitDTO)
-                {
-                    <option value="@unit.Measure">@unit.Measure</option>
-                }
-            }
-        </select>
-    </div>    
-    
-    <div class="form-group">
-        <label for="salesRate">Sales Rate:</label>
-        <input type="text" id="salesRate" name="salesRate" @bind="productFormList.SellingPrice">
+ 
+
+
+
+    </form>
     </div>
-    <div class="form-group">
-        <label for="isTaxable">Is Taxable:</label>
-        <label class="switch">
-            <input type="checkbox" id="isTaxable" name="isTaxable" @bind="productFormList.Taxable">
-            <span class="slider round"></span>
-        </label>
+
     </div>
-    <div class="form-group">
-        <label for="productStatus">Product Status:</label>
-        <label class="switch">
-            <input type="checkbox" id="productStatus" name="productStatus" @bind="productFormList.IsActive">
-            <span class="slider round"></span>
-        </label>
-    </div>
+
+
+
+
+
+
+
     <div class="form-actions">
         <button type="button" class="add-sku-btn" @onclick="ShowSKU">ADD SKU</button>        
     </div>
@@ -158,6 +214,14 @@
     <button type="submit" class="save-btn" @onclick="CreateProduct">SAVE</button>
     </div>
 </div>
+
+
+
+
+
+
+
+
 
 
 
