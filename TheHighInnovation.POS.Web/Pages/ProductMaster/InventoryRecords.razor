@@ -15,17 +15,26 @@
 
 <div class="container inventoryrcdpage">
     <div class="row">
-        <div class="col-4">
+
+        <div class="col-6 category-heading">
+            <p>Purches Receipt</p>
+        </div>
+       @* <div class="col-6   AddCatogeryBtn">
+            <button class="addbutton justify-content-end" @onclick="OpenCategoryUpsertModel">Add Category</button>
+        </div> *@
+    </div>
+    <div class="row">
+        <div class="col-4 ">
             <label class="vendornamelabel">Vendor Name</label>
  
-            <BlazoredTypeahead class="inventoryrecords"
+            <BlazoredTypeahead class="inventoryrecords" placeholder="Vender Name"
                             SearchMethod="FetchVendors"
                            TValue="VendorListShort"                           
                            TItem="VendorListShort"
                            Value="selectedVendor"
                            ValueChanged="SaveValue"
                            ValueExpression="@(() => selectedVendor)">
-            <SelectedTemplate>@context.CompanyName</SelectedTemplate>
+                <SelectedTemplate>@context.CompanyName</SelectedTemplate>
             <ResultTemplate>@context.CompanyName</ResultTemplate>
             <NotFoundTemplate>
                 Vendor Not Found.
@@ -45,7 +54,7 @@
             </select>
         </div>
         <div class="col-4">
-            <Button Class="btn-primary" Style="background-color:var(--our--commonblue-color);margin-top:3.5vh;border:none; height:5.3vh;border-radius:5px; margin-left:-15px;" @onclick="SearchHandle">
+            <Button Class="btn-primary" Style="background-color:#ABBFE0;margin-top:3.8vh;border:none; height:6.5vh;border-radius:5px; margin-left:-15px;" @onclick="SearchHandle">
                 <i class="fa fa-search searchicon" aria-hidden="true"></i>
 
         </Button>
@@ -58,7 +67,7 @@
                 
                 @if (purchaseReceipt.Count > 0)
             {
-                <table id="example" class="display">
+                    <table id="example" class="display table table-striped table-hover">
                     <thead class="tablehead">
                         <tr>
                             <th>VendorName</th>
@@ -250,6 +259,7 @@
 
     }    
 </div>
+
 @code {
    
     decimal taxableamount = 0;

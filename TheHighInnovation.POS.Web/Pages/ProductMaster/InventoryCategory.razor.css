@@ -1,11 +1,13 @@
 ﻿.inventorycategorypage {
-   margin-top:3%;
-   margin-bottom:2%;
-   margin-left:-1vw;
-/*   height:100%;
-   overflow:hidden;
-   position:fixed;*/
+    margin-top: 4%;
+    margin-bottom: 2%;
+    margin-left: -1vw;
 }
+.category-heading{
+    font-size: 36px;
+    font-weight: 300;
+}
+
 
 .category-heading{
     font-size:36px;
@@ -23,15 +25,11 @@
     padding: 10px;
     margin-right: 10px;
     border: 2px solid #ddd;
-    border-radius: 4px;
-    width:50%;
+    border-radius: 10px;
+/*    width:50%;*/    
+    width:500px;
 }
 
-
-
-/*.search-panel button:hover {
-    background-color: #0056b3;
-}*/
 
 .categorynamelabel, .categorycodelabel, .categorydescription {
     margin-top: 6px;
@@ -46,7 +44,9 @@
     background-color: #d9d9d9;
     border-radius: 10px;
 }
-
+.categorytable thead{
+    border-bottom: 1px solid black;
+}
 
     .categorytable th, .categorytable td {
 
@@ -72,42 +72,36 @@
 categorytable thead th, .thlast {
     text-align:end;
 }
-.categorytable thead th {
-   /* background-color: var(--tablehead-background);*/
- /*   color: #111;*/
+
+
+.categorytable tbody{
+    height:50vh !important;
+}
+.table-container {
+    border: 1px solid #0C2144;
 }
 
-.categorytable tbody tr:nth-child(odd) {
-    background-color: #d1d1d1;
-}
-
-    .categorytable tbody tr:hover {
-        background-color: var(--tablehead-background);
-    }
 
 
 .addbutton {
     border: none;
-    /* background-color: var(--our--commonblue-color);*/
     color: black;
     background-color: #ABBFE0;
-    height: 7vh;
-    width: 10vw;
+    height: 60px;
+    width: 187px;
     border-radius: 10px;
-/*    margin-left: 20vw;*/
-margin-left:70%;
+    margin-left: 58%;
 }
 .AddCatogeryBtn {
-/*    padding-left: 20vh;*/
+
     padding:2vh 0 0 20vh;
 }
 .searchbutton {
-    /*    background-color: var(--our--commonblue-color);*/
     border: none;
     background-color: #ABBFE0;
     border-radius: 10px;
-    width: 15vh;
-    height: 8vh;
+    height:52px;
+    width:132px;
     color: black;
     cursor: pointer;
 }
@@ -117,7 +111,7 @@ margin-left:70%;
     cursor: pointer;
 }
 .categorytable tbody {
-    max-height: 45vh;
+/*    max-height: 45vh;*/
     display:block;
     overflow-y: scroll;
 }
@@ -141,11 +135,12 @@ margin-left:70%;
     border: none;
     background-color: #d9d9d9;
     border-radius:5px;
-    width:30px;
+    height:29px;
+    width:57px;
 }
-.paginationpart{
 
-    padding:1vh;
+.paginationpart{
+margin-top:4vh;
 }
 .action-icon {
     text-align:right !important;
@@ -156,10 +151,11 @@ margin-left:70%;
     color:#E72929;
     cursor:pointer;
 }
-
-
+.selectcompany{
+    height:29px;
+    width:57px
+}
 /*Media Quary ====================================================================================*/
-
 @media screen and (max-width: 1100px) {
     .addbutton {
         height: 8vh;
@@ -243,3 +239,6 @@ margin-left:70%;
         margin-left: 50%;
     }
 }
+
+
+
