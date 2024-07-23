@@ -19,9 +19,7 @@
         <div class="col-6 category-heading">
             <p>Purches Receipt</p>
         </div>
-       @* <div class="col-6   AddCatogeryBtn">
-            <button class="addbutton justify-content-end" @onclick="OpenCategoryUpsertModel">Add Category</button>
-        </div> *@
+
     </div>
     <div class="row">
         <div class="col-4 ">
@@ -53,9 +51,10 @@
                 <option>4</option>
             </select>
         </div>
-        <div class="col-4">
-            <Button Class="btn-primary" Style="background-color:#ABBFE0;margin-top:3.8vh;border:none; height:6.5vh;border-radius:5px; margin-left:-15px;" @onclick="SearchHandle">
-                <i class="fa fa-search searchicon" aria-hidden="true"></i>
+        <div class="col-4 search-btn">
+            <Button Class="btn-primary searchbutton" @onclick="SearchHandle">
+                @* <i class="fa fa-search searchicon" aria-hidden="true"></i> *@
+                Search
 
         </Button>
         </div>

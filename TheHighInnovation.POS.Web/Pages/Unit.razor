@@ -12,7 +12,7 @@
 @inject SweetAlert SweetAlertService
 
 <div class="unitpage">
-    @* top similar ==================================================================================*@
+ 
     <div class="row">
 
         <div class="col-6 category-heading">
@@ -27,12 +27,12 @@
     <div class="row row search-panel">
         <div class="col-12">
 
-            <input type="text" placeholder="Search" class="categorycodeinput">
+            <input type="text" placeholder=" Search" class="categorycodeinput">
             <button class="searchbutton"> @* <i class="fa fa-search"></i> *@ Search  </button>
         </div>
 
     </div>
-    @* ================================================================================================== *@
+ 
     @if (OpenUnitModel)
     {
         <ModalDialog OnClose="@OnUpsertCategory" OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
@@ -61,6 +61,7 @@
     {
         @if (unitList != null)
         {
+            <div class="table-container">
             <table class="unittable table table-striped table-hover">
                 <thead>
                     <tr>
@@ -83,6 +84,7 @@
                     }
                 </tbody>
             </table>
+            </div>
         }
         else
         {

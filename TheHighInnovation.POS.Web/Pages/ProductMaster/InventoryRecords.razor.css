@@ -123,4 +123,14 @@
     font-size: 36px;
     font-weight: 300;
 }
-
+.searchbutton {
+    margin-top: 5vh !important;
+    border: none;
+    background-color: #ABBFE0 !important;
+    border-radius: 10px !important;
+    height: 52px!important;
+    width: 132px!important;
+    color: black !important;
+    cursor: pointer !important;
+    cursor: pointer !important;
+}
