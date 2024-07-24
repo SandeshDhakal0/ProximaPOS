@@ -10,20 +10,15 @@
 
 
 <div class="AddProducttContainer container pt-5">
-    <div class="d-flex">
+    <div class="addproduct">
         <h2>Add Product</h2>
+
         <button @onclick="CloseAddProduct" class="closeaddproductpagebutton">X</button>
     </div>
     
     <div class="row">
         <div class="col-6">
             <form action="">
-
-            
-
-
-
-
             <div class="form-group col-12">
                 <label for="productName">Product Name:</label>
                 <input type="text" id="productName" name="productName" @bind="productFormList.ProductName">
@@ -97,15 +92,15 @@
 
                         </div>
                         </div>
-                        <div class="col-2">
-                            <div class="form-group">
-                            </div>
+                            <div class="col-2">
+                           
                             <button class="btn-sm btn-primary plusbutton" @onclick="AddCategory"><i class="fa-solid fa-plus"></i></button>
                         </div>
                         </div>
         </div>
         <div class="col-6">
                     <div class="form-group">
+                       <div class="form-group">
                         <label for="unit">Unit*:</label>
                         <div class="unit-input">
                             <BlazoredTypeahead SearchMethod="FetchUnit" @bind-Values="_selectedUnit" TItem="UnitDTO" TValue="UnitDTO" Disabled="_isDisabledMulti" EnableDropDown="true" placeholder="Search by measure...">
@@ -117,6 +112,9 @@
                                 </ResultTemplate>
                             </BlazoredTypeahead>
 
+                            
+                                <button class="btn-sm btn-primary plusbuttonunit" @onclick="AddCategory"><i class="fa-solid fa-plus"></i></button>
+                                </div>
                             @if (OpenaddcategoryModel)
                             {
                                 <ModalDialog OnClose="@OnUpsertCategory" OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
@@ -162,21 +160,22 @@
 
     </div>
     </div>
-                <div class="form-group">
+    <div class="d-flex">
+                <div class=" mx-3 form-group">
                     <label for="isTaxable">Is Taxable:</label>
                     <label class="switch">
                         <input type="checkbox" id="isTaxable" name="isTaxable" @bind="productFormList.Taxable">
                         <span class="slider round"></span>
                     </label>
                 </div>
-                <div class="form-group">
+                <div class="mx-3 form-group">
                     <label for="productStatus">Product Status:</label>
                     <label class="switch">
                         <input type="checkbox" id="productStatus" name="productStatus" @bind="productFormList.IsActive">
                         <span class="slider round"></span>
                     </label>
                 </div>
-
+                </div>
 
 
     <div class="form-group">
@@ -199,10 +198,12 @@
 
 
 
+    <div class="row">
 
-    <div class="form-actions">
-        <button type="button" class="add-sku-btn" @onclick="ShowSKU">ADD SKU</button>        
-    </div>
+    
+    <div class="form-actions col-7">
+         
+  
     @if(IsShowSku)
     {
         <div class="form-group">
@@ -210,8 +211,11 @@
            <input type="text" @bind=productFormList.SKU />
         </div>
     }
-    <div class="form-actions">
-    <button type="submit" class="save-btn" @onclick="CreateProduct">SAVE</button>
+        </div>
+    <div class="col">
+            <button type="button" class="add-sku-btn" @onclick="ShowSKU">ADD SKU</button>
+            <button type="submit" class="save-btn" @onclick="CreateProduct">SAVE</button>
+    </div>
     </div>
 </div>
 
