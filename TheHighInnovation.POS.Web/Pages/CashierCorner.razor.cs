@@ -1336,6 +1336,7 @@ public partial class CashierCorner()
                 _showCashView = false;
                 _showCardView = false;
                 _showScanView = false;
+                _showSplitView = false;
                 _showCustomerView = true;
                 _showRemarksView = false;
                 _searchCustomer = "";
@@ -1343,6 +1344,7 @@ public partial class CashierCorner()
                 break;
             case 2:
                 _showCashView = true;
+                _showSplitView = false;
                 _showCardView = false;
                 _showScanView = false;
                 _showCustomerView = false;
@@ -1350,6 +1352,7 @@ public partial class CashierCorner()
                 break;
             case 3:
                 _showCashView = false;
+                _showSplitView = false;
                 _showCardView = true;
                 _showScanView = false;
                 _showCustomerView = false;
@@ -1357,6 +1360,7 @@ public partial class CashierCorner()
                 break;
             case 4:
                 _showCashView = false;
+                _showSplitView = false;
                 _showCardView = false;
                 _showScanView = true;
                 _showCustomerView = false;
@@ -1364,6 +1368,7 @@ public partial class CashierCorner()
                 break;
             case 5:
                 _showCashView = false;
+                _showSplitView = false;
                 _showCardView = false;
                 _showScanView = false;
                 _showCustomerView = false;
