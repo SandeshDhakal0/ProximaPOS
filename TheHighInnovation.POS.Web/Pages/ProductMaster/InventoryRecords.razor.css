@@ -19,38 +19,88 @@
     
     background-color: #d9d9d9;
 }
-.tablehead {
-  /*  background-color: var(--tablehead-background);*/
+.inputsrow {
+    width: 98vw;
+    margin-bottom: 1.5vh;
+    margin-top: 1.5vh;
 }
-/*.display {
-    margin-top: 2vh;
-    width:98%;
-}*/
-/*.display thead th,tbody td {
-    padding:15px;
-}*/
+.searchbutotn {
+    border: none;
+    background-color: #ABBFE0;
+    border-radius: 10px;
+    height: 52px;
+    width: 132px;
+    color: black;
+    cursor: pointer;
+    font-size: 22px;
+}
+.vendorname input {
+    padding: 10px;
+    margin-right: 10px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    width: 240px;
+}
+.panvatvendor input {
+    padding: 10px;
+    margin-right: 10px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    width: 240px;
+}
 
-.selectcompany{
-    border:none;
-    background-color:#d9d9d9;
-    height:4vh;
- 
-    border-radius:5px;
-    margin-top:1vh;
+.selectcompany {
+    border: none;
+    background-color: #d9d9d9;
+    height: 4vh;
+    border-radius: 5px;
+    margin-top: 1vh;
 }
 
 /*Modal Ddesign starts from here*/
-.tableabhove{
+/*.tableabhove{
     width:100%;
+}*/
+
+
+.top-row{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+}
+.top-row p{
+    font-size:22px;
+}
+.inputfield {
+    border:none;
+    border-radius:10px;
+    background-color: #ECECEB;
+    width: 150px;
+    height: 40px;
+    margin-left:10px;
+    font-size:16px !important;
+    display:flex;
+    justify-content:start;
+    align-items:center;
+    padding:5px;
+
+}
+span i{
+    font-size:30px;
+    padding:10px;
+}
+.column1, .column2, .column3{
+    display:flex;
+    justify-content:center;
+
 }
 .rightpart {
     float: right;
-    margin-right:-10vw;
-    padding-left:8vw;
+    margin-right: -10vw;
+    padding-left: 8vw;
 }
-.vendorname, .vendorid, .panvatno, .issuedate {
+.vendorname, .vendorid, .panvatno, .issuedate, .panvatvendor {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 400;
     padding-right: 5px;
 }
 /*
@@ -100,17 +150,21 @@
 }*/
 
 #example {
-    margin-top: 5vh;
     width: 100%;
-  /*  height:50vh;
-    max-height: 45vh;*/
-    overflow-y: scroll;
     padding: 10px;
-
 }
-.batchidoptions{
-    height:6.5vh;
-    padding:5px;
+#example, .tbody {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    height: 50vh !important;
+}
+
+.receipt-table {
+    border: 1px solid black;
+}
+.batchidoptions {
+    height: 6.5vh;
+    padding: 5px;
 }
 .inventoryrecords{
     height:7vh;
@@ -123,7 +177,7 @@
     font-size: 36px;
     font-weight: 300;
 }
-.searchbutton {
+/*.searchbutton {
     margin-top: 5vh !important;
     border: none;
     background-color: #ABBFE0 !important;
@@ -133,4 +187,232 @@
     color: black !important;
     cursor: pointer !important;
     cursor: pointer !important;
+}
+*/
+
+
+.AddCatogeryBtn {
+    margin-left: 50%;
+}
+.addbutton {
+    height: 60px;
+    width: 250px;
+    background-color: #ABBFE0;
+    font-size:22px;
+    border:none;
+    border-radius:10px;
+}
+.tablehead{
+    border-bottom:1px solid black;
+}
+
+.displayTable tr th, td {
+    height: 5vh;
+}
+
+.displayTable thead {
+    border-radius: 5px;
+}
+.displayTable thead, .displayTable tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+
+
+
+
+/*Table=============================================================================*/
+
+tbody tr:nth-child(even) {
+    background-color: white !important;
+}
+#exampleS {
+    border: 1px solid #a8a8a8;
+    border-bottom:none;
+}
+
+td {
+    border: 1px;
+    font-weight: 500 !important;
+}
+
+.remarks_td {
+    margin-top: 0;
+}
+
+.remarkstextarea {
+    border: none;
+    border-radius: 5px;
+    background-color:#ECECEB;
+    height: 15vh;
+    width: 100%;
+    resize: none;
+}
+
+.inwords_text_area input {
+    width: 100%;
+    height: 5vh;
+    background-color: #ECECEB;
+    border-radius: 5px;
+
+   border:none!important;
+}
+
+.dueandpaid_amount_table {
+    margin-left: -2.8%;
+}
+
+    .dueandpaid_amount_table input {
+        width: 85%;
+        background-color: #ECECEB;
+     border:none;
+        border-radius: 5px;
+        margin-top: 2%;
+    }
+
+    .dueandpaid_amount_table td {
+        border: none;
+    }
+.bottombilltable {
+    width: 100%;
+}
+
+    .bottombilltable tr, .rounded_off_td, .net_amt_td {
+        border: 1px solid #a8a8a8;
+
+    }
+
+.first_tr {
+    border-top: none !important;
+}
+.rounded_off_td, .net_amt_td {
+    border-top: none !important;
+    border-bottom: none !important;
+    border-right: none !important;
+}
+
+/*.remarks_nested_table .input, .rounded_offtable .input, .net_amt_table .input, .paid_amt_table .input, .gross_amt_table .input {
+
+    background-color: #ECECEB;
+    border:none;
+    border-radius: 5px;
+}*/
+.input {
+    background-color: #ECECEB;
+    height: 30px;
+    width: 180px;
+    border-radius: 5px;
+}
+
+.remarks_nested_table .vat_td {
+    border-bottom: none;
+}
+
+.remarks_nested_table td {
+    border-right: none;
+}
+
+.product_amt_td {
+    border-top: none !important;
+}
+
+.gross_amt_tr {
+    border-bottom: none !important;
+    border-right: none !important;
+}
+
+.gross_amt_label {
+    margin-right: 0.7vw;
+}
+
+.net_amt_label {
+    margin-right: 1.9vw;
+}
+
+.rounded_off_amt_label {
+    margin-right: 1.5vw;
+}
+
+.inwords_colon {
+    padding-right: 14px;
+}
+
+.in_words_label {
+    margin-right: 4.1vw;
+}
+
+label {
+    font-weight: 400 !important;
+}
+
+td {
+    height: 4.8vh;
+    padding-left: 15px;
+}
+
+.due_amt_label {
+    margin-left: -15px;
+    margin-right: 6px;
+}
+
+.quantitytd {
+    text-align: center;
+    padding-left: 2vw !important;
+}
+
+
+.submitbuttondiv {
+    margin-left: 1px;
+}
+
+    .submitbuttondiv input {
+        width: 15%;
+        border-radius: 5px;
+        background-color: #ECECEB;
+        border:none;
+    }
+
+.eyeicon{
+    cursor:pointer;
+}
+/*======================================================================*/
+.display {
+    table-layout: fixed;
+}
+.display tbody {
+    height:10vh;
+    overflow-y:scroll;
+    border-collapse:collapse;
+    table-layout:fixed;
+}
+
+
+
+.tablerowbody td{
+}
+
+/*.bariscode {
+    background-color: #ECECEB;
+    height:20px;
+    width:200px;
+    border-radius:20px;
+    margin:20px;
+}*/
+.bg {
+    height:35px;
+ border-radius:10px;
+    background-color: #ECECEB;
+    padding:5px;
+}
+
+.gross_amt_input {
+    background-color: #ECECEB;
+    height: 30px;
+    width: 180px;
+    border-radius: 5px;
+}
+.inputfield a {
+    color: #0C2144;
 }

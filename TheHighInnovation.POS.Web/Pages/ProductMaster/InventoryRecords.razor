@@ -19,18 +19,42 @@
         <div class="col-6 category-heading">
             <p>Purches Receipt</p>
         </div>
+        <div class="col-6">
+            <div class="col-6  AddCatogeryBtn">
+                <button class="addbutton" >Add Purchase Receipt</button>
+            </div>
+        </div>
 
     </div>
     <div class="row">
-        <div class="col-4 ">
+        <div class="row inputsrow">
+            <div class="col-4 vendorname">
+                <label>Vendor Name:</label>
+                <input  />
+            </div>
+            <div class="col-4 panvatvendor">
+                <lable>Batch ID</lable>
+                <input />
+            </div>
+            <div class="col-4 isavtivevendor">
+                <button class="searchbutotn">
+                    Search
+                </button>
+            </div>
+
+        </div>
+
+
+
+@*         <div class="col-4 ">
             <label class="vendornamelabel">Vendor Name</label>
- 
+        </div>
             <BlazoredTypeahead class="inventoryrecords" placeholder="Vender Name"
                             SearchMethod="FetchVendors"
                            TValue="VendorListShort"                           
                            TItem="VendorListShort"
-                           Value="selectedVendor"
-                           ValueChanged="SaveValue"
+                           Value="selectedVendor" 
+                            ValueChanged="SaveValue"
                            ValueExpression="@(() => selectedVendor)">
                 <SelectedTemplate>@context.CompanyName</SelectedTemplate>
             <ResultTemplate>@context.CompanyName</ResultTemplate>
@@ -38,9 +62,6 @@
                 Vendor Not Found.
             </NotFoundTemplate>
         </BlazoredTypeahead>
-           
-
-        </div>
         <div class="col-4">
             <label class="batcchidlabel">Batch ID</label>
             <select class="batchidoptions">
@@ -53,12 +74,16 @@
         </div>
         <div class="col-4 search-btn">
             <Button Class="btn-primary searchbutton" @onclick="SearchHandle">
-                @* <i class="fa fa-search searchicon" aria-hidden="true"></i> *@
+           
                 Search
 
         </Button>
-        </div>
+        </div> *@
+
     </div>
+
+
+
     <div class="row">
         <div class="col-12">
              @if(inventoryFilter.IsInitialized)
@@ -66,15 +91,16 @@
                 
                 @if (purchaseReceipt.Count > 0)
             {
-                    <table id="example" class="display table table-striped table-hover">
+                <div class="receipt-table">
+                    <table id="example" class="displayTable ">
                     <thead class="tablehead">
                         <tr>
                             <th>VendorName</th>
-                            <th>VendorId</th>
-                            <th>Receipt</th>
-                            <th>IssueDate</th>
                             <th>InvoiceNo</th>
-                            <th>PaymentStatus</th>                            
+                            <th>PurchaseDate</th>
+                            <th>Total Cost</th>
+                            <th>Status</th>
+                            <th>Receipt</th>
                         </tr>
                     </thead>
                     <tbody class="tablebody">
@@ -83,28 +109,29 @@
                         {
                                 @foreach (var item in purchaseReceipt)
                             {
-                                <tr>
+                                <tr> 
                                     <td>@item.VendorName</td>
-                                    <td>@item.VendorId</td>
-                                    <td><i class="fa-solid fa-receipt" @onclick ="() =>OpenReceipt(item.Id)"></i></td>
-                                    <td>@item.IssueDate</td>
                                     <td>@item.InvoiceNo</td>
-                                    <td>@item.PaymentStatus</td>                                    
+                                    <td>@item.IssueDate</td>
+                                    <td>@item.VendorId</td>
+                                    <td>@item.PaymentStatus</td>
+                                    @* <td><i class="fa-solid fa-receipt" @onclick ="() =>OpenReceipt(item.Id)" ></i></td> *@
+                                     <td class="eyeicon"><i class="fa-solid fa-eye-slash" @onclick="() =>OpenReceipt(item.Id)"></i></td>
                                 </tr>                                
                             }
                         }
-
                     </tbody>
                 </table>
+                </div>
 
                     @if (OpenReceiptModel)
                     {
                         @if (vendorwisepeoductbyidMap != null)
                         {
-                            <ModalDialog  Title="Receipt" OnClose="CloseRecepitModel">
+                            <ModalDialog  Title="" OnClose="CloseRecepitModel">
                                 @foreach (var products in vendorwisepeoductbyidMap)
                                 {
-                                    <div class="row tableabhove">
+                                 @*    <div class="row tableabhove">
                                         <div class="col-8 leftpart">
                                             <p><span class="vendorname">Vendor Name:</span>@products.VendorName</p>
                                             <p><span class="vendorid">Vendor ID: 222 </span></p>
@@ -113,89 +140,230 @@
                                             <p><span class="panvatno">PAN/VAT :</span> @products.Pan_VatNo</p>
                                             <p><span class="issuedate">Date :</span>@products.IssueDateAd</p>
                                         </div>
+                                    </div> *@
+                                    <div class="top-row">
+                                        <div class="column1">
+                                            <p>Invoice No </p>
+                                                <p class="inputfield"> Smth012</p>
+                                        </div>
+                                        <div class="column2">
+                                            <p>Vendor Name
+                                            </p>
+                                                <p class="inputfield"> Smth</p>
+                                             
+                                        </div>
+                                        <div class="column3">
+                                            <p>Export
+                                            </p>
+                                         <p class="inputfield">
+                                              <span>
+                                                  <a href="">
+                                              <i class="fa-solid fa-file-excel"></i>
+                                                  </a>
+                                              </span>
+                                              <span>
+                                                  <a href="">
+
+                                              <i class="fa-solid fa-file-pdf"></i>
+                                                  </a>
+                                              </span>
+                                              <span>
+                                                  <a href="">
+
+                                              <i class="fa-solid fa-print"></i>
+                                                  </a>
+                                              </span>
+                                         </p>
+                                         
+                                        </div>
                                     </div>
                                    
                                 }
-                            <table id="example" class="display modaltable">
+                                <table id="exampleS" class="table display modaltable table-hover ">
                                 <thead class="thead">
                                     <tr>
-                                        <th>ProductName</th>
-                                        <th>Item Qty</th>
+                                        <th>S.No.</th>
+                                        <th colspan="2">Product/Barcode</th>
+                                        <th>UoM</th>
+                                        <th>Qty</th>
                                         <th>Unit</th>
                                         <th>Rate</th>
                                         <th>Disc%</th>
-                                        <th colspan="2">DiscAmount</th>
-                                        <th>Total</th>
+                                        <th>Disc Amt</th>
+                                        <th>Amount</th>
                                     </tr>
                                 </thead>
 
-                                <tbody class="tbody">                                    
+                                <tbody class="TableBody">                                    
                                         @foreach (var products in vendorwisepeoductbyidMap )
                                         {
                                            
                                           @foreach(var item in products.ProductDetails)
                                             {
                                                 <tr class="tablerowbody">
-                                                    <td>@item.ProductName</td>
-                                                    <td>@item.Qty</td>
-                                                    <td>@item.Unit</td>
-                                                    <td>@item.Rate</td>
-                                                    <td>@item.DiscPercent</td>
-                                                    <td colspan="2">@item.Disc</td>
-                                                    <td>@(Convert.ToDecimal(item.Rate) + Convert.ToDecimal(item.Rate))</td>
+                                                    <td>1</td>
+                                                    <td colspan="2" class="bariscode"> <div class="bg"> @item.ProductName</div> </td>
+                                                    <td><div class="bg">UoM</div> </td>
+                                                    <td> <div class="bg">@item.Qty</div></td>
+                                                    <td> <div class="bg">@item.Unit</div> </td>
+                                                    <td> <div class="bg">@item.Rate</div> </td>
+                                                    <td> <div class="bg">@item.DiscPercent</div></td>
+                                                    <td> <div class="bg">@item.Disc</div></td>
+                                                    <td> <div class="bg">@(Convert.ToDecimal(item.Rate) + Convert.ToDecimal(item.Rate)) </div></td>
                                                 </tr>
+                                                <tr class="tablerowbody">
+                                                    <td>2</td>
+                                                    <td colspan="2" class="bariscode"> <div class="bg"> @item.ProductName</div> </td>
+                                                    <td><div class="bg">UoM</div> </td>
+                                                    <td> <div class="bg">@item.Qty</div></td>
+                                                    <td> <div class="bg">@item.Unit</div> </td>
+                                                    <td> <div class="bg">@item.Rate</div> </td>
+                                                    <td> <div class="bg">@item.DiscPercent</div></td>
+                                                    <td> <div class="bg">@item.Disc</div></td>
+                                                    <td> <div class="bg">@(Convert.ToDecimal(item.Rate) + Convert.ToDecimal(item.Rate)) </div></td>
+                                                </tr>
+
+                                                <tr class="tablerowbody">
+                                                    <td>3</td>
+                                                    <td colspan="2" class="bariscode"> <div class="bg"> @item.ProductName</div> </td>
+                                                    <td><div class="bg">UoM</div> </td>
+                                                    <td> <div class="bg">@item.Qty</div></td>
+                                                    <td> <div class="bg">@item.Unit</div> </td>
+                                                    <td> <div class="bg">@item.Rate</div> </td>
+                                                    <td> <div class="bg">@item.DiscPercent</div></td>
+                                                    <td> <div class="bg">@item.Disc</div></td>
+                                                    <td> <div class="bg">@(Convert.ToDecimal(item.Rate) + Convert.ToDecimal(item.Rate)) </div></td>
+                                                </tr>
+                                                <tr class="tablerowbody">
+                                                    <td>4</td>
+                                                    <td colspan="2" class="bariscode"> <div class="bg"> @item.ProductName</div> </td>
+                                                    <td><div class="bg">UoM</div> </td>
+                                                    <td> <div class="bg">@item.Qty</div></td>
+                                                    <td> <div class="bg">@item.Unit</div> </td>
+                                                    <td> <div class="bg">@item.Rate</div> </td>
+                                                    <td> <div class="bg">@item.DiscPercent</div></td>
+                                                    <td> <div class="bg">@item.Disc</div></td>
+                                                    <td> <div class="bg">@(Convert.ToDecimal(item.Rate) + Convert.ToDecimal(item.Rate)) </div></td>
+                                                </tr>
+
                                                 totalCostSalesSum += Convert.ToDecimal(item.Rate) + Convert.ToDecimal(item.Rate);
                                                 taxAmount = totalCostSalesSum * taxRate;
                                                 netamount = totalCostSalesSum + taxAmount + taxAmount  ;                                                
                                             }
-                                            <tr class="grossamountrow">
-                                                <td colspan="5"></td>
-                                                <td class="grossamountxt">Gross Amount</td>
-                                                <td class="mid">:</td>
-                                                <td class="grossamountsum">@totalCostSalesSum</td>
-                                            </tr>
-                                            <tr class="remarksrow">
-                                                <td colspan="5"class="remarkscard txt">Remarks</td>
-                                                <td class="productdistxt">Product Discount</td>
-                                                <td class="mid">:</td>
-                                                <td class="productdisnum">0</td>
-                                            </tr>
-                                            <tr class="discountrow">
-                                                <td colspan="5"></td>
-                                                <td class="discounttxt">Discount</td>
-                                                <td class="mid">:</td>
-                                                <td class="discountnum">0</td>
-                                            </tr>
-                                             <tr class="taxableamtrow">
-                                                <td colspan="5"></td>
-                                                <td class="taxabletxt">Taxable Amount</td>
-                                                <td class="mid">:</td>
-                                                <td class="taxablenum">@taxAmount </td>
-                                            </tr>
-                                            <tr class="vatrow">
-                                                <td colspan="5"></td>
-                                                <td class="vattxt">Vat 13%</td>
-                                               <td class="mid">:</td>
-                                                <td class="taxamt">@taxAmount</td>
-                                            </tr>
-                                            <tr class="billpreprow">
-                                                <td class="billpreptxtlg" colspan="5">Bill Prepared By: Sandesh Dhakal</td>
-                                                <td class="billpreptxtsm">rounded off</td>
-                                                <td class="mid">:</td>
-                                                <td class="billprepnum">0</td>
-                                            </tr>
-                                            <tr class="netamtrow">
-                                                <td class="netamttxtlg" colspan="5">In Words: number thousand number hundred</td>
-                                                <td class="netamttxtsm">Net Amount</td>
-                                                <td class="mid">:</td>
-                                                <td class="netamtnum">@netamount</td>
-                                            </tr>
+                                            }
+                                         </tbody>
+                                </table>
+                             
+                                    
 
-                                                                                                                           
-                                        }  
+                                <table class=" bottombilltable">
+                                    <tr class="first_tr">
+                                        <td></td>
+                                        <td>
+                                            <table style="width:100%;" class="gross_amt_table">
+                                                <tr class="gross_amt_tr">
+                                                    <td><label class="gross_amt_label">Gross Amount</label></td>
+                                                    <td>:</td>
+                                                    <td class="gross_amt_amt_td">
+                                                        @* <input class="gross_amt_input" /> *@
+                                                        <div class="gross_amt_input"></div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="remarks_td">
+                                            <label class="remarks_label">Remarks</label><br>
+                                           @*  <textarea id="remarks" class="remarkstextarea" ></textarea> *@
+                                           <div class="remarkstextarea" id="remarks"></div>
+                                        </td>
+                                        <td>
+                                            <table class="remarks_nested_table" style="width:100%;">
+                                                <tr>
+                                                    <td class="product_amt_td"><label>Product Disc</label> </td>
+                                                    <td>:</td>
+                                                 
+                                                    <td><div class="input"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <label>Discount</label></td>
+                                                    <td>:</td>
+                                               
+                                                    <td><div class="input"></div></td>
+                                                </tr>
+                                                <tr>
+                                                    <td> <label>Taxable Amount</label></td>
+                                                    <td>:</td>
+                                                   
+                                                    <td><div class="input"></div></td>
+                                                </tr>
+                                                <tr class="vat_td">
+                                                    <td> <label>VAT 13%</label></td>
+                                                    <td>:</td>
+                                                    
+                                                    <td><div class="input"></div></td>
+
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td rowspan="2" class="inwords_text_area">
+                                            <label class="in_words_label">In Words  </label>
+
+                                            <input id="in-words" class="full-width" />
+                                        </td>
+
+                                        <td>
+                                            <table style="width:100%;" class="rounded_offtable">
+                                                <td class="rounded_off_td"><label class="rounded_off_amt_label">Rounded Off</label></td>
+                                                <td>:</td>
+                                              
+                                                <td><div class="input"></div></td>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+
+                                        <td>
+                                            <table class="net_amt_table" style="width:100%;">
+                                                <td class="net_amt_td"><label class="net_amt_label">Net Amount</label></td>
+                                                <td>:</td>
                                         
-                                </tbody>
-                            </table>
+                                                <td><div class="input"></div></td>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+
+                                </table>
+                                <table>
+                                    <td>
+                                        <table class="dueandpaid_amount_table" style="width:100%;">
+                                            <td class="parid_amt_td"><label class="paid_amt_label">Paid Amount :</label></td>
+
+                                            <td><input type="text" /></td>
+                                            <td><label class="due_amt_label">Due Amount :</label></td>
+
+                                            <td><input type="text" id="paid-amount-confirm" ></td>
+
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table style="width:100%;" class="paid_amt_table">
+                                        </table>
+                                    </td>
+                                </table>
+                                <div class="submitbuttondiv row">
+                                    <div class="col-10">
+                                        <div> Bill Prepared by: <input id="prepared-by" /></div>
+                                    </div>
+
+                                </div>
                         </ModalDialog>
                         }                       
                     }

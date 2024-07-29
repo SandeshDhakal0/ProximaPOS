@@ -1,28 +1,13 @@
 ﻿.productspage {
-    margin-top: 3%;
-/*    background-color: #ECECEB;*/
+    margin-top: 4%;
 }
-/*.product-top{
-    padding:10px 0;
-}*/
-.container {
+
+/*.container {
     width: 80%;
     margin: 0 auto;
     padding: 20px;
-}
+}*/
 
-
-/*header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-    header h1 {
-        margin: 0;
-    }
-*/
 .actions .btn {
     background-color: #007bff;
     border: none;
@@ -100,13 +85,7 @@ table tbody tr {
     width: 100%;
 }
 
-/*tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
 
-tbody tr:hover {
-    background-color: #ddd;
-}*/
 
 /* Ensure each cell in the table head has the same width as its corresponding cell in the table body */
 thead th,
@@ -206,57 +185,81 @@ th[colspan="2"] {
     font-size: 36px;
     font-weight: 300;
 }
+.category-heading p{
+    margin-bottom:1rem;
+}
 
 .AddCatogeryBtn {
-    padding-top: 2vh;
-    padding-left:10vw;
-/*    margin-left:13.5vw;*/
-    display:flex;
-    gap:8px;
-
-
+    gap: 10px;
+    padding-top:2vh;
+    margin-left:24vh;
 }
 
 .addbutton {
-    border: none;
- /*   background-color: var(--our--commonblue-color);*/
- background-color:#ABBFE0;
+        border: none;
+    height:60px;
+    width:187px;
+    font-size: 22px;
     color: black;
-    height: 8vh;
-    width: 10vw;
+    background-color: #ABBFE0;
     border-radius: 10px;
-/*    margin-left: 40%;*/
-    /*margin-right:1%;*/
 }
+
 
 .search-panel {
     justify-content: space-between;
     margin-bottom: 20px;
 }
+
     .search-panel input[type="text"], .search-panel select {
         padding: 10px;
         margin-right: 10px;
         border: 2px solid #ddd;
-        border-radius: 4px;
-        width: 50%;
+        border-radius: 10px;
+        width: 500px;
     }
-
 
 
     .search-panel button:hover {
         background-color: #0056b3;
     }
-
 .searchbutton {
-    /*background-color: var(--our--commonblue-color);*/
+    border: none;
     background-color: #ABBFE0;
     border-radius: 10px;
-    width: 15vh;
-    height: 8vh;
+    height: 52px;
+    width: 132px;
     color: black;
     cursor: pointer;
-    border:none;
+    font-size: 22px;
 }
+
+    .table-container{
+    border: 1px solid #0C2144;
+}
+
+    .product-table thead{
+        border-bottom:1px solid black;
+    }
+
+.product-table tbody {
+    display: block;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    height: 50vh !important;
+}
+
+.paginationpart {
+    margin-top: 4vh;
+}
+
+    .paginationpart select {
+        border: none;
+        background-color: #d9d9d9;
+        border-radius: 5px;
+        height: 29px;
+        width: 57px;
+    }
 
 @media screen and (max-width: 1194px) {
     .AddCatogeryBtn{

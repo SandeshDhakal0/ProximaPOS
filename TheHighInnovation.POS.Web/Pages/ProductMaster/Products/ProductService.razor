@@ -14,29 +14,19 @@
 @if (productFilter.IsInitialized)
     {
  <div class="productspage">
-        @*    <header>
-        <h1>Product</h1>
-        <div class="actions">
-            <button class="btn">Import Product</button>
-            <button class="btn" @onclick="OpenAddProduct">Add Product</button>
-        </div>
-    </header>
-
-    <div class="filters"> *@
-      @*   <button class="filter-btn">Filter</button>
+   @*  <div class="filters">
+        <button class="filter-btn">Filter</button>
         <input type="date" id="from-date" name="from-date" value="2024-03-01">
-        <input type="date" id="to-date" name="to-date" value="2024-03-31"> *@
-  @*       <input type="text" id="search" placeholder="Search..." @bind="productname">
-        <button class="btn btn-primary" @onclick="HandleSearch">Search</button>
-    </div> *@
+        <input type="date" id="to-date" name="to-date" value="2024-03-31">
+        </div> *@
         <div class="row product-top">
 
             <div class="col-6 category-heading">
                 <p>Product</p>
             </div>
-            <div class="offset-lg-1 offset-md-2 offset-sm-1  offset-o col-4 AddCatogeryBtn">
+            <div class="@* offset-lg-1 offset-md-2 offset-sm-1  offset-o col-4 *@ d-flex AddCatogeryBtn">
                 <button class="addbutton">Import Product</button>
-                <button class="addbutton justify-content-end" @onclick="OpenAddProduct">Add Product</button>
+                <button class="addbutton " @onclick="OpenAddProduct">Add Product</button>
             </div>
         </div>
 
@@ -44,12 +34,12 @@
         <div class="row row search-panel">
             <div class="col-12">
 
-                <input type="text" placeholder="Search" id="search" @bind="productname"class="categorycodeinput">
+                <input type="text" placeholder= "Search" id="search" @bind="productname"class="categorycodeinput">
                 <button class="searchbutton" @onclick="HandleSearch"> @* <i class="fa fa-search"></i> *@ Search  </button>
             </div>
 
         </div>
-    
+        <div class="table-container">
         <table class="product-table table table-striped table-hover">
         <thead>
             <tr>
@@ -108,6 +98,7 @@
             
         </tbody>
     </table>
+    </div>
 </div>
 
     @if (_pagerDto.TotalPages > 0)
