@@ -47,12 +47,12 @@
     font-size:22px;
 }
 
-.containerbindcards {
-    height: 90vh;
-    height: 66vh;
-    overflow-y: scroll;
+/*.containerbindcards {*/
+ /*   height: 90vh;
+    height: 66vh;*/
+    /*overflow-y: scroll;
     overflow-x: hidden;
-}
+}*/
 
 ::-webkit-scrollbar {
     width: 15px;
@@ -66,15 +66,15 @@
 
 .vendorcard {
     padding: 10px;
-    width: 30%;
-    height: 38vh;
+    width: 28%;
+  
     background-color: var(--vendor--cardcolor);
-    background-color: #ECECEB;
+    height:35vh !important;
     border: none;
-    margin: 2.5vh;
-    margin-top: 1.5vh;
+
+  margin:2%;
     border-radius: 10px;
-    margin:2vh;
+   
 }
 
 .paginationpart {
@@ -202,7 +202,7 @@ input[type="checkbox"] {
 
 .nameandcashier {
     text-align: center;
-    margin-bottom: 2vh;
+  
 }
 
 .name {
@@ -257,7 +257,7 @@ input[type="checkbox"] {
    
 }
 .cardsrow{
-    height:65vh;
+    height:60vh;
     overflow-y:scroll;
     scroll-behavior:smooth;
 }
@@ -290,7 +290,7 @@ input[type="checkbox"] {
         .vendordropdown {
             height: 5vh;
             margin-left: 2vh;
-            /*margin-top: 4vh;*/
+            margin-top: 4vh;
             text-align: center;
         }
     }
@@ -346,7 +346,7 @@ input[type="checkbox"] {
         }
     }
 
-/*    @media screen and (min-width: 1201px) {
+    @media screen and (min-width: 1201px) {
         .vendorcard {
             height: 45vh;
         }
@@ -366,17 +366,11 @@ input[type="checkbox"] {
             height: 5vh;
             margin-top: 3vh;
         }
-    }*/
+    }
 
 
 
-    /*@media screen and (max-width: 1400px) {
-        .vendorcard {*/
-   /*         height: 55vh;*/
-   /*height:48vh;
-        }
-    
-    }*/
+   
     @media screen and (min-width: 1401px){
         .vendorcard {
             height: 50vh;
@@ -389,9 +383,9 @@ input[type="checkbox"] {
     }
 }
 
-    /*@media screen and (max-width: 995px) {
+    @media screen and (max-width: 995px) {
     .card-body{
    
 
     }
-}*/
+}
