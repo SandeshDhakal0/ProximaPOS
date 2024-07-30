@@ -1,10 +1,12 @@
 .Vendorpage {
     margin-top: 4%;
     height: 92vh;
-    margin-bottom:-2vh;
 
 }
 
+/*.vendorcard{
+    height:42vh !important;
+}*/
 
 
 .vendordropdown {
@@ -41,18 +43,12 @@
     border: none;
     background-color: #ABBFE0;
     color: black;
-    height:60px;
-    width:187px;
+    height:50px;
+    width:150px;
     border-radius: 10px;
-    font-size:22px;
+    font-size:20px;
 }
 
-/*.containerbindcards {*/
- /*   height: 90vh;
-    height: 66vh;*/
-    /*overflow-y: scroll;
-    overflow-x: hidden;
-}*/
 
 ::-webkit-scrollbar {
     width: 15px;
@@ -67,12 +63,10 @@
 .vendorcard {
     padding: 10px;
     width: 28%;
-  
     background-color: var(--vendor--cardcolor);
-    height:35vh !important;
+    height:35vh;
     border: none;
-
-  margin:2%;
+    margin:2%;
     border-radius: 10px;
    
 }
@@ -103,31 +97,34 @@ padding-bottom:20px;
     margin-top: 4vh;
 }
 .inputsrow {
-    width: 98vw;
-    margin-bottom: 1.5vh;
-    margin-top: 1.5vh;
+    margin-left:5px;
+    margin-bottom: 2vh;
+    margin-top: 1vh;
+display:flex;
+gap:30px;
+}
+.threedots i{
+    color: #0C2144;
 }
 
 .isavtivevendor {
-    margin-top: -0.8vh;
 }
 
 .selecttext {
     margin-left: -4vw;
 }
 
+.card-body{
+    padding:5px !important;
+}
 .vendorname input, .panvatvendor input {
     background-color: #d9d9d9;
     border: none;
     border-radius: 5px;
-    height: 4vh;
-    width: 20vw;
+    height: 5vh;
+    width: 10vw;
 }
 
-.panvatvendor {
-    margin-left: 1.5vw;
-    margin-right: -1.5vw;
-}
 
 input[type="checkbox"] {
     margin: 1vh;
@@ -139,55 +136,50 @@ input[type="checkbox"] {
 
 .searchbutotn {
     background-color: var(--our--commonblue-color);
+    color: #ffffff;
+    width: 5vw;
+    height: 6vh;
     margin-left: 2vw;
-    width: 4vw;
-    color: #fff;
     border: none;
     border-radius: 5px;
-    height: 4.5vh;
     font-size: 18px;
 }
 .activepart:hover {
     background-color: #14AD5A;
 }
+
+.actionpart{
+    display:flex;
+    gap:9vw;
+    padding:0 5px;
+
+}
+.buttonpart{
+    display:flex;
+    gap:15px;
+}
 .activepart {
-    color:#fff;
+    color: #fff;
     background-color: #14AD5A;
-    margin-left: 10vw;
-    margin-right: 3vh;
     cursor: pointer;
-    width: 90%;
-    margin-top: 1vh;
     border-radius: 10px;
     font-weight: 500;
     font-size: 12px;
 
+    height:35px;
+    width:75px;
 }
-.inactivepart {
-    margin-left: 10vw;
-    margin-right: 5px;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 1vh;
-    border-radius: 10px;
-    font-weight: 500;
-    font-size: 12px;
-}
+
 
 .notactivepart {
-    margin-left: 11.5vw;
-    height: 3.5vh;
+    color: #fff;
+    background-color: #E72929;
     cursor: pointer;
-    width: 100%;
-    padding: 3px 0px 0 18px;
-    margin-right: 1vh;
-    margin-top: 1vh;
-    border: #808080;
     border-radius: 10px;
-    background-color: rgb(7, 226, 144,25%);
-    color: #36454F;
     font-weight: 500;
     font-size: 12px;
+    height: 35px;
+    width: 75px;
 }
 
 
@@ -218,6 +210,7 @@ input[type="checkbox"] {
 }
 
 .nesteddiv {
+    /*height:150px;*/
     font-size: 12px;
     font-weight: 600;
     background-color: #ffffff;
@@ -264,41 +257,128 @@ input[type="checkbox"] {
 .top-container{
     margin-bottom:1vh;
 }
-
+#myCheckbox label {
+    background-color: #0C2144;
+}
 /*media quary=====================================================================================================*/
-@media screen and (max-width: 1200px) {
-    .addvendorbutton {
-            margin-left: 3vw;
-            height: 8vh;
-            width: 10vw;
+@media screen and (max-width: 1632px) {
+    .vendorcard{
+        height:37vh;
+    }
+    .actionpart{
+        gap:50%;
+    }
+    .buttonpart{
+        gap:25%;
+    }
+    .nameandcashier{
+        padding:10px 0 15px 0;
+    }
+}
+    @media screen and (max-width: 1451px) {
+        .vendorcard{
+            height:45vh;
+        }
+        .actionpart{
+            gap:45%;
+        }
+        .buttonpart{
+            gap:20%;
         }
 
-        .nameandcashier {
-            margin-bottom: 3vh;
+    }
+    @media screen and (max-width: 1254px){
+        .vendorcard{
+            height:49vh;
         }
-
-        .vendorcard {
-            height: 50vh;
+        .actionpart{
+            gap:40%;
         }
-
-        .nesteddiv {
-            height: 25vh;
-            font-size: 10px;
-            margin-bottom: 3vh;
+        .buttonpart{
+            gap:15px;
         }
-
-        .vendordropdown {
-            height: 5vh;
-            margin-left: 2vh;
-            margin-top: 4vh;
-            text-align: center;
+        .addvendorbutton{
+            margin-left:30%;
         }
     }
+@media screen and (max-width: 1254px){
+
+}
+   @media screen and (max-width: 1200px) {
+    .actionpart {
+        gap: 35%;
+    }
+
+    .buttonpart {
+        gap: 15px;
+    }
+    .addvendorbutton {
+        margin-left: 20%;
+    }
+
+    }
+
+
+@media screen and (max-width: 1080px) {
+  
+    .vendorcard{
+        height:44vh;
+    }
+    .iconpart i{
+        font-size:24px;
+        }
+    .threedots i{
+        font-size:24px;
+    }
+    .activepart{
+        height:25px;
+        width:65px;
+        font-size:10px;
+        margin-top:5px;
+        display:flex;
+        text-align:center;
+        align-items:center;
+    }
+    .notactivepart {
+        height: 25px;
+        width: 65px;
+        font-size: 10px;
+        margin-top: 5px;
+        display: flex;
+        text-align: center;
+        align-items: center;
+    }
+    .actionpart{
+        gap:35%;
+    }
+    .nameandcashier{
+        padding:5px 0 10px 0;
+    
+    }
+    .name{
+        font-size:14px;
+    }
+    .nesteddiv{
+        font-size:10px;
+    }
+
+    @media screen and (max-width: 974px){
+        .addvendorbutton{
+            font-size:16px;
+            height:45px;
+
+            width:130px;
+        }
+        .nesteddiv{
+            font-size:10px;
+        }
+    }
+    /*
 
     @media screen and (max-width: 1175px) {
         .threedots {
             margin-right: 3vw;
-        }
+        
 
         .activepart {
             margin-left: 9vw;
@@ -313,24 +393,7 @@ input[type="checkbox"] {
         }
     }
 
-    @media screen and (max-width: 1080px) {
-        .activepart {
-            margin-left: 7vw;
-        }
-
-        .inactivepart {
-            margin-left: 7vw;
-        }
-
-        .name {
-            font-size: 12px;
-        }
-
-        .nesteddiv {
-            font-size: 10px;
-        }
-    }
-
+ 
     @media screen and (max-width: 963px) {
         .addvendorbutton {
             font-size: 14px;
@@ -344,9 +407,8 @@ input[type="checkbox"] {
             margin-left: 4vw;
             margin-right: 2vw;
         }
-    }
-
-    @media screen and (min-width: 1201px) {
+    }*/
+    /*    @media screen and (min-width: 1201px) {
         .vendorcard {
             height: 45vh;
         }
@@ -354,9 +416,11 @@ input[type="checkbox"] {
         .nesteddiv {
             font-size: 12px;
         }
-        .nameandcashier{
-            margin-bottom:20px;
+
+        .nameandcashier {
+            margin-bottom: 20px;
         }
+
         .addvendorbutton {
             margin-left: 3vw;
             height: 8vh;
@@ -370,22 +434,32 @@ input[type="checkbox"] {
 
 
 
-   
-    @media screen and (min-width: 1401px){
+*/
+    /*    @media screen and (min-width: 1401px) {
+        .vendorcard {
+            height: 40vh;
+        }
+
+        .inputsrow {
+            width: 88vw;
+            padding-left: 10px;
+        }
+
+        .cardsrow {
+            height: 60vh;
+        }
+
+        .card-body {
+            padding: 5px !important;
+        }
+    }*/
+    /*
+    @media screen and (min-width: 1486px) {
         .vendorcard {
             height: 50vh;
         }
-    
-    }
-@media screen and (min-width: 1486px) {
-    .vendorcard {
-        height: 50vh;
-    }
-}
-
+    }*/
     @media screen and (max-width: 995px) {
-    .card-body{
-   
-
+        .card-body {
+        }
     }
-}
