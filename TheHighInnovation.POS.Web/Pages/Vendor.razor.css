@@ -100,8 +100,9 @@ padding-bottom:20px;
     margin-left:5px;
     margin-bottom: 2vh;
     margin-top: 1vh;
-display:flex;
-gap:30px;
+    display:flex;
+    gap:30px;
+    align-items:center;
 }
 .threedots i{
     color: #0C2144;
@@ -216,6 +217,11 @@ input[type="checkbox"] {
     background-color: #ffffff;
     padding: 10px;
     border-radius: 10px;
+    overflow:hidden;
+    
+}
+.itsawrap {
+    overflow-wrap: break-word;
 }
 
 .labeltexts {
@@ -263,7 +269,7 @@ input[type="checkbox"] {
 /*media quary=====================================================================================================*/
 @media screen and (max-width: 1632px) {
     .vendorcard{
-        height:37vh;
+        height:40vh;
     }
     .actionpart{
         gap:50%;
@@ -275,8 +281,13 @@ input[type="checkbox"] {
         padding:10px 0 15px 0;
     }
 }
-    @media screen and (max-width: 1451px) {
-        .vendorcard{
+ @media screen and (max-width: 1504px){
+     .vendorcard{
+         height:44vh;
+     }
+}
+@media screen and (max-width: 1451px) {
+    .vendorcard{
             height:45vh;
         }
         .actionpart{
@@ -287,6 +298,17 @@ input[type="checkbox"] {
         }
 
     }
+    @media screen and (max-width: 1389px){
+        .vendorcard{
+            height:47vh;
+        }
+    }
+
+        @media screen and (max-width: 1327px){
+            .vendorcard{
+                height:49vh;
+            }
+        }
     @media screen and (max-width: 1254px){
         .vendorcard{
             height:49vh;
@@ -320,25 +342,29 @@ input[type="checkbox"] {
 
 
 @media screen and (max-width: 1080px) {
-  
-    .vendorcard{
-        height:44vh;
+
+    .vendorcard {
+        height: 44vh;
     }
-    .iconpart i{
-        font-size:24px;
-        }
-    .threedots i{
-        font-size:24px;
+
+    .iconpart i {
+        font-size: 24px;
     }
-    .activepart{
-        height:25px;
-        width:65px;
-        font-size:10px;
-        margin-top:5px;
-        display:flex;
-        text-align:center;
-        align-items:center;
+
+    .threedots i {
+        font-size: 24px;
     }
+
+    .activepart {
+        height: 25px;
+        width: 65px;
+        font-size: 10px;
+        margin-top: 5px;
+        display: flex;
+        text-align: center;
+        align-items: center;
+    }
+
     .notactivepart {
         height: 25px;
         width: 65px;
@@ -348,118 +374,146 @@ input[type="checkbox"] {
         text-align: center;
         align-items: center;
     }
-    .actionpart{
-        gap:35%;
-    }
-    .nameandcashier{
-        padding:5px 0 10px 0;
-    
-    }
-    .name{
-        font-size:14px;
-    }
-    .nesteddiv{
-        font-size:10px;
+
+    .actionpart {
+        gap: 35%;
     }
 
-    @media screen and (max-width: 974px){
+    .nameandcashier {
+        padding: 5px 0 10px 0;
+    }
+
+    .name {
+        font-size: 14px;
+    }
+
+    .nesteddiv {
+        font-size: 10px;
+    }
+
+    @media screen and (max-width: 974px) {
+        .actionpart {
+            gap: 30%;
+        }
+
+        .addvendorbutton {
+            font-size: 16px;
+            height: 45px;
+            width: 130px;
+        }
+
+        .nesteddiv {
+            font-size: 10px;
+        }
+
+        .vendorname input, .panvatvendor input {
+            height: 5vh;
+            width: 14.5vw;
+        }
+
+        .addvendorbutton {
+            margin-left: 35%;
+        }
+    }
+
+
+    @media screen and (max-width: 930px) {
+        .vendorname input, .panvatvendor input {
+            width: 14vw;
+        }
+    }
+
+    @media screen and (max-width: 930px) {
+        .vendorname input, .panvatvendor input {
+            width: 13vw;
+        }
+
+        .actionpart {
+            gap: 25%;
+        }
+
+        .vendorcard {
+            padding: 5px;
+            height: 42vh;
+        }
+
+        .addvendorbutton {
+            margin-left: 20%;
+        }
+    }
+
+    @media screen and (max-width: 798px) {
+        .vendorcard {
+            height: 39vh;
+        }
+
+        .addvendorbutton {
+            margin-left: 5%;
+        }
+
+        .nameandcashier {
+            padding: 0 0 5px 0;
+        }
+
+        .inputsrow {
+            font-size: 14px;
+        }
+
+        .vendorname input, .panvatvendor input {
+            height: 5vh;
+            width: 12vw;
+        }
+
+        .actionpart {
+            gap: 15%;
+        }
+
+        .nesteddiv {
+            padding: 5px;
+        }
+    }
+
+    @media screen and (max-width: 768px){
+        .vendorcard{
+            height:38vh;
+        }
+        .vendorname input, .panvatvendor input {
+            height: 4vh;
+            width: 12vw;
+        }
+        .inputsrow{
+            font-size:12px;
+        }
+        input[type="checkbox"] {
+            transform: scale(2);
+            margin:5px;        
+            padding:10px;
+            
+        }
+        .vendorname input, .panvatvendor input {
+
+            width: 13vw;
+        }
+        .searchbutotn {
+        width:5vw;
+        height:6vh;
+        }
         .addvendorbutton{
+            margin-left:0;
+            height:40px;
+            width:100px;
             font-size:16px;
-            height:45px;
-
-            width:130px;
+        }
+        .activepart{
+            height:20px;
+            width:55px;
+            font-weight:300;
+            border-radius:5px;
         }
         .nesteddiv{
             font-size:10px;
         }
-    }
-    /*
-
-    @media screen and (max-width: 1175px) {
-        .threedots {
-            margin-right: 3vw;
-        
-
-        .activepart {
-            margin-left: 9vw;
-        }
-
-        .inactivepart {
-            margin-left: 9vw;
-        }
-
-        .nesteddiv {
-            padding-bottom: 20px;
-        }
-    }
-
- 
-    @media screen and (max-width: 963px) {
-        .addvendorbutton {
-            font-size: 14px;
-        }
-
-        .vendordropdown {
-            font-size: 14px;
-        }
-
-        .activepart, .inactivepart {
-            margin-left: 4vw;
-            margin-right: 2vw;
-        }
-    }*/
-    /*    @media screen and (min-width: 1201px) {
-        .vendorcard {
-            height: 45vh;
-        }
-
-        .nesteddiv {
-            font-size: 12px;
-        }
-
-        .nameandcashier {
-            margin-bottom: 20px;
-        }
-
-        .addvendorbutton {
-            margin-left: 3vw;
-            height: 8vh;
-        }
-
-        .vendordropdown {
-            height: 5vh;
-            margin-top: 3vh;
-        }
-    }
-
-
-
-*/
-    /*    @media screen and (min-width: 1401px) {
-        .vendorcard {
-            height: 40vh;
-        }
-
-        .inputsrow {
-            width: 88vw;
-            padding-left: 10px;
-        }
-
-        .cardsrow {
-            height: 60vh;
-        }
-
-        .card-body {
-            padding: 5px !important;
-        }
-    }*/
-    /*
-    @media screen and (min-width: 1486px) {
-        .vendorcard {
-            height: 50vh;
-        }
-    }*/
-    @media screen and (max-width: 995px) {
-        .card-body {
+        .noofvendor{
+            font-size:30px;
         }
     }
