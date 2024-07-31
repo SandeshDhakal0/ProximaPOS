@@ -273,7 +273,7 @@
         {
             { "productid", productid.ToString() },
         };
-        var productListUpdate = await BaseService.GetAsync<Model.Response.Base.Derived<ProductListUpdate>>("productmanagement/get-product-by-id", parameters);
+        var productListUpdate = await BaseService.GetAsync<Derived<ProductListUpdate>>("productmanagement/get-product-by-id", parameters);
         _productListUpdate = productListUpdate.Result;
         var unitsString = _productListUpdate.Unit;
 
@@ -332,7 +332,7 @@
             var jsonRequest = JsonSerializer.Serialize(updateProduct);
             var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
             var apiEndpoint = "productmanagement/update-product";
-            var result = await BaseService.PostAsync<Model.Response.Base.Derived<object>>(apiEndpoint, content);
+            var result = await BaseService.PostAsync<Derived<object>>(apiEndpoint, content);
         }
         catch(Exception ex)
         {      
@@ -366,7 +366,7 @@
             {"pageno" , pageNumber.ToString() },
             { "pagesize",productFilter.PageSize.ToString()},
         };
-            var productList = await BaseService.GetAsync<Model.Response.Base.Derived<List<ProductListMain>>>("productmanagement/get-product-list", parameters);
+            var productList = await BaseService.GetAsync<Derived<List<ProductListMain>>>("productmanagement/get-product-list", parameters);
             if (productList != null)
             {
                 _productList = productList.Result;
@@ -390,7 +390,7 @@
     {
         try
         {
-            var category = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryDropDownList>>>("VendorManagement/get-category-list");
+            var category = await BaseService.GetAsync<Derived<List<CategoryDropDownList>>>("VendorManagement/get-category-list");
 
             if (category != null)
             {
@@ -408,7 +408,7 @@
 
         try
         {
-            var unit = await BaseService.GetAsync<Model.Response.Base.Derived<IEnumerable<UnitDTO>>>("VendorManagement/get-unit");
+            var unit = await BaseService.GetAsync<Derived<IEnumerable<UnitDTO>>>("VendorManagement/get-unit");
             return unit?.Result ?? Enumerable.Empty<UnitDTO>();
         }
         catch (Exception ex)

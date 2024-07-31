@@ -58,7 +58,7 @@ public partial class Category
                 { "pageSize", Filter.PageSize.ToString() },
             };
 
-            var categories = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryResponseDto>>>("category", parameters);
+            var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parameters);
 
             _pagerDto = new PagerDto(categories.TotalCount ?? 1, 1, 10);
 
@@ -91,7 +91,7 @@ public partial class Category
             { "pageSize", "1000" },
         };
 
-        var companies = await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
+        var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
             
         _companies = companies?.Result ?? [];
     }
@@ -139,7 +139,7 @@ public partial class Category
                 { "pageSize", Filter.PageSize.ToString() },
                 };
 
-                    var categories = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryResponseDto>>>("category", parametersCat);
+                    var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parametersCat);
 
                     _pagerDto = new PagerDto(categories.TotalCount ?? 1, 1, 10);
 
@@ -173,7 +173,7 @@ public partial class Category
                     { "categoryId", categoryId.Value.ToString() },
                 };
 
-                var result = (await BaseService.GetAsync<Model.Response.Base.Derived<CategoryResponseDto>>("category", parameters))?.Result;
+                var result = (await BaseService.GetAsync<Derived<CategoryResponseDto>>("category", parameters))?.Result;
 
                 _categoryModel = new CategoryRequestDto()
                 {
@@ -190,7 +190,7 @@ public partial class Category
                     { "companyId", _globalState.CompanyId.ToString() },
                 };
             
-                var categories = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryResponseDto>>>("category", parameterForCompany);
+                var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parameterForCompany);
             
                 _parentCategories = categories?.Result ?? [];
 
@@ -209,7 +209,7 @@ public partial class Category
                         { "pageSize", "1000" },
                     };
 
-                    var companies = await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
+                    var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
                 
                     _companies = companies?.Result ?? [];
                 
@@ -222,7 +222,7 @@ public partial class Category
                         { "pageSize", "1000" },
                     };
 
-                    var companies = await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
+                    var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
                 
                     _companies = companies?.Result ?? [];
                 }
@@ -256,7 +256,7 @@ public partial class Category
 
         var response = await Http.PostAsync("api/file-upload", formData);
 
-        var uploadedResult = await response.Content.ReadFromJsonAsync<Model.Response.Base.Derived<List<string>>>();
+        var uploadedResult = await response.Content.ReadFromJsonAsync<Derived<List<string>>>();
 
         uploadedFileUrl = uploadedResult!.Result.FirstOrDefault()!;
     }
@@ -281,7 +281,7 @@ public partial class Category
             
             var stringContent = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
             
-            await BaseService.PostAsync<Model.Response.Base.Derived<object>>("category", stringContent);
+            await BaseService.PostAsync<Derived<object>>("category", stringContent);
 
             _showUpsertCategoryDialog = false;
 
@@ -299,7 +299,7 @@ public partial class Category
                 { "pageSize", "1000" },
             };
 
-            var companies = await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
+            var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
                 
             _companies = companies?.Result ?? [];
         }
@@ -338,7 +338,7 @@ public partial class Category
                 { "companyId", companyId.ToString() },
             };
             
-            var categories = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryResponseDto>>>("category", parameters);
+            var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parameters);
             
             _parentCategories = categories?.Result ?? [];
 
@@ -368,7 +368,7 @@ public partial class Category
             { "pageSize", pageSize.ToString() },
         };
 
-        var categories = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryResponseDto>>>("category", parameters);
+        var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parameters);
 
         _pagerDto = new PagerDto(categories.TotalCount ?? 1, pageNumber, pageSize);
 

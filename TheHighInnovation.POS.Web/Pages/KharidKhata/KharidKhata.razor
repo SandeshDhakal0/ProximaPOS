@@ -182,7 +182,7 @@
                 { "pagesize", _kharidFilter.PageSize.ToString() }
             };
 
-            var karidList = await BaseService.GetAsync<Model.Response.Base.Derived<List<KharidKhataList>>>("KharidKhata/get-kharid-khata", parameters);
+            var karidList = await BaseService.GetAsync<Derived<List<KharidKhataList>>>("KharidKhata/get-kharid-khata", parameters);
             if(karidList != null)
             {
                 _kharidList = karidList.Result;

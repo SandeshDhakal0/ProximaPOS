@@ -62,7 +62,7 @@ namespace TheHighInnovation.POS.Web.Pages.ProductMaster
                 var jsonRequest = JsonSerializer.Serialize(category);
                 var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
                 var apiEndpoint = "VendorManagement/upsert-category";
-                var result = await BaseService.PostAsync<Model.Response.Base.Derived<object>>(apiEndpoint, content);
+                var result = await BaseService.PostAsync<Derived<object>>(apiEndpoint, content);
                 if (result.Status == "Success")
                 {
                     OpenCategoryModel = false;
@@ -96,7 +96,7 @@ namespace TheHighInnovation.POS.Web.Pages.ProductMaster
                     { "categoryname", categoryFilter.CategoryName ?? string.Empty }
                 };
 
-                var categorylist = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryList>>>("VendorManagement/get-category", parameters);
+                var categorylist = await BaseService.GetAsync<Derived<List<CategoryList>>>("VendorManagement/get-category", parameters);
                 if (categorylist != null && categorylist.Result != null)
                 {
                     categoryList = categorylist.Result;
@@ -123,7 +123,7 @@ namespace TheHighInnovation.POS.Web.Pages.ProductMaster
                     { "categoryid", categoryId.ToString() }
                 };
 
-                var response = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryList>>>("VendorManagement/get-category-by-id", parameters);
+                var response = await BaseService.GetAsync<Derived<List<CategoryList>>>("VendorManagement/get-category-by-id", parameters);
 
                 if (response != null && response.Status == "Success")
                 {

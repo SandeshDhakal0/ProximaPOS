@@ -30,7 +30,7 @@ public partial class Login
             var jsonRequest = JsonSerializer.Serialize(loginRequest);
             var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-            var authResult = await BaseService.PostAsync<Model.Response.Base.Derived<LoginResponseDto>>("authenticate/login", content);
+            var authResult = await BaseService.PostAsync<Derived<LoginResponseDto>>("authenticate/login", content);
 
             await LocalStorage.SetItemAsync("access_token", authResult?.Result.Token ?? "");
 

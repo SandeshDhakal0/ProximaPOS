@@ -14,8 +14,6 @@
 
     <div class="container-fluid top-container">
         <div class="row outer-row">
-
-
             <div class="col-3 cards-left">
                 <div class="rev-sec">
                     <p class="r-title">Revenue</p>
@@ -541,7 +539,7 @@
 };
 
             var result = await
-            BaseService.GetAsync<Model.Response.Base.Derived<List<DashboardTransactionDto>>>("dashboard/get-sales-records",
+            BaseService.GetAsync<Derived<List<DashboardTransactionDto>>>("dashboard/get-sales-records",
             parameters);
 
             DashboardTransactionDto = result?.Result.FirstOrDefault() ?? new();

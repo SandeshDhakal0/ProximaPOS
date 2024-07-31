@@ -465,7 +465,7 @@
 
         try
         {
-            var vendors = await BaseService.GetAsync<Model.Response.Base.Derived<IEnumerable<VendorListShort>>>("VendorManagement/get-vendor-for-search", parameters);
+            var vendors = await BaseService.GetAsync<Derived<IEnumerable<VendorListShort>>>("VendorManagement/get-vendor-for-search", parameters);
             return vendors.Result;
         }
         catch (Exception ex)
@@ -491,7 +491,7 @@
                         { "vendorid", selectedVendor?.Id.ToString() ?? "0"},
                     };
 
-            var inventoryList = await BaseService.GetAsync<Model.Response.Base.Derived<List<GetPurchaseReceipt>>>("PurchaseReceipt/get-purchase-receipt-records", parameters);
+            var inventoryList = await BaseService.GetAsync<Derived<List<GetPurchaseReceipt>>>("PurchaseReceipt/get-purchase-receipt-records", parameters);
             if(inventoryList != null && inventoryList.Result != null)
             {
                 purchaseReceipt = inventoryList.Result;
@@ -533,7 +533,7 @@
                         { "purchasereceiptid", vendorinventoryid.ToString() }
                     };
 
-                var productList = await BaseService.GetAsync<Model.Response.Base.Derived<List<VendorWiseProductByIdMap>>>("PurchaseReceipt/get-purchase-receipt-by-id", parameters);
+                var productList = await BaseService.GetAsync<Derived<List<VendorWiseProductByIdMap>>>("PurchaseReceipt/get-purchase-receipt-by-id", parameters);
                 if (productList != null)
                 {
                     vendorwisepeoductbyidMap = productList.Result ?? [];                    

@@ -71,7 +71,7 @@ public partial class CashierCorner()
     {
         _showHoldDialog = true;
         
-        var response = await BaseService.GetAsync<Model.Response.Base.Derived<List<Hold>>>("hold/get-takeaway-item");
+        var response = await BaseService.GetAsync<Derived<List<Hold>>>("hold/get-takeaway-item");
 
         _showHoldDialog = true;
 
@@ -119,11 +119,11 @@ public partial class CashierCorner()
     {
         _showHoldDialogtable = true;
 
-        var holdTables = await BaseService.GetAsync<Model.Response.Base.Derived<List<HoldTableResponseDto>>>("hold/get-hold-tables");
+        var holdTables = await BaseService.GetAsync<Derived<List<HoldTableResponseDto>>>("hold/get-hold-tables");
 
         _holdTables = holdTables?.Result ?? new();
 
-        var holdRooms = await BaseService.GetAsync<Model.Response.Base.Derived<List<HoldRoomResponseDto>>>("hold/get-hold-rooms");
+        var holdRooms = await BaseService.GetAsync<Derived<List<HoldRoomResponseDto>>>("hold/get-hold-rooms");
 
         _holdRooms = holdRooms?.Result ?? new();
     }
@@ -144,7 +144,7 @@ public partial class CashierCorner()
             { "current_status", "Checked-In" }
         };
         
-        var reservations = await BaseService.GetAsync<Model.Response.Base.Derived<List<ReservationResponseDto>>>("Reservation/reservation-active-list", parameters);
+        var reservations = await BaseService.GetAsync<Derived<List<ReservationResponseDto>>>("Reservation/reservation-active-list", parameters);
 
         ReservationList = reservations.Result.ToList();
     }
@@ -178,7 +178,7 @@ public partial class CashierCorner()
 
             var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-            await BaseService.PostAsync<Model.Response.Base.Derived<object>>("hold/hold-items", content);
+            await BaseService.PostAsync<Derived<object>>("hold/hold-items", content);
 
             _itemsToAdd = new List<AddProductRequestDto>();
 
@@ -227,7 +227,7 @@ public partial class CashierCorner()
 
             var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-            await BaseService.PostAsync<Model.Response.Base.Derived<object>>("hold/hold-items", content);
+            await BaseService.PostAsync<Derived<object>>("hold/hold-items", content);
 
             _itemsToAdd = new List<AddProductRequestDto>();
 
@@ -277,7 +277,7 @@ public partial class CashierCorner()
 
     private async Task ReturnItems(int itemId, string type)
     {
-        var response = await BaseService.GetAsync<Model.Response.Base.Derived<List<Hold>>>("hold/get-hold-item");
+        var response = await BaseService.GetAsync<Derived<List<Hold>>>("hold/get-hold-item");
 
         if (response == null) return;
         
@@ -315,7 +315,7 @@ public partial class CashierCorner()
                 }
             }
           
-                await BaseService.DeleteAsync<Model.Response.Base.Derived<object>>($"hold/delete-hold-item?id={itemId}&holdType={type}");
+                await BaseService.DeleteAsync<Derived<object>>($"hold/delete-hold-item?id={itemId}&holdType={type}");
             
             
             _itemDiscount = _itemsToAdd.Sum(x => x.Discount);
@@ -374,9 +374,9 @@ public partial class CashierCorner()
                 { "id", itemId.ToString() }
             };
             
-            var reservation = await BaseService.GetAsync<Model.Response.Base.Derived<BookingResponseDto>>("Reservation/reservation-active-list-by-id", parameters);
+            var reservation = await BaseService.GetAsync<Derived<BookingResponseDto>>("Reservation/reservation-active-list-by-id", parameters);
         
-            var customer = await BaseService.GetAsync<Model.Response.Base.Derived<SelectCustomerRequestDto>>("customer/get-customer-by-id?customerId=" + reservation?.Result.CustomerId);
+            var customer = await BaseService.GetAsync<Derived<SelectCustomerRequestDto>>("customer/get-customer-by-id?customerId=" + reservation?.Result.CustomerId);
         
             _customer = customer?.Result!;
             _reservationId = itemId;
@@ -385,7 +385,7 @@ public partial class CashierCorner()
         
         if (_itemsToAdd.Any()) return;
 
-        var response = await BaseService.GetAsync<Model.Response.Base.Derived<List<Hold>>>("hold/get-hold-item");
+        var response = await BaseService.GetAsync<Derived<List<Hold>>>("hold/get-hold-item");
 
         if (response == null) return;
 
@@ -407,7 +407,7 @@ public partial class CashierCorner()
         }
         if(type != "Reservation")
         {
-            await BaseService.DeleteAsync<Model.Response.Base.Derived<object>>($"hold/delete-hold-item?id={itemId}&holdType={type}");
+            await BaseService.DeleteAsync<Derived<object>>($"hold/delete-hold-item?id={itemId}&holdType={type}");
 
         }
 
@@ -468,7 +468,7 @@ public partial class CashierCorner()
 
         var jsonRequest = JsonSerializer.Serialize(result);
         var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
-        await BaseService.PostAsync<Model.Response.Base.Derived<object>>("hold/hold-items", content);
+        await BaseService.PostAsync<Derived<object>>("hold/hold-items", content);
         _itemsToAdd = new List<AddProductRequestDto>();
 
         _showHoldDialog = false;
@@ -602,7 +602,7 @@ public partial class CashierCorner()
         
         var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-        await BaseService.PostAsync<Model.Response.Base.Derived<object>>("safe-drop/safe-drop", content);
+        await BaseService.PostAsync<Derived<object>>("safe-drop/safe-drop", content);
         
         CashDetails = new CashDetails();
         
@@ -626,7 +626,7 @@ public partial class CashierCorner()
             { "companyId", _globalState.CompanyId.Value.ToString() },
         };
         
-        var response = await BaseService.GetAsync<Model.Response.Base.Derived<List<ItemResponseDto>>>("home/get-parent-records", parameters);
+        var response = await BaseService.GetAsync<Derived<List<ItemResponseDto>>>("home/get-parent-records", parameters);
 
         if (response != null)
         {
@@ -660,7 +660,7 @@ public partial class CashierCorner()
     {
         _subcategories = new();
         
-        var result = await BaseService.GetAsync<Model.Response.Base.Derived<List<ItemResponseDto>>>($"home/get-child-records/{categoryId}");
+        var result = await BaseService.GetAsync<Derived<List<ItemResponseDto>>>($"home/get-child-records/{categoryId}");
 
         foreach (var item in result.Result)
         {
@@ -683,7 +683,7 @@ public partial class CashierCorner()
 
     private async Task<IEnumerable<CategoryProductResponseDto>> FetchNestedSubcategories(int categoryId)
     {
-        var response = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryProductResponseDto>>>($"home/get-child-records/{categoryId}");
+        var response = await BaseService.GetAsync<Derived<List<CategoryProductResponseDto>>>($"home/get-child-records/{categoryId}");
 
         return response.Result;
     }
@@ -718,7 +718,7 @@ public partial class CashierCorner()
             { "barcode", lastScannedBarcode.ToString() }
         };
 
-            var response = await BaseService.GetAsync<Model.Response.Base.Derived<List<ProductScannedResponse>>>("productmanagement/get-product-by-barcode", parameters);
+            var response = await BaseService.GetAsync<Derived<List<ProductScannedResponse>>>("productmanagement/get-product-by-barcode", parameters);
             var result = response?.Result.FirstOrDefault();
 
             if (result == null)
@@ -780,7 +780,7 @@ public partial class CashierCorner()
 
         };
 
-        var result = (await BaseService.GetAsync<Model.Response.Base.Derived<ProductResponseDto>>("product", parameters))?.Result;
+        var result = (await BaseService.GetAsync<Derived<ProductResponseDto>>("product", parameters))?.Result;
 
         var salesPrice = result!.SalesPrice ?? 1;
         
@@ -1192,7 +1192,7 @@ public partial class CashierCorner()
 
             var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-            await BaseService.PostAsync<Model.Response.Base.Derived<object>>("sales/create-sales", content);
+            await BaseService.PostAsync<Derived<object>>("sales/create-sales", content);
 
             _showPrintOption = false;
 
@@ -1408,7 +1408,7 @@ public partial class CashierCorner()
     {
         try
         {
-            var response = await BaseService.GetAsync<Model.Response.Base.Derived<List<SelectCustomerRequestDto>>>("customer/get-all-customers?search=" + _searchCustomer);
+            var response = await BaseService.GetAsync<Derived<List<SelectCustomerRequestDto>>>("customer/get-all-customers?search=" + _searchCustomer);
 
             customersList = response.Result;
 
@@ -1429,7 +1429,7 @@ public partial class CashierCorner()
 
             var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-             var response = await BaseService.PostAsync<Model.Response.Base.Derived<bool>>("customer/create-customer", content);
+             var response = await BaseService.PostAsync<Derived<bool>>("customer/create-customer", content);
 
             
               
@@ -1506,7 +1506,7 @@ public partial class CashierCorner()
         
         var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-        await BaseService.PostAsync<Model.Response.Base.Derived<object>>("close-till/drawer-amount", content);
+        await BaseService.PostAsync<Derived<object>>("close-till/drawer-amount", content);
         
         _showLandingCashierView = true;
         
@@ -1521,7 +1521,7 @@ public partial class CashierCorner()
             { "employeeId", _globalState.UserId.ToString() },
         };
         
-        var response = await BaseService.GetAsync<Model.Response.Base.Derived<List<CloseTillResponseDto>>>("close-till/get-closing-details", parameters);
+        var response = await BaseService.GetAsync<Derived<List<CloseTillResponseDto>>>("close-till/get-closing-details", parameters);
         
         var transactionDetails = response.Result;
         

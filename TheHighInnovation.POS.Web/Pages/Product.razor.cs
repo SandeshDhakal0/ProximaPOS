@@ -58,7 +58,7 @@ public partial class Product
             { "pageSize", Filter.PageSize.ToString() },
         };
 
-        var products = await BaseService.GetAsync<Model.Response.Base.Derived<List<ProductResponseDto>>>("product", parameters);
+        var products = await BaseService.GetAsync<Derived<List<ProductResponseDto>>>("product", parameters);
 
         _pagerDto = new PagerDto(products.TotalCount ?? 1, 1, 10);
 
@@ -83,7 +83,7 @@ public partial class Product
             { "pageSize", "1000" },
         };
 
-        var companies = await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
+        var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
             
         _companies = companies?.Result ?? [];
     }
@@ -105,7 +105,7 @@ public partial class Product
             { "pageSize", "1000" },
         };
 
-        var categories = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryResponseDto>>>("category", parameters);
+        var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parameters);
             
         _categories = categories?.Result ?? [];
     }
@@ -137,7 +137,7 @@ public partial class Product
             { "pageSize", "1000" },
         };
 
-            var categories = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryResponseDto>>>("category", parameters);
+            var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parameters);
 
             _categories = categories?.Result ?? [];
 
@@ -151,7 +151,7 @@ public partial class Product
             { "pageSize", Filter.PageSize.ToString() },
             };
 
-            var products = await BaseService.GetAsync<Model.Response.Base.Derived<List<ProductResponseDto>>>("product", parametersinitial);
+            var products = await BaseService.GetAsync<Derived<List<ProductResponseDto>>>("product", parametersinitial);
 
             _pagerDto = new PagerDto(products.TotalCount ?? 1, 1, 10);
 
@@ -167,7 +167,7 @@ public partial class Product
                 { "pageSize", "1000" },
             };
 
-            var organizations = await BaseService.GetAsync<Model.Response.Base.Derived<List<OrganizationResponseDto>>>("organization", parameters);
+            var organizations = await BaseService.GetAsync<Derived<List<OrganizationResponseDto>>>("organization", parameters);
 
             _organizations = organizations!.Result;
         }
@@ -188,7 +188,7 @@ public partial class Product
                 { "productId", productId.Value.ToString() },
             };
 
-            var result = (await BaseService.GetAsync<Model.Response.Base.Derived<ProductResponseDto>>("product", parameters))?.Result;
+            var result = (await BaseService.GetAsync<Derived<ProductResponseDto>>("product", parameters))?.Result;
 
             _productModel = new CreateProductRequestDto()
             {
@@ -217,7 +217,7 @@ public partial class Product
                 { "pageSize", "1000" },
                  };
 
-                var categories = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryResponseDto>>>("category", parametersCat);
+                var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parametersCat);
 
                 _categories = categories?.Result ?? [];
 
@@ -230,7 +230,7 @@ public partial class Product
                     { "pageSize", "1000" },
                 };
 
-                var companies = await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
+                var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
                 
                 _companies = companies?.Result ?? [];
             }
@@ -258,7 +258,7 @@ public partial class Product
 
         var response = await Http.PostAsync("api/file-upload", formData);
 
-        var uploadedResult = await response.Content.ReadFromJsonAsync<Model.Response.Base.Derived<List<string>>>();
+        var uploadedResult = await response.Content.ReadFromJsonAsync<Derived<List<string>>>();
 
         uploadedFileUrl = uploadedResult!.Result.FirstOrDefault()!;
     }
@@ -285,7 +285,7 @@ public partial class Product
 
                 var jsonContent = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-                await BaseService.PostAsync<Model.Response.Base.Derived<object>>("product", jsonContent);
+                await BaseService.PostAsync<Derived<object>>("product", jsonContent);
 
                 _showUpsertProductDialog = false;
             
@@ -305,7 +305,7 @@ public partial class Product
                         { "pageSize", "1000" },
                     };
 
-                    var categories = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryResponseDto>>>("category", parametersForSearch);
+                    var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parametersForSearch);
                 
                     _categories = categories?.Result ?? [];
                 }
@@ -331,7 +331,7 @@ public partial class Product
                 { "companyId", _globalState.CompanyId.ToString() },
             };
             
-            var categories = await BaseService.GetAsync<Model.Response.Base.Derived<List<CategoryResponseDto>>>("category", parameters);
+            var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parameters);
             
             _categories = categories?.Result ?? [];
 
@@ -361,7 +361,7 @@ public partial class Product
             { "pageSize", pageSize.ToString() },
         };
 
-        var products = await BaseService.GetAsync<Model.Response.Base.Derived<List<ProductResponseDto>>>("product", parameters);
+        var products = await BaseService.GetAsync<Derived<List<ProductResponseDto>>>("product", parameters);
 
         _pagerDto = new PagerDto(products.TotalCount ?? 1, pageNumber, pageSize);
 

@@ -48,7 +48,7 @@ public partial class Sale
                 { "pageSize", "1000" },
             };
 
-            var companies = await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
+            var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
             
             await HandleFilter();
 
@@ -111,7 +111,7 @@ public partial class Sale
                 { "page", "1" },
                 { "page_size", Filter.PageSize.ToString() },
             };
-                var initialSales = await BaseService.GetAsync<Model.Response.Base.Derived<List<SalesResponseDto>>>("sales/get-sales-records", initialParameters);
+                var initialSales = await BaseService.GetAsync<Derived<List<SalesResponseDto>>>("sales/get-sales-records", initialParameters);
 
 
                 _pagerDto = new PagerDto(initialSales.TotalCount ?? 1, 1, 10);
@@ -193,7 +193,7 @@ public partial class Sale
             { "page_size", pageSize.ToString() },
         };
         
-        var sales = await BaseService.GetAsync<Model.Response.Base.Derived<List<SalesResponseDto>>>("sales/get-sales-records", parameters);
+        var sales = await BaseService.GetAsync<Derived<List<SalesResponseDto>>>("sales/get-sales-records", parameters);
 
         _pagerDto = new PagerDto(sales.TotalCount ?? 1, pageNumber, pageSize);
 
