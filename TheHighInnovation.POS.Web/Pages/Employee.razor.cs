@@ -1,12 +1,12 @@
 ﻿using System.Text.Json;
 using Microsoft.AspNetCore.Components;
-using TheHighInnovation.POS.Model;
-using TheHighInnovation.POS.Model.Request.Employee;
-using TheHighInnovation.POS.Model.Request.Filter;
-using TheHighInnovation.POS.Model.Response.Company;
-using TheHighInnovation.POS.Model.Response.Employee;
-using TheHighInnovation.POS.Model.Response.Organization;
-using TheHighInnovation.POS.Model.Response.Role;
+using TheHighInnovation.POS.Web.Model;
+using TheHighInnovation.POS.Web.Model.Request.Employee;
+using TheHighInnovation.POS.Web.Model.Request.Filter;
+using TheHighInnovation.POS.Web.Model.Response.Company;
+using TheHighInnovation.POS.Web.Model.Response.Employee;
+using TheHighInnovation.POS.Web.Model.Response.Organization;
+using TheHighInnovation.POS.Web.Model.Response.Role;
 using TheHighInnovation.POS.Web.Models;
 
 namespace TheHighInnovation.POS.Web.Pages;

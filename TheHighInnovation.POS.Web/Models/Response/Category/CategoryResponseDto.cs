@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Response.Category;
+﻿namespace TheHighInnovation.POS.Web.Model.Response.Category;
 
 public class CategoryResponseDto
 {

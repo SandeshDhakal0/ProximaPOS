@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheHighInnovation.POS.Model.Request.VendorManagement.ProductsDTO
+namespace TheHighInnovation.POS.Web.Model.Request.VendorManagement.ProductsDTO
 {
     public class ProductListUpdate
     {

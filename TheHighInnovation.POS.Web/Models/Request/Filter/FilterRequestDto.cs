@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices.JavaScript;
 
-namespace TheHighInnovation.POS.Model.Request.Filter;
+namespace TheHighInnovation.POS.Web.Model.Request.Filter;
 
 public class FilterRequestDto
 {
@@ -9,7 +9,6 @@ public class FilterRequestDto
 	public int CompanyId { get; set; }
 
 	public int? CategoryId { get; set; }
-
 
 	public int PageSize { get; set; }
 
@@ -77,8 +76,23 @@ public class KharidKhataFilter
 {
 	public int YearBs { get; set; } = 2081;
 	public int MonthBs { get; set; } = 0;
+
 	public int PageNo { get; set; } = 1;
 	public int PageSize { get; set; } = 5;
-	public bool IsInitialized { get; set; } =true;
+	public bool IsInitialized { get; set; } = true;
 }
+
+public class BikriKhataFilter
+{
+	public int YearBs { get; set; } = 2081;
+
+	public int MonthBs { get; set; } = 0;
+
+	public int PageNo { get; set; } = 1;
+
+	public int PageSize { get; set; } = 5;
+
+	public bool IsInitialized { get; set; } = true;
+}
+
 

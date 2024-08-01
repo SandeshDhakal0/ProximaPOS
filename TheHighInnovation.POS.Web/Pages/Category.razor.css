@@ -12,7 +12,6 @@
 }
 
 .filter-section {
-    
     border: none;
     width: 96%;
     margin-left: 2%;
@@ -21,7 +20,6 @@
 .required, .filterby {
     letter-spacing: 3px;
     font-weight: 500;
-    
 }
 
 .required {
@@ -30,7 +28,7 @@
 
 .filterby {
     font-size: 18px;
-    color:#111;
+    color: #111;
 }
 
 .categorypage {
@@ -39,7 +37,6 @@
     height: 90.5vh;
     padding-bottom: 2vh;
     margin-left: 1%;
-
 }
 
 .form-select {
@@ -51,7 +48,7 @@
 
 .addcatogerybtn {
     background-color: var(--our--commonblue-color);
-    color:#fff;
+    color: #fff;
     height: 35px;
     width: 25%;
     margin-right: 3%;
@@ -59,13 +56,9 @@
 
 .searchlinegroup {
     margin: 1% 0;
-    
-   
 }
 
     .searchlinegroup .searchbutton, .searchbuttond, .clearbuttond {
-       
-       
         height: 4vh;
     }
 
@@ -79,9 +72,11 @@
     border: none;
     border-radius: 10px;
 }
+
 .searchline2 {
     margin-left: 25%;
 }
+
 .clearbuttond {
     background-color: red;
     color: #fff;
@@ -92,8 +87,8 @@
 .showentries, .selectcompany {
     border: none;
     border-radius: 5px;
-    color:#111;
-   margin-top:1.5vh;
+    color: #111;
+    margin-top: 1.5vh;
 }
 
 .showentries {
@@ -103,7 +98,6 @@
 
 .selectcompany {
     width: 3vw;
-    
     background-color: #d9d9d9;
     height: 4vh;
 }
@@ -120,7 +114,6 @@
 
 .selecttext, .searchtext {
     font-size: 16px;
-    
 }
 
 .selecttext {
@@ -165,27 +158,26 @@
         width: 100%;
     }
 
-.tablediv tbody {
-    display: block;
-    max-height: 50vh;
-    overflow-y: scroll;
-}
+    .tablediv tbody {
+        display: block;
+        max-height: 50vh;
+        overflow-y: scroll;
+    }
 
         .tablediv thead, .tablediv tbody tr {
             display: table;
             width: 100%;
             table-layout: fixed;
-            
-          
         }
+
             .tablediv tbody tr:hover {
                 background-color: var(--tablehead-background);
             }
 
-            ::-webkit-scrollbar {
-                width: 10px;
-                background-color: transparent;
-            }
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+}
 
 ::-webkit-scrollbar-thumb {
     background-color: darkgrey;
@@ -201,3 +193,30 @@
 }
 
 
+.color-palette {
+    display: flex;
+    gap: 10px;
+}
+
+.color-option {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+    .color-option:hover {
+        border-color: #000;
+    }
+
+    .color-option i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 20px;
+    }

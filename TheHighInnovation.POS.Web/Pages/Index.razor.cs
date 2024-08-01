@@ -1,4 +1,4 @@
-﻿using TheHighInnovation.POS.Model;
+﻿using TheHighInnovation.POS.Web.Model;
 using Microsoft.AspNetCore.Components;
 using TheHighInnovation.POS.Web.Models;
 

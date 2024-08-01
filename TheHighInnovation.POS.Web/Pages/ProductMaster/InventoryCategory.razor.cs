@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Microsoft.AspNetCore.Components;
-using TheHighInnovation.POS.Model.Request.Filter;
-using TheHighInnovation.POS.Model.Request.VendorManagement;
+using TheHighInnovation.POS.Web.Model.Request.Filter;
+using TheHighInnovation.POS.Web.Model.Request.VendorManagement;
 using TheHighInnovation.POS.Web.Models;
 
 namespace TheHighInnovation.POS.Web.Pages.ProductMaster

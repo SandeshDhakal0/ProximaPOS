@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Request.SafeDrop;
+﻿namespace TheHighInnovation.POS.Web.Model.Request.SafeDrop;
 
 public class SafeDropRequestDto
 {

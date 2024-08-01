@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Request.Module;
+﻿namespace TheHighInnovation.POS.Web.Model.Request.Module;
 
 public class ModuleRequestDto
 {

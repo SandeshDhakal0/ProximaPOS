@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TheHighInnovation.POS.Model.Request.Product;
+namespace TheHighInnovation.POS.Web.Model.Request.Product;
 
 public class HoldProductRequestDto
 {

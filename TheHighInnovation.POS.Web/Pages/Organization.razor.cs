@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using Application.DTOs.Request;
-using TheHighInnovation.POS.Model.Response.Base;
-using TheHighInnovation.POS.Model.Response.Organization;
+using TheHighInnovation.POS.Web.Model.Response.Base;
+using TheHighInnovation.POS.Web.Model.Response.Organization;
 
 namespace TheHighInnovation.POS.Web.Pages;
 

@@ -4,6 +4,7 @@
 @using TheHighInnovation.POS.Web.Services.Base
 @inject NavigationManager NavManager;
 @inject BaseService baseService
+
 <div class="landingpage container">
     <div class="row">
         @if (landingPage != null)
@@ -36,7 +37,7 @@
     {
         _actionMapping = new Dictionary<string, Func<Task>>
         {
-            { "SwitchToCashierPanel", SwitchToCashierPanel },
+            // { "SwitchToCashierPanel", SwitchToCashierPanel },
             { "SwitchToReservation", SwitchToReservation },
             { "SwitchToAdmin", SwitchToAdmin },
             { "SwitchToInventory", SwitchToInventory },
@@ -69,12 +70,12 @@
         }
     }
 
-    private Task SwitchToCashierPanel()
-    {
-        _globalState.PageNumber = 2;
-        NavManager.NavigateTo("/cashier-corner");
-        return Task.CompletedTask;
-    }
+    // private Task SwitchToCashierPanel()
+    // {
+    //     _globalState.PageNumber = 2;
+    //     NavManager.NavigateTo("/cashier-corner");
+    //     return Task.CompletedTask;
+    // }
 
     private Task SwitchToReservation()
     {

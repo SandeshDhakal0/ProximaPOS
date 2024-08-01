@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Request.Employee;
+﻿namespace TheHighInnovation.POS.Web.Model.Request.Employee;
 
 public class EmployeeRequestDto
 {

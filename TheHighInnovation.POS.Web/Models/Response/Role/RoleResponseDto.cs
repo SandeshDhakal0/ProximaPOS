@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Response.Role;
+﻿namespace TheHighInnovation.POS.Web.Model.Response.Role;
 
 public class RoleResponseDto
 {

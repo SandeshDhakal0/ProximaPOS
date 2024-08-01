@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 
-namespace TheHighInnovation.POS.Model.Request.VendorManagement
+namespace TheHighInnovation.POS.Web.Model.Request.VendorManagement
 {
     public class VendorWiseProductById
     {        

@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Request.Company;
+﻿namespace TheHighInnovation.POS.Web.Model.Request.Company;
 
 public class CompanyRequestDto
 {

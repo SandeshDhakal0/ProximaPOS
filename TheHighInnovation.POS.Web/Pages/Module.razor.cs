@@ -2,9 +2,9 @@
 using System.Net.Http.Json;
 using System.Text.Json;
 using Microsoft.AspNetCore.Components.Forms;
-using TheHighInnovation.POS.Model.Request.Module;
-using TheHighInnovation.POS.Model.Response.Base;
-using TheHighInnovation.POS.Model.Response.Module;
+using TheHighInnovation.POS.Web.Model.Request.Module;
+using TheHighInnovation.POS.Web.Model.Response.Base;
+using TheHighInnovation.POS.Web.Model.Response.Module;
 
 namespace TheHighInnovation.POS.Web.Pages;
 

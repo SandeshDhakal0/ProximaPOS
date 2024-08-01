@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Response.Reservation;
+﻿namespace TheHighInnovation.POS.Web.Model.Response.Reservation;
 
 public class HoldRoomAvailabilityDTO
 {

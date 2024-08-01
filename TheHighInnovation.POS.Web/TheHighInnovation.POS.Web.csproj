@@ -39,7 +39,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Pages\" />
+      <None Include="Layout\BikriKhata\BikriKhata.razor" />
+      <None Include="Layout\DateFilter\BsMonthSelection.razor" />
+      <None Include="Layout\DateFilter\BsYearSelection.razor" />
     </ItemGroup>
 
 </Project>

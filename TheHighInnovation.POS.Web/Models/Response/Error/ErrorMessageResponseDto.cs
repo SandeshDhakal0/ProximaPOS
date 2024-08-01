@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace TheHighInnovation.POS.Model.Response.Error;
+namespace TheHighInnovation.POS.Web.Model.Response.Error;
 
 public class ErrorMessageResponseDto
 {

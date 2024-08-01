@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Response.Service;
+﻿namespace TheHighInnovation.POS.Web.Model.Response.Service;
 
 public class ServiceResponseDto
 {

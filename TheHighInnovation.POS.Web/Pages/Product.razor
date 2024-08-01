@@ -1,5 +1,5 @@
 ﻿@page "/product"
-@using TheHighInnovation.POS.Model.Response.Product
+@using TheHighInnovation.POS.Web.Model.Response.Product
 @using TheHighInnovation.POS.Web.Services.Base
 @inject BaseService BaseService
 @inject HttpClient Http
@@ -15,53 +15,24 @@
 		</div>
 	</div>
 	<div class="card filter-section">
-        <div class="card-body">
-            <form @onsubmit="@HandleFilter">
-                <div class="row">
-	                <div class="col-2 mt-1">
+		<div class="card-body">
+			<form @onsubmit="@HandleFilter">
+				<div class="row">
+					<div class="col-2 mt-1">
 						<label class="filterby d-flex">Filter By: <i class="fa-solid fa-filter mt-1" style="font-size:16px;"></i></label>
-	                </div>
-	                @if (_globalState.OrganizationId is null)
-	                {
-		                <div class="col">
-			                <label class="required">Organization</label>
-			                <select aria-required="true" class="form-select" required @onchange="OnOrganizationSelection">
-				                <option disabled="" label="Select an Organization" selected="" value=""></option>
-				                @if (_organizations != null)
-				                {
-					                foreach (var item in _organizations)
-					                {
-						                <option value="@item.Id">@item.Name</option>
-					                }
-				                }
-			                </select>
-		                </div>
-	                }
-                   @*  <div class="col">
-                    	<label class="required">Company</label>
-                        <select aria-required="true" class="form-select" required @onchange="OnCompanySelection">
-							
-                            <option disabled="" label="Select a Company" selected="" value=""></option>
-                            @if (_companies != null)
-                            {
-                                foreach (var item in _companies)
-                                {
-                                    <option value="@item.Id">@item.Name</option>
-                                }
-                            }
-                        </select>
-                    </div> *@
-	                <div class="col row">
-		                <label class="required">Category</label>
+					</div>
+
+					<div class="col row">
+						<label class="required">Category</label>
 						<select aria-required="true" class="form-select" required @onchange="OnCategorySelection">
 							<option value="" disabled selected> Select Categories</option>
 							<option selected value="">all</option>
 							@if (_categories != null)
 							{
-								
+
 								foreach (var item in _categories)
 								{
-									
+
 									<option value="@item.Id">@item.Title</option>
 								}
 							}
@@ -75,13 +46,13 @@
 
 
 						</button>
-	                </div>
-	               
-                </div>
-            </form>
-        </div>
-    </div>
-	
+					</div>
+
+				</div>
+			</form>
+		</div>
+	</div>
+
 	@if (Filter.IsInitialized)
 	{
 		<div class="row searchlinegroup">
@@ -96,12 +67,12 @@
 						<option value="20">20</option>
 					</select>
 				}
-			
+
 			</div>
 
-			
+
 			<div class="col-5 ">
-				<span class="searchtext">Search:</span> <input type="text" class="searchinput" @bind="Filter.Search"/>
+				<span class="searchtext">Search:</span> <input type="text" class="searchinput" @bind="Filter.Search" />
 
 
 			</div>
@@ -115,160 +86,142 @@
 
 				</button>
 			</div>
-			</div>
-		
+		</div>
+
 		<div class="tablediv">
 			<table class="table">
 				<thead>
-				<tr>
-					<th class="th1">
-						Product
-					</th>
-					<th>
-						Unit
-					</th>
-					<th>
-						Category
-					</th>
-					<th class="th6">
-						Action
-					</th>
-				</tr>
+					<tr>
+						<th class="th1">
+							Product
+						</th>
+						<th>
+							Unit
+						</th>
+						<th>
+							Category
+						</th>
+						<th>
+							Status
+						</th>
+						<th class="th6">
+							Action
+						</th>
+					</tr>
 				</thead>
 				<tbody class="table-striped">
-				@{
-					IEnumerable<ProductResponseDto> products = _products;
+					@{
+						IEnumerable<ProductResponseDto> products = _products;
 
-					if(products != null && products.Any())
-					{
-						foreach (var product in products)
+						if (products != null && products.Any())
 						{
-							<tr>
-								<td class="td1">
-									<div class="row m-0">
-										<div class="col-1">
-												<img src="@product.ProductImageUrl" alt="" class="productimage">
+							foreach (var product in products)
+							{
+								<tr>
+									<td class="td1">
+										<div class="row m-0">
+											<div class="col-1">
+												<div style="background-color: @product.ProductImageUrl; height:50px;width:50px;"></div>
+											</div>
+											<div class="col-11 titleanddesc">
+												<p class="producttitle">@product.Title</p>
+												<p class="productdesc">@product.Description</p>
+											</div>
 										</div>
-										<div class="col-11 titleanddesc">
-											<p class="producttitle">@product.Title</p>
-											<p class="productdesc">@product.Description</p>
-										</div>
-									</div>
-								</td>
-								<td class="titlecolumn">@product.Unit</td>
-								<td class="mt-2">@(product.CategoryTitle ?? "")</td>								
-								<td class="td6">
-									<div class="d-flex actionicons">
-										<i class="fa-solid fa-pen-to-square mx-1" @onclick="() => OpenUpsertProductDialog(product.Id)"></i>
+									</td>
+									<td class="titlecolumn">@product.Unit</td>
+									<td class="mt-2">@(product.CategoryTitle ?? "")</td>
+									<td class="mt-2">
+										@(product.IsActive ? "Active" : "Inactive")
+									</td>
+									<td class="td6">
+										<div class="d-flex actionicons">
+											<i class="fa-solid fa-pen-to-square mx-1" @onclick="() => OpenUpsertProductDialog(product.Id)"></i>
 											<i class="fa fa-trash mx-2"></i>
-										<i class="fa fa-pause mx-2"></i>
-									</div>
-						
-								</td>
-					
-							</tr>
+											<i class="fa fa-pause mx-2"></i>
+										</div>
+
+									</td>
+
+								</tr>
+							}
 						}
 					}
-				}
 				</tbody>
 			</table>
-			
+
 			@if (_pagerDto.TotalPages > 0)
-                    {
-                        <div class="row">
-                            <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
-                                
-                            </div>
-                            <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
-                                <ul class="pagination justify-content-end">
-                                    @if (_pagerDto.CurrentPage > 1)
-                                    {
-                                        <li class="page-item pointer px-1">
-                                            <a class="page-link" @onclick="() => OnPagination(1)">First</a>
-                                        </li>
-                                        <li class="page-item pointer px-1">
-                                            <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
-                                        </li>
-                                    }
-                                    @if (_pagerDto.TotalPages > 1)
-                                    {
-                                        for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
-                                        {
-                    	                    var currentPageItem = pageItem; 
-                    	                    <li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
-                    		                    <a class="page-link" @onclick="() => OnPagination(currentPageItem)">@currentPageItem</a>
-                    	                    </li>
-                                        }
-                                    }
-                
-                                    @if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
-                                    {
-                                        <li class="page-item pointer px-1">
-                                            <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
-                                        </li>
-                                        <li class="page-item pointer px-1">
-                                            <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
-                                        </li>
-                                    }
-                                </ul>
-                            </div>
-                        </div>
-                        
-                    }
+			{
+				<div class="row">
+					<div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
+					</div>
+					<div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+						<ul class="pagination justify-content-end">
+							@if (_pagerDto.CurrentPage > 1)
+							{
+								<li class="page-item pointer px-1">
+									<a class="page-link" @onclick="() => OnPagination(1)">First</a>
+								</li>
+								<li class="page-item pointer px-1">
+									<a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
+								</li>
+							}
+							@if (_pagerDto.TotalPages > 1)
+							{
+								for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+								{
+									var currentPageItem = pageItem;
+									<li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
+										<a class="page-link" @onclick="() => OnPagination(currentPageItem)">@currentPageItem</a>
+									</li>
+								}
+							}
+
+							@if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
+							{
+								<li class="page-item pointer px-1">
+									<a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
+								</li>
+								<li class="page-item pointer px-1">
+									<a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
+								</li>
+							}
+						</ul>
+					</div>
+				</div>
+
+			}
 		</div>
-			
+
 	}
-	
 
 
-@if (_showUpsertProductDialog)
-{
+
+	@if (_showUpsertProductDialog)
+	{
 
 		<ModalDialog Title="@_dialogTitle" OnClose="@OnUpsertProductDialogClose" OkLabel="@_dialogOkLabel">
-		<form enctype="multipart/form-data">
-			<div class="row">
-				@* <div class="col">
-				<label class="form-label">&nbsp;Company</label>
-				@if (_productModel.Id == 0)
-				{
-            		<select class="form-control" @onchange="HandleCompanyChange" required="required">
-            			<option selected="selected" disabled="disabled">Select a Company</option>
-            			@foreach (var item in _companies)
-            			{
-            				<option value="@item.Id">@item.Name</option>
-            			}
-            		</select>
-				}
-				else
-				{
-					<select value="@_productModel.CompanyId" class="form-control" @onchange="HandleCompanyChange" required="required">
-						<option selected="selected" disabled="disabled">Select a Company</option>
-						@foreach (var item in _companies)
-						{
-							<option value="@item.Id">@item.Name</option>
-						}
-					</select>
-				}
-            </div> *@
-			<div class="col">
-				<label class="form-label">&nbsp;Category</label>
-				<select class="form-control" @bind="_productModel.CategoryId" required="required">
-					<option selected="selected" disabled="disabled">Select an category</option>
-					@foreach (var item in _categories)
-					{
-						<option value="@item.Id">@item.Title</option>
-					}
-				</select>
-			</div>
-			</div>
-			<div class="row mt-3">
-				<div class="col">
-				<label class="form-label">&nbsp;Title</label>
-				<input type="text" class="form-control" @bind="_productModel.Title" placeholder="Enter a product title" required="required">
+			<form enctype="multipart/form-data">
+				<div class="row">
+					<div class="col">
+						<label class="form-label">&nbsp;Category</label>
+						<select class="form-control" @bind="_productModel.CategoryId" required="required">
+							<option selected="selected" disabled="disabled">Select an category</option>
+							@foreach (var item in _categories)
+							{
+								<option value="@item.Id">@item.Title</option>
+							}
+						</select>
+					</div>
+				</div>
+				<div class="row mt-3">
+					<div class="col">
+						<label class="form-label">&nbsp;Title</label>
+						<input type="text" class="form-control" @bind="_productModel.Title" placeholder="Enter a product title" required="required">
 					</div>
 
-			<div class="col">
-				
+					<div class="col">
+
 						<label class="form-label">&nbsp;Unit</label>
 						<select class="form-control" @bind="_productModel.Unit" required="required">
 							<option selected="selected" disabled="disabled">Select a Unit</option>
@@ -276,51 +229,54 @@
 							<option value="2">Per Meters</option>
 							<option value="3">Per Unit</option>
 						</select>
-			</div>
-			</div>
-			<div class="row mt-3">
-				<div class="col">
-					<label class="form-label">&nbsp;Description</label>
-					<textarea type="text" class="form-control" @bind="_productModel.Description" placeholder="Enter the description" required="required"></textarea>
-			</div>
-				</div>
-				<div class="row mt-4">
-					<div class="col-10">
-						<label class="form-label">&nbsp;ImageUrl</label>
-						<textarea type="text" class="form-control" @bind="_productModel.ImageURL" placeholder="Enter Image Url" required="required"></textarea>
 					</div>
-					<div class="col-2">
-						@if (!string.IsNullOrEmpty(_productModel.ImageURL))
-						{
-							<img src="@_productModel.ImageURL" alt="Image Preview" style="max-width: 110px; max-height: 110px; border-radius:20px;" class="mt-3">
-
-						}
-						else
-						{
-							<p></p>
-						}
-					</div>
-
 				</div>
 				<div class="row mt-3">
-			<div class="col">
-				<label class="form-label">&nbsp;Sales Price</label>
-				<input type="number" class="form-control" @bind="_productModel.SalesPrice" placeholder="Enter the Sales Price" required="required" />
-			</div>
-			<div class="col">
-				<label class="form-label">&nbsp;Cost Price</label>
-				<input type="number" class="form-control" @bind="_productModel.CostPrice" placeholder="Enter the Cost Price" required="required" />
-			</div>
+					<div class="col">
+						<label class="form-label">&nbsp;Description</label>
+						<textarea type="text" class="form-control" @bind="_productModel.Description" placeholder="Enter the description" required="required"></textarea>
+					</div>
 				</div>
-		</form>
+				<div class="row mt-4">
+					<div class="col-10 color-palette">
+						@foreach (var color in ColorOptions)
+						{
+							<div class="color-option" style="background-color: @color;" @onclick="() => SelectColor(color)">
+								@if (SelectedColor == color)
+								{
+									<i class="bi bi-check-circle"></i>
+								}
+							</div>
+						}
+					</div>
 
-		@if (!string.IsNullOrEmpty(_upsertProductErrorMessage))
-		{
-			<span>@_upsertProductErrorMessage</span>
-			
-		}
-	
-</ModalDialog>
-}
+
+				</div>
+				<div class="row mt-4">
+					<label class="switch">
+						<input type="checkbox" @bind="_productModel.IsActive">
+						<span class="slider round" checked></span>
+					</label>
+				</div>
+				<div class="row mt-3">
+					<div class="col">
+						<label class="form-label">&nbsp;Sales Price</label>
+						<input type="number" class="form-control" @bind="_productModel.SalesPrice" placeholder="Enter the Sales Price" required="required" />
+					</div>
+					<div class="col">
+						<label class="form-label">&nbsp;Cost Price</label>
+						<input type="number" class="form-control" @bind="_productModel.CostPrice" placeholder="Enter the Cost Price" required="required" />
+					</div>
+				</div>
+			</form>
+
+			@if (!string.IsNullOrEmpty(_upsertProductErrorMessage))
+			{
+				<span>@_upsertProductErrorMessage</span>
+
+			}
+
+		</ModalDialog>
+	}
 
 </div>

@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Request.Reservation;
+﻿namespace TheHighInnovation.POS.Web.Model.Request.Reservation;
 
 public class ReservationRequestDto
 {

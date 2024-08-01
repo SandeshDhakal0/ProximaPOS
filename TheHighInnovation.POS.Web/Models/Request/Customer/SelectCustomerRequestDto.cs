@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TheHighInnovation.POS.Model.Request.Customer;
+namespace TheHighInnovation.POS.Web.Model.Request.Customer;
 
 public class SelectCustomerRequestDto
 {

@@ -1,14 +1,13 @@
 ﻿@page "/product-service"
 @using System.Text.Json
 @using Blazored.Typeahead
-@using TheHighInnovation.POS.Model.Request.Filter
-@using TheHighInnovation.POS.Model.Request.VendorManagement
-@using TheHighInnovation.POS.Model.Request.VendorManagement.ProductsDTO
+@using TheHighInnovation.POS.Web.Model.Request.Filter
+@using TheHighInnovation.POS.Web.Model.Request.VendorManagement
+@using TheHighInnovation.POS.Web.Model.Request.VendorManagement.ProductsDTO
 @using TheHighInnovation.POS.Web.Models
 @using TheHighInnovation.POS.Web.Services.Base
 @inject IJSRuntime JS
 @inject BaseService BaseService
-
 @inject NavigationManager NavManager
 
 @if (productFilter.IsInitialized)

@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Request.Role;
+﻿namespace TheHighInnovation.POS.Web.Model.Request.Role;
 
 public class RoleRequestDto
 {

@@ -1,251 +1,145 @@
 ﻿@page "/category"
-@using TheHighInnovation.POS.Model.Response.Category
+@using TheHighInnovation.POS.Web.Model.Response.Category
 @using TheHighInnovation.POS.Web.Services.Base
 @inject BaseService BaseService
 @inject HttpClient Http
 <div class="categorypage">
-	
-	<div class="row mt-1 mb-1">
-		<div class="col-4">
-			<h3 style="margin:10px;">Category Index</h3>
-		</div>
-		<div class="col-8 text-end">
-			<button class="addcatogerybtn" type="button" @onclick="() => OpenUpsertCategoryDialog()">
-				Add a new category
-			</button>
-		</div>
-	</div>
-	
-	<div class="card filter-section">
-    <div class="card-body">
-        <form @onsubmit="@HandleFilter">
-            <div class="row">
-	          @*  <div class="col mt-4">
-               		<label class="filterby">Filter By:<i class="fa-solid fa-filter" style="font-size:18px;"></i></label>
-               </div> *@
-	            @if (_globalState.OrganizationId is null)
-	            {
-		            <div class="col">
-			            <label class="required">Organization</label>
-			            <select aria-required="true" class="form-select" required @onchange="OnOrganizationSelection">
-				            <option disabled="" label="Select an Organization" selected="" value=""></option>
-				            @if (_organizations != null)
-				            {
-					            foreach (var item in _organizations)
-					            {
-						            <option value="@item.Id">@item.Name</option>
-					            }
-				            }
-			            </select>
-		            </div>
-	            }
-             @*    <div class="col row companysection">
-                	<label class="required">Company</label>
-                    <select aria-required="true" class="form-select" required @onchange="OnCompanySelection">
-                        <option disabled="" label="Select a Company" selected="" value=""></option>
-                        @if (_companies != null)
-                        {
-                            foreach (var item in _companies)
-                            {
-                                <option value="@item.Id">@item.Name</option>
-                            }
-                        }
-                    </select>
-						<button type="submit" value="Search" data-bs-toggle="tooltip" data-bs-placement="top" title="Search" class="searchbuttond">
-							<i class="fa-solid fa-magnifying-glass"></i>
-						</button>
-						
-                </div> *@
-                
-            </div>
-        </form>
+    <div class="row mt-1 mb-1">
+        <div class="col-4">
+            <h3 style="margin:10px;">Category Index</h3>
+        </div>
+        <div class="col-8 text-end">
+            <button class="addcatogerybtn" type="button" @onclick="() => OpenUpsertCategoryDialog()">
+                Add a new category
+            </button>
+        </div>
     </div>
-</div>
 
-@if (Filter.IsInitialized)
-{
-	<div class="row searchlinegroup">
-		<div class="col">
-			@if (_pagerDto.TotalPages > 0)
-			{
-				<span class="selecttext">Current Entries:</span>
-				<select class="selectcompany" @onchange="HandlePaginationChange">
-					<option value="5">5</option>
-					<option value="10">10</option>
-					<option value="15">15</option>
-					<option value="20">20</option>
-				</select>
-			}
-			</div>
-		<div class="col searchline2" style="text-align:left">
-			<span class="searchtext">Search:</span> <input type="text" class="searchinput" @bind="Filter.Search"/>
-			
-			<button type="button" value="Search" @onclick="HandleFilter" data-bs-toggle="tooltip" data-bs-placement="top" title="Click here, to search records" class="searchbuttond" >
-				<i class="fa-solid fa-magnifying-glass"></i> 
-			</button>
-				<button @onclick="clearsearch" type="button" title="Clear" class="clearbuttond">
-					<i class="fa-solid fa-eraser"></i>
-				</button>
-		
-		</div>
-	</div>
-	<div class="tablediv">
-		<table class="table">
-			<thead>
-			<tr>
-				@* <th class="th1">
-			
-					Company
-		
-				</th> *@
-				<th>
-			
-					Title
-			
-				</th>
-				<th>
-			
-					Parent Category
-			
-				</th>
-				<th class="th6">
+    @if (Filter.IsInitialized)
+    {
+        <div class="row searchlinegroup">
+            <div class="col">
+                @if (_pagerDto.TotalPages > 0)
+                {
+                    <span class="selecttext">Current Entries:</span>
+                    <select class="selectcompany" @onchange="HandlePaginationChange">
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                }
+            </div>
+            <div class="col searchline2" style="text-align:left">
+                <span class="searchtext">Search:</span>
+                <input type="text" class="searchinput" @bind="Filter.Search" />
+                <button type="button" @onclick="HandleFilter" class="searchbuttond">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </div>
+        <div class="tablediv">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Parent Category</th>
+                        <th>Color</th>
+                        <th class="th6">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var category in _categories)
+                    {
+                        <tr>
+                            <td>@category.Title</td>
+                            <td>@category.ParentCategoryName</td>
+                            <td><div style="background-color: @category.ImageUrl; height:50px;width:50px;"></div></td>
+                            <td>
+                                <i class="fa-solid fa-pen-to-square" @onclick="() => OpenUpsertCategoryDialog(category.Id)"></i>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
-					Action
-
-				</th>
-	
-			</tr>
-			</thead>
-			<tbody>
-			@{
-				IEnumerable<CategoryResponseDto> categories = _categories;
-
-				if (categories != null && categories.Any())
-				{
-					foreach (var category in categories)
-					{
-						<tr >						
-							<td>@category.Title</td>
-							<td>@category.ParentCategoryName</td>
-							<td>
-								<i class="fa-solid fa-pen-to-square" @onclick="() => OpenUpsertCategoryDialog(category.Id)"></i>						
-							</td>
-						</tr>
-					}
-				}
-			}
-			</tbody>
-		</table>
-		@if (_pagerDto.TotalPages > 0)
-        {
-            <div class="row">
-                <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
-                   
-			
-	
-                </div>
-                <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
-
-                    <ul class="pagination justify-content-end">
-                        @if (_pagerDto.CurrentPage > 1)
-                        {
-                            <li class="page-item pointer px-1">
-                                <a class="page-link" @onclick="() => OnPagination(1)">First</a>
-                            </li>
-                            <li class="page-item pointer px-1">
-                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
-                            </li>
-                        }
-                        @if (_pagerDto.TotalPages > 1)
-                        {
-                            for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+            @if (_pagerDto.TotalPages > 0)
+            {
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+                        <ul class="pagination justify-content-end">
+                            @if (_pagerDto.CurrentPage > 1)
                             {
-                                var currentPageItem = pageItem; 
-                                <li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
-                                    <a class="page-link" @onclick="() => OnPagination(currentPageItem)">@currentPageItem</a>
+                                <li class="page-item pointer px-1">
+                                    <a class="page-link" @onclick="() => OnPagination(1)">First</a>
+                                </li>
+                                <li class="page-item pointer px-1">
+                                    <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
                                 </li>
                             }
-                        }
-    
-                        @if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
-                        {
-                            <li class="page-item pointer px-1">
-                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
-                            </li>
-                            <li class="page-item pointer px-1">
-                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
-                            </li>
-                        }
-                    </ul>
+                            @for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+                            {
+                                <li class="page-item pointer px-1 @(pageItem == _pagerDto.CurrentPage ? "active" : "")">
+                                    <a class="page-link" @onclick="() => OnPagination(pageItem)">@pageItem</a>
+                                </li>
+                            }
+                            @if (_pagerDto.CurrentPage < _pagerDto.TotalPages)
+                            {
+                                <li class="page-item pointer px-1">
+                                    <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
+                                </li>
+                                <li class="page-item pointer px-1">
+                                    <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            
-        }
-		
-	</div>	
-}
+            }
+        </div>
+    }
 
-@if (_showUpsertCategoryDialog)
-{
-	<ModalDialog Title="@_dialogTitle" OnClose="@OnUpsertCategoryDialogClose" OkLabel="@_dialogOkLabel">
-		<form enctype="multipart/form-data">
-			@* <div class="mb-3">
-				<label class="form-label">&nbsp;Company</label>
-				@if (_categoryModel.Id == 0)
-				{
-					<select class="form-control" @onchange="HandleCompanyChange" required="required">
-						<option selected="selected" disabled="disabled">Select an Company</option>
-						@if (_companies is not null)
-						{
-							foreach (var item in _companies)
-							{
-								<option value="@item.Id">@item.Name</option>
-							}
-						}
-					</select>
-				}
-				else
-				{
-					<select value="@_categoryModel.CompanyId" class="form-control" @onchange="HandleCompanyChange" required="required">
-						<option selected="selected" disabled="disabled">Select an Company</option>
-						@if (_companies is not null)
-						{
-							foreach (var item in _companies)
-							{
-								<option value="@item.Id">@item.Name</option>
-							}
-						}
-					</select>
-				}
-			</div> *@
-			<div class="mb-3">
-				<label class="form-label">&nbsp;Title</label>
-				<input type="text" class="form-control" @bind="_categoryModel.Title" placeholder="Enter a category title" required="required">
-			</div>
-			<div class="mb-3">
-				<label class="form-label">&nbsp;Description</label>
-				<textarea type="text" class="form-control" @bind="_categoryModel.Description" placeholder="Enter the description" required="required"></textarea>
-			</div>
-			<div class="mb-3">
-				<label class="form-label">&nbsp;Parent Category</label>
-				<select class="form-control" @bind="_categoryModel.ParentCategoryId" >
-					<option selected="selected" disabled="disabled">Select a Parent Category</option>
-					@foreach (var item in _parentCategories)
-					{
-						<option value="@item.Id">@item.Title</option>
-					}
-				</select>
-			</div>
-			<div class="mb-3">
-				<label class="form-label">&nbsp;ImageUrl</label>
-				<textarea type="text" class="form-control" @bind="_categoryModel.ImageURL" placeholder="Enter ImageUrl" required="required"></textarea>
-			</div>
-		</form>
-
-		@if (!string.IsNullOrEmpty(_upsertCategoryErrorMessage))
-		{
-			<span>@_upsertCategoryErrorMessage</span>
-		}
-	</ModalDialog>
-}
+    @if (_showUpsertCategoryDialog)
+    {
+        <ModalDialog Title="@_dialogTitle" OnClose="@OnUpsertCategoryDialogClose" OkLabel="@_dialogOkLabel">
+            <form enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label class="form-label">&nbsp;Title</label>
+                    <input type="text" class="form-control" @bind="_categoryModel.Title" placeholder="Enter a category title" required="required">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">&nbsp;Description</label>
+                    <textarea type="text" class="form-control" @bind="_categoryModel.Description" placeholder="Enter the description" required="required"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">&nbsp;Parent Category</label>
+                    <select class="form-control" @bind="_categoryModel.ParentCategoryId">
+                        <option selected="selected" disabled="disabled">Select a Parent Category</option>
+                        @foreach (var item in _parentCategories)
+                        {
+                            <option value="@item.Id">@item.Title</option>
+                        }
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Select Color</label>
+                    <div class="color-palette">
+                        @foreach (var color in ColorOptions)
+                        {
+                            <div class="color-option" style="background-color: @color;" @onclick="() => SelectColor(color)">
+                                @if (SelectedColor == color)
+                                {
+                                    <i class="bi bi-check-circle"></i>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </form>
+            @if (!string.IsNullOrEmpty(_upsertCategoryErrorMessage))
+            {
+                <span>@_upsertCategoryErrorMessage</span>
+            }
+        </ModalDialog>
+    }
 </div>

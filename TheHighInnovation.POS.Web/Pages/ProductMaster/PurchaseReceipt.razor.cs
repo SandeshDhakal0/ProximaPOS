@@ -3,9 +3,9 @@ using System.Text.Json.Serialization;
 using BlazorBootstrap;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using TheHighInnovation.POS.Model.Request.PurchaseReceipt;
-using TheHighInnovation.POS.Model.Request.VendorManagement;
-using TheHighInnovation.POS.Model.Request.VendorManagement.ProductsDTO;
+using TheHighInnovation.POS.Web.Model.Request.PurchaseReceipt;
+using TheHighInnovation.POS.Web.Model.Request.VendorManagement;
+using TheHighInnovation.POS.Web.Model.Request.VendorManagement.ProductsDTO;
 using TheHighInnovation.POS.Web.Models;
 
 namespace TheHighInnovation.POS.Web.Pages.ProductMaster

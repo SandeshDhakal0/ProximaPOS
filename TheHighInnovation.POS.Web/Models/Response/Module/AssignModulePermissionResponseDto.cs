@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Response.Module;
+﻿namespace TheHighInnovation.POS.Web.Model.Response.Module;
 
 public class AssignModulePermissionResponseDto
 {

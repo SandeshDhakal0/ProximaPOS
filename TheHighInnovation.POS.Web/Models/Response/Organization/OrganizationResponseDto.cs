@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Response.Organization;
+﻿namespace TheHighInnovation.POS.Web.Model.Response.Organization;
 
 public class OrganizationResponseDto
 {

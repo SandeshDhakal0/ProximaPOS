@@ -4,7 +4,7 @@
 @inject BaseService BaseService;
 
 <nav class="flex-column verticalnav">
-	
+
 	@if (_globalState is { RoleType: 0, OrganizationId: null })
 	{
 		<div class="nav-item px-3 navedit">
@@ -42,11 +42,11 @@
 				<i class="fa-solid fa-list"></i> &nbsp; Vendor
 			</NavLink>
 		</div>
-		
+
 		<div class="nav-item px-3 navedit navdropdown">
 			<button class="dropdown-btn d-flex" @onclick="ToggleDropdown">
 				<i class="fa fa-product-hunt" aria-hidden="true"></i> &nbsp; Product Master
-				
+
 				<i class="fa fa-caret-down"></i>
 			</button>
 			<div class="dropdown-container dropdownpart" style="@(_isDropdownOpen ? "display:block;" : "display:none;")">
@@ -65,15 +65,31 @@
 				<span class="d-flex productlink">
 					<NavLink class="nav-link dropdownlink" href="kharidkhata" Match="NavLinkMatch.All"><s class="linecut">&ensp;&ensp;</s>Kharid Khata</NavLink>
 				</span>
+				<span class="d-flex productlink">
+					<NavLink class="nav-link dropdownlink" href="bikrikhata" Match="NavLinkMatch.All"><s class="linecut">&ensp;&ensp;</s>Bikri Khata</NavLink>
+				</span>
 				<span class="d-flex productlink lastproductlink">
 					<NavLink class="nav-link dropdownlink" href="inventoryrecords" Match="NavLinkMatch.All"><s class="linecut">&ensp;&ensp;</s>Purchase Receipt Record</NavLink>
 				</span>
-			
+
+				<span class="d-flex productlink lastproductlink">
+					<NavLink class="nav-link dropdownlink" href="safe-drop-report" Match="NavLinkMatch.All"><s class="linecut">&ensp;&ensp;</s>Safe Drop Report</NavLink>
+				</span>
+				<span class="d-flex productlink lastproductlink">
+					<NavLink class="nav-link dropdownlink" href="void-report" Match="NavLinkMatch.All"><s class="linecut">&ensp;&ensp;</s>Void Report</NavLink>
+				</span>
+				<span class="d-flex productlink lastproductlink">
+					<NavLink class="nav-link dropdownlink" href="lock-report" Match="NavLinkMatch.All"><s class="linecut">&ensp;&ensp;</s>Lock Report</NavLink>
+				</span>
+				<span class="d-flex productlink lastproductlink">
+					<NavLink class="nav-link dropdownlink" href="petty-cash-report" Match="NavLinkMatch.All"><s class="linecut">&ensp;&ensp;</s>Petty Cash Report</NavLink>
+				</span>
 			</div>
 		</div>
 	}
-	
-		else{
+
+	else
+	{
 		<div class="nav-item px-3 navedit">
 			<NavLink class="nav-link" href="category" Match="NavLinkMatch.All">
 				<i class="fa-solid fa-list"></i> &nbsp; Categories
@@ -94,21 +110,7 @@
 				<i class="fa-solid fa-right-from-bracket"></i> &nbsp; Logout
 			</span>
 		</div>
-		}
-</nav>
-@* <script>
-	var dropdown = document.getElementsByClassName("dropdown-btn");
-	var i;
-
-	for (i = 0; i < dropdown.length; i++) {
-		dropdown[i].addEventListener("click", function () {
-			this.classList.toggle("active");
-			var dropdownContent = this.nextElementSibling;
-			if (dropdownContent.style.display === "block") {
-				dropdownContent.style.display = "none";
-			} else {
-				dropdownContent.style.display = "block";
-			}
-		});
 	}
-</script> *@
+</nav>
+
+

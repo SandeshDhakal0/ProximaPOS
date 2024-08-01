@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
 using BlazorBootstrap;
 using Microsoft.AspNetCore.Components;
-using TheHighInnovation.POS.Model.Request.Authentication;
-using TheHighInnovation.POS.Model.Response.Authentication;
+using TheHighInnovation.POS.Web.Model.Request.Authentication;
+using TheHighInnovation.POS.Web.Model.Response.Authentication;
 using TheHighInnovation.POS.Web.Models;
 
 namespace TheHighInnovation.POS.Web.Pages;

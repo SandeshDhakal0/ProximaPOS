@@ -1,0 +1,46 @@
+﻿@using Microsoft.JSInterop
+
+<div style="margin-left:50px;">
+    <label  for="month-select">महिना चयन गर्नुहोस्:</label>
+    <select
+        style="border:none;
+        height:5vh;
+        background-color:#d9d9d9;
+        border-radius:5px;
+        margin-left:10px;
+        width:10vw;
+        text-align:center;"
+            id="month-select" name="month" @onchange="OnMonthChange">
+        <option value="1">बैशाख</option>
+        <option value="2">जेठ</option>
+        <option value="3">असार</option>
+        <option value="4">साउन</option>
+        <option value="5">भदौ</option>
+        <option value="6">असोज</option>
+        <option value="7">कात्तिक</option>
+        <option value="8">मंसिर</option>
+        <option value="9">पुष</option>
+        <option value="10">माघ</option>
+        <option value="11">फाल्गुन</option>
+        <option value="12">चैत्र</option>
+    </select>
+</div>
+
+@code {
+    [Parameter] public string ClassName { get; set; } = "container";
+    [Parameter] public int SelectedMonth { get; set; } = 1;
+    [Parameter] public EventCallback<int> selectedMonthChange { get; set; }
+    [Inject] private IJSRuntime JSRuntime { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var currentNepaliMonth = await JSRuntime.InvokeAsync<int>("getCurrentNepaliMonth");
+        SelectedMonth = currentNepaliMonth;
+    }
+
+    private async Task OnMonthChange(ChangeEventArgs e)
+    {
+        SelectedMonth = int.Parse(e.Value.ToString());
+        await selectedMonthChange.InvokeAsync(SelectedMonth);
+    }
+}

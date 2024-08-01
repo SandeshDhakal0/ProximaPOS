@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
-using TheHighInnovation.POS.Model.Request.Scan;
-using TheHighInnovation.POS.Model.Response.Base;
-using TheHighInnovation.POS.Model.Response.Scan;
+using TheHighInnovation.POS.Web.Model.Request.Scan;
+using TheHighInnovation.POS.Web.Model.Response.Base;
+using TheHighInnovation.POS.Web.Model.Response.Scan;
 
 namespace TheHighInnovation.POS.Web.Pages;
 

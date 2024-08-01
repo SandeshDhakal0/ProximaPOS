@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Response.Sales;
+﻿namespace TheHighInnovation.POS.Web.Model.Response.Sales;
 
 public class SalesResponseDto
 {

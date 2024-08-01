@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Response.Dashboard;
+﻿namespace TheHighInnovation.POS.Web.Model.Response.Dashboard;
 
 public class DashboardTransactionDto
 {

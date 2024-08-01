@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheHighInnovation.POS.Model.Response.Unit
+namespace TheHighInnovation.POS.Web.Model.Response.Unit
 {
 	internal class UnitResponseDto
 	{

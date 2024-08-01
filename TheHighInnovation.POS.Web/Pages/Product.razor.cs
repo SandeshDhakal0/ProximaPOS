@@ -5,366 +5,265 @@ using System.Text.Json;
 using Application.DTOs.Product;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
-using TheHighInnovation.POS.Model;
-using TheHighInnovation.POS.Model.Request.Filter;
-using TheHighInnovation.POS.Model.Response.Category;
-using TheHighInnovation.POS.Model.Response.Company;
-using TheHighInnovation.POS.Model.Response.Organization;
-using TheHighInnovation.POS.Model.Response.Product;
+using TheHighInnovation.POS.Web.Model;
+using TheHighInnovation.POS.Web.Model.Request.Filter;
+using TheHighInnovation.POS.Web.Model.Response.Category;
+using TheHighInnovation.POS.Web.Model.Response.Company;
+using TheHighInnovation.POS.Web.Model.Response.Organization;
+using TheHighInnovation.POS.Web.Model.Response.Product;
 using TheHighInnovation.POS.Web.Models;
 
 namespace TheHighInnovation.POS.Web.Pages;
 
 public partial class Product
 {
-    [CascadingParameter]
-    private GlobalState _globalState { get; set; }
-    
-    private List<ProductResponseDto> _products { get; set; }
-    
-    private List<CompanyResponseDto>? _companies { get; set; }
+	[CascadingParameter]
+	private GlobalState _globalState { get; set; }
 
-    private List<CategoryResponseDto>? _categories { get; set; } = new();
-    
-    private List<OrganizationResponseDto>? _organizations { get; set; }
+	private List<ProductResponseDto> _products { get; set; }
 
-    private bool _showUpsertProductDialog { get; set; }
-    
-    private bool _showDeleteProductDialog { get; set; }
+	private List<CompanyResponseDto>? _companies { get; set; }
 
-    private CreateProductRequestDto _productModel { get; set; } = new();
-    
-    private string _dialogTitle { get; set; } 
+	private List<CategoryResponseDto>? _categories { get; set; } = new();
 
-    private string _dialogOkLabel { get; set; } 
-    
-    private string _upsertProductErrorMessage { get; set; } 
-    
-    private string _deleteProductErrorMessage { get; set; }
+	private List<OrganizationResponseDto>? _organizations { get; set; }
 
-    private FilterRequestDto Filter = new();
-    
-    private PagerDto _pagerDto { get; set; } = new();
-    
-    private async Task HandleFilter()
-    {
-        Filter.PageSize = 10;
-       
-        var parameters = new Dictionary<string, string>
-        {
-            { "categoryId", Filter.CategoryId.ToString()! },
-            { "search", Filter.Search },
-            { "pageNumber", "1" },
-            { "pageSize", Filter.PageSize.ToString() },
-        };
+	private bool _showUpsertProductDialog { get; set; }
 
-        var products = await BaseService.GetAsync<Derived<List<ProductResponseDto>>>("product", parameters);
+	private bool _showDeleteProductDialog { get; set; }
 
-        _pagerDto = new PagerDto(products.TotalCount ?? 1, 1, 10);
+	private CreateProductRequestDto _productModel { get; set; } = new();
 
-        _products = products.Result ?? [];
-        
-        Filter.IsInitialized = true;
-    }
-    
-    private async Task OnOrganizationSelection(ChangeEventArgs e)
-    {
-        if (e.Value == null) return;
-        
-        var organizationId = Int32.Parse(e.Value.ToString());
+	private string _dialogTitle { get; set; }
 
-        Filter.OrganizationId = organizationId;
-        Filter.CompanyId = 0;
-        
-        var parameters = new Dictionary<string, string>
-        {
-            { "organizationId", organizationId.ToString() },
-            { "pageNumber", "1" },
-            { "pageSize", "1000" },
-        };
+	private string _dialogOkLabel { get; set; }
 
-        var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
-            
-        _companies = companies?.Result ?? [];
-    }
-    
-    
-    private async Task OnCompanySelection(ChangeEventArgs e)
-    {
-        if (e.Value == null) return;
-        
-        var companyId = Int32.Parse(e.Value.ToString());
+	private string _upsertProductErrorMessage { get; set; }
 
-        Filter.CompanyId = companyId;
-        Filter.CategoryId = 0;
-        
-        var parameters = new Dictionary<string, string>
-        {
-            { "companyId", companyId.ToString() },
-            { "pageNumber", "1" },
-            { "pageSize", "1000" },
-        };
+	private string _deleteProductErrorMessage { get; set; }
 
-        var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parameters);
-            
-        _categories = categories?.Result ?? [];
-    }
+	private FilterRequestDto Filter = new();
 
-    private void OnCategorySelection(ChangeEventArgs e)
-    {
-        if (e.Value != null && !string.IsNullOrWhiteSpace(e.Value.ToString()))
-        {
-            if (Int32.TryParse(e.Value.ToString(), out int categoryId))
-            {
-                Filter.CategoryId = categoryId;
-            }
-        }
-        else
-        {
-            Filter.CategoryId = null;
-        }
-        
-    }
-    
-    protected override async Task OnInitializedAsync()
-    {
-        if (_globalState.OrganizationId != null)
-        {
-            var parameters = new Dictionary<string, string>
-            {
-            { "companyId", _globalState.CompanyId.ToString() },
-            { "pageNumber", "1" },
-            { "pageSize", "1000" },
-        };
+	private PagerDto _pagerDto { get; set; } = new();
 
-            var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parameters);
+	private List<string> ColorOptions = new()
+	{
+		"#FF5733", // Red-Orange
+        "#33FF57", // Green
+        "#3357FF", // Blue
+        "#F0F0F0"  // Light Gray
+    };
 
-            _categories = categories?.Result ?? [];
+	private string SelectedColor { get; set; }
 
-            Filter.PageSize = 10;
+	private void SelectColor(string color)
+	{
+		SelectedColor = color;
+		_productModel.ImageURL = SelectedColor;
+	}
 
-            var parametersinitial = new Dictionary<string, string>
-            {
-            { "categoryId", Filter.CategoryId.ToString()! },            
-            { "search", Filter.Search },
-            { "pageNumber", "1" },
-            { "pageSize", Filter.PageSize.ToString() },
-            };
+	private async Task HandleFilter()
+	{
+		Filter.PageSize = 10;
 
-            var products = await BaseService.GetAsync<Derived<List<ProductResponseDto>>>("product", parametersinitial);
+		var parameters = new Dictionary<string, string>
+		{
+			{ "categoryId", Filter.CategoryId.ToString()! },
+			{ "search", Filter.Search },
+			{ "pageNumber", "1" },
+			{ "pageSize", Filter.PageSize.ToString() },
+		};
 
-            _pagerDto = new PagerDto(products.TotalCount ?? 1, 1, 10);
+		var products = await BaseService.GetAsync<Derived<List<ProductResponseDto>>>("product", parameters);
 
-            _products = products.Result ?? [];
+		_pagerDto = new PagerDto(products.TotalCount ?? 1, 1, 10);
 
-            Filter.IsInitialized = true;
-        }
-        else
-        {
-            var parameters = new Dictionary<string, string>
-            {
-                { "pageNumber", "1" },
-                { "pageSize", "1000" },
-            };
+		_products = products.Result ?? [];
 
-            var organizations = await BaseService.GetAsync<Derived<List<OrganizationResponseDto>>>("organization", parameters);
+		Filter.IsInitialized = true;
+	}
 
-            _organizations = organizations!.Result;
-        }
-    }
 
-    private async Task OpenUpsertProductDialog(int? productId = null)
-    {
-        _dialogTitle = "Add a new product";
+	private void OnCategorySelection(ChangeEventArgs e)
+	{
+		if (e.Value != null && !string.IsNullOrWhiteSpace(e.Value.ToString()))
+		{
+			if (Int32.TryParse(e.Value.ToString(), out int categoryId))
+			{
+				Filter.CategoryId = categoryId;
+			}
+		}
+		else
+		{
+			Filter.CategoryId = null;
+		}
 
-        _dialogOkLabel = "Add";
+	}
 
-        _upsertProductErrorMessage = "";
+	protected override async Task OnInitializedAsync()
+	{
+		if (_globalState.OrganizationId != null)
+		{
+			var parameters = new Dictionary<string, string>
+			{
+			{ "pageNumber", "1" },
+			{ "pageSize", "1000" },
+		};
 
-        if (productId.HasValue)
-        {
-            var parameters = new Dictionary<string, string>
-            {
-                { "productId", productId.Value.ToString() },
-            };
+			var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parameters);
 
-            var result = (await BaseService.GetAsync<Derived<ProductResponseDto>>("product", parameters))?.Result;
+			_categories = categories?.Result ?? [];
 
-            _productModel = new CreateProductRequestDto()
-            {
-                Id = result!.Id,
-                Title = result.Title,
-                Description = result.Description,
-                Unit = result.Unit,
-                CategoryId = result.CategoryId,
-                CompanyId = result.CompanyId,
-                CostPrice = result.CostPrice,
-                SalesPrice = result.SalesPrice,
-                ImageURL = result.ProductImageUrl
-            };
-        }
-        else
-        {            
-            
-            if (_globalState.OrganizationId != null)
-            {
-              
+			Filter.PageSize = 10;
 
-                var parametersCat = new Dictionary<string, string>
-                {
-                { "companyId", _globalState.CompanyId.ToString() },
-                { "pageNumber", "1" },
-                { "pageSize", "1000" },
-                 };
+			var parametersinitial = new Dictionary<string, string>
+			{
+			{ "categoryId", Filter.CategoryId.ToString()! },
+			{ "search", Filter.Search },
+			{ "pageNumber", "1" },
+			{ "pageSize", Filter.PageSize.ToString() },
+			};
 
-                var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parametersCat);
+			var products = await BaseService.GetAsync<Derived<List<ProductResponseDto>>>("product", parametersinitial);
 
-                _categories = categories?.Result ?? [];
+			_pagerDto = new PagerDto(products.TotalCount ?? 1, 1, 10);
 
-            }
-            else
-            {
-                var parameters = new Dictionary<string, string>
-                {
-                    { "pageNumber", "1" },
-                    { "pageSize", "1000" },
-                };
+			_products = products.Result ?? [];
 
-                var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
-                
-                _companies = companies?.Result ?? [];
-            }
-        }
-        
-        _showUpsertProductDialog = true;
-    }
+			Filter.IsInitialized = true;
+		}
+		else
+		{
+			var parameters = new Dictionary<string, string>
+			{
+				{ "pageNumber", "1" },
+				{ "pageSize", "1000" },
+			};
 
-    private string uploadedFileUrl = "";
+			var organizations = await BaseService.GetAsync<Derived<List<OrganizationResponseDto>>>("organization", parameters);
 
-    private async Task OnInputFileChanged(InputFileChangeEventArgs e)
-    {
-        using var formData = new MultipartFormDataContent();
+			_organizations = organizations!.Result;
+		}
+	}
 
-        foreach (var file in e.GetMultipleFiles(2))
-        {
-            var fileContent = new StreamContent(file.OpenReadStream(long.MaxValue));
-            
-            fileContent.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+	private async Task OpenUpsertProductDialog(int? productId = null)
+	{
+		_dialogTitle = "Add a new product";
 
-            formData.Add(content: fileContent, name: "Files", fileName: file.Name);
-        }
+		_dialogOkLabel = "Add";
 
-        formData.Add(new StringContent("2"), "FilePath");
+		_upsertProductErrorMessage = "";
 
-        var response = await Http.PostAsync("api/file-upload", formData);
+		if (productId.HasValue)
+		{
+			var parameters = new Dictionary<string, string>
+			{
+				{ "productId", productId.Value.ToString() },
+			};
 
-        var uploadedResult = await response.Content.ReadFromJsonAsync<Derived<List<string>>>();
+			var result = (await BaseService.GetAsync<Derived<ProductResponseDto>>("product", parameters))?.Result;
 
-        uploadedFileUrl = uploadedResult!.Result.FirstOrDefault()!;
-    }
-    
-    private async Task OnUpsertProductDialogClose(bool isClosed)
-    {
-        try
-        {
-            if (isClosed)
-            {
-                _showUpsertProductDialog = false;
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(_productModel.Title) || _productModel.CategoryId == 0 || 
-                    string.IsNullOrEmpty(_productModel.Description))
-                {
-                    _upsertProductErrorMessage = "Please fill in all the details";
-            
-                    return;
-                }
-                 
-                var jsonRequest = JsonSerializer.Serialize(_productModel);
+			_productModel = new CreateProductRequestDto()
+			{
+				Id = result!.Id,
+				Title = result.Title,
+				Description = result.Description,
+				Unit = result.Unit,
+				CategoryId = result.CategoryId,
+				CompanyId = result.CompanyId,
+				CostPrice = result.CostPrice,
+				SalesPrice = result.SalesPrice,
+				ImageURL = result.ProductImageUrl,
+				IsActive = result.IsActive
+			};
+		}
+		else
+		{
 
-                var jsonContent = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
+			var parametersCat = new Dictionary<string, string>
+				{
+				{ "pageNumber", "1" },
+				{ "pageSize", "1000" },
+				 };
 
-                await BaseService.PostAsync<Derived<object>>("product", jsonContent);
+			var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parametersCat);
 
-                _showUpsertProductDialog = false;
-            
-                await OnInitializedAsync();
+			_categories = categories?.Result ?? [];
 
-                uploadedFileUrl = "";
-            }
+		}
 
-            if (Filter.OrganizationId is not 0)
-            {                
-                if (_globalState.CompanyId != null)
-                {
-                    var parametersForSearch = new Dictionary<string, string>
-                    {
-                        { "companyId", _globalState.CompanyId.ToString() },
-                        { "pageNumber", "1" },
-                        { "pageSize", "1000" },
-                    };
+		_showUpsertProductDialog = true;
+	}
 
-                    var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parametersForSearch);
-                
-                    _categories = categories?.Result ?? [];
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            _upsertProductErrorMessage = e.Message;
-        }
-        
-    }
-    
-    private async Task HandleCompanyChange(ChangeEventArgs e)
-    {
-        var selectedCompanyId = e.Value?.ToString();
 
-        var result = int.TryParse(selectedCompanyId, out int companyId);
 
-        if (result)
-        {
-            var parameters = new Dictionary<string, string>
-            {
-                { "companyId", _globalState.CompanyId.ToString() },
-            };
-            
-            var categories = await BaseService.GetAsync<Derived<List<CategoryResponseDto>>>("category", parameters);
-            
-            _categories = categories?.Result ?? [];
+	private async Task OnUpsertProductDialogClose(bool isClosed)
+	{
+		try
+		{
+			if (isClosed)
+			{
+				_showUpsertProductDialog = false;
+				_productModel = new();
+				SelectedColor = "";
+			}
+			else
+			{
+				if (string.IsNullOrEmpty(_productModel.Title) || _productModel.CategoryId == 0 ||
+					string.IsNullOrEmpty(_productModel.Description))
+				{
+					_upsertProductErrorMessage = "Please fill in all the details";
 
-            _productModel.CompanyId = companyId;
-        }
-    }
-    
-    private async Task HandlePaginationChange(ChangeEventArgs e)
-    {
-        if(e.Value == null) return;
-        
-        var pageSize = int.Parse(e.Value.ToString()!);
+					return;
+				}
 
-        Filter.PageSize = pageSize;
-	    
-        await OnPagination(1);
-    }
+				var jsonRequest = JsonSerializer.Serialize(_productModel);
 
-    private async Task OnPagination(int pageNumber)
-    {
-        var pageSize = Filter.PageSize;
-	    
-        var parameters = new Dictionary<string, string>
-        {
-            { "categoryId", Filter.CategoryId.ToString() },
-            { "pageNumber", pageNumber.ToString() },
-            { "pageSize", pageSize.ToString() },
-        };
+				var jsonContent = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-        var products = await BaseService.GetAsync<Derived<List<ProductResponseDto>>>("product", parameters);
+				await BaseService.PostAsync<Derived<object>>("product", jsonContent);
 
-        _pagerDto = new PagerDto(products.TotalCount ?? 1, pageNumber, pageSize);
+				_showUpsertProductDialog = false;
+				_productModel = new();
+				SelectedColor = "";
+				await OnInitializedAsync();
 
-        _products = products?.Result ?? [];
-    }
+			}
+		}
+		catch (Exception e)
+		{
+			_upsertProductErrorMessage = e.Message;
+		}
+
+	}
+
+
+	private async Task HandlePaginationChange(ChangeEventArgs e)
+	{
+		if (e.Value == null) return;
+
+		var pageSize = int.Parse(e.Value.ToString()!);
+
+		Filter.PageSize = pageSize;
+
+		await OnPagination(1);
+	}
+
+	private async Task OnPagination(int pageNumber)
+	{
+		var pageSize = Filter.PageSize;
+
+		var parameters = new Dictionary<string, string>
+		{
+			{ "categoryId", Filter.CategoryId.ToString() },
+			{ "pageNumber", pageNumber.ToString() },
+			{ "pageSize", pageSize.ToString() },
+		};
+
+		var products = await BaseService.GetAsync<Derived<List<ProductResponseDto>>>("product", parameters);
+
+		_pagerDto = new PagerDto(products.TotalCount ?? 1, pageNumber, pageSize);
+
+		_products = products?.Result ?? [];
+	}
 }

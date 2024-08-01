@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Response.Authentication;
+﻿namespace TheHighInnovation.POS.Web.Model.Response.Authentication;
 
 public class LoginResponseDto
 {

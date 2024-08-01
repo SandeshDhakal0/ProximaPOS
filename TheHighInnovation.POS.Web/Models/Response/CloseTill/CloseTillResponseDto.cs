@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Response.CloseTill;
+﻿namespace TheHighInnovation.POS.Web.Model.Response.CloseTill;
 
 public class CloseTillResponseDto
 {

@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http;
 using Microsoft.JSInterop;
 using System.Text.Json;
-using TheHighInnovation.POS.Model;
-using TheHighInnovation.POS.Model.Request.Customer;
-using TheHighInnovation.POS.Model.Request.Filter;
-using TheHighInnovation.POS.Model.Request.Reservation;
-using TheHighInnovation.POS.Model.Response.Reservation;
+using TheHighInnovation.POS.Web.Model;
+using TheHighInnovation.POS.Web.Model.Request.Customer;
+using TheHighInnovation.POS.Web.Model.Request.Filter;
+using TheHighInnovation.POS.Web.Model.Request.Reservation;
+using TheHighInnovation.POS.Web.Model.Response.Reservation;
 using TheHighInnovation.POS.Web.Models;
 
 namespace TheHighInnovation.POS.Web.Pages

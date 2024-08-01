@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TheHighInnovation.POS.Model.Request.Scan
+namespace TheHighInnovation.POS.Web.Model.Request.Scan
 {
 	public class ScanRequestDto
 	{
