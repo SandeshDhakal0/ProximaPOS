@@ -1,0 +1,16 @@
+@inject IJSRuntime _JS;
+
+
+
+<canvas id="myLineGraph"></canvas>
+
+@code {
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await _JS.InvokeVoidAsync("initializeLineGraph");
+        }
+    }
+}

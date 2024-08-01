@@ -2,7 +2,7 @@
     --primary-btn-color: #1b6ec2;
     --button-border-color: #1861ac;
     --validation-message-color: #e50000;
-    --inputbox-color: #F2F2F2;
+    --inputbox-color: #ECECEB;
 }
 
 html, body {
@@ -16,7 +16,7 @@ html, body {
 #productTable {
     width: 100%;
 
-   
+
 }
 
     #productTable th, #productTable td {
@@ -28,7 +28,7 @@ html, body {
         padding-bottom: 3px !important;
     }
 #productTable tbody {
-    height:16.5vh !important;
+    height:15vh !important;
 }
 /* Header Styling */
 #productTable thead {
@@ -131,57 +131,62 @@ h1:focus {
     border-radius: 0 15px 15px 0;
     margin: 4% 0 4% 0;
 }
-.blazored-typeahead__input-mask {
-    border: none;
-    background-color: #d9d9d9;
+
+
+
+/*Product receipt page blazored inputs design */
+
+/*Start*/
+.vendorbox .blazored-typeahead, .panvattypehead .blazored-typeahead, .productbarcodeinput .blazored-typeahead__input {
+    background-color: transparent;
+    border: none !important;
+    height: 100%;
 }
 
-.blazored-typeahead {
-    border: none;
-    background-color: #d9d9d9;
-    border:none;
-  
+
+
+.vendorbox .blazored-typeahead__input {
+    background-color: var(--inputbox-color) !important;
+    border-radius: 10px 0 0 10px;
+    border: 1px solid #111 !important;
 }
-.blazored-typeahead__input{
-    background-color:transparent;
-}
-.blazored-typeahead__input-mask{
-    background-color:transparent;
-    
+
+
+.panvattypehead .blazored-typeahead__input {
+    background-color: var(--inputbox-color) !important;
+    border-radius: 10px;
+    border: 1px solid #111 !important;
+    width: 90%;
 }
 .productbarcodeinput .blazored-typeahead__input {
-    width: 150px !important;
-    height:4vh !important;
-   border:none;
-   background-color:#b3c6ec;
-  font-weight:500;
-   color:#082248;
-   
-}   
-/*Vendor management page input for vendor names edit.*/
-
- .productmanagementvendorname .blazored-typeahead__input {
-   
-    width:50px !important;
-    padding-top:0;
-}
-.panvattypehead .blazored-typeahead__input{
-    width:70%;
-    
+    background-color: var(--inputbox-color) !important;
+    border-radius: 5px;
+    height: 3.5vh !important;
+    border: 1px solid #111 !important;
+    width: 100% !important;
 }
 
+
+.unit-input .blazored-typeahead__input {
+    border:none !important;
+    background-color: #d9d9d9;
+    width: 14vw;
+    border-radius: 5px;
+}
+
+
+/*end*/
 @supports (-webkit-touch-callout: none) {
     .status-bar-safe-area {
-        display: flex;
-        position: sticky;
-        top: 0;
-        height: env(safe-area-inset-top);
-        background-color: #f7f7f7;
-        width: 100%;
-        z-index: 1;
+            display: flex;
+            position: sticky;
+            top: 0;
+            height: env(safe-area-inset-top);
+            background-color: #f7f7f7;
+            width: 100%;
+            z-index: 1;
+        }
+        .flex-column, .navbar-brand {
+            padding-left: env(safe-area-inset-left);
+        }
     }
-
-    .flex-column, .navbar-brand {
-        padding-left: env(safe-area-inset-left);
-    }
-}
