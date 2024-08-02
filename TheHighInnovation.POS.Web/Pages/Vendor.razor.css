@@ -4,9 +4,43 @@
 
 }
 
-/*.vendorcard{
-    height:42vh !important;
-}*/
+
+
+
+.headingpart {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.categoryheading {
+    font-size: 36px;
+    font-weight: 300;
+}
+
+.addbuttoncategory {
+    text-align: end;
+}
+
+.buttonadd {
+    align-items: end;
+    height: 55px;
+    width: 180px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ABBFE0;
+    color: #000000;
+    font-size: 20px;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 .vendordropdown {
@@ -24,30 +58,11 @@
 
 }
 
-.noofvendor {
-    font-weight: 600;
-    font-size: 32px;
-    margin-left:1vw;
-    padding-top:2vh;
-}
-
 .fa-bookmark {
     font-size: 32px;
     color: var(--our--commonblue-color);
 }
 
-.addvendorbutton {
-    margin-top: 8px;
-    margin-left:40%;
-    text-align: center;
-    border: none;
-    background-color: #ABBFE0;
-    color: black;
-    height:50px;
-    width:150px;
-    border-radius: 10px;
-    font-size:20px;
-}
 
 
 ::-webkit-scrollbar {
@@ -319,9 +334,7 @@ input[type="checkbox"] {
         .buttonpart{
             gap:15px;
         }
-        .addvendorbutton{
-            margin-left:30%;
-        }
+       
     }
 @media screen and (max-width: 1254px){
 
@@ -334,9 +347,7 @@ input[type="checkbox"] {
     .buttonpart {
         gap: 15px;
     }
-    .addvendorbutton {
-        margin-left: 20%;
-    }
+  
 
     }
 
@@ -396,11 +407,7 @@ input[type="checkbox"] {
             gap: 30%;
         }
 
-        .addvendorbutton {
-            font-size: 16px;
-            height: 45px;
-            width: 130px;
-        }
+   
 
         .nesteddiv {
             font-size: 10px;
@@ -411,9 +418,7 @@ input[type="checkbox"] {
             width: 14.5vw;
         }
 
-        .addvendorbutton {
-            margin-left: 35%;
-        }
+      
     }
 
 
@@ -437,9 +442,7 @@ input[type="checkbox"] {
             height: 42vh;
         }
 
-        .addvendorbutton {
-            margin-left: 20%;
-        }
+ 
     }
 
     @media screen and (max-width: 798px) {
@@ -447,9 +450,6 @@ input[type="checkbox"] {
             height: 39vh;
         }
 
-        .addvendorbutton {
-            margin-left: 5%;
-        }
 
         .nameandcashier {
             padding: 0 0 5px 0;
@@ -498,12 +498,7 @@ input[type="checkbox"] {
         width:5vw;
         height:6vh;
         }
-        .addvendorbutton{
-            margin-left:0;
-            height:40px;
-            width:100px;
-            font-size:16px;
-        }
+   
         .activepart{
             height:20px;
             width:55px;
@@ -513,7 +508,5 @@ input[type="checkbox"] {
         .nesteddiv{
             font-size:10px;
         }
-        .noofvendor{
-            font-size:30px;
-        }
+   
     }

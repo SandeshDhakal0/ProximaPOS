@@ -11,17 +11,17 @@
 <div class="Vendorpage">
      
                 <div class="row top-container">
-                    <div class="col-8 d-flex">
-                        <p class="noofvendor">VENDORS</p>
-                   @*      <select class="vendordropdown">
-                           <option selected disabled> Filter</option>
-                           <option>Active</option>
-                           <option>Inactive</option>
-                       </select> *@
-                    </div>                  
-                    <div class="offset-1 col-2">
-                        <button class="addvendorbutton" @onclick="openaddvendordialogue">Add Vendor</button>
-                    </div>
+        <div class="headingpart">
+            <div class="categoryheading">
+                <p>
+                    Vendors
+                </p>
+            </div>
+            <div class="addbuttoncategory">
+                <button class="buttonadd" @onclick="openaddvendordialogue">Add Vendor</button>
+            </div>
+        </div>
+              
 
                     @if(_openaddvendordialogue){
                         <ModalDialog OnClose="@OnUpsertVendor" OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
