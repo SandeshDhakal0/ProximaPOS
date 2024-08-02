@@ -3,31 +3,31 @@
     margin-bottom: 2%;
     margin-left: -1vw;
 }
-.category-heading{
-    font-size: 36px;
-    font-weight: 300;
+
+/*Top parttttttttttttttttttttttttttttttttttttttttttttttttt*/
+.headingpart{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr) ;
 }
-
-
-.category-heading{
+.categoryheading{
     font-size:36px;
     font-weight:300;
 }
+.addbuttoncategory {
 
-
-.search-panel {
- 
-    justify-content: space-between;
-    margin-bottom: 20px;
+  text-align:end;
 }
-
-.search-panel input[type="text"], .search-panel select {
-    padding: 10px;
-    margin-right: 10px;
-    border: 2px solid #ddd;
-    border-radius: 10px;  
-    width:500px;
+.buttonadd {
+    align-items: end;
+    height: 55px;
+    width: 180px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ABBFE0;
+    color: #000000;
+    font-size: 20px;
 }
+/*ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt*/
 
 
 .categorynamelabel, .categorycodelabel, .categorydescription {
@@ -44,7 +44,7 @@
     border-radius: 10px;
 }
 .categorytable thead{
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid #dcdcdc;
 }
 
     .categorytable th, .categorytable td {
@@ -75,35 +75,11 @@ categorytable thead th, .thlast {
 
 
 .table-container {
-    border: 1px solid #0C2144;
+    border: 2px solid #dcdcdc;
 }
 
 
 
-.addbutton {
-    border: none;
-    color: black;
-    background-color: #ABBFE0;
-    height: 60px;
-    width: 187px;
-    border-radius: 10px;
-    margin-left: 58%;
-    font-size:22px;
-}
-.AddCatogeryBtn {
-
-    padding:2vh 0 0 20vh;
-}
-.searchbutton {
-    border: none;
-    background-color: #ABBFE0;
-    border-radius: 10px;
-    height:52px;
-    width:132px;
-    color: black;
-    cursor: pointer;
-    font-size:22px;
-}
 .updatebutton {
     color: dodgerblue;
     font-size: 20px;
@@ -155,90 +131,139 @@ categorytable thead th, .thlast {
     width:57px
 }
 
+
+/*Search Buttonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn*/
+.search-pannel {
+    display: flex;
+
+    margin-bottom:20px;
+ 
+}
+    .search-pannel input{
+        width:500px;
+    }
+    .search-input {
+        border: 1px solid #dcdcdc;
+        padding: 10px;
+        border-radius:10px 0 0 10px;
+
+
+    }
+.search-button {
+    background-color: #0C2144;
+    color:white;
+    width:60px;
+    border-radius:0 10px 10px 0;
+}
+.search-button i{
+    font-size:22px;
+}
+/*nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn*/
+
+
+
+
+
+/*.categorytable tr td:last-child {
+    padding-right: 30px;
+}*/
+.categorytable tr td:nth-last-child(2){
+    width:300px;
+}
+
+.categorytable thead th:nth-last-child(2) {
+    width: 300px; 
+}
+
+
+
+
+
 /*Media Quary ====================================================================================*/
-@media screen and (max-width: 1100px) {
-    .addbutton {
-        height: 8vh;
-        font-size: 14px;
-    }
+@media screen and (max-width: 1632px) {
+ 
+}
 
-    .searchbutton {
-        font-size: 14px;
+@media screen and (max-width: 1254px){
+ 
+} 
+@media screen and (max-width: 1080px){
+    .inventorycategorypage {
+        margin-top: 4.5%;
+    }
+.search-pannel input{
+    width:400px !important;
+}
+.buttonadd{
+    font-size:18px;
+}
+.categorytable{
+    font-size:14px;
+}
+}
+
+@media screen and (max-width: 974px) {
+    .inventorycategorypage{
+        margin-top:5%;
+    }
+    .buttonadd{
+        height:50px;
+        width:150px;
+
+    }
+    .search-pannel{
+        width:400px!important;
     }
 }
 
-@media screen and (max-width: 996px) {
-    .addbutton {
-        font-size: 15px;
-        width: 11vw;
-        margin-left: 65%;
+@media screen and (max-width: 798px) {
+    .inventorycategorypage {
+        margin-top: 6%;
+    }
+    .buttonadd {
+        height: 45px;
+        width: 130px;
+        font-size:14px;
+    }
+    .search-pannel{
+        width:350px !important;
+    }
+    .search-button{
+        width:70px;
+    }
+    .search-input{
+        padding:5px;
+    }
+    .search-button i{
+        font-size:16px;
+    }
+    .categorytable tr td:nth-last-child(2) {
+        width: 200px;
     }
 
-    .searchbutton {
-        font-size: 15px;
-        height: 7vh;
+    .categorytable thead th:nth-last-child(2) {
+        width: 200px;
+    }
+    .categorytable tbody{
+        height:45vh !important;
     }
 
-    .search-panel input[type="text"], .search-panel select {
-        padding: 5px;
-    }
+
 }
 
 
-@media screen and (max-width: 940px) {
-    .addbutton {
-        font-size: 14px;
-        height: 7vh;
-    }
-
-    .search-panel input[type="text"], .search-panel select {
-        padding: 5px;
-    }
-
-    .searchbutton {
-        height: 7vh;
-    }
-
-    .action-icon {
-        font-size: 15px;
-    }
-}
-
-@media screen and (max-width: 886px) {
-    .addbutton {
-        font-size: 13px;
-    }
-
-    .searchbutton {
-        font-size: 13px;
-    }
-
-    .search-panel input[type="text"], .search-panel select {
-        padding: 5px;
-    }
-}
-@media screen and (max-width: 886px) {
-    .category-heading {
-        font-size: 32px;
-    }
-
-    .addbutton {
-        font-size: 12px;
-        height: 7vh;
-    }
-
-    .categorytable {
-        font-size: 13px;
-    }
-}
 
 
-@media screen and (max-width: 775px) {
-    .addbutton {
-        width: 20vh;
-        margin-left: 50%;
-    }
-}
+
+
+
+
+
+
+
+
+
+
 
 
 
