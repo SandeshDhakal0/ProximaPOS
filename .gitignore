@@ -261,7 +261,6 @@ wwwroot/documents/*
 package.json
 global.json
 mono*.blob
-launchSettings.json
 
 # CI/CD
 .DS_Store
