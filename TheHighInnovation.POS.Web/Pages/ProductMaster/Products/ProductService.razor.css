@@ -2,11 +2,6 @@
     margin-top: 4%;
 }
 
-/*.container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-}*/
 
 .actions .btn {
     background-color: #007bff;
@@ -45,16 +40,52 @@
         .filters .filter-btn:hover {
             background-color: #5a6268;
         }
+
+
+
+
+
+
+.search-pannel {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+    .search-pannel input {
+        width: 500px;
+    }
+
+.categorycodeinput {
+    border: 1px solid #dcdcdc;
+    padding: 10px;
+    border-radius: 10px 0 0 10px;
+}
+
+.search-button {
+    background-color: #0C2144;
+    color: white;
+    width: 60px;
+    border-radius: 0 10px 10px 0;
+}
+
+    .search-button i {
+        font-size: 22px;
+    }
+
+
+
+
+
+
+
+
 table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
     --column-count: 7;
 }
-.product-table {
- /*   border: 1px solid #0C2144;
-    border-radius:10px;*/
-}
+
 
 thead th,
 tbody td {
@@ -63,7 +94,6 @@ tbody td {
 }
 
 thead th {
-/*    background-color: #4CAF50;*/
     color: black;
     position: sticky; /* Make the headers sticky */
     top: 0; /* Stick to the top of the viewport */
@@ -97,13 +127,7 @@ th[colspan="2"] {
     width: 100%;
 }
 
-/*.status.active {
-    color: #28a745;
-}
 
-.status.inactive {
-    color: #dc3545;
-}*/
 .active-button {
     background-color: #14AD5A;
     border-radius:10px;
@@ -206,40 +230,13 @@ th[colspan="2"] {
 }
 
 
-.search-panel {
-    justify-content: space-between;
-    margin-bottom: 20px;
-}
-
-    .search-panel input[type="text"], .search-panel select {
-        padding: 10px;
-        margin-right: 10px;
-        border: 2px solid #ddd;
-        border-radius: 10px;
-        width: 500px;
-    }
-
-
-    .search-panel button:hover {
-        background-color: #0056b3;
-    }
-.searchbutton {
-    border: none;
-    background-color: #ABBFE0;
-    border-radius: 10px;
-    height: 52px;
-    width: 132px;
-    color: black;
-    cursor: pointer;
-    font-size: 22px;
-}
 
     .table-container{
-    border: 1px solid #0C2144;
+    border: 2px solid #dcdcdc;
 }
 
     .product-table thead{
-        border-bottom:1px solid black;
+        border-bottom:2px solid #dcdcdc;
     }
 
 .product-table tbody {
@@ -261,6 +258,173 @@ th[colspan="2"] {
         width: 57px;
     }
 
+.headingpart {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.addbuttoncategory{
+
+}
+.categoryheading {
+    font-size: 36px;
+    font-weight: 300;
+}
+
+.addbuttoncategory {
+    justify-content:end;
+    text-align: end;
+  display:flex;
+  gap:10px;
+
+}
+
+.buttonadd {
+    align-items: end;
+    height: 55px;
+    width: 180px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ABBFE0;
+    color: #000000;
+    font-size: 20px;
+}
+
+
+
+
+/*Media Quary ====================================================================================*/
+@media screen and (max-width: 1632px) {
+}
+
+@media screen and (max-width: 1254px) {
+}
+
+@media screen and (max-width: 1080px) {
+    .buttonadd{
+        height:50px;
+        width:150px;
+        font-size:18px;
+    }
+    .productspage {
+        margin-top: 4.5%;
+    }
+
+    .search-pannel input {
+        width: 400px !important;
+    }
+
+    .product-table{
+        font-size:14px;
+    }
+
+}
+
+@media screen and (max-width: 974px) {
+    .productspage {
+        margin-top: 5%;
+    }
+
+
+    .search-pannel {
+        width: 400px !important;
+    }
+    .product-table {
+        font-size: 12px;
+    }
+    thead th,
+    tbody td {
+        padding: 5px;
+        text-align: left;
+    }
+    .buttonadd{
+        height:45px;
+        width:130px;
+        font-size:16px;
+
+    }
+    .categorycodeinput{
+        padding:8px;
+    }
+    .active-button, .inactive-button {
+        height: 4vh;
+        width: 8vh;
+        border-radius: 5px;
+    }
+    .inactive-button{
+
+    }
+}
+
+@media screen and (max-width: 798px) {
+    .productspage {
+        margin-top: 6%;
+    }
+
+    .search-pannel {
+        width: 350px !important;
+    }
+
+    .search-button {
+        width: 70px;
+    }
+
+    .categorycodeinput {
+        padding: 5px;
+    }
+
+    .search-button i {
+        font-size: 16px;
+    }
+
+     .product-table {
+        font-size: 12px;
+    }
+    .product-table tbody {
+        height: 45vh !important;
+    }
+    .buttonadd{
+        height:45px;
+        width:130px;
+        font-size:14px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 @media screen and (max-width: 1194px) {
     .AddCatogeryBtn{
 
@@ -269,10 +433,7 @@ th[colspan="2"] {
         font-size:15px;
 
     }
-    .searchbutton {
 
-        height: 9vh;
-    }
 }
 @media screen and (max-width: 1127px) {
     .addbutton {
@@ -285,9 +446,7 @@ th[colspan="2"] {
             font-size: 14px;
         }
 
-        .searchbutton {
-            font-size: 14px;
-        }
+  
     }
 
 
@@ -307,28 +466,14 @@ th[colspan="2"] {
             width: 12vw;
         }
 
-        .searchbutton {
-            font-size: 15px;
-            height: 9vh;
-        }
 
-        .search-panel input[type="text"], .search-panel select {
-            padding: 5px;
-        }
+
     }
 
 
     @media screen and (max-width: 940px) {
         .addbutton {
             font-size: 14px;
-            height: 7vh;
-        }
-
-        .search-panel input[type="text"], .search-panel select {
-            padding: 5px;
-        }
-
-        .searchbutton {
             height: 7vh;
         }
 
@@ -342,13 +487,8 @@ th[colspan="2"] {
             font-size: 13px;
         }
 
-        .searchbutton {
-            font-size: 13px;
-        }
 
-        .search-panel input[type="text"], .search-panel select {
-            padding: 5px;
-        }
+
     }
 
     @media screen and (max-width: 886px) {
@@ -378,4 +518,4 @@ th[colspan="2"] {
         .addbutton {
             margin-left: 45%;
         }
-    }
+    }*/
