@@ -1,6 +1,6 @@
 
 .dashboardpage {
-    /*    background-color: var(--page-background-color);*/
+
     background-color: #ECECEB;
     margin-top: 2%;
     margin-bottom: -4%;
@@ -13,16 +13,14 @@
     font-size: 35px;
     font-weight: 300;
     padding: 20px 10px 0px 15px;
-    /*margin-left: 10px;*/
+
 }
 
 .top-container {
     padding: 0px 0px 0px 20px;
-    /*    margin-left: 40px;*/
 }
 
 .container-fluid {
-    /*    background-color: var(--page-background-color);*/
     background-color: #ECECEB;
 }
 
@@ -92,8 +90,8 @@
 .revenue, .salesby, .snapshoots, .top-selling, .employees-status, .money-distribution {
     width: 460px;
     height: 350px;
-    background-color: white;
     border-radius: 10px;
+    background-color: white;
 }
 .employee-progress{
     padding-top:10px;
@@ -169,14 +167,17 @@
     padding: 10px 0 20px 0;
 }
 
-/*.top-row {
-    display: flex;
-    gap: 30%;
-    padding: 10px;
+.top-row {
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
 }
-*/
-.dropdown{
-    padding:10px;
+.seconddiv{
+    text-align:end;
+    margin-right:20px;
+}
+
+.dropdown {
+    padding: 10px;
 }
 .row-heading {
     font-size: 30px;
@@ -195,7 +196,6 @@
 .individual-progress {
     margin: 15px 0;
 }
-
 
 
 .chart {
