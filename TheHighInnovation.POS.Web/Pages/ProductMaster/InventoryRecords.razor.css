@@ -1,7 +1,7 @@
 .inventoryrcdpage
 {
     margin-top:3%;
-    padding:2vh;
+    padding:2vh 4vh 2vh 4vh;
    
     margin-left:-3vh;
     width:105%;
@@ -19,6 +19,35 @@
     
     background-color: #d9d9d9;
 }
+
+
+.headingpart {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.categoryheading {
+    font-size: 36px;
+    font-weight: 300;
+}
+
+.addbuttoncategory {
+    text-align: end;
+}
+
+.buttonadd {
+    align-items: end;
+    height: 55px;
+    width: 200px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ABBFE0;
+    color: #000000;
+    font-size: 19px;
+}
+
+
+
 .inputsrow {
     width: 98vw;
     margin-bottom: 1.5vh;
@@ -57,15 +86,48 @@
     margin-top: 1vh;
 }
 
+/*search*/
+.searchcontainer{
+    display:flex;
+    margin-bottom:20px;
+}
+.searchbox {
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    width:250px;
+}
+.searchboxone {
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px 0 0 10px;
+    width:250px;
+}
+.buttonclass{
+  
+}
+.search-button {
+    background-color: #0C2144;
+   padding:11px;
+   border-radius:0 10px 10px 0;
+   color:white;
+   width:4vw;
+   border:none;
+}
+.search-button i{
+    font-size:20px;
+    
+}
+
+
+
 /*Modal Ddesign starts from here*/
 /*.tableabhove{
     width:100%;
 }*/
-
-
-.top-row{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
+.top-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 .top-row p{
     font-size:22px;
@@ -103,14 +165,9 @@ span i{
     font-weight: 400;
     padding-right: 5px;
 }
-/*
-.thead  {
-    background-color: var(--tablehead-background);
-}*/
 
 
-
-/*.taxablenum, .taxabletxt, .discounttxt, .discountnum, .productdistxt, .productdisnum, .billpreptxtlg, .billprepnum, .vatrow, .mid {
+.taxablenum, .taxabletxt, .discounttxt, .discountnum, .productdistxt, .productdisnum, .billpreptxtlg, .billprepnum, .vatrow, .mid {
     border-bottom: 3px solid var(--tablehead-background);
 }
 .mid{
@@ -130,10 +187,10 @@ span i{
 .billpreptxtsm{
     border-right:none;
 }
-*/
 
 
-/*.display tbody {
+
+/*.display tbody {*/
     max-height: 45vh;
     display: block;
     overflow-y: scroll;
@@ -147,7 +204,7 @@ span i{
 ::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     border-radius: 10px;
-}*/
+}
 
 #example {
     width: 100%;
@@ -160,7 +217,7 @@ span i{
 }
 
 .receipt-table {
-    border: 1px solid black;
+    border: 2px solid #dcdcdc;
 }
 .batchidoptions {
     height: 6.5vh;
@@ -173,26 +230,6 @@ span i{
 .blazored-typeahead__controls{
     background-color:#ffffff !important;
 }
-.category-heading {
-    font-size: 36px;
-    font-weight: 300;
-}
-/*.searchbutton {
-    margin-top: 5vh !important;
-    border: none;
-    background-color: #ABBFE0 !important;
-    border-radius: 10px !important;
-    height: 52px!important;
-    width: 132px!important;
-    color: black !important;
-    cursor: pointer !important;
-    cursor: pointer !important;
-}
-*/
-
-
-.AddCatogeryBtn {
-    margin-left: 50%;
 }
 .addbutton {
     height: 60px;
@@ -203,7 +240,7 @@ span i{
     border-radius:10px;
 }
 .tablehead{
-    border-bottom:1px solid black;
+    border-bottom:2px solid  #dcdcdc;
 }
 
 .displayTable tr th, td {
@@ -405,3 +442,49 @@ td {
 .inputfield a {
     color: #0C2144;
 }
+
+
+
+@media screen and (max-width: 1632px) {
+}
+
+@media screen and (max-width: 1254px) {
+}
+
+@media screen and (max-width: 1080px) {
+  .buttonadd{
+      height:50px;
+      width:180px;
+      font-size:16px;
+  }
+  .searchbox, .searchboxone{
+      width:200px;
+  }
+}
+
+@media screen and (max-width: 974px) {
+
+}
+
+@media screen and (max-width: 798px) {
+    .buttonadd {
+        height: 45px;
+        width: 150px;
+        font-size: 14px;
+    }
+
+    .searchbox, .searchboxone {
+        width: 150px;
+        padding:5px;
+    }
+    .search-button{
+        width:50px;
+        padding:6px;
+    }
+    .search-button i{
+        font-size:14px;
+    }
+}
+
+
+

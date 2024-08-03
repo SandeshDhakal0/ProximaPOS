@@ -14,20 +14,20 @@
 
 
 <div class="container inventoryrcdpage">
-    <div class="row">
 
-        <div class="col-6 category-heading">
-            <p>Purchas Receipt</p>
+    <div class="headingpart">
+        <div class="categoryheading">
+            <p>
+              Purchase Receipt
+            </p>
         </div>
-        <div class="col-6">
-            <div class="col-6  AddCatogeryBtn">
-                <button class="addbutton" >Add Purchase Receipt</button>
-            </div>
+        <div class="addbuttoncategory">
+            <button class="buttonadd">Add Purchase Receipt</button>
         </div>
-
     </div>
+
     <div class="row">
-        <div class="row inputsrow">
+     @*    <div class="row inputsrow">
             <div class="col-4 vendorname">
                 <label>Vendor Name:</label>
                 <input  />
@@ -42,8 +42,19 @@
                 </button>
             </div>
 
-        </div>
+        </div> *@
+        <div class="searchcontainer">
+            <div class="seaarchpannel">
 
+                <input type="text" class="searchbox" placeholder="Enter Vendor Name" />
+                <input type="text" class="searchboxone" placeholder="Enter Batch ID" />
+            </div>
+            <div class="buttonclass">
+                <button class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
 
 
 @*         <div class="col-4 ">
@@ -92,7 +103,7 @@
                 @if (purchaseReceipt.Count > 0)
             {
                 <div class="receipt-table">
-                    <table id="example" class="displayTable ">
+                        <table id="example" class="displayTable table table-striped table-hover">
                     <thead class="tablehead">
                         <tr>
                             <th>VendorName</th>
@@ -141,6 +152,8 @@
                                             <p><span class="issuedate">Date :</span>@products.IssueDateAd</p>
                                         </div>
                                     </div> *@
+
+
                                     <div class="top-row">
                                         <div class="column1">
                                             <p>Invoice No </p>
@@ -177,6 +190,7 @@
                                          
                                         </div>
                                     </div>
+                                  
                                    
                                 }
                                 <table id="exampleS" class="table display modaltable table-hover ">
