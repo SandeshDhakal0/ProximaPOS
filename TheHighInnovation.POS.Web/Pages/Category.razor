@@ -14,7 +14,6 @@
             </button>
         </div>
     </div>
-
     @if (Filter.IsInitialized)
     {
         <div class="row searchlinegroup">
@@ -129,7 +128,7 @@
                             <div class="color-option" style="background-color: @color;" @onclick="() => SelectColor(color)">
                                 @if (SelectedColor == color)
                                 {
-                                    <i class="bi bi-check-circle"></i>
+                                    <i class="bi bi-check-circle-fill"></i>
                                 }
                             </div>
                         }
