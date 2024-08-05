@@ -11,6 +11,11 @@ public partial class NavPanel
 
     private bool _isDropdownOpen = false;
 
+    protected override async Task OnInitializedAsync()
+    {
+	    _globalState = await BaseService.GetGlobalState();
+	}
+    
 	private void ToggleDropdown()
 	{
 		_isDropdownOpen = !_isDropdownOpen;

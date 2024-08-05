@@ -25,6 +25,7 @@ namespace TheHighInnovation.POS.Web.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            GlobalState = await BaseService.GetGlobalState();
             StateHasChanged();
             vendorFilter.IsActive = true;
            await LoadVendorsAsync(1);
@@ -124,13 +125,10 @@ namespace TheHighInnovation.POS.Web.Pages
 
                 if (alert && vendorId > 0)
                 {
-                    var result = await BaseService.DeleteAsyncWithId<Derived<bool>>("VendorManagement/inactive-vendor", vendorId, status);
-                    if (result != null)
-                    {
-                        await SweetAlertService.Alert("Success", "Vendor status updated", "success");
-                        _vendorRequestDto.IsActive = true;
-                        await OnInitializedAsync();
-                    }
+                    await BaseService.DeleteAsyncWithId("VendorManagement/inactive-vendor", vendorId, status);
+                    await SweetAlertService.Alert("Success", "Vendor status updated", "success");
+                    _vendorRequestDto.IsActive = true;
+                    await OnInitializedAsync();
                 }
             }
             catch (Exception ex)

@@ -90,6 +90,8 @@ public partial class Employee
     
     protected override async Task OnInitializedAsync()
     {
+        _globalState = await BaseService.GetGlobalState();
+        
         if (_globalState.OrganizationId != null)
         {
             Filter.PageSize = 5;

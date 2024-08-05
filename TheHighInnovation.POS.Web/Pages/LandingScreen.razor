@@ -49,6 +49,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        _globalState = await baseService.GetGlobalState();
+        
         await FetchLandingScreen();
     }
 

@@ -8,8 +8,10 @@ public partial class Index
 {
     [CascadingParameter] private GlobalState? GlobalState { get; set; }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
+        GlobalState = await BaseService.GetGlobalState();
+
         var navigation = GlobalState?.UserId == 0 ? "/login" : GlobalState?.RoleType == 0 ? "/admin-dashboard" : "/cashier-corner";
 
         NavManager.NavigateTo(navigation);

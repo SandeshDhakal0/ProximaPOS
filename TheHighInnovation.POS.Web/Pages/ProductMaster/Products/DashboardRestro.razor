@@ -451,6 +451,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        GlobalState = await BaseService.GetGlobalState();
+
         if (GlobalState.CompanyId is not null)
         {
             var parameters = new Dictionary<string, string>

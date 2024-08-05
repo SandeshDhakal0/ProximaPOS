@@ -45,6 +45,7 @@ public partial class Category
 
     protected override async Task OnInitializedAsync()
     {
+        _globalState = await BaseService.GetGlobalState();
         await LoadCategoriesAsync();
     }
 

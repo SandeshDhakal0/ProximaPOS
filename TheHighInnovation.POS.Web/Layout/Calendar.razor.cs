@@ -7,4 +7,9 @@ public partial class Calendar
 {
     [CascadingParameter]
     private GlobalState _globalState { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _globalState = await BaseService.GetGlobalState();
+    }
 }

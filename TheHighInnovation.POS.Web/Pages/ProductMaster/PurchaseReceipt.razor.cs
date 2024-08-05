@@ -32,6 +32,7 @@ namespace TheHighInnovation.POS.Web.Pages.ProductMaster
 
         protected override async Task OnInitializedAsync()
         {
+            GlobalState = await BaseService.GetGlobalState();
 
             productFormList = new();
             selectedVendor = null;
