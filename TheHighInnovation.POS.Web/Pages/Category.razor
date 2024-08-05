@@ -46,7 +46,7 @@
                         <tr>
                             <td>@category.Title</td>
                             <td>@category.ParentCategoryName</td>
-                            <td><div style="background-color: @category.ImageUrl; height:40px;width:40px;"></div></td>
+                            <td><div class="colorbg" style="background-color: @category.ImageUrl;"></div></td>
                             <td class="lasttd">
                                 <i class="fa-solid fa-pen-to-square" @onclick="() => OpenUpsertCategoryDialog(category.Id)"></i>
                             <i class="fa-solid fa-trash" style="color: #e72929;"></i>
@@ -66,8 +66,8 @@
     @if (_pagerDto.TotalPages > 0)
     {
         <div class="row paginationpart">
-            <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
-                <div class="col">
+            <div class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-start">
+                <div class="col-12">
                     @if (_pagerDto.TotalPages > 0)
                     {
                         <span class="selecttext">Current Entries:</span>
@@ -80,7 +80,7 @@
                     }
                 </div>
             </div>
-            <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+            <div class="col-lg-9 col-md-6 col-sm-6 d-flex pagination-wrapper justify-content-end align-items-center">
 
                 <ul class="pagination justify-content-end">
                     @if (_pagerDto.CurrentPage > 1)

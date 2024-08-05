@@ -230,3 +230,77 @@
 .paginationpart{
     margin-top:20px;
 }
+.colorbg{
+    height:40px;
+    width:40px;
+    margin-left:10px;
+}
+/*Media querry*/
+@media screen and (max-width: 1260px) {
+    .addcatogerybtn {
+        width: 40%;
+        font-size:18px;
+    }
+    .inputsearch{
+        width:350px;
+    }
+    .colorbg{
+        height:30px;
+        width:30px;
+        
+    }
+}
+@media screen and (max-width: 1112px){
+    .addcatogerybtn{
+        width:45%;
+    }
+
+}
+@media screen and (max-width: 1024px) {
+    .inputsearch{
+        width:300px;
+    }
+    .addcatogerybtn{
+        font-size:16px;
+    }
+
+    .topheading{
+        font-size:28px;
+    }
+}
+@media screen and (max-width: 986px) {
+    .categorypage{
+        margin-top:5%;
+    }
+    .inputsearch{
+        width:250px;
+        height:40px;
+    }
+    .searchbutton{
+        height:40px;
+    }
+    .addcatogerybtn{
+        font-size:14px;
+        height:45px;
+    }
+
+}
+
+
+    @media screen and (max-width: 768px) {
+        .addcatogerybtn{
+            line-height:1;
+            height:40px;
+            width:40%;
+
+        }
+        .table{
+            font-size:12px;
+        }
+        .table thead{
+            font-size:12px;
+        }
+        .selecttext{
+ 
+        }
+    }
