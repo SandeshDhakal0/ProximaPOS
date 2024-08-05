@@ -4,41 +4,34 @@
 @inject BaseService BaseService
 @inject HttpClient Http
 <div class="categorypage">
-    <div class="row mt-1 mb-1">
-        <div class="col-4">
-            <h3 style="margin:10px;">Category Index</h3>
+ 
+    <div class="toppart">
+        <div class="topheading">
+            <p>Category Index</p>
         </div>
-        <div class="col-8 text-end">
-            <button class="addcatogerybtn" type="button" @onclick="() => OpenUpsertCategoryDialog()">
+        <div class="buttonadd">
+                <button class="addcatogerybtn" type="button" @onclick="() => OpenUpsertCategoryDialog()">
                 Add a new category
             </button>
         </div>
     </div>
-    @if (Filter.IsInitialized)
-    {
-        <div class="row searchlinegroup">
-            <div class="col">
-                @if (_pagerDto.TotalPages > 0)
-                {
-                    <span class="selecttext">Current Entries:</span>
-                    <select class="selectcompany" @onchange="HandlePaginationChange">
-                        <option value="5">5</option>
-                        <option value="10" selected>10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
-                }
+
+
+        <div class="searchdiv">
+            <div class="searchbox">
+
+                 <input type="text" class="inputsearch" placeholder="Search"/>
             </div>
-            <div class="col searchline2" style="text-align:left">
-                <span class="searchtext">Search:</span>
-                <input type="text" class="searchinput" @bind="Filter.Search" />
-                <button type="button" @onclick="HandleFilter" class="searchbuttond">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
+            <div class="buttonbox">
+            <button class="searchbutton">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
             </div>
+
         </div>
+ 
         <div class="tablediv">
-            <table class="table">
+            <table class="table table-hover table-striped">
                 <thead>
                     <tr>
                         <th>Title</th>
@@ -53,50 +46,82 @@
                         <tr>
                             <td>@category.Title</td>
                             <td>@category.ParentCategoryName</td>
-                            <td><div style="background-color: @category.ImageUrl; height:50px;width:50px;"></div></td>
-                            <td>
+                            <td><div style="background-color: @category.ImageUrl; height:40px;width:40px;"></div></td>
+                            <td class="lasttd">
                                 <i class="fa-solid fa-pen-to-square" @onclick="() => OpenUpsertCategoryDialog(category.Id)"></i>
+                            <i class="fa-solid fa-trash" style="color: #e72929;"></i>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
 
-            @if (_pagerDto.TotalPages > 0)
-            {
-                <div class="row">
-                    <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
-                        <ul class="pagination justify-content-end">
-                            @if (_pagerDto.CurrentPage > 1)
-                            {
-                                <li class="page-item pointer px-1">
-                                    <a class="page-link" @onclick="() => OnPagination(1)">First</a>
-                                </li>
-                                <li class="page-item pointer px-1">
-                                    <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
-                                </li>
-                            }
-                            @for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
-                            {
-                                <li class="page-item pointer px-1 @(pageItem == _pagerDto.CurrentPage ? "active" : "")">
-                                    <a class="page-link" @onclick="() => OnPagination(pageItem)">@pageItem</a>
-                                </li>
-                            }
-                            @if (_pagerDto.CurrentPage < _pagerDto.TotalPages)
-                            {
-                                <li class="page-item pointer px-1">
-                                    <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
-                                </li>
-                                <li class="page-item pointer px-1">
-                                    <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
-                                </li>
-                            }
-                        </ul>
-                    </div>
-                </div>
-            }
+
+       
+
         </div>
+
+
+
+    @if (_pagerDto.TotalPages > 0)
+    {
+        <div class="row paginationpart">
+            <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
+                <div class="col">
+                    @if (_pagerDto.TotalPages > 0)
+                    {
+                        <span class="selecttext">Current Entries:</span>
+                        <select class="selectcompany" @onchange="HandlePaginationChange">
+                            <option value="5">5</option>
+                            <option value="10">10</option>
+                            <option value="15">15</option>
+                            <option value="20">20</option>
+                        </select>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+
+                <ul class="pagination justify-content-end">
+                    @if (_pagerDto.CurrentPage > 1)
+                    {
+                        <li class="page-item pointer px-1">
+                            <a class="page-link" @onclick="() => OnPagination(1)">First</a>
+                        </li>
+                        <li class="page-item pointer px-1">
+                            <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
+                        </li>
+                    }
+                    @if (_pagerDto.TotalPages > 1)
+                    {
+                        for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+                        {
+                            var currentPageItem = pageItem;
+                            <li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
+                                <a class="page-link" @onclick="() => OnPagination(currentPageItem)">@currentPageItem</a>
+                            </li>
+                        }
+                    }
+
+                    @if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
+                    {
+                        <li class="page-item pointer px-1">
+                            <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
+                        </li>
+                        <li class="page-item pointer px-1">
+                            <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+
     }
+
+
+
+
+
 
     @if (_showUpsertCategoryDialog)
     {

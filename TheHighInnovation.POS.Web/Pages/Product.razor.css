@@ -1,42 +1,80 @@
 .productpage {
-    margin-top: 3.1%;
-    /*   margin-left: -4.6vw;*/
-    height: 92vh;
-    width: 150.1vh;
-    padding: 3vh;
+    margin-top: 4%;
+
+/*    height: 92vh;*/
+
 }
 
-.searchbutton, .clearbutton {
-    border: none;
-    border-radius: 10px;
-    width: 50px;
-    margin-left: 1%;
+.searchdiv {
+    display: flex;
+}
+
+
+.inputsearch {
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius: 10px 0 0 10px;
+    background-color: #ECECEB;
+    width: 400px;
+    height: 45px;
 }
 
 .searchbutton {
-    height: 5vh;
-    margin-left: 2vh;
-    font-size: 19px;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    background-color: #0C2144;
+    color: #ffffff;
+    width: 45px;
+    height: 45px;
 }
 
+.toppart {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.topheading {
+    font-size: 30px;
+}
+
+.addcatogerybtn {
+    border: none;
+    border-radius: 10px;
+    background-color: #ABBFE0;
+    color: #000000;
+    height: 50px;
+    width: 35%;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.buttonadd {
+    text-align: end;
+}
+
+
+.buttonbox{
+    display:flex;
+}
 .searchbutton2 {
     height: 4vh;
     margin-top: 0.5vh;
     background-color: #d9d9d9;
 }
 
-
 .clearbutton {
     background-color: var(--color-trashbutton);
     color: var(--color-white);
-    height: 5vh;
+    height: 45px;
+    width:45px;
+    padding:10px;
     font-size: 22px;
     line-height: 0;
+    border:none;
+    border-radius:10px;
+    margin-left:10px;
 }
 
-.clearbutton2 {
-    height: 4vh;
-}
 
 .required {
     letter-spacing: 3px;
@@ -64,7 +102,9 @@
     font-weight: 500;
     margin-top: 3.5vh;
 }
-
+.table thead{
+    border-bottom:2px solid #dcdcdc !important;
+}
 
 .filter-section, .showentries {
     border: none;
@@ -100,8 +140,9 @@
 
 .searchlinegroup, .tablediv {
     margin-top: 2%;
-    margin-left: 2vw;
+/*    margin-left: 2vw;*/
 }
+
 
 .searchinput {
     border: 1px solid #dcdfe8;
@@ -128,7 +169,18 @@
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
+    border:2px solid #dcdcdc;
+    border-radius:5px;
 }
+    .th2{
+        width:16.5%;
+    }
+    .th3{
+        width:15%;
+    }
+    .th4{
+        width:16%;
+    }
 
     .table th, .table td {
         font-size: 16px;
@@ -143,36 +195,36 @@
         border-radius: 0 10px 10px 0;
     }
 
-    .table td {
-        width: 8%;
-    }
 
     .table th {
-        background-color: #dcdfe8;
         color: #110a57;
     }
 
 thead {
     border: none;
 }
+    .table td {
+        width: 9%;
+    }
 
 .table .td1 {
-    width: 75%;
+    width: 20%;
 }
 
 .table .th1 {
-    width: 70%;
+    width: 34%;
 }
 
 
 
 .table tbody {
     display: block;
-    max-height: 44vh;
+    max-height: 50vh;
     overflow-y: scroll;
     border: 1px solid #fff;
     border-radius: 5px;
     border-top: none;
+    table-layout:fixed;
 }
 
     .table thead, .table tbody tr {
@@ -212,7 +264,7 @@ thead {
 
 .table .actionicons {
     font-size: 22px;
-    margin-left: 3vh;
+    /*margin-left: 3vh;*/
 }
 
 

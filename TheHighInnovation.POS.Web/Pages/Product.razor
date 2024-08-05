@@ -4,17 +4,19 @@
 @inject BaseService BaseService
 @inject HttpClient Http
 <div class="productpage">
-	<div class="row">
-		<div class="col-5">
-			<h4 class="producttitle">Product List</h4>
+
+	<div class="toppart">
+		<div class="topheading">
+			<p>Product List</p>
 		</div>
-		<div class="col-7 text-end">
-			<button class=" addproductbtn" type="button" @onclick="() => OpenUpsertProductDialog()">
-				Add product
+		<div class="buttonadd">
+			<button class="addcatogerybtn" type="button" @onclick="() => OpenUpsertProductDialog()">
+				Add a new category
 			</button>
 		</div>
 	</div>
-	<div class="card filter-section">
+
+@* 	<div class="card filter-section">
 		<div class="card-body">
 			<form @onsubmit="@HandleFilter">
 				<div class="row">
@@ -51,42 +53,25 @@
 				</div>
 			</form>
 		</div>
-	</div>
-
-	@if (Filter.IsInitialized)
-	{
-		<div class="row searchlinegroup">
-			<div class="col-5 filternumbers">
-				@if (_pagerDto.TotalPages > 0)
-				{
-					<span class="selecttext">Current Entries:</span>
-					<select class="selectcompany" @onchange="HandlePaginationChange">
-						<option value="5">5</option>
-						<option value="10">10</option>
-						<option value="15">15</option>
-						<option value="20">20</option>
-					</select>
-				}
-
-			</div>
+	</div> *@
 
 
-			<div class="col-5 ">
-				<span class="searchtext">Search:</span> <input type="text" class="searchinput" @bind="Filter.Search" />
 
 
-			</div>
-			<div class="col-2">
-				<button type="button" value="Search" @onclick="HandleFilter" data-bs-toggle="tooltip" data-bs-placement="top" title="Click here, to search records" class=" searchbutton searchbutton2">
-					<i class="fa-solid fa-magnifying-glass"></i>
-				</button>
-				<button type="submit" value="Search" data-bs-toggle="tooltip" data-bs-placement="top" title="Click here, to clear" class=" clearbutton clearbutton2">
-					<span></span><i class="fa-solid fa-eraser"></i>
+	<div class="searchdiv">
+		<div class="searchbox">
 
-
-				</button>
-			</div>
+			<input type="text" class="inputsearch" placeholder="Search" @bind="Filter.Search" />
 		</div>
+		<div class="buttonbox">
+			<button type="button" value="Search" @onclick="HandleFilter" data-bs-toggle="tooltip" data-bs-placement="top" title="Click here, to search records" class=" searchbutton">
+				<i class="fa-solid fa-magnifying-glass"></i>
+			</button>
+			<button type="submit" value="Search" data-bs-toggle="tooltip" data-bs-placement="top" title="Click here, to clear" class=" clearbutton clearbutton2">
+				<span></span><i class="fa-solid fa-eraser"></i>
+			</button>
+		</div>
+	</div>
 
 		<div class="tablediv">
 			<table class="table">
@@ -95,13 +80,13 @@
 						<th class="th1">
 							Product
 						</th>
-						<th>
+						<th class="th2">
 							Unit
 						</th>
-						<th>
+						<th class="th3">
 							Category
 						</th>
-						<th>
+						<th class="th4">
 							Status
 						</th>
 						<th class="th6">
@@ -118,17 +103,18 @@
 							foreach (var product in products)
 							{
 								<tr>
-									<td class="td1">
-										<div class="row m-0">
-											<div class="col-1">
-												<div style="background-color: @product.ProductImageUrl; height:50px;width:50px;"></div>
+								 	<td class="td1">
+										<div class="row">
+											<div class="col-3">
+												<div style="background-color: @product.ProductImageUrl; height:40px;width:40px;"></div>
 											</div>
-											<div class="col-11 titleanddesc">
+											<div class="col-5 titleanddesc">
 												<p class="producttitle">@product.Title</p>
 												<p class="productdesc">@product.Description</p>
 											</div>
 										</div>
-									</td>
+								</td> 
+
 									<td class="titlecolumn">@product.Unit</td>
 									<td class="mt-2">@(product.CategoryTitle ?? "")</td>
 									<td class="mt-2">
@@ -150,51 +136,67 @@
 				</tbody>
 			</table>
 
-			@if (_pagerDto.TotalPages > 0)
-			{
-				<div class="row">
-					<div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
-					</div>
-					<div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
-						<ul class="pagination justify-content-end">
-							@if (_pagerDto.CurrentPage > 1)
-							{
-								<li class="page-item pointer px-1">
-									<a class="page-link" @onclick="() => OnPagination(1)">First</a>
-								</li>
-								<li class="page-item pointer px-1">
-									<a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
-								</li>
-							}
-							@if (_pagerDto.TotalPages > 1)
-							{
-								for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
-								{
-									var currentPageItem = pageItem;
-									<li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
-										<a class="page-link" @onclick="() => OnPagination(currentPageItem)">@currentPageItem</a>
-									</li>
-								}
-							}
+		</div>
 
-							@if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
-							{
-								<li class="page-item pointer px-1">
-									<a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
-								</li>
-								<li class="page-item pointer px-1">
-									<a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
-								</li>
-							}
-						</ul>
-					</div>
+
+	@if (_pagerDto.TotalPages > 0)
+	{
+		<div class="row paginationpart">
+			<div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
+				<div class="col mt-1">
+					@if (_pagerDto.TotalPages > 0)
+					{
+						<span class="selecttext">Current Entries:</span>
+						<select class="selectcompany" @onchange="HandlePaginationChange">
+							<option value="5">5</option>
+							<option value="10">10</option>
+							<option value="15">15</option>
+							<option value="20">20</option>
+						</select>
+					}
 				</div>
+			</div>
+			<div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
 
-			}
+				<ul class="pagination justify-content-end">
+					@if (_pagerDto.CurrentPage > 1)
+					{
+						<li class="page-item pointer px-1">
+							<a class="page-link" @onclick="() => OnPagination(1)">First</a>
+						</li>
+						<li class="page-item pointer px-1">
+							<a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1)">Previous</a>
+						</li>
+					}
+					@if (_pagerDto.TotalPages > 1)
+					{
+						for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+						{
+							var currentPageItem = pageItem;
+							<li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
+								<a class="page-link" @onclick="() => OnPagination(currentPageItem)">@currentPageItem</a>
+							</li>
+						}
+					}
+
+					@if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
+					{
+						<li class="page-item pointer px-1">
+							<a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1)">Next</a>
+						</li>
+						<li class="page-item pointer px-1">
+							<a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages)">Last</a>
+						</li>
+					}
+				</ul>
+			</div>
 		</div>
 
 	}
 
+		
+	
+		</div>
 
 
 	@if (_showUpsertProductDialog)
@@ -279,4 +281,3 @@
 		</ModalDialog>
 	}
 
-</div>
