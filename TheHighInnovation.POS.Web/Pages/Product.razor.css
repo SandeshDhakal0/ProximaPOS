@@ -356,3 +356,163 @@ input:checked + .slider:before {
     .slider.round:before {
         border-radius: 50%;
     }
+
+
+
+@media screen and (max-width: 1260px) {
+    .addcatogerybtn {
+        width: 40%;
+        font-size: 18px;
+    }
+
+    .inputsearch {
+        width: 350px;
+    }
+
+    .colorbg {
+        height: 30px;
+        width: 30px;
+    }
+    .th2{
+        width:15.5%;  
+
+    }
+    .th3{
+        width:16%;
+    }
+}
+
+@media screen and (max-width: 1112px) {
+    .addcatogerybtn {
+        width: 45%;
+    }
+    .th2{
+        width:14.5%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .inputsearch {
+        width: 300px;
+    }
+
+    .addcatogerybtn {
+        font-size: 16px;
+    }
+
+    .topheading {
+        font-size: 28px;
+    }
+    .table .th1{
+        width:32%;
+    }
+}
+
+@media screen and (max-width: 886px) {
+    .productpage {
+        margin-top: 5%;
+    }
+
+    .inputsearch {
+        width: 250px;
+        height: 40px;
+    }
+
+    .searchbutton {
+        height: 40px;
+    }
+
+    .addcatogerybtn {
+        font-size: 14px;
+        height: 45px;
+    }
+    .table .td1 {
+        width: 25%;
+    }
+    .table .th1{
+        width:35%;
+    }
+
+    .th2 {
+        width: 13.5%;
+    }
+
+    .th4 {
+        width: 14%;
+    }
+
+}
+@media screen and (max-width: 865px){
+    .th3{
+        width:14%;
+    }
+} 
+@media screen and (max-width: 800px) {
+    .th2{
+        width:12.5%;
+    }
+}
+
+@media screen and (max-width: 789px) {
+    .addcatogerybtn {
+        line-height: 1;
+        height: 40px;
+        width: 40%;
+    }
+    .table .td1{
+        width:25%;
+
+    }
+    .th2{
+       width: 11.5%;
+    }
+    .th4{
+        width:14%;
+    }
+    .th3{
+        width:15%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .addcatogerybtn {
+        line-height: 1;
+        height: 40px;
+        width: 40%;
+    }
+
+    .table {
+        font-size: 12px;
+    }
+
+        .table thead {
+            font-size: 10px;
+        }
+    .producttitle{
+        margin-bottom: 5px;
+
+    }
+    .productdesc{
+
+    }
+
+    .selecttext {
+    }
+    .clearbutton{
+        height:40px;
+  
+    }
+    .table .th1{
+        width:34%;
+
+    }
+    .th2{
+        width:12.5%;
+    }
+    .th3{
+        width:15%;
+    }
+    .th4{
+        width:15%;
+    }
+}

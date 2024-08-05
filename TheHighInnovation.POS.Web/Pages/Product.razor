@@ -74,7 +74,7 @@
 	</div>
 
 		<div class="tablediv">
-			<table class="table">
+			<table class="table table-hover table-striped">
 				<thead>
 					<tr>
 						<th class="th1">
@@ -108,7 +108,7 @@
 											<div class="col-3">
 												<div style="background-color: @product.ProductImageUrl; height:40px;width:40px;"></div>
 											</div>
-											<div class="col-5 titleanddesc">
+											<div class="col-9 titleanddesc">
 												<p class="producttitle">@product.Title</p>
 												<p class="productdesc">@product.Description</p>
 											</div>
@@ -142,8 +142,8 @@
 	@if (_pagerDto.TotalPages > 0)
 	{
 		<div class="row paginationpart">
-			<div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
-				<div class="col mt-1">
+			<div class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-start">
+				<div class="col-12 mt-1">
 					@if (_pagerDto.TotalPages > 0)
 					{
 						<span class="selecttext">Current Entries:</span>
@@ -156,7 +156,7 @@
 					}
 				</div>
 			</div>
-			<div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+			<div class="col-lg-9 col-md-6 col-sm-6 d-flex pagination-wrapper justify-content-end align-items-center">
 
 				<ul class="pagination justify-content-end">
 					@if (_pagerDto.CurrentPage > 1)
