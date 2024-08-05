@@ -92,32 +92,19 @@
             </div> *@
 
 
+
     <div class="searchdiv">
         <div class="searchbox">
 
-            <input type="text" class="inputsearch" placeholder="Search" @bind="Filter.Search" />
+            <input type="text" class="inputsearch" placeholder="Search" />
         </div>
         <div class="buttonbox">
-            <button type="button" value="Search" @onclick="HandleFilter" data-bs-toggle="tooltip" data-bs-placement="top" title="Click here, to search records" class=" searchbutton">
-                	<i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            <button type="button" title="Clear" class="clearbuttond">
-                <i class="fa-solid fa-eraser"></i>
+            <button class="searchbutton">
+                <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </div>
 
     </div>
-      @*   <div class=" container row searchlinegroup">
-            <div class="d-flex searchbutton searchbuttongroups col-6">
-                <span class="searchtext">Search:</span> <input type="text" class="searchinput" @bind="Filter.Search"/>
-                <button type="button" value="Search" @onclick="HandleFilter" data-bs-toggle="tooltip" data-bs-placement="top" title="Click here, to search records" class="searchbuttond">
-                	<i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-                <button type="button" title="Clear" class="clearbuttond">
-                    <i class="fa-solid fa-eraser"></i>
-                </button>
-           </div>
-            </div> *@
         
      
         <div class="tablediv">
@@ -172,8 +159,8 @@
     @if (_pagerDto.TotalPages > 0)
     {
         <div class="row paginationpart">
-            <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
-                <div class="col mt-1">
+            <div class="col-lg-3 col-md-6 col-sm-6 d-flex justify-content-start">
+                <div class="col-12 mt-1">
                     @if (_pagerDto.TotalPages > 0)
                     {
                         <span class="selecttext">Current Entries:</span>
@@ -186,7 +173,7 @@
                     }
                 </div>
             </div>
-            <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+            <div class="col-lg-9 col-md-6 col-sm-6 d-flex pagination-wrapper justify-content-end align-items-center">
 
                 <ul class="pagination justify-content-end">
                     @if (_pagerDto.CurrentPage > 1)
