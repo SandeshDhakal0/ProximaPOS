@@ -12,8 +12,12 @@ public partial class Index
     {
         GlobalState = await BaseService.GetGlobalState();
 
-        var navigation = GlobalState?.UserId == 0 ? "/login" : GlobalState?.RoleType == 0 ? "/admin-dashboard" : "/cashier-corner";
-
+        var navigation = GlobalState?.UserId == 0 ? "/login" : GlobalState?.RoleType == 0
+            ? GlobalState?.OrganizationId == null || GlobalState.OrganizationId == 0
+                ? "/admin-dashboard"
+                : "/landing-page"
+            : "/cashier-corner";
+        
         NavManager.NavigateTo(navigation);
     }
 }

@@ -57,6 +57,7 @@ public partial class Login
                 : "/cashier-corner";
 
             GlobalState.PageNumber = navigation == "/admin-dashboard" ? 1 : 0;
+            
             NavigationManager.NavigateTo(navigation);
         }
         catch (Exception ex)

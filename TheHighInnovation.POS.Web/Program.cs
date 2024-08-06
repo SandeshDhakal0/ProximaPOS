@@ -2,6 +2,7 @@ using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using TheHighInnovation.POS.Web;
+using TheHighInnovation.POS.Web.Models;
 using TheHighInnovation.POS.Web.Services;
 using TheHighInnovation.POS.Web.Services.Alert;
 using TheHighInnovation.POS.Web.Services.Base;
@@ -13,11 +14,13 @@ builder.RootComponents.Add<App>("#app");
 
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-var apiUrl = AppConfiguration.BaseUrl;
+var configuration = builder.Configuration;
 
-builder.Services.AddScoped(x => new HttpClient
+var applicationConfiguration = configuration.GetSection("Configuration").Get<Configuration>()!;
+
+builder.Services.AddScoped(_ => new HttpClient
 {
-    BaseAddress = new Uri(apiUrl)
+    BaseAddress = new Uri(applicationConfiguration.BaseUrl)
 });
 
 builder.Services.AddTransient<BaseService>();

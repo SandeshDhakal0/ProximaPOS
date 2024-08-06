@@ -1,5 +1,9 @@
-﻿@inherits LayoutComponentBase
-
+﻿@using Blazored.LocalStorage
+@using TheHighInnovation.POS.Web.Services.Base
+@inherits LayoutComponentBase
+@inject BaseService BaseService
+@inject NavigationManager NavigationManager
+@inject ILocalStorageService LocalStorageService
 <div class="mainpage">
     <CascadingValue Value="@_globalState">
         @if (_globalState.UserId != 0)
