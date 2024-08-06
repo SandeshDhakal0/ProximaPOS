@@ -23,6 +23,8 @@ namespace TheHighInnovation.POS.Web.Pages.ProductMaster
 
         protected override async Task OnInitializedAsync()
         {
+            _globalState = await BaseService.GetGlobalState();
+
             categoryFilter.IsInitialized = true;
             await LoadCategoryAsync(1);
         }

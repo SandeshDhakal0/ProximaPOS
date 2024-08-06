@@ -10,6 +10,38 @@ public class BaseService(HttpClient httpClient, ILocalStorageService localStorag
 {
     private readonly string _baseUrl = AppConfiguration.BaseUrl;
 
+    public async Task<GlobalState> GetGlobalState()
+    {
+        var userDetails = await GetAsync<Derived<LoginResponseDetailsDto>>("authenticate/profile");
+
+        if (userDetails?.Result == null || userDetails.Result.UserId == 0)
+        {
+            await localStorage.RemoveItemAsync("access_token");
+
+            return new GlobalState();
+        }
+
+        var result = userDetails.Result;
+
+        var globalState = new GlobalState
+        {
+            UserId = result.UserId,
+            EmployeeId = result.EmployeeId,
+            Name = result.Name,
+            RoleId = result.RoleId,
+            RoleName = result.RoleName,
+            RoleType = result.RoleType,
+            CompanyId = result.CompanyId,
+            CompanyName = result.CompanyName,
+            OrganizationId = result.OrganizationId,
+            OrganizationName = result.OrganizationName,
+            IsAdmin = result.IsAdmin,
+            IsSuperAdmin = result.IsSuperAdmin
+        };
+
+        return globalState;
+    }
+
     public async Task<bool> IsUserLoggedIn()
     {
         var accessToken = await localStorage.GetItemAsync<string>("access_token");
@@ -17,12 +49,12 @@ public class BaseService(HttpClient httpClient, ILocalStorageService localStorag
         if (accessToken == null) return false;
 
         var tokenHandler = new JwtSecurityTokenHandler();
-     
+
         var jwtToken = tokenHandler.ReadJwtToken(accessToken);
 
         var expiryDateTime = jwtToken.ValidTo;
 
-        return expiryDateTime > DateTime.Now;
+        return expiryDateTime > DateTime.UtcNow;
     }
 
     public async Task LogOutUser()
@@ -139,9 +171,10 @@ public class BaseService(HttpClient httpClient, ILocalStorageService localStorag
         return response;
     }
     
-    public async Task<Derived<bool>> DeleteAsyncWithId<T>(string endpoint, int vendorId, bool status)
+    public async Task<Derived<bool>> DeleteAsyncWithId(string endpoint, int vendorId, bool status)
     {
         var url = $"{_baseUrl}/api/{endpoint}/{vendorId}/{status}";
+        
         var response = await httpClient.DeleteAsync(url);
 
         if (response.IsSuccessStatusCode)

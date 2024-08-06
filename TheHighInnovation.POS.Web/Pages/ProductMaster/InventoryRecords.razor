@@ -447,6 +447,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        GlobalState = await BaseService.GetGlobalState();
+
         selectedVendor = new();    
         await LoadInventoryRecords(1);
     }

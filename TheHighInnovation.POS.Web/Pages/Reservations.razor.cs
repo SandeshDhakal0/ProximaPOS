@@ -63,7 +63,8 @@ namespace TheHighInnovation.POS.Web.Pages
 
         protected override async Task OnInitializedAsync()
         {
-           
+            _globalState = await BaseService.GetGlobalState();
+            
             var roomTypes = await BaseService.GetAsync<Derived<List<RoomTypeResponseDto>>>("Reservation/room-type");
 
             _roomTypes = roomTypes!.Result.Select(x => x.Name).ToList();

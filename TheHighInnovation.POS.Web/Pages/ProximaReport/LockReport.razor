@@ -110,7 +110,12 @@
     {
         await LoadLockDetails(1, 5);
     }
-    
+
+    protected override async Task OnInitializedAsync()
+    {
+        _globalState = await BaseService.GetGlobalState();
+    }
+
     private async Task LoadLockDetails(int pageNumber, int pageSize)
     {
         try

@@ -162,6 +162,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        _globalState = await BaseService.GetGlobalState();
+        
         await LoadKharidKhata(1);
     }
 

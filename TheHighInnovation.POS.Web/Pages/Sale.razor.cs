@@ -39,6 +39,8 @@ public partial class Sale
 
     protected override async Task OnInitializedAsync()
     {
+        _globalState = await BaseService.GetGlobalState();
+        
         if (_globalState.OrganizationId != null)
         {
             var parameters = new Dictionary<string, string>

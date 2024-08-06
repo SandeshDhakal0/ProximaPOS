@@ -26,67 +26,67 @@ namespace TheHighInnovation.POS.Web.Pages;
 
 	private string _deleteScanErrorMessage { get; set; }
 
-protected override async Task OnInitializedAsync()
-{
-	var result = await BaseService.GetAsync<Derived<List<ScanResponseDto>>>("GetScannedProducts");
-
-	_scan = result?.Result ?? [];
-}
-private async Task OpenUpsertScanDialog(int? scanId = null)
-{
-	_dialogTitle = "Add a new Product";
-
-	_dialogOkLabel = "Add";
-
-	_upsertScanErrorMessage = "";
-
-	
-
-	if (scanId.HasValue)
+	protected override async Task OnInitializedAsync()
 	{
-		var parameters = new Dictionary<string, string>
-			{
-				{ "scanid", scanId.Value.ToString() },
-			};
+		var result = await BaseService.GetAsync<Derived<List<ScanResponseDto>>>("GetScannedProducts");
 
-		var result = (await BaseService.GetAsync<Derived<ScanResponseDto>>("GetScannedProducts", parameters))?.Result;
+		_scan = result?.Result ?? [];
+	}
+	private async Task OpenUpsertScanDialog(int? scanId = null)
+	{
+		_dialogTitle = "Add a new Product";
 
-		_scanModel = new ScanRequestDto()
+		_dialogOkLabel = "Add";
+
+		_upsertScanErrorMessage = "";
+
+		
+
+		if (scanId.HasValue)
 		{
-			p_id = result!.p_id,
-			p_barcode = result.p_barcode,
-			p_title = result.p_title,
-			p_unit = result.p_unit,
-			p_companyid = result.p_companyid,
-			p_imageurl = result.p_imageurl,
-			p_salesprice = result.p_salesprice,
-			p_costprice = result.p_costprice,
-		};
+			var parameters = new Dictionary<string, string>
+				{
+					{ "scanid", scanId.Value.ToString() },
+				};
+
+			var result = (await BaseService.GetAsync<Derived<ScanResponseDto>>("GetScannedProducts", parameters))?.Result;
+
+			_scanModel = new ScanRequestDto()
+			{
+				p_id = result!.p_id,
+				p_barcode = result.p_barcode,
+				p_title = result.p_title,
+				p_unit = result.p_unit,
+				p_companyid = result.p_companyid,
+				p_imageurl = result.p_imageurl,
+				p_salesprice = result.p_salesprice,
+				p_costprice = result.p_costprice,
+			};
+				_showUpsertScanDialog = true;
+		}
+		else
+		{
+			_scanModel = new ScanRequestDto();
 			_showUpsertScanDialog = true;
 		}
-	else
-	{
-		_scanModel = new ScanRequestDto();
-			_showUpsertScanDialog = true;
-		}
-}
- private async Task OnUpsertScanDialogClose(bool isClosed)
-    {
-        if (isClosed)
-        {
-            _showUpsertScanDialog = false;
-        }
-        else
-        {
-            var jsonRequest = JsonSerializer.Serialize(_scanModel);
+	}
+		private async Task OnUpsertScanDialogClose(bool isClosed)
+		{
+	        if (isClosed)
+	        {
+	            _showUpsertScanDialog = false;
+	        }
+	        else
+	        {
+	            var jsonRequest = JsonSerializer.Serialize(_scanModel);
 
-            var jsonContent = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
+	            var jsonContent = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-            await BaseService.PostAsync<Derived<object>>("UpsertBarcodeProduct", jsonContent);
+	            await BaseService.PostAsync<Derived<object>>("UpsertBarcodeProduct", jsonContent);
 
-            _showUpsertScanDialog = false;
-            
-            await OnInitializedAsync();
-        }
-    }
+	            _showUpsertScanDialog = false;
+	            
+	            await OnInitializedAsync();
+	        }
+	    }
 }

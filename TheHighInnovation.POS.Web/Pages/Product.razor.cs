@@ -102,6 +102,8 @@ public partial class Product
 
 	protected override async Task OnInitializedAsync()
 	{
+		_globalState = await BaseService.GetGlobalState();
+		
 		if (_globalState.OrganizationId != null)
 		{
 			var parameters = new Dictionary<string, string>

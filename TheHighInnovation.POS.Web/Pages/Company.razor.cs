@@ -38,6 +38,8 @@ public partial class Company
     
     protected override async Task OnInitializedAsync()
     {
+	    _globalState = await BaseService.GetGlobalState();
+	    
 	    Filter.PageSize = 5;
 
 		if (_globalState.OrganizationId != null)
