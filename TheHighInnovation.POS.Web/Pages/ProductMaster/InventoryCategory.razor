@@ -5,59 +5,45 @@
 @inject SweetAlert SweetAlertService
 
 <div class="container-fluid inventorycategorypage">
-    <div class="row">
 
-    <div class="col-6 category-heading">
-     <p>Category</p>   
-    </div>
-    <div class="col-6   AddCatogeryBtn">
-            <button class="addbutton justify-content-end" @onclick="OpenCategoryUpsertModel">Add Category</button>
-    </div>
-    </div>
-
-
-    <div class="row row search-panel">
-       @*  <span class="categorynamelabel">Category Name:</span><input type="text" placeholder="Category Name" @bind="categoryFilter.CategoryName" class="categorynameinput"> *@
-   <div class="col-12">
-
-       <input type="text" placeholder="Search" @bind="categoryFilter.CategoryCode" class="categorycodeinput">
-        <button class="searchbutton" @onclick="HandleSearch"> @* <i class="fa fa-search"></i> *@ Search  </button>
-       </div>
-       
-    </div>
-@*     <div class="search-panel">
-
-    <div class="input-group">
-        <div class="form-outline" data-mdb-input-init>
-            <input type="search" id="form1" class="form-control" />
-            <label class="form-label" for="form1">Search</label>
+    <div class="headingpart">
+        <div class="categoryheading">
+            <p>
+                Category
+            </p>
         </div>
-        <button type="button" class="btn btn-primary" data-mdb-ripple-init>
-            <i class="fas fa-search"></i>
-        </button>
-    </div> *@
+        <div class="addbuttoncategory">
+            <button class="buttonadd" @onclick="OpenCategoryUpsertModel">Add Category</button>
+        </div>
     </div>
+
+@*     <div class="row row search-panel">
+         <span class="categorynamelabel">Category Name:</span><input type="text" placeholder="Category Name" @bind="categoryFilter.CategoryName" class="categorynameinput">
+
+       <div class="col-12">
+
+
+            <input type="text" placeholder="Search" @bind="categoryFilter.CategoryCode" class="categorycodeinput">
+            <button class="searchbutton" @onclick="HandleSearch"> Search  </button>
+        </div> *@
+
+
+
+    <div class="row search-container">
+         <div class="col-12 search-pannel">
+            <input type="text" class="search-input" placeholder="Search" @bind="categoryFilter.CategoryCode" >
+        <button class="search-button" @onclick="HandleSearch">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+     
+    </div>
+
 
     @if (OpenCategoryModel)
     {
         <ModalDialog OnClose="@OnUpsertCategory" OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
             <div class="modal-body">
-               @*  <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <div>
-                                <label for="categoryname" class="categoryname">Category Name</label>
-                                <input type="text" name="categoryname" class="categorynameinput" @bind="_categoryResponseDTO.CategoryName" />
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="col-12">
-                                <label for="categorydescription" class="categorydescription">Category Description</label>
-                                <textarea type="text" name="categorydescription" class="categorydescriptioninput" @bind="_categoryResponseDTO.CategoryDescription"></textarea>
-                            </div>
-                        </div>                       
-                    </div>
-                </div> *@
                 <form>
                     <div class="form-group col-6">
                         <label for="categoryname" >Category Name</label>
@@ -166,4 +152,4 @@
             </div>
         }
     }
-    
+    </div>

@@ -1,4 +1,4 @@
-﻿@page "/vendor"
+@page "/vendor"
 @using System.Text.Json
 @using TheHighInnovation.POS.Web.Model
 @using TheHighInnovation.POS.Web.Model.Request.VendorManagement
@@ -11,17 +11,17 @@
 <div class="Vendorpage">
      
                 <div class="row top-container">
-                    <div class="col-8 d-flex">
-                        <p class="noofvendor">VENDORS</p>
-                        <select class="vendordropdown">
-                           <option selected disabled> Filter</option>
-                           <option>Active</option>
-                           <option>Inactive</option>
-                       </select>
-                    </div>                  
-                    <div class="offset-1 col-2">
-                        <button class="addvendorbutton" @onclick="openaddvendordialogue">Add Vendor</button>
-                    </div>
+        <div class="headingpart">
+            <div class="categoryheading">
+                <p>
+                    Vendors
+                </p>
+            </div>
+            <div class="addbuttoncategory">
+                <button class="buttonadd" @onclick="openaddvendordialogue">Add Vendor</button>
+            </div>
+        </div>
+              
 
                     @if(_openaddvendordialogue){
                         <ModalDialog OnClose="@OnUpsertVendor" OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
@@ -71,13 +71,13 @@
 
  <div class="container-fluid">
 
-                   <div class="row inputsrow">
+          @*          <div class="row inputsrow">
                        <div class="col-4 vendorname">
                             <label>Vendor Name:</label>
                             <input @bind="_vendorRequestDto.CompanyName" />
                        </div>
                        <div class="col-4 panvatvendor">
-                            <lable>Pan/Vat</lable>
+                            <lable>Pan/Vat:</lable>
                             <input @bind="_vendorRequestDto.PanVatNo"/>
                        </div>
                         <div class="col-4 isavtivevendor">
@@ -88,7 +88,27 @@
                             </button>
                         </div>
                        
+                   </div> *@
+                   <div class=" inputsrow">
+                       <div class="vendorname">
+                           <label>Vendor Name:</label>
+                <input @bind="_vendorRequestDto.CompanyName" />
+                       </div>
+                       <div class=" panvatvendor">
+                           <label>Pan/Vat:</label>
+                <input @bind="_vendorRequestDto.PanVatNo" />
+
+                       </div>
+            <div class="isavtivevendor">
+                <input type="checkbox" id="myCheckbox" @bind="_vendorRequestDto.IsActive" @bind:event="oninput" name="myCheckbox">
+                <label for="myCheckbox">IsActive</label>
+                <button class="searchbutotn" @onclick="HandleSearch">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    
+                </button>
+            </div>
                    </div>
+
         @if (vendorFilter.IsInitialized)
         {
             
@@ -100,29 +120,32 @@
                                 {
                                 <div class="card vendorcard">
                                 
+                   
+                                    <div class="actionpart">
+                                        <div class="iconpart">
                                     <div class="card-head d-flex">
                        
                                         <i class="fa fa-bookmark" aria-hidden="true"></i>
-                              
+                              </div>
+
+                              <div class="buttonpart">
                                         @if(@item.IsActive == true)
                                         {
                                          @*    <span class="activepart d-flex" @onclick="() =>DeleteVendor(item.Id,false)"><p>IActive</p></span> *@
                                 
                                     <button class="btn small-btn  activepart" @onclick="() =>DeleteVendor(item.Id,false)">InActive</button>
-                                     
-                                 
-
-                                                <span class="threedots d-flex" @onclick="() =>GetVendorById(item.Id)"><i class="fa-solid fa-ellipsis"></i></span>
-                      
-
                                             }
                                             else{
 
-                                                <span class="notactivepart d-flex" @onclick="() =>DeleteVendor(item.Id,true)"><p>Active</p></span>
+                                                <button class="btn small-btn notactivepart " @onclick="() =>DeleteVendor(item.Id,true)">Active</button>
                                            @*      <span class="threedots d-flex"><i class="fa-solid fa-ellipsis"></i></span> *@
                                                 }
-
+                                                <div class="threedots d-flex" @onclick="() =>GetVendorById(item.Id)"><i class="fa-solid fa-ellipsis"></i></div>
+                                                </div>
                                     </div>
+
+
+
                                     <div class="card-body">
                                         <div class="nameandcashier">
                                             <span class="name">@item.CompanyName</span>
@@ -135,7 +158,7 @@
                                         <div class="nesteddiv">
 
                                             <div class="row">
-                                                <div class="col-7">
+                                                <div class="col-7 itsawrap">
                                                     <span>
                                                         <span class="labeltexts">Vendor Id<br />
 
