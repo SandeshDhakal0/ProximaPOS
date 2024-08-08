@@ -76,13 +76,13 @@
 }
 
 .vendorcard {
-    padding: 10px;
-    width: 28%;
-    background-color: var(--vendor--cardcolor);
-    height:35vh;
+    padding: 20px;
+background-color:#ECECEB;
+    /*height:35vh;*/
     border: none;
     margin:2%;
     border-radius: 10px;
+/*    background-color: var(--vendor--cardcolor);*/
    
 }
 
@@ -165,22 +165,24 @@ input[type="checkbox"] {
 }
 
 .actionpart{
-/*    display:flex;
-    gap:9vw;
-    padding:0 5px;
-*/
-display:grid;
-grid-template-columns:repeat(2, 1fr);
-max-width:95%;
-}
-    .actionpart{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
 
-    }
+
+}
+.vendordate{
+    justify-content:end;
+    text-align:end;
+
+}
+.actionpart {
+}
     .buttonpart {
- /*       display: flex;
-        gap: 15px;*/
- display:grid;
- grid-template-columns:repeat(2, 1fr);
+        display: flex;
+
+justify-content:end;
+
+
     }
 .activepart {
     color: #fff;
@@ -218,6 +220,7 @@ max-width:95%;
 
 .nameandcashier {
     text-align: center;
+    margin:15px 0 ;
   
 }
 
@@ -234,14 +237,15 @@ max-width:95%;
 }
 
 .nesteddiv {
-    /*height:150px;*/
+   /* height:150px;*/
+   height:100%;
     font-size: 12px;
     font-weight: 600;
     background-color: #ffffff;
     padding: 10px;
     border-radius: 10px;
-    overflow:hidden;
-    
+    border: 2px solid #B6DAFF;
+    overflow: hidden;
 }
 .itsawrap {
     overflow-wrap: break-word;
@@ -282,9 +286,19 @@ max-width:95%;
     height:60vh;
     overflow-y:scroll;
     scroll-behavior:smooth;
+
+
 }
-.top-container{
-    margin-bottom:1vh;
+.cardsrowgrid{
+
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    
+
+}
+
+.top-container {
+    margin-bottom: 1vh;
 }
 #myCheckbox label {
     background-color: #0C2144;
@@ -295,7 +309,7 @@ max-width:95%;
         height:40vh;
     }
     .actionpart{
-        gap:50%;
+  
     }
     .buttonpart{
         gap:25%;
@@ -314,7 +328,7 @@ max-width:95%;
             height:45vh;
         }
         .actionpart{
-            gap:45%;
+
         }
         .buttonpart{
             gap:20%;
@@ -337,7 +351,7 @@ max-width:95%;
             height:49vh;
         }
         .actionpart{
-            gap:40%;
+  
         }
         .buttonpart{
             gap:15px;
@@ -349,7 +363,7 @@ max-width:95%;
 }
    @media screen and (max-width: 1200px) {
     .actionpart {
-        gap: 35%;
+
     }
 
     .buttonpart {
@@ -395,7 +409,7 @@ max-width:95%;
     }
 
     .actionpart {
-        gap: 35%;
+
     }
 
     .nameandcashier {
@@ -412,7 +426,7 @@ max-width:95%;
 
     @media screen and (max-width: 974px) {
         .actionpart {
-            gap: 30%;
+   
         }
 
    
@@ -442,7 +456,7 @@ max-width:95%;
         }
 
         .actionpart {
-            gap: 25%;
+
         }
 
         .vendorcard {
@@ -473,7 +487,7 @@ max-width:95%;
         }
 
         .actionpart {
-            gap: 15%;
+   
         }
 
         .nesteddiv {
