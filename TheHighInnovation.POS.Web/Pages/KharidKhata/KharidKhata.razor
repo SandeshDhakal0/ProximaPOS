@@ -1,13 +1,13 @@
 ﻿@page "/kharidkhata"
 @using BlazorBootstrap
-@using TheHighInnovation.POS.Model.Request.Filter
-@using TheHighInnovation.POS.Model.Response.KharidKhata
 @inject BaseService BaseService
 @inject SweetAlert SweetAlertService
+@using TheHighInnovation.POS.Web.Layout.DateFilter
+@using TheHighInnovation.POS.Web.Model.Request.Filter
+@using TheHighInnovation.POS.Web.Model.Response.KharidKhata
 @using TheHighInnovation.POS.Web.Services.Base
 @using TheHighInnovation.POS.Web.Models
 @using TheHighInnovation.POS.Web.Services.Alert
-
 @inject IJSRuntime JS
 
 <div class="container-fluid pt-5 d-flex" style="justify-content:space-between;width:100%;">
@@ -159,13 +159,11 @@
     private PagerDto _pagerDto { get; set; } = new();
     private KharidKhataFilter _kharidFilter = new();
     private string _message { get; set; } = string.Empty;
-    private List<ToastMessage> messages;
-    private string Message = string.Empty;
-    private string Type = string.Empty;
-
 
     protected override async Task OnInitializedAsync()
     {
+        _globalState = await BaseService.GetGlobalState();
+        
         await LoadKharidKhata(1);
     }
 
@@ -182,7 +180,7 @@
                 { "pagesize", _kharidFilter.PageSize.ToString() }
             };
 
-            var karidList = await BaseService.GetAsync<Model.Response.Base.Derived<List<KharidKhataList>>>("KharidKhata/get-kharid-khata", parameters);
+            var karidList = await BaseService.GetAsync<Derived<List<KharidKhataList>>>("KharidKhata/get-kharid-khata", parameters);
             if(karidList != null)
             {
                 _kharidList = karidList.Result;
@@ -205,39 +203,28 @@
 
     private async Task DownloadExcel()
     {
-        try
+        if (await JS.InvokeAsync<bool>("confirm", $"Do you want to download excel? "))
         {
-            if (await SweetAlertService.Ask("Do you want to download excel?"))
-            {
-                StateHasChanged();
-                var invoiceno = "";
-                var parameters = new Dictionary<string, string>
+            StateHasChanged();
+            var invoiceno = "";
+            var parameters = new Dictionary<string, string>
                          {
                              { "invoiceno", invoiceno },
                              { "yearbs", _kharidFilter.YearBs.ToString() },
                              { "monthbs", _kharidFilter.MonthBs.ToString() }
                          };
-                var response = await BaseService.GetAsyncOnly("KharidKhata/download-kharid-khata", parameters);
+            var response = await BaseService.GetAsyncOnly("KharidKhata/download-kharid-khata", parameters);
 
-                if (response.IsSuccessStatusCode)
-                {
-                    var fileBytes = await response.Content.ReadAsByteArrayAsync();
-                    var monthyear = $@"{_kharidFilter.YearBs}/{_kharidFilter.MonthBs}";
+            if (response != null)
+            {
+                var fileBytes = await response.Content.ReadAsByteArrayAsync();
+                var monthyear = $@"{_kharidFilter.YearBs}/{_kharidFilter.MonthBs}";
 
-                    var fileName = $"KharidKhata/{monthyear}.xlsx";
-                    var done = JS.InvokeAsync<object>("saveAsFile", fileName, Convert.ToBase64String(fileBytes));
-                    await SweetAlertService.Alert("Success", "File is Downloaded", "success");
-                }
-                else
-                {
-                    await SweetAlertService.Alert("Warning", "The data is not available", "warning");
-                }
-
+                var fileName = $"KharidKhata/{monthyear}.xlsx";
+                  await JS.InvokeAsync<bool>("saveAsFile", fileName, Convert.ToBase64String(fileBytes));
+                
+                    await SweetAlertService.Alert("Success", "The download is complete!", "success");                
             }
-        }
-        catch(Exception)
-        {
-            SweetAlertService.ShowMessage(ToastType.Warning, "Export Failed", "Please Try Again");
         }
     }
 

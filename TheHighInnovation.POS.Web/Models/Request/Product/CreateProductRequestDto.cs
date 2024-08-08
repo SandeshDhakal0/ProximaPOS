@@ -21,4 +21,6 @@ public class CreateProductRequestDto
     public decimal? CostPrice { get; set; }
     
     public string? ImageURL { get; set; }
+	public bool IsActive { get; set; }
+
 }

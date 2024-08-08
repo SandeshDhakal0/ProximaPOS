@@ -1,18 +1,13 @@
-.searchbutton, .addcatogerybtn, .clearbuttond {
+ .clearbuttond {
     border: none;
     border-radius: 10px;
     margin-top: 3%;
     font-size: 18px;
 }
 
-.searchbutton {
-    background-color: var(--search-button-background);
-    color: var(--our--commonblue-color);
-    margin-left: 11vw;
-}
+
 
 .filter-section {
-    
     border: none;
     width: 96%;
     margin-left: 2%;
@@ -21,7 +16,6 @@
 .required, .filterby {
     letter-spacing: 3px;
     font-weight: 500;
-    
 }
 
 .required {
@@ -30,16 +24,14 @@
 
 .filterby {
     font-size: 18px;
-    color:#111;
+    color: #111;
 }
 
 .categorypage {
-    margin-top: 3%;
-    width: 80vw;
+    margin-top: 4%;
+
     height: 90.5vh;
     padding-bottom: 2vh;
-    margin-left: 1%;
-
 }
 
 .form-select {
@@ -48,39 +40,48 @@
     border-radius: 10px;
     background-color: #d9d9d9;
 }
-
+.toppart{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+}
+.topheading{
+    font-size:30px;
+}
 .addcatogerybtn {
-    background-color: var(--our--commonblue-color);
-    color:#fff;
-    height: 35px;
-    width: 25%;
-    margin-right: 3%;
-}
-
-.searchlinegroup {
-    margin: 1% 0;
-    
-   
-}
-
-    .searchlinegroup .searchbutton, .searchbuttond, .clearbuttond {
-       
-       
-        height: 4vh;
-    }
-
-
-.searchbuttond {
-    width: 50px;
-    font-size: 18px;
-    border-radius: 10px;
-    border: none;
-    background-color: #d9d9d9;
     border: none;
     border-radius: 10px;
+    background-color: #ABBFE0;
+    color: #000000;
+    height:50px;
+    width: 35%;
+    font-size:18px;
+    font-weight:400;
 }
-.searchline2 {
-    margin-left: 25%;
+.buttonadd{
+    text-align:end;
+}
+
+
+.searchdiv{
+    display:flex;
+}
+
+
+.inputsearch {
+    padding: 10px;
+    border: 1px solid #dcdcdc;
+    border-radius:10px 0 0 10px;
+    background-color: #ECECEB;
+    width: 400px;
+    height:45px;
+}
+.searchbutton {
+    border: none;
+    border-radius: 0 10px 10px 0;
+    background-color: #0C2144;
+    color: #ffffff;
+    width: 45px;
+    height: 45px;
 }
 .clearbuttond {
     background-color: red;
@@ -92,8 +93,8 @@
 .showentries, .selectcompany {
     border: none;
     border-radius: 5px;
-    color:#111;
-   margin-top:1.5vh;
+    color: #111;
+    margin-top: 1.5vh;
 }
 
 .showentries {
@@ -101,9 +102,9 @@
     margin-right: 15px;
 }
 
+
 .selectcompany {
     width: 3vw;
-    
     background-color: #d9d9d9;
     height: 4vh;
 }
@@ -113,14 +114,10 @@
     margin-right: 5px;
 }
 
-/*.companysection {
-    margin-left: -45vw;
-}
-*/
+
 
 .selecttext, .searchtext {
     font-size: 16px;
-    
 }
 
 .selecttext {
@@ -132,12 +129,7 @@
     border: none;
 }
 
-/*.selectcategory {
-    background-color: #efefef;
-    width: 100px;
-    height: 15px;
-}
-*/
+
 .searchinput {
     border: 1px solid #dcdfe8;
     height: 30px;
@@ -146,46 +138,47 @@
 
 
 .table thead, .tablediv thead th {
-    background-color: var(--tablehead-background);
     font-size: 16px;
     font-weight: 500;
     color: #110a57;
 }
 
 .tablediv {
-    border: 1px solid #dcdfe8;
-    margin: 2%;
-    width: 96%;
+    
+    border:2px solid #dcdcdc;
+    margin-top: 2%;
+}
+.table thead{
+    border-bottom:2px solid #dcdcdc;
 }
 
-    .tablediv thead th {
-        position: sticky;
-        top: 0;
-        z-index: 1;
-        width: 100%;
+.tablediv thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+}
+
+    .tablediv tbody {
+        display: block;
+        max-height: 50vh;
+        overflow-y: scroll;
     }
-
-.tablediv tbody {
-    display: block;
-    max-height: 50vh;
-    overflow-y: scroll;
-}
 
         .tablediv thead, .tablediv tbody tr {
             display: table;
             width: 100%;
             table-layout: fixed;
-            
-          
         }
+
             .tablediv tbody tr:hover {
                 background-color: var(--tablehead-background);
             }
 
-            ::-webkit-scrollbar {
-                width: 10px;
-                background-color: transparent;
-            }
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+}
 
 ::-webkit-scrollbar-thumb {
     background-color: darkgrey;
@@ -198,6 +191,116 @@
 
 .table .th6 {
     border-radius: 0 10px 0 0;
+    text-align:center;
+    
+}
+.lasttd{
+    text-align:center;
 }
 
 
+.color-palette {
+    display: flex;
+    gap: 10px;
+}
+
+.color-option {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    border: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+    .color-option:hover {
+        border-color: #000;
+    }
+
+    .color-option i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 20px;
+    }
+
+.paginationpart{
+    margin-top:20px;
+}
+.colorbg{
+    height:40px;
+    width:40px;
+    margin-left:10px;
+}
+/*Media querry*/
+@media screen and (max-width: 1260px) {
+    .addcatogerybtn {
+        width: 40%;
+        font-size:18px;
+    }
+    .inputsearch{
+        width:350px;
+    }
+    .colorbg{
+        height:30px;
+        width:30px;
+        
+    }
+}
+@media screen and (max-width: 1112px){
+    .addcatogerybtn{
+        width:45%;
+    }
+
+}
+@media screen and (max-width: 1024px) {
+    .inputsearch{
+        width:300px;
+    }
+    .addcatogerybtn{
+        font-size:16px;
+    }
+
+    .topheading{
+        font-size:28px;
+    }
+}
+@media screen and (max-width: 986px) {
+    .categorypage{
+        margin-top:5%;
+    }
+    .inputsearch{
+        width:250px;
+        height:40px;
+    }
+    .searchbutton{
+        height:40px;
+    }
+    .addcatogerybtn{
+        font-size:14px;
+        height:45px;
+    }
+
+}
+
+
+    @media screen and (max-width: 768px) {
+        .addcatogerybtn{
+            line-height:1;
+            height:40px;
+            width:40%;
+
+        }
+        .table{
+            font-size:12px;
+        }
+        .table thead{
+            font-size:12px;
+        }
+        .selecttext{
+ 
+        }
+    }

@@ -1,8 +1,8 @@
 ﻿@page "/admin-dashboard"
 @using TheHighInnovation.POS.Web.Services.Base
-@using TheHighInnovation.POS.Model.Response.Dashboard
-@using TheHighInnovation.POS.Model.Response.Organization
-@using TheHighInnovation.POS.Model
+@using TheHighInnovation.POS.Web.Model.Response.Dashboard
+@using TheHighInnovation.POS.Web.Model.Response.Organization
+@using TheHighInnovation.POS.Web.Model
 @using TheHighInnovation.POS.Web.Models
 
 
@@ -14,8 +14,6 @@
 
     <div class="container-fluid top-container">
         <div class="row outer-row">
-
-
             <div class="col-3 cards-left">
                 <div class="rev-sec">
                     <p class="r-title">Revenue</p>
@@ -134,7 +132,7 @@
                         </div>
                         <div class="row">
                             <div class="col">room Sale</div>
-                            <div class="col">RS 2000</div
+                            <div class="col">RS 2000</div>
                         </div>
                         <div class="row">
                             <div class="col">Room Sale</div>
@@ -552,6 +550,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        GlobalState = await BaseService.GetGlobalState();
+        
         if (GlobalState.CompanyId is not null)
         {
             var parameters = new Dictionary<string, string>
@@ -560,7 +560,7 @@
 };
 
             var result = await
-            BaseService.GetAsync<Model.Response.Base.Derived<List<DashboardTransactionDto>>>("dashboard/get-sales-records",
+            BaseService.GetAsync<Derived<List<DashboardTransactionDto>>>("dashboard/get-sales-records",
             parameters);
 
             DashboardTransactionDto = result?.Result.FirstOrDefault() ?? new();

@@ -1,0 +1,452 @@
+﻿@page "/restro-dashboard"
+@using TheHighInnovation.POS.Web.Services.Base
+@using TheHighInnovation.POS.Web.Model.Response.Dashboard
+@using TheHighInnovation.POS.Web.Model.Response.Organization
+@using TheHighInnovation.POS.Web.Models
+
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js">
+    
+</script>
+
+<div class="dashboardpage container-fluid">
+    <h2 class="page-heading">WELCOME TO PROXIMA</h2>
+
+  
+        <div class="container-fluid outer-row">
+            <div class="cards-left">
+                <div class="rev-sec">
+                    <p class="r-title">Total Revenue</p>
+                    <p class="amt-1">Rs. 528,976.82</p>
+                    <div class="two-btn">
+                        <span class="rev-btn1">88.88%</span> <span class="rev-btn2">Rs. 54321</span> <br />
+                    </div>
+                </div>
+                <div class="rev-sec">
+                    <p class="r-title">Total Expenses</p>
+                    <p class="amt-2">Rs 59,976.82</p>
+                    <div class="two-btn">
+                        <span class="rev-btn3">88.88%</span> <span class="rev-btn4">Rs 54321</span>
+                    </div>
+                </div>
+            </div>
+
+          
+                <div class="first-row">
+                    <div class="small-cards">
+                        <div>
+                            <div class="row">
+                                <div class="icon"><i class="fa-solid fa-comments-dollar"></i></div>
+                                <div class="text"><p>Total Sales</p></div>
+                                <div class="ellipsis"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                            </div>
+                            
+                            <div class="">
+                        <p class="TotalSaleAmt">Rs 2,34,400</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-cards">
+                        <div>
+                            <div class="row">
+                                <div class="icon"><i class="fa-solid fa-comments-dollar"></i></div>
+                                <div class="text"><p>Bar Sales</p></div>
+                                <div class="ellipsis"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                            </div>
+                           
+                            <div>
+                        <p class="BarSaleAmt">Rs 2,34,400</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-cards">
+                        <div>
+                            <div class="row">
+                                <div class="icon"><i class="fa-solid fa-comments-dollar"></i></div>
+                                <div class="text"><p>Total Inventory</p></div>
+                                <div class="ellipsis"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                            </div>
+                            <div class="row">
+                                <div class="label">In Rupees</div>
+                                <div class="value">RS 2000</div>
+                            </div>
+                            <div class="row">
+                                <div class="label">In Units</div>
+                                <div class="value">20 pcs</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-cards">
+                        <div>
+                            <div class="row">
+                                <div class="icon"><i class="fa-solid fa-comments-dollar"></i></div>
+                                <div class="text"><p>Order Status</p></div>
+                                <div class="ellipsis"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                            </div>
+                            <div class="row">
+                                <div class="label">Room Sale</div>
+                                <div class="value">RS 2000</div>
+                            </div>
+                            <div class="row">
+                                <div class="label">Room Sale</div>
+                                <div class="value">Rs 2000</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="small-cards">
+                        <div>
+                            <div class="row">
+                                <div class="icon"><i class="fa-solid fa-comments-dollar"></i></div>
+                                <div class="text"><p>Expenses</p></div>
+                                <div class="ellipsis"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                            </div>
+                            <div class="Expenses">
+                             <p>Rs. 28,900</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-cards">
+                        <div>
+                            <div class="row">
+                                <div class="icon"><i class="fa-solid fa-comments-dollar"></i></div>
+                                <div class="text"><p>Occupancy Rate</p></div>
+                                <div class="ellipsis"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                            </div>
+                            <div class="OccupancyRate">
+                              <p>59%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-cards">
+                        <div>
+                            <div class="row">
+                                <div class="icon"><i class="fa-solid fa-comments-dollar"></i></div>
+                                <div class="text"><p>Restro Overview</p></div>
+                                <div class="ellipsis"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                            </div>
+                            <div class="row">
+                                <div class="label">Table Sales</div>
+                                <div class="value">RS 2000</div>
+                            </div>
+                            <div class="row">
+                                <div class="label">Online Sales</div>
+                                <div class="value">Rs 2000</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="small-cards">
+                        <div>
+                            <div class="row">
+                                <div class="icon"><i class="fa-solid fa-comments-dollar"></i></div>
+                                <div class="text"><p>Customer Status</p></div>
+                                <div class="ellipsis"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                            </div>
+                            <div class="row">
+                                <div class="label">Table Order</div>
+                                <div class="value">50</div>
+                            </div>
+                            <div class="row">
+                                <div class="label">Online & To-Go</div>
+                                <div class="value">20</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+        </div>
+    
+
+    <div class="container-fluid">
+        <div class="sales">
+            <div class="top-row heading">
+                <div class="title"><p>SALES TRENDS</p></div>
+                <div class="dropdown">
+                    <div class="btn-group">
+                        <button class="btn btn-secondary btn-sm dropdown-toggle" type="button">
+                            Small button
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>me</li>
+                            <li>you</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="line-graph">
+                <LineGraph Class="linegraph"></LineGraph>
+            </div>
+        </div>
+
+        <div class="rev-brk" >
+            <div class="revenue">
+                <p class="row-heading">REVENUE BREAKDOWN</p>
+                <div class="chart">
+                    <ChartComponent></ChartComponent>
+                </div>
+            </div>
+
+            <div class="salesby">
+                <div class="top-row">
+                    <p class="row-heading">SALES BY</p>
+                    <div class="dropdown">
+                        <div class="btn-group">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button">
+                                category
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>i</li>
+                                <li>my</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <table class="table salesby-table">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Qty</th>
+                        <th>Amount</th>
+                    </tr>
+                    <tr>
+                        <td>Khukuri Rum</td>
+                        <td>12</td>
+                        <td>10500</td>
+                    </tr>
+                    <tr>
+                        <td>Khukuri Rum</td>
+                        <td>12</td>
+                        <td>10500</td>
+                    </tr>
+                    <tr>
+                        <td>Khukuri Rum</td>
+                        <td>12</td>
+                        <td>10500</td>
+                    </tr>
+                    <tr>
+                        <td>Khukuri Rum</td>
+                        <td>12</td>
+                        <td>10500</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="snapshoots">
+                <div class="top-row">
+                    <p class="row-heading">SNAPSHOTS</p>
+                    <div class="dropdown">
+                        <div class="btn-group">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button">
+                                category
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>i</li>
+                                <li>my</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <table class="table">
+                    <tr>
+                        <td><i class="fa-regular fa-calendar-days"></i></td>
+                        <td>Most walking day</td>
+                        <td>Friday</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-regular fa-calendar-days"></i></td>
+                        <td>Most walking day</td>
+                        <td>Friday</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-regular fa-calendar-days"></i></td>
+                        <td>Most walking day</td>
+                        <td>Friday</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-regular fa-calendar-days"></i></td>
+                        <td>Most walking day</td>
+                        <td>Friday</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fa-regular fa-calendar-days"></i></td>
+                        <td>Most walking day</td>
+                        <td>Friday</td>
+                    </tr>
+                </table>
+            </div>
+       
+            <div class="money-distribution">
+                <div class="top-row">
+                    <p class="row-heading">MONEY DISTRIBUTION</p>
+                </div>
+                <div class="pie-chart">
+                    <PieChart></PieChart>
+                </div>
+            </div>
+
+            <div class="employees-status">
+                <div class="top-row">
+                    <p class="row-heading">EMPLOYEES STATUS</p>
+                </div>
+                <div class="employee-progress">
+                    <div class="individual-progress">
+                        <div class="icon-col">
+                            <i class="fa-solid fa-person"></i>
+                        </div>
+                        <div class="progress-col">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 80%;"></div>
+                            </div>
+                        </div>
+                        <div class="day-col">
+                            <span>291/365</span>
+                        </div>
+                    </div>
+                    <div class="individual-progress">
+                        <div class="icon-col">
+                            <i class="fa-solid fa-person"></i>
+                        </div>
+                        <div class="progress-col">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 99%;"></div>
+                            </div>
+                        </div>
+                        <div class="day-col">
+                            <span>361/365</span>
+                        </div>
+                    </div>
+                    <div class="individual-progress">
+                        <div class="icon-col">
+                            <i class="fa-solid fa-person"></i>
+                        </div>
+                        <div class="progress-col">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 10%;"></div>
+                            </div>
+                        </div>
+                        <div class="day-col">
+                            <span>36/365</span>
+                        </div>
+                    </div>
+                    <div class="individual-progress">
+                        <div class="icon-col">
+                            <i class="fa-solid fa-person"></i>
+                        </div>
+                        <div class="progress-col">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 10%;"></div>
+                            </div>
+                        </div>
+                        <div class="day-col">
+                            <span>36/365</span>
+                        </div>
+                    </div>
+                    <div class="individual-progress">
+                        <div class="icon-col">
+                            <i class="fa-solid fa-person"></i>
+                        </div>
+                        <div class="progress-col">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 30%;"></div>
+                            </div>
+                        </div>
+                        <div class="day-col">
+                            <span>109/365</span>
+                        </div>
+                    </div>
+                    <div class="individual-progress">
+                        <div class="icon-col">
+                            <i class="fa-solid fa-person"></i>
+                        </div>
+                        <div class="progress-col">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 90%;"></div>
+                            </div>
+                        </div>
+                        <div class="day-col">
+                            <span>328/365</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="top-selling">
+                <div class="top-row">
+                    <p class="row-heading">TOP SELLING</p>
+                    <div class="dropdown">
+                        <div class="btn-group">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button">
+                                category
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>i</li>
+                                <li>my</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Qty</th>
+                        <th>Amount</th>
+                    </tr>
+                    <tr>
+                        <td>Khukuri Rum</td>
+                        <td>12</td>
+                        <td>10500</td>
+                    </tr>
+                    <tr>
+                        <td>Khukuri Rum</td>
+                        <td>12</td>
+                        <td>10500</td>
+                    </tr>
+                    <tr>
+                        <td>Khukuri Rum</td>
+                        <td>12</td>
+                        <td>10500</td>
+                    </tr>
+                    <tr>
+                        <td>Khukuri Rum</td>
+                        <td>12</td>
+                        <td>10500</td>
+                    </tr>
+                    <tr>
+                        <td>Khukuri Rum</td>
+                        <td>12</td>
+                        <td>10500</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@inject BaseService BaseService
+
+@code {
+    [CascadingParameter]
+    private GlobalState GlobalState { get; set; }
+
+    private DashboardTransactionDto DashboardTransactionDto { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        GlobalState = await BaseService.GetGlobalState();
+
+        if (GlobalState.CompanyId is not null)
+        {
+            var parameters = new Dictionary<string, string>
+{
+{ "companyId", GlobalState.CompanyId.ToString() },
+};
+
+            var result = await
+            BaseService.GetAsync<Derived<List<DashboardTransactionDto>>>("dashboard/get-sales-records",
+            parameters);
+
+            DashboardTransactionDto = result?.Result.FirstOrDefault() ?? new();
+
+        }
+    }
+}

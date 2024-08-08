@@ -1,92 +1,123 @@
 ﻿@page "/landing-page"
+@using TheHighInnovation.POS.Web.Model.Response.Permission
 @using TheHighInnovation.POS.Web.Models
+@using TheHighInnovation.POS.Web.Services.Base
 @inject NavigationManager NavManager;
-<div class="landingpage container ">
+@inject BaseService baseService
 
+<div class="landingpage container">
     <div class="row">
-             <div class="col">
-
-                <button @onclick="SwitchToCashierPanel" class="togobuttons">
-                <i class="fa fa-desktop icon" aria-hidden="true"></i>
-                </button>
-               <p class="label">POS</p>
-            </div>
-            <div class="col">
-        <button @onclick="SwitchToDashboard" class="togobuttons">
-           
-            <i class="fa fa-table icon" aria-hidden="true"></i>
-        </button>
-            <p class="label">Dashboard</p>
-        </div>
-        
-            <div class="col">
-            <button @onclick="SwitchToReservation" class="togobuttons">
-                <i class="fa fa-building icon" aria-hidden="true"></i>
-                    
-                </button>
-            <p class="label">Reservation</p>
-            </div>
-        <div class="col">
-            <button @onclick="SwitchToSales" class="togobuttons">
-
-                <i class="fa-solid fa-square-poll-vertical icon"></i>
-            </button>
-            <p class="label">Sales </p>
-        </div>
-        <div class="col">
-            <button @onclick="SwitchToInventory" class="togobuttons">
-                <i class="fa-solid fa-list icon"></i>
-            </button>
-            <p class="label">Inventory</p>
-        </div>
-        <div class="col">
-            <button @onclick="SwitchToAdmin" class="togobuttons">
-                <i class="fas fa-user-cog icon"></i>
-            </button>
-            <p class="label">Settings</p>
-        </div>
-        
-       
-        
+        @if (landingPage != null)
+        {
+            foreach (var item in landingPage)
+            {
+                <div class="col">
+                    <button @onclick="@(async () => await ExecuteAction(item.Action))" class="togobuttons">
+                        <i class="@item.Icon" aria-hidden="true"></i>
+                    </button>
+                    <p class="label">@item.Name</p>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Loading...</p>
+        }
     </div>
-        </div>
+</div>
 
 @code {
-    [CascadingParameter] 
+    [CascadingParameter]
     private GlobalState _globalState { get; set; }
+    private List<GetLandingPage> landingPage { get; set; }
 
-    private void SwitchToCashierPanel()
+    private readonly Dictionary<string, Func<Task>> _actionMapping;
+
+    public LandingScreen()
     {
-        _globalState.PageNumber = 2;
-        NavManager.NavigateTo("/cashier-corner");
+        _actionMapping = new Dictionary<string, Func<Task>>
+        {
+            // { "SwitchToCashierPanel", SwitchToCashierPanel },
+            { "SwitchToReservation", SwitchToReservation },
+            { "SwitchToAdmin", SwitchToAdmin },
+            { "SwitchToInventory", SwitchToInventory },
+            { "SwitchToSales", SwitchToSales },
+            { "SwitchToDashboard", SwitchToDashboard },
+            { "SwitchToDashboardRestro", SwitchToDashboardRestro }
+        };
     }
 
-    private void SwitchToReservation()
+    protected override async Task OnInitializedAsync()
+    {
+        _globalState = await baseService.GetGlobalState();
+        
+        await FetchLandingScreen();
+    }
+
+    private async Task FetchLandingScreen()
+    {
+        var response = await baseService.GetAsync<Derived<List<GetLandingPage>>>("permission/get-landing-screen");
+
+        if (response != null)
+        {
+            landingPage = response.Result;
+        }
+    }
+
+    private async Task ExecuteAction(string actionName)
+    {
+        if (_actionMapping.ContainsKey(actionName))
+        {
+            await _actionMapping[actionName]();
+        }
+    }
+
+    // private Task SwitchToCashierPanel()
+    // {
+    //     _globalState.PageNumber = 2;
+    //     NavManager.NavigateTo("/cashier-corner");
+    //     return Task.CompletedTask;
+    // }
+
+    private Task SwitchToReservation()
     {
         _globalState.PageNumber = 3;
         NavManager.NavigateTo("/reservation");
+        return Task.CompletedTask;
     }
 
-    private void SwitchToAdmin()
+    private Task SwitchToAdmin()
     {
         _globalState.PageNumber = 1;
         NavManager.NavigateTo("/category");
+        return Task.CompletedTask;
     }
 
-    private void SwitchToInventory()
+    private Task SwitchToInventory()
     {
         _globalState.PageNumber = 4;
         NavManager.NavigateTo("/vendor");
+        return Task.CompletedTask;
     }
 
-    private void SwitchToSales()
+    private Task SwitchToSales()
     {
         _globalState.PageNumber = 5;
         NavManager.NavigateTo("/sale");
+        return Task.CompletedTask;
     }
-     private void SwitchToDashboard()
+
+    private Task SwitchToDashboard()
     {
         _globalState.PageNumber = 6;
         NavManager.NavigateTo("/admin-dashboard");
+        return Task.CompletedTask;
+    }
+
+    private Task SwitchToDashboardRestro()
+    {
+        _globalState.PageNumber = 6;
+        NavManager.NavigateTo("/restro-dashboard");
+        return Task.CompletedTask;
     }
 }

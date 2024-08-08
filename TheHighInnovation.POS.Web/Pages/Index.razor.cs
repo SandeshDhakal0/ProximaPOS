@@ -1,4 +1,4 @@
-﻿using TheHighInnovation.POS.Model;
+﻿using TheHighInnovation.POS.Web.Model;
 using Microsoft.AspNetCore.Components;
 using TheHighInnovation.POS.Web.Models;
 
@@ -8,10 +8,16 @@ public partial class Index
 {
     [CascadingParameter] private GlobalState? GlobalState { get; set; }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        var navigation = GlobalState?.UserId == 0 ? "/login" : GlobalState?.RoleType == 0 ? "/admin-dashboard" : "/cashier-corner";
+        GlobalState = await BaseService.GetGlobalState();
 
+        var navigation = GlobalState?.UserId == 0 ? "/login" : GlobalState?.RoleType == 0
+            ? GlobalState?.OrganizationId == null || GlobalState.OrganizationId == 0
+                ? "/admin-dashboard"
+                : "/landing-page"
+            : "/cashier-corner";
+        
         NavManager.NavigateTo(navigation);
     }
 }

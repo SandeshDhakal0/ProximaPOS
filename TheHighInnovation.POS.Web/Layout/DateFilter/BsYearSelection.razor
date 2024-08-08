@@ -1,0 +1,37 @@
+﻿<div>
+    <label for="year-select"
+           style="margin-left:10px;">Choose a year:</label>
+    <select style="border:none;
+        height:5vh;
+        background-color:#d9d9d9;
+        border-radius:5px;
+        margin-left:10px;
+        width:8vw;
+        text-align:center;"
+        id="year-select" class="@ClassName" name="year" @onchange="OnYearChange">
+        <option value="2070">2070</option>
+        <option value="2071">2071</option>
+        <option value="2072">2072</option>
+        <option value="2073">2073</option>
+        <option value="2074">2074</option>
+        <option value="2075">2075</option>
+        <option value="2076">2076</option>
+        <option value="2077">2077</option>
+        <option value="2078">2078</option>
+        <option value="2079">2079</option>
+        <option value="2080">2080</option>
+        <option value="2081">2081</option>
+    </select>
+</div>
+
+@code {
+    [Parameter] public string ClassName { get; set; } = "container";
+    [Parameter] public int selectedValue { get; set; } = 2081;
+    [Parameter] public EventCallback<int> selectedYearChange { get; set; }
+
+    private async Task OnYearChange(ChangeEventArgs e)
+    {
+        selectedValue = int.Parse(e.Value.ToString());
+        await selectedYearChange.InvokeAsync(selectedValue);
+    }
+}

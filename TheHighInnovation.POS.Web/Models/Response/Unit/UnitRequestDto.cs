@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Http;
 
-namespace TheHighInnovation.POS.Model.Response.Unit
+namespace TheHighInnovation.POS.Web.Model.Response.Unit
 {
 	internal class UnitRequestDto
 	{

@@ -8,7 +8,37 @@ namespace TheHighInnovation.POS.Web.Services.Base;
 
 public class BaseService(HttpClient httpClient, ILocalStorageService localStorage)
 {
-    private readonly string _baseUrl = AppConfiguration.BaseUrl;
+    public async Task<GlobalState> GetGlobalState()
+    {
+        var userDetails = await GetAsync<Derived<LoginResponseDetailsDto>>("authenticate/profile");
+
+        if (userDetails?.Result == null || userDetails.Result.UserId == 0)
+        {
+            await localStorage.RemoveItemAsync("access_token");
+
+            return new GlobalState();
+        }
+
+        var result = userDetails.Result;
+
+        var globalState = new GlobalState
+        {
+            UserId = result.UserId,
+            EmployeeId = result.EmployeeId,
+            Name = result.Name,
+            RoleId = result.RoleId,
+            RoleName = result.RoleName,
+            RoleType = result.RoleType,
+            CompanyId = result.CompanyId,
+            CompanyName = result.CompanyName,
+            OrganizationId = result.OrganizationId,
+            OrganizationName = result.OrganizationName,
+            IsAdmin = result.IsAdmin,
+            IsSuperAdmin = result.IsSuperAdmin
+        };
+
+        return globalState;
+    }
 
     public async Task<bool> IsUserLoggedIn()
     {
@@ -17,12 +47,12 @@ public class BaseService(HttpClient httpClient, ILocalStorageService localStorag
         if (accessToken == null) return false;
 
         var tokenHandler = new JwtSecurityTokenHandler();
-     
+
         var jwtToken = tokenHandler.ReadJwtToken(accessToken);
 
         var expiryDateTime = jwtToken.ValidTo;
 
-        return expiryDateTime > DateTime.Now;
+        return expiryDateTime > DateTime.UtcNow;
     }
 
     public async Task LogOutUser()
@@ -39,7 +69,7 @@ public class BaseService(HttpClient httpClient, ILocalStorageService localStorag
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
 
-        var fullUrl = $"{_baseUrl}/api/{endpoint}";
+        var fullUrl = $"/api/{endpoint}";
 
         if (parameters is { Count: > 0 })
         {
@@ -68,7 +98,7 @@ public class BaseService(HttpClient httpClient, ILocalStorageService localStorag
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
         
-        var response = await httpClient.PostAsync($"{_baseUrl}/api/{endpoint}", stringContent);
+        var response = await httpClient.PostAsync($"/api/{endpoint}", stringContent);
 
         if (response.IsSuccessStatusCode)
         {
@@ -87,7 +117,7 @@ public class BaseService(HttpClient httpClient, ILocalStorageService localStorag
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
         
-        var response = await httpClient.PatchAsync($"{_baseUrl}/api/{endpoint}", stringContent);
+        var response = await httpClient.PatchAsync($"/api/{endpoint}", stringContent);
 
         if (response.IsSuccessStatusCode)
         {
@@ -106,7 +136,7 @@ public class BaseService(HttpClient httpClient, ILocalStorageService localStorag
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
         
-        var response = await httpClient.DeleteAsync($"{_baseUrl}/api/{endpoint}");
+        var response = await httpClient.DeleteAsync($"/api/{endpoint}");
 
         if (response.IsSuccessStatusCode)
         {
@@ -125,7 +155,7 @@ public class BaseService(HttpClient httpClient, ILocalStorageService localStorag
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }
 
-        var fullUrl = $"{_baseUrl}/api/{endpoint}";
+        var fullUrl = $"/api/{endpoint}";
 
         if (parameters is { Count: > 0 })
         {
@@ -139,9 +169,10 @@ public class BaseService(HttpClient httpClient, ILocalStorageService localStorag
         return response;
     }
     
-    public async Task<Derived<bool>> DeleteAsyncWithId<T>(string endpoint, int vendorId, bool status)
+    public async Task<Derived<bool>> DeleteAsyncWithId(string endpoint, int vendorId, bool status)
     {
-        var url = $"{_baseUrl}/api/{endpoint}/{vendorId}/{status}";
+        var url = $"/api/{endpoint}/{vendorId}/{status}";
+        
         var response = await httpClient.DeleteAsync(url);
 
         if (response.IsSuccessStatusCode)

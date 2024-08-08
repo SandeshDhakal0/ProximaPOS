@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Request.Service;
+﻿namespace TheHighInnovation.POS.Web.Model.Request.Service;
 
 public class ServiceRequestDto
 {

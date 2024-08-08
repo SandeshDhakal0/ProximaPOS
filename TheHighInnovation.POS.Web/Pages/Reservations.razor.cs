@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http;
 using Microsoft.JSInterop;
 using System.Text.Json;
-using TheHighInnovation.POS.Model;
-using TheHighInnovation.POS.Model.Request.Customer;
-using TheHighInnovation.POS.Model.Request.Filter;
-using TheHighInnovation.POS.Model.Request.Reservation;
-using TheHighInnovation.POS.Model.Response.Reservation;
+using TheHighInnovation.POS.Web.Model;
+using TheHighInnovation.POS.Web.Model.Request.Customer;
+using TheHighInnovation.POS.Web.Model.Request.Filter;
+using TheHighInnovation.POS.Web.Model.Request.Reservation;
+using TheHighInnovation.POS.Web.Model.Response.Reservation;
 using TheHighInnovation.POS.Web.Models;
 
 namespace TheHighInnovation.POS.Web.Pages
@@ -63,8 +63,9 @@ namespace TheHighInnovation.POS.Web.Pages
 
         protected override async Task OnInitializedAsync()
         {
-           
-            var roomTypes = await BaseService.GetAsync<Model.Response.Base.Derived<List<RoomTypeResponseDto>>>("Reservation/room-type");
+            _globalState = await BaseService.GetGlobalState();
+            
+            var roomTypes = await BaseService.GetAsync<Derived<List<RoomTypeResponseDto>>>("Reservation/room-type");
 
             _roomTypes = roomTypes!.Result.Select(x => x.Name).ToList();
             await UpdateFilter("Booked");
@@ -127,7 +128,7 @@ namespace TheHighInnovation.POS.Web.Pages
             {"departure_date", departureDateS}
         };
 
-            var reservations = await BaseService.GetAsync<Model.Response.Base.Derived<List<ReservationResponseDto>>>("Reservation/reservation-active-list", parameters);
+            var reservations = await BaseService.GetAsync<Derived<List<ReservationResponseDto>>>("Reservation/reservation-active-list", parameters);
 
             if (reservations != null && reservations.Result != null)
             {
@@ -214,7 +215,7 @@ namespace TheHighInnovation.POS.Web.Pages
 
             _dialogOkLabel = "Update";
 
-            var reservation = await BaseService.GetAsync<Model.Response.Base.Derived<BookingResponseDto>>("Reservation/reservation-active-list-by-id", parameters);
+            var reservation = await BaseService.GetAsync<Derived<BookingResponseDto>>("Reservation/reservation-active-list-by-id", parameters);
 
             if (reservation != null)
             {
@@ -281,7 +282,7 @@ namespace TheHighInnovation.POS.Web.Pages
                 var jsonRequestCustomer = JsonSerializer.Serialize(customerparam);
                 var contentCustomer = new StringContent(jsonRequestCustomer, System.Text.Encoding.UTF8, "application/json");
 
-                var result = await BaseService.PostAsync<Model.Response.Base.Derived<int>>("customer/create-customer", contentCustomer);
+                var result = await BaseService.PostAsync<Derived<int>>("customer/create-customer", contentCustomer);
 
                 if (result.Result != null)
                 {
@@ -328,7 +329,7 @@ namespace TheHighInnovation.POS.Web.Pages
             var apiEndPoint = ReservationModel.Id == 0 ? "Reservation/create-reservation" : "Reservation/update-reservation";
 
             // Send reservation data to server.
-            await BaseService.PostAsync<Model.Response.Base.Derived<object>>(apiEndPoint, content);
+            await BaseService.PostAsync<Derived<object>>(apiEndPoint, content);
 
             // Reinitialize components.
             await OnInitializedAsync();
@@ -375,7 +376,7 @@ namespace TheHighInnovation.POS.Web.Pages
 
                 var apiEndPoint = "Reservation/checkin-customer";
 
-                var checkin = await BaseService.PostAsync<Model.Response.Base.Derived<object>>(apiEndPoint, content);
+                var checkin = await BaseService.PostAsync<Derived<object>>(apiEndPoint, content);
 
                 await OnInitializedAsync();
 
@@ -431,7 +432,7 @@ namespace TheHighInnovation.POS.Web.Pages
                     {"from", arrivalDate },
                     {"to", departureDate }
                 };
-                var reservations = await BaseService.GetAsync<Model.Response.Base.Derived<List<HoldRoomAvailabilityDTO>>>("Reservation/get-all-rooms-reservation", parameter);
+                var reservations = await BaseService.GetAsync<Derived<List<HoldRoomAvailabilityDTO>>>("Reservation/get-all-rooms-reservation", parameter);
 
                 roomsList = reservations.Result;
                                           
@@ -452,7 +453,7 @@ namespace TheHighInnovation.POS.Web.Pages
                 { "reservationId", reservationId.ToString() },               
             };
 
-            var reservations = await BaseService.GetAsync<Model.Response.Base.Derived<List<HoldRoomAvailabilityDTO>>>("Reservation/get-reservation-room-details", parameters);
+            var reservations = await BaseService.GetAsync<Derived<List<HoldRoomAvailabilityDTO>>>("Reservation/get-reservation-room-details", parameters);
 
             roomsList = reservations!.Result;
 
@@ -496,7 +497,7 @@ namespace TheHighInnovation.POS.Web.Pages
 
                     var apiEndPoint = "Reservation/cancel-reservation";
 
-                    var response = await BaseService.PostAsync<Model.Response.Base.Derived<object>>(apiEndPoint, content);
+                    var response = await BaseService.PostAsync<Derived<object>>(apiEndPoint, content);
                    
                     await _jsRuntime.InvokeVoidAsync("showAlert", "Success", "Reservation Cancelled.", "success");
                     await OnInitializedAsync();
@@ -534,7 +535,7 @@ namespace TheHighInnovation.POS.Web.Pages
 
             var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-            await BaseService.PostAsync<Model.Response.Base.Derived<object>>("Reservation/assign-rooms", content);
+            await BaseService.PostAsync<Derived<object>>("Reservation/assign-rooms", content);
 
             CustomerModalActionButton();
         }
@@ -594,7 +595,7 @@ namespace TheHighInnovation.POS.Web.Pages
                 {"contact_id", _contactNumber}
             };
 
-                var customerData = await BaseService.GetAsync<Model.Response.Base.Derived<Customer>>("customer/get-customer-by-contact", parameters);
+                var customerData = await BaseService.GetAsync<Derived<Customer>>("customer/get-customer-by-contact", parameters);
                 Customers = customerData?.Result;  
             }
             if (string.IsNullOrEmpty(_contactNumber))

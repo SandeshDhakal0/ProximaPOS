@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace TheHighInnovation.POS.Model.Response.Item;
+namespace TheHighInnovation.POS.Web.Model.Response.Item;
 
 public class CategoryProductResponseDto
 {

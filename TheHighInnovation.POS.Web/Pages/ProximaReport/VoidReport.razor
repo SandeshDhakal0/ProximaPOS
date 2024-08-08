@@ -1,0 +1,214 @@
+﻿@page "/void-report"
+@using TheHighInnovation.POS.Web.Model.Request.Report
+@using TheHighInnovation.POS.Web.Model.Response.Report
+@using TheHighInnovation.POS.Web.Models
+@using TheHighInnovation.POS.Web.Services.Base
+
+@inject BaseService BaseService
+
+<h3>Void Transaction Report</h3>
+
+<label class="form-control">Start Date</label>
+<input @bind="_search.StartDate" type="date" class="form-control" />
+
+<label class="form-control">End Date</label>
+<input @bind="_search.EndDate" type="date" class="form-control" />
+
+<button @onclick="HandleSubmit" class="form-control">Search</button>
+
+@if (_voidDetails != null && _voidDetails.Any())
+{
+    <table>
+        <thead>
+        <th>
+            Date
+        </th>
+        <th>Time</th>
+        <th>Cashier ID</th>
+        <th>Cashier Name</th>
+        <th>Type</th>
+        <th>Discount</th>
+        <th>Tax Amount</th>
+        <th>Total Amount</th>
+        </thead>
+        <tbody>
+        @foreach (var items in _voidDetails)
+        {
+            <tr>
+                <td>@items.Date.ToString("yyyy-MM-dd")</td>
+                <td>@items.Time</td>
+                <td>@items.CashierId</td>
+                <td>@items.CashierName</td>
+                <td>@items.Type</td>
+                <td>@items.VoidDiscount</td>
+                <td>@items.VoidTaxAmount</td>
+                <td>@items.VoidTotalAmount</td>
+                <td>
+                    <button type="button" @onclick="() => SetVoidProductDetails(items.Id)">Details</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    @if (_pagerDto.TotalPages > 0)
+        {
+            <div class="row paginationpart">
+                <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
+                    <div class="col mt-1">
+                        @if (_pagerDto.TotalPages > 0)
+                        {
+                            <span class="selecttext">Current Entries:</span>
+                            <select class="selectcompany" @onchange="HandlePaginationChange">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+                    <ul class="pagination justify-content-end">
+                        @if (_pagerDto.CurrentPage > 1)
+                        {
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(1, _search.PageSize)">First</a>
+                            </li>
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1, _search.PageSize)">Previous</a>
+                            </li>
+                        }
+                        @if (_pagerDto.TotalPages > 1)
+                        {
+                            for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+                            {
+                                var currentPageItem = pageItem;
+                                <li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
+                                    <a class="page-link" @onclick="() => OnPagination(currentPageItem, _search.PageSize)">@currentPageItem</a>
+                                </li>
+                            }
+                        }
+                        @if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
+                        {
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1, _search.PageSize)">Next</a>
+                            </li>
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages, _search.PageSize)">Last</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+}
+
+@if (_showVoidDetails)
+{
+    <ModalDialog Title="Safe Drop Report" OnClose="@CloseModal" OkLabel="Close">
+        <table class="safedroptable">
+            <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Discount</th>
+                <th>Total Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in _productDetails)
+                {
+                    <tr>
+                        <td>@item.ProductName</td>
+                        <td>@item.Quantity</td>
+                        <td>Rs @item.DiscountAmount</td>
+                        <td>Rs @item.ProductAmount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </ModalDialog>
+}
+
+@code {
+    [CascadingParameter] 
+    private GlobalState _globalState { get; set; }
+
+    private ReportSearchDto _search { get; set; } = new();
+    
+    private List<VoidDetailsResponseDto>? _voidDetails { get; set; }
+
+    private bool _showVoidDetails { get; set; }
+
+    private PagerDto _pagerDto { get; set; } = new();
+
+    private string _message { get; set; }
+
+    private List<ProductsDetails> _productDetails { get; set; } = new();
+    
+    private async Task HandleSubmit()
+    {
+        await LoadVoidDetails(1, 5);
+    }
+    
+    private async Task LoadVoidDetails(int pageNumber, int pageSize)
+    {
+        try
+        {
+            var parameters = new Dictionary<string, string>
+            {
+                { "pageNumber", pageNumber.ToString()  },
+                { "pageSize", pageSize.ToString()},
+                { "startDate", _search.StartDate.ToString("yyyy-MM-dd") },
+                { "endDate", _search.EndDate.ToString("yyyy-MM-dd") }
+            };
+
+            var details = await BaseService.GetAsync<Derived<List<VoidDetailsResponseDto>>>("void/void-details", parameters);
+            
+            if (details != null)
+            {
+                _voidDetails = details.Result;
+                
+                _pagerDto = new PagerDto(details.TotalCount ?? 1, pageNumber, _search.PageSize);
+            }
+            else
+            {
+                _message = "Nothing to display.";
+            }
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message.ToString());
+        }
+    }
+
+    private void SetVoidProductDetails(int voidId)
+    {
+        _showVoidDetails = true;
+        
+        _productDetails = _voidDetails!.FirstOrDefault(x => x.Id == voidId)!.ProductsDetails.ToList();
+    }
+
+    private void CloseModal()
+    {
+        _showVoidDetails = false;
+    }
+    
+    private async Task HandlePaginationChange(ChangeEventArgs e)
+    {
+        if (e.Value == null) return;
+
+        var pageSize = int.Parse(e.Value.ToString()!);
+
+        _search.PageSize = pageSize;
+        
+        await OnPagination(1, pageSize);
+    }
+
+    private async Task OnPagination(int pageNumber, int pageSize)
+    {
+        _search.PageNumber = pageNumber;
+
+        await LoadVoidDetails(pageNumber, pageSize);
+    }
+}

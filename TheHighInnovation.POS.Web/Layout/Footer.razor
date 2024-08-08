@@ -1,6 +1,7 @@
 @inherits LayoutComponentBase
 @using TheHighInnovation.POS.Web.Models
-
+@using TheHighInnovation.POS.Web.Services.Base
+@inject BaseService BaseService
 @inject NavigationManager NavigationManager
 
 @if (!(NavigationManager.Uri.Contains("/cashier-corner") || NavigationManager.Uri.Contains("/login")))
@@ -27,6 +28,11 @@ z-index:999;">
 @code {
     [CascadingParameter]
     private GlobalState _globalState { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _globalState = await BaseService.GetGlobalState();
+    }
 }
 
 

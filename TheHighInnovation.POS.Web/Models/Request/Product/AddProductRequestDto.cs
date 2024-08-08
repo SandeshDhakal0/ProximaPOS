@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Request.Product;
+﻿namespace TheHighInnovation.POS.Web.Model.Request.Product;
 
 public class AddProductRequestDto
 {

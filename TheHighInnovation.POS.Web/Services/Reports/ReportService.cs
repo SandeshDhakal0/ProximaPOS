@@ -2,7 +2,7 @@
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using Microsoft.JSInterop;
-using TheHighInnovation.POS.Model.Response.CloseTill;
+using TheHighInnovation.POS.Web.Model.Response.CloseTill;
 using Element = iTextSharp.text.Element;
 
 namespace TheHighInnovation.POS.Web.Services.Reports;

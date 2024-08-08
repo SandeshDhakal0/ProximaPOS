@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Response.Product;
+﻿namespace TheHighInnovation.POS.Web.Model.Response.Product;
 
 public class ProductResponseDto
 {
@@ -30,6 +30,7 @@ public class ProductResponseDto
 
     public string? OrganizationName { get; set; }
 
+	public bool IsActive { get; set; }
 
 }
 

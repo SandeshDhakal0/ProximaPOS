@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Http;
 
-namespace TheHighInnovation.POS.Model.Response.Category;
+namespace TheHighInnovation.POS.Web.Model.Response.Category;
 
 public class CategoryRequestDto
 {

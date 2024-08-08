@@ -1,12 +1,12 @@
 ﻿using System.Text.Json;
 using Microsoft.AspNetCore.Components;
-using TheHighInnovation.POS.Model;
-using TheHighInnovation.POS.Model.Request.Employee;
-using TheHighInnovation.POS.Model.Request.Filter;
-using TheHighInnovation.POS.Model.Response.Company;
-using TheHighInnovation.POS.Model.Response.Employee;
-using TheHighInnovation.POS.Model.Response.Organization;
-using TheHighInnovation.POS.Model.Response.Role;
+using TheHighInnovation.POS.Web.Model;
+using TheHighInnovation.POS.Web.Model.Request.Employee;
+using TheHighInnovation.POS.Web.Model.Request.Filter;
+using TheHighInnovation.POS.Web.Model.Response.Company;
+using TheHighInnovation.POS.Web.Model.Response.Employee;
+using TheHighInnovation.POS.Web.Model.Response.Organization;
+using TheHighInnovation.POS.Web.Model.Response.Role;
 using TheHighInnovation.POS.Web.Models;
 
 namespace TheHighInnovation.POS.Web.Pages;
@@ -48,7 +48,7 @@ public partial class Employee
             { "pageSize", Filter.PageSize.ToString() },
         };
 
-        var employees = await BaseService.GetAsync<Model.Response.Base.Derived<List<EmployeeResponseDto>>>("employees", parameters);
+        var employees = await BaseService.GetAsync<Derived<List<EmployeeResponseDto>>>("employees", parameters);
 
         _pagerDto = new PagerDto(employees.TotalCount ?? 1, 1, 5);
 
@@ -74,7 +74,7 @@ public partial class Employee
             { "pageSize", "1000" },
         };
 
-        var companies = await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
+        var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
             
         _companies = companies?.Result ?? [];
     }
@@ -90,6 +90,8 @@ public partial class Employee
     
     protected override async Task OnInitializedAsync()
     {
+        _globalState = await BaseService.GetGlobalState();
+        
         if (_globalState.OrganizationId != null)
         {
             Filter.PageSize = 5;
@@ -102,7 +104,7 @@ public partial class Employee
             { "pageSize", Filter.PageSize.ToString() },
             };
 
-            var employees = await BaseService.GetAsync<Model.Response.Base.Derived<List<EmployeeResponseDto>>>("employees", parameters);
+            var employees = await BaseService.GetAsync<Derived<List<EmployeeResponseDto>>>("employees", parameters);
 
             _pagerDto = new PagerDto(employees.TotalCount ?? 1, 1, 5);
 
@@ -118,7 +120,7 @@ public partial class Employee
                 { "pageSize", "1000" },
             };
 
-            var organizations = await BaseService.GetAsync<Model.Response.Base.Derived<List<OrganizationResponseDto>>>("organization", parameters);
+            var organizations = await BaseService.GetAsync<Derived<List<OrganizationResponseDto>>>("organization", parameters);
 
             _organizations = organizations!.Result;
         }
@@ -145,7 +147,7 @@ public partial class Employee
                 { "pageSize", "1000" },
             };
 
-            var organizations = await BaseService.GetAsync<Model.Response.Base.Derived<OrganizationResponseDto>>("organization", parameters);
+            var organizations = await BaseService.GetAsync<Derived<OrganizationResponseDto>>("organization", parameters);
 
             _organizations = [organizations!.Result];
         }
@@ -157,7 +159,7 @@ public partial class Employee
                 { "pageSize", "1000" },
             };
 
-            var organizations = await BaseService.GetAsync<Model.Response.Base.Derived<List<OrganizationResponseDto>>>("organization", parameters);
+            var organizations = await BaseService.GetAsync<Derived<List<OrganizationResponseDto>>>("organization", parameters);
 
             _organizations = organizations!.Result;
         }
@@ -176,7 +178,7 @@ public partial class Employee
                 { "organizationId", organizationId.ToString() },
             };
 
-            var companies= await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
+            var companies= await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
 
             _companies = companies?.Result ?? [];
 
@@ -210,7 +212,7 @@ public partial class Employee
 
                 var jsonContent = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-                await BaseService.PostAsync<Model.Response.Base.Derived<object>>("authenticate/register-user", jsonContent);
+                await BaseService.PostAsync<Derived<object>>("authenticate/register-user", jsonContent);
 
                 _showUpsertEmployeeDialog = false;
 
@@ -226,7 +228,7 @@ public partial class Employee
                     { "pageSize", "1000" },
                 };
 
-                var companies = await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
+                var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
                 
                 _companies = companies?.Result ?? [];
             }
@@ -251,7 +253,7 @@ public partial class Employee
                 { "companyId", companyId.ToString() },
             };
             
-            var roles = await BaseService.GetAsync<Model.Response.Base.Derived<List<RoleResponseDto>>>("role", parameters);
+            var roles = await BaseService.GetAsync<Derived<List<RoleResponseDto>>>("role", parameters);
             
             _roles = roles?.Result ?? [];
 
@@ -292,7 +294,7 @@ public partial class Employee
             { "pageSize", pageSize.ToString() },
         };
 
-        var employees = await BaseService.GetAsync<Model.Response.Base.Derived<List<EmployeeResponseDto>>>("employees", parameters);
+        var employees = await BaseService.GetAsync<Derived<List<EmployeeResponseDto>>>("employees", parameters);
 
         _pagerDto = new PagerDto(employees.TotalCount ?? 1, pageNumber, pageSize);
 

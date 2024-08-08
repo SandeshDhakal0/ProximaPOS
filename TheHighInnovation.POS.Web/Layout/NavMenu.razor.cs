@@ -10,6 +10,11 @@ public partial class NavMenu
     
     private string currentDate = DateTime.Now.ToString("dd-MM-yyyy");
 
+    protected override async Task OnInitializedAsync()
+    {
+	    _globalState = await BaseService.GetGlobalState();
+    }
+    
     private async Task LogoutHandler()
     {
         _globalState = new GlobalState();

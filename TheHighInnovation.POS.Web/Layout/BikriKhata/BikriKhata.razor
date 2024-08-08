@@ -1,0 +1,308 @@
+@page "/bikrikhata"
+@using BlazorBootstrap
+@using TheHighInnovation.POS.Web.Layout.DateFilter
+@using TheHighInnovation.POS.Web.Model.Request.Filter
+@using TheHighInnovation.POS.Web.Model.Response.BikriKhata
+@using TheHighInnovation.POS.Web.Models
+@using TheHighInnovation.POS.Web.Services.Alert
+@using TheHighInnovation.POS.Web.Services.Base
+
+@inject BaseService BaseService
+@inject IJSRuntime JsRuntime
+@inject SweetAlert SweetAlertService
+<style>
+    .inline-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+    }
+    .issuedatebsbox {
+        display: flex;
+        align-items: center;
+    }
+    .issuedatebsbox label {
+        margin-right: 5px;
+    }
+    .form-control {
+        margin-right: 5px;
+    }
+    .submitbtn, .exportbtn {
+        margin-left: 10px;
+    }
+</style>
+
+<div class="header mt-4">
+    <h1>बिक्री खाता</h1>
+</div>
+
+<div class="inline-container">
+    <div class="issuedatebsbox">
+        <BsYearSelection  selectedValue="_biktriKhataFilter.YearBs" selectedYearChange="OnYearChange"></BsYearSelection>
+        <BsMonthSelection    SelectedMonth="_biktriKhataFilter.MonthBs" selectedMonthChange="OnMonthChange"></BsMonthSelection>
+    </div>
+  
+    <button class="submitbtn" @onclick="HandleSubmit">Submit</button>
+    <button class="exportbtn" @onclick="DownloadExcel">Export</button>
+</div>
+
+<div class="tablediv">
+    <table>
+        <thead>
+        <tr>
+            <th colspan="15">(नियम २३ को उपनियम (१) को खण्ड  (ज) संग सम्बन्धित ) </th>
+        </tr>
+        <tr>
+            <th colspan="4">करदाता दर्ता नं </th>
+            <th colspan="3">करदाताको नाम</th>
+            <th colspan="2">साल</th>
+            <th colspan="6">कर अवधि</th>
+        </tr>
+        <tr>
+            <th colspan="7">बिक्री खाता</th>
+            <th colspan="2">-</th>
+            <th colspan="2">करयोग्य बिक्री</th>
+            <th colspan="4">निकासी</th>
+        </tr>
+        <tr>
+            <td>मिति</td>
+            <td>बीजक नम्बर</td>
+            <td>खरिदकर्ताको नाम</td>
+            <td>खरिदकर्ताको
+                स्थायी
+                लेखा नम्बर</td>
+            <td>वस्तु वा
+                सेवाको नाम</td>
+            <td>वस्तु वा
+                सेवाको
+                परिमाण</td>
+            <td>वस्तु वा सेवाको
+                परिमाण
+                मापन
+                गर्ने इकाइ</td>
+            <td>जम्मा बिक्री / निकासी (रु)</td>
+            <td>स्थानीय कर
+                छुटको बिक्री
+                मूल्य (रु)</td>
+            <td>मूल्य (रु)</td>
+            <td>कर (रु)</td>
+            <td>निकासी गरेको
+                वस्तु वा सेवाको
+                मूल्य (रु)</td>
+            <td>निकासी
+                गरेको देश</td>
+            <td>निकासी
+                प्रज्ञापनपत्र
+                नम्बर</td>
+            <td>निकासी
+                प्रज्ञापनपत्र
+                मिति</td>
+        </tr>
+        </thead>
+        <tbody>
+            @if(_BikriKhataList != null && _BikriKhataList.Any())
+            {
+                foreach (var item in _BikriKhataList)
+                {
+                    <tr>
+                        <td>@item.NepaliDates</td>
+                        <td>@item.BijakNumber</td>
+                        <td>@item.CustomerName</td>
+                        <td>@item.LekhaNumber</td>
+                        <td>@item.ProductName</td>
+                        <td>@item.ProductAmount</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>@item.VatAmount</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+            }
+            @if(!String.IsNullOrEmpty(_message))
+            {
+                <Alert Color="AlertColor.Warning" Dismissable="true">
+                     <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                </Alert>
+            }
+        </tbody>
+        @if (_pagerDto.TotalPages > 0)
+        {
+            <div class="row paginationpart">
+                <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
+                    <div class="col mt-1">
+                        @if (_pagerDto.TotalPages > 0)
+                        {
+                            <span class="selecttext">Current Entries:</span>
+                            <select class="selectcompany" @onchange="HandlePaginationChange">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+                    <ul class="pagination justify-content-end">
+                        @if (_pagerDto.CurrentPage > 1)
+                        {
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(1, PageSize)">First</a>
+                            </li>
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1, PageSize)">Previous</a>
+                            </li>
+                        }
+                        @if (_pagerDto.TotalPages > 1)
+                        {
+                            for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+                            {
+                                var currentPageItem = pageItem;
+                                <li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
+                                    <a class="page-link" @onclick="() => OnPagination(currentPageItem, PageSize)">@currentPageItem</a>
+                                </li>
+                            }
+                        }
+                        @if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
+                        {
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1, PageSize)">Next</a>
+                            </li>
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages, PageSize)">Last</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+    </table>
+</div>
+
+@code{
+   
+    
+    private BikriKhataFilter _biktriKhataFilter = new();
+
+    private List<BikriKhataDetailsDto> _BikriKhataList { get; set; } = new();
+
+    public int PageSize { get; set; } = 5;
+    
+    // private static SelectedDates selectedDates = new SelectedDates();
+
+    private PagerDto _pagerDto { get; set; } = new();
+
+    private string _message { get; set; } = string.Empty;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        try
+        {
+            if (firstRender)
+            {
+                await JsRuntime.InvokeVoidAsync("leapfrogdatepicker");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        }
+
+    }
+    
+    private async Task HandleSubmit()
+    {
+        await LoadBikriKhata(1, 5);
+    }
+    
+    private async Task LoadBikriKhata(int pageNumber, int pageSize)
+    {
+        try
+        {
+
+            var parameters = new Dictionary<string, string>
+            {
+                { "year", _biktriKhataFilter.YearBs.ToString()},
+                { "month", _biktriKhataFilter.MonthBs.ToString() },
+                { "pageNo", pageNumber.ToString() },
+                { "pageSize", pageSize.ToString() }
+            };
+            
+            var result = await BaseService.GetAsync<Derived<List<BikriKhataDetailsDto>>>("BikriKhata/get-bikri-khata", parameters);
+            
+            if(result != null)
+            {
+                _BikriKhataList = result.Result;
+                _pagerDto = new PagerDto(result.TotalCount ?? 1, pageNumber, pageSize);
+            }
+            else
+            {
+                _message = "Nothing to display.";
+            }
+            
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message.ToString());
+        }
+    }
+    
+    private async Task DownloadExcel()
+    {
+        if (await JsRuntime.InvokeAsync<bool>("confirm", $"Do you want to download excel? "))
+        {
+            StateHasChanged();
+            
+            var parameters = new Dictionary<string, string>
+            {
+                { "year", _biktriKhataFilter.YearBs.ToString()},
+                { "month", _biktriKhataFilter.MonthBs.ToString() },
+            };
+            
+            var response = await BaseService.GetAsyncOnly("BikriKhata/download-bikri-khata", parameters);
+
+            var fileBytes = await response.Content.ReadAsByteArrayAsync();
+            
+            var monthYear = $"{_biktriKhataFilter.YearBs}/{_biktriKhataFilter.MonthBs}";
+            
+            var fileName = $"BikriKhata/{monthYear}.xlsx";
+            
+            await SweetAlertService.Alert("Success", "The download is complete!", "success");
+            
+            await JsRuntime.InvokeAsync<bool>("saveAsFile", fileName, Convert.ToBase64String(fileBytes));
+        }
+    }
+    
+    private async Task HandlePaginationChange(ChangeEventArgs e)
+    {
+        if (e.Value == null) return;
+
+        var pageSize = int.Parse(e.Value.ToString()!);
+
+        PageSize = pageSize;
+        
+        await OnPagination(1, pageSize);
+    }
+
+    private async Task OnPagination(int pageNumber, int pageSize)
+    {
+        await LoadBikriKhata(pageNumber, pageSize);
+    }
+
+    
+    private void OnYearChange(int year)
+    {
+        _biktriKhataFilter.YearBs = year;
+    }
+
+    private void OnMonthChange(int month)
+    {
+        _biktriKhataFilter.MonthBs = month;
+    }
+}

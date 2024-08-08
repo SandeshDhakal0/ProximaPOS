@@ -1,0 +1,331 @@
+﻿@page "/safe-drop-report"
+@using TheHighInnovation.POS.Web.Model.Request.Report
+@using TheHighInnovation.POS.Web.Model.Response.Report
+@using TheHighInnovation.POS.Web.Models
+@using TheHighInnovation.POS.Web.Services.Base
+
+@inject BaseService BaseService
+
+<h3>Safe Drop Report</h3>
+
+<label class="form-control">Start Date</label>
+<input @bind="_search.StartDate" type="date" class="form-control" />
+
+<label class="form-control">End Date</label>
+<input @bind="_search.EndDate" type="date" class="form-control" />
+
+<button @onclick="HandleSubmit" class="form-control">Search</button>
+
+@if (_safeDropDetails != null && _safeDropDetails.Any())
+{
+    <table>
+        <thead>
+        <th>
+            Date
+        </th>
+        <th>Time</th>
+        <th>Cashier ID</th>
+        <th>Cashier Name</th>
+        <th>Amount</th>
+        <th></th>
+        </thead>
+        <tbody>
+        @foreach (var items in _safeDropDetails)
+        {
+            <tr>
+                <td>@items.Date.ToString("yyyy-MM-dd")</td>
+                <td>@items.Time</td>
+                <td>@items.CashierId</td>
+                <td>@items.CashierName</td>
+                <td>Rs @items.TotalAmount</td>
+                <td>
+                    <button type="button" @onclick="() => SetSafeDropAmount(items.Id)">Details</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    @if (_pagerDto.TotalPages > 0)
+        {
+            <div class="row paginationpart">
+                <div class="col-lg-3 col-md-12 col-sm-12 d-flex justify-content-start">
+                    <div class="col mt-1">
+                        @if (_pagerDto.TotalPages > 0)
+                        {
+                            <span class="selecttext">Current Entries:</span>
+                            <select class="selectcompany" @onchange="HandlePaginationChange">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                        }
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-12 col-sm-12 d-flex pagination-wrapper justify-content-end align-items-center">
+                    <ul class="pagination justify-content-end">
+                        @if (_pagerDto.CurrentPage > 1)
+                        {
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(1, _search.PageSize)">First</a>
+                            </li>
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage - 1, _search.PageSize)">Previous</a>
+                            </li>
+                        }
+                        @if (_pagerDto.TotalPages > 1)
+                        {
+                            for (var pageItem = _pagerDto.StartPage; pageItem <= _pagerDto.EndPage; pageItem++)
+                            {
+                                var currentPageItem = pageItem;
+                                <li class="page-item pointer px-1 @(currentPageItem == _pagerDto.CurrentPage ? "active" : "")">
+                                    <a class="page-link" @onclick="() => OnPagination(currentPageItem, _search.PageSize)">@currentPageItem</a>
+                                </li>
+                            }
+                        }
+                        @if (_pagerDto.CurrentPage < _pagerDto.TotalPages && _pagerDto.TotalItems > _pagerDto.PageSize)
+                        {
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.CurrentPage + 1, _search.PageSize)">Next</a>
+                            </li>
+                            <li class="page-item pointer px-1">
+                                <a class="page-link" @onclick="() => OnPagination(_pagerDto.TotalPages, _search.PageSize)">Last</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+}
+
+@if (_showSafeDropDetails)
+{
+    <ModalDialog Title="Safe Drop Report" OnClose="@CloseModal" OkLabel="Close">
+        <table class="safedroptable">
+            <thead>
+            <tr>
+                <th>Denominator</th>
+                <th></th>
+                <th>Quantity</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <input type="number" readonly value="1000" placeholder="1000">
+                </td>
+                <td><h3>x</h3></td>
+                <td>
+                    <input type="number" readonly min="0" @bind="_amountDetails.Rs1000">
+                </td>
+                <td>  
+                    <input type="text" placeholder="value" @bind="_combinedAmountDetails.Rs1000">
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="number" readonly value="500" placeholder="500">
+                </td>
+                <td><h3>x</h3></td>
+                <td>   
+                    <input type="number" readonly min="0" @bind="_amountDetails.Rs500">
+                </td>
+                <td>  
+                    <input type="text" placeholder="value" @bind="_combinedAmountDetails.Rs500">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="number" readonly value="100" placeholder="100">
+                </td>
+                <td><h3>x</h3></td>
+                <td>     
+                    <input type="number" readonly min="0" @bind="_amountDetails.Rs100">
+                    </td>
+                <td>  
+                    <input type="text" placeholder="value" @bind="_combinedAmountDetails.Rs100">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="number" readonly value="50" placeholder="50">
+                </td>
+                <td><h3>x</h3></td>
+                <td>   
+                    <input type="number" readonly min="0" @bind="_amountDetails.Rs50">
+                </td>
+                <td>  
+                    <input type="text" placeholder="value" @bind="_combinedAmountDetails.Rs50">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="number" readonly value="20" placeholder="20">
+                </td>
+                <td><h3>x</h3></td>
+                <td>   
+                    <input type="number" readonly min="0" @bind="_amountDetails.Rs20">
+                </td>
+                <td>  
+                    <input type="text" placeholder="value" @bind="_combinedAmountDetails.Rs20">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="number" readonly value="10" placeholder="10">
+                </td>
+                <td><h3>x</h3></td>
+                <td>   
+                    <input type="number" readonly min="0" @bind="_amountDetails.Rs10">
+                </td>
+                <td>  
+                    <input type="text" placeholder="value" @bind="_combinedAmountDetails.Rs10">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="number" readonly value="5" placeholder="5">
+                </td>
+                <td><h3>x</h3></td>
+                <td>   
+                    <input type="number" readonly min="0" @bind="_amountDetails.Rs5">
+                </td>
+                <td>  
+                    <input type="text" placeholder="value" @bind="_combinedAmountDetails.Rs5">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="number" readonly value="2" placeholder="2">
+                </td>
+                <td><h3>x</h3></td>
+                <td>   
+                    <input type="number" readonly min="0" @bind="_amountDetails.Rs1">
+                </td>
+                <td>  
+                    <input type="text" placeholder="value" @bind="_combinedAmountDetails.Rs1">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="number" readonly value="1" placeholder="1">
+                </td>
+                <td><h3>x</h3></td>
+                <td>   
+                    <input type="number" readonly min="0" @bind="_amountDetails.Rs1000">
+                </td>
+                <td>  
+                    <input type="text" placeholder="value" @bind="_combinedAmountDetails.Rs1000">
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </ModalDialog>
+}
+
+@code {
+    [CascadingParameter] 
+    private GlobalState _globalState { get; set; }
+
+    private ReportSearchDto _search { get; set; } = new();
+    
+    private List<SafeDropResponseDto>? _safeDropDetails { get; set; }
+
+    private bool _showSafeDropDetails { get; set; }
+
+    private PagerDto _pagerDto { get; set; } = new();
+
+    private string _message { get; set; }
+
+    private int _totalAmount { get; set; }
+    
+    private AmountDetails _amountDetails { get; set; } = new();
+
+    private CombinedAmountDetails _combinedAmountDetails { get; set; } = new();
+    
+    private async Task HandleSubmit()
+    {
+        await LoadSafeDropDetails(1, 5);
+    }
+    
+    private async Task LoadSafeDropDetails(int pageNumber, int pageSize)
+    {
+        try
+        {
+            var parameters = new Dictionary<string, string>
+            {
+                { "pageNumber", pageNumber.ToString()  },
+                { "pageSize", pageSize.ToString()},
+                { "companyId", _globalState.CompanyId?.ToString()! },
+                { "startDate", _search.StartDate.ToString("yyyy-MM-dd") },
+                { "endDate", _search.EndDate.ToString("yyyy-MM-dd") }
+            };
+
+            var details = await BaseService.GetAsync<Derived<List<SafeDropResponseDto>>>("safe-drop/safe-drop", parameters);
+            
+            if (details != null)
+            {
+                _safeDropDetails = details.Result;
+                
+                _pagerDto = new PagerDto(details.TotalCount ?? 1, pageNumber, _search.PageSize);
+            }
+            else
+            {
+                _message = "Nothing to display.";
+            }
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message.ToString());
+        }
+    }
+
+    private void SetSafeDropAmount(int safeDropId)
+    {
+        _showSafeDropDetails = true;
+        
+        _amountDetails = _safeDropDetails.FirstOrDefault(x => x.Id == safeDropId)!.Amount;
+
+        _combinedAmountDetails = new CombinedAmountDetails()
+        {
+            Rs1 = _amountDetails.Rs1 * 1,
+            Rs2 = _amountDetails.Rs2 * 2,
+            Rs5 = _amountDetails.Rs5 * 5,
+            Rs10 = _amountDetails.Rs10 * 10,
+            Rs20 = _amountDetails.Rs20 * 20,
+            Rs50 = _amountDetails.Rs50 * 50,
+            Rs100 = _amountDetails.Rs100 * 100,
+            Rs500 = _amountDetails.Rs500 * 500,
+            Rs1000 = _amountDetails.Rs1000 * 1000,
+        };
+
+        _totalAmount = _combinedAmountDetails.Rs1 + _combinedAmountDetails.Rs2 + _combinedAmountDetails.Rs5 +
+                       _combinedAmountDetails.Rs10 + _combinedAmountDetails.Rs20 + _combinedAmountDetails.Rs50 +
+                       _combinedAmountDetails.Rs100 + _combinedAmountDetails.Rs500 + _combinedAmountDetails.Rs1000;
+    }
+
+    private void CloseModal()
+    {
+        _showSafeDropDetails = false;
+    }
+    
+    private async Task HandlePaginationChange(ChangeEventArgs e)
+    {
+        if (e.Value == null) return;
+
+        var pageSize = int.Parse(e.Value.ToString()!);
+
+        _search.PageSize = pageSize;
+        
+        await OnPagination(1, pageSize);
+    }
+
+    private async Task OnPagination(int pageNumber, int pageSize)
+    {
+        _search.PageNumber = pageNumber;
+
+        await LoadSafeDropDetails(pageNumber, pageSize);
+    }
+}

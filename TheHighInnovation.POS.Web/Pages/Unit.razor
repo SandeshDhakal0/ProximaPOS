@@ -1,11 +1,11 @@
 @page "/inventory-unit"
 @using System.Net.Http
 @using System.Text.Json
-@using TheHighInnovation.POS.Model
-@using TheHighInnovation.POS.Model.Request.Filter
+@using TheHighInnovation.POS.Web.Model
+@using TheHighInnovation.POS.Web.Model.Request.Filter
 @using TheHighInnovation.POS.Web.Services.Alert
 @using TheHighInnovation.POS.Web.Services.Base
-@using TheHighInnovation.POS.Model.Response.Unit
+@using TheHighInnovation.POS.Web.Model.Response.Unit
 @using TheHighInnovation.POS.Web.Models
 
 @inject BaseService BaseService
@@ -173,7 +173,7 @@
                 // { "unitname", unitFilter.UnitName ?? string.Empty }
             };
 
-            var result = await BaseService.GetAsync<Model.Response.Base.Derived<List<UnitList>>>("VendorManagement/get-unit-list", parameters);
+            var result = await BaseService.GetAsync<Derived<List<UnitList>>>("VendorManagement/get-unit-list", parameters);
             if (result != null && result.Result != null)
             {
                 unitList = result.Result;
@@ -221,7 +221,7 @@
             var jsonRequest = JsonSerializer.Serialize(unit);
             var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
             var apiEndpoint = "VendorManagement/upsert-unit";
-            var result = await BaseService.PostAsync<Model.Response.Base.Derived<object>>(apiEndpoint, content);
+            var result = await BaseService.PostAsync<Derived<object>>(apiEndpoint, content);
             if (result.Status == "Success")
             {
                 OpenUnitModel = false;
@@ -255,7 +255,7 @@
                 { "Id", unitId.ToString() },
                  { "Measure", Measure},
             };
-            var unitList = await BaseService.GetAsync<Model.Response.Base.Derived<List<UnitById>>>("VendorManagement/get-unit-by-id", parameters);
+            var unitList = await BaseService.GetAsync<Derived<List<UnitById>>>("VendorManagement/get-unit-by-id", parameters);
 
             
             if(unitList != null)

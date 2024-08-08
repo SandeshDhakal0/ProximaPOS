@@ -3,9 +3,9 @@ using System.Text.Json.Serialization;
 using BlazorBootstrap;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using TheHighInnovation.POS.Model.Request.PurchaseReceipt;
-using TheHighInnovation.POS.Model.Request.VendorManagement;
-using TheHighInnovation.POS.Model.Request.VendorManagement.ProductsDTO;
+using TheHighInnovation.POS.Web.Model.Request.PurchaseReceipt;
+using TheHighInnovation.POS.Web.Model.Request.VendorManagement;
+using TheHighInnovation.POS.Web.Model.Request.VendorManagement.ProductsDTO;
 using TheHighInnovation.POS.Web.Models;
 
 namespace TheHighInnovation.POS.Web.Pages.ProductMaster
@@ -32,6 +32,7 @@ namespace TheHighInnovation.POS.Web.Pages.ProductMaster
 
         protected override async Task OnInitializedAsync()
         {
+            GlobalState = await BaseService.GetGlobalState();
 
             productFormList = new();
             selectedVendor = null;
@@ -138,7 +139,7 @@ namespace TheHighInnovation.POS.Web.Pages.ProductMaster
 
             try
             {
-                var vendors = await BaseService.GetAsync<Model.Response.Base.Derived<IEnumerable<VendorListShort>>>("VendorManagement/get-vendor-for-search", parameters);
+                var vendors = await BaseService.GetAsync<Derived<IEnumerable<VendorListShort>>>("VendorManagement/get-vendor-for-search", parameters);
                 return vendors.Result;
             }
             catch (Exception ex)
@@ -157,7 +158,7 @@ namespace TheHighInnovation.POS.Web.Pages.ProductMaster
 
             try
             {
-                var vendors = await BaseService.GetAsync<Model.Response.Base.Derived<IEnumerable<VendorListShort>>>("VendorManagement/get-vendor-for-search-pan-vat", parameters);
+                var vendors = await BaseService.GetAsync<Derived<IEnumerable<VendorListShort>>>("VendorManagement/get-vendor-for-search-pan-vat", parameters);
                 return vendors.Result;
             }
             catch (Exception ex)
@@ -234,7 +235,7 @@ namespace TheHighInnovation.POS.Web.Pages.ProductMaster
                     var jsonRequestVendor = JsonSerializer.Serialize(vendor);
                     var contentVendor = new StringContent(jsonRequestVendor, System.Text.Encoding.UTF8, "application/json");
                     var apiEndpointVendor = "PurchaseReceipt/create-purchase-receipt";
-                    var resultVendor = await BaseService.PostAsync<Model.Response.Base.Derived<int>>(apiEndpointVendor, contentVendor);
+                    var resultVendor = await BaseService.PostAsync<Derived<int>>(apiEndpointVendor, contentVendor);
 
                     if (resultVendor != null)
                     {
@@ -268,7 +269,7 @@ namespace TheHighInnovation.POS.Web.Pages.ProductMaster
                             var jsonRequestProduct = JsonSerializer.Serialize(productList);
                             var content = new StringContent(jsonRequestProduct, System.Text.Encoding.UTF8, "application/json");
                             var apiEndpoint = "PurchaseReceipt/create-purchase-product";
-                            var result = await BaseService.PostAsync<Model.Response.Base.Derived<object>>(apiEndpoint, content);
+                            var result = await BaseService.PostAsync<Derived<object>>(apiEndpoint, content);
 
                             if (result != null && resultVendor != null)
                             {
@@ -401,7 +402,7 @@ namespace TheHighInnovation.POS.Web.Pages.ProductMaster
 
             try
             {
-                var products = await BaseService.GetAsync<Model.Response.Base.Derived<IEnumerable<ProductListShort>>>("productmanagement/get-product-name", parameters);
+                var products = await BaseService.GetAsync<Derived<IEnumerable<ProductListShort>>>("productmanagement/get-product-name", parameters);
                 return products.Result;
 
             }

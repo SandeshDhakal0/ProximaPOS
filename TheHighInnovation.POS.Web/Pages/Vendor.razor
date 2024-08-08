@@ -1,8 +1,8 @@
-﻿@page "/vendor"
+@page "/vendor"
 @using System.Text.Json
-@using TheHighInnovation.POS.Model
-@using TheHighInnovation.POS.Model.Request.VendorManagement
-@using TheHighInnovation.POS.Model.Response.Base
+@using TheHighInnovation.POS.Web.Model
+@using TheHighInnovation.POS.Web.Model.Request.VendorManagement
+@using TheHighInnovation.POS.Web.Model.Response.Base
 @using TheHighInnovation.POS.Web.Services.Alert
 @using TheHighInnovation.POS.Web.Services.Base
 @inject BaseService BaseService
@@ -26,7 +26,7 @@
                     @if(_openaddvendordialogue){
                         <ModalDialog OnClose="@OnUpsertVendor" OkLabel="@_dialogOkLabel" Title="@_dialogTitle">
                          
-                           <div>
+                           <div >
                               <div class="container">
                                   <div class="row form">                       
                                             <div class="col-6 p-2 form-group">
@@ -123,6 +123,8 @@
                    
                                     <div class="actionpart">
                                         <div class="iconpart">
+                                    <div class="card-head d-flex">
+                       
                                         <i class="fa fa-bookmark" aria-hidden="true"></i>
                               </div>
 

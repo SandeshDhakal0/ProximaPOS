@@ -2,22 +2,22 @@
 using Microsoft.JSInterop;
 using System.ComponentModel.Design;
 using Microsoft.AspNetCore.Components.Web;
-using TheHighInnovation.POS.Model;
-using TheHighInnovation.POS.Model.Request.Filter;
-using TheHighInnovation.POS.Model.Response.Company;
-using TheHighInnovation.POS.Model.Response.Sales;
+using TheHighInnovation.POS.Web.Model;
+using TheHighInnovation.POS.Web.Model.Request.Filter;
+using TheHighInnovation.POS.Web.Model.Response.Company;
+using TheHighInnovation.POS.Web.Model.Response.Sales;
 using TheHighInnovation.POS.Web.Models;
 
 namespace TheHighInnovation.POS.Web.Pages;
 
 public partial class Sale
 {
-    [CascadingParameter] 
+    [CascadingParameter]
     private GlobalState _globalState { get; set; }
 
     private List<SalesResponseDto> _sales { get; set; } = [];
 
-    private SalesProductDto _salesRecord { get; set; } 
+    private SalesProductDto _salesRecord { get; set; }
 
     private List<SalesProduct> _salesDetails { get; set; } = [];
 
@@ -26,19 +26,21 @@ public partial class Sale
     private List<CompanyResponseDto> _companies { get; set; } = new();
 
     private PagerDto _pagerDto { get; set; } = new();
-    
+
     private bool OpenSalesRecordDialog { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            await _jsRuntime.InvokeVoidAsync("initializeNepaliDatePicker", "nepali-datepicker");
+            await _jsRuntime.InvokeVoidAsync("leapfrogdatepicker");
         }
     }
-    
+
     protected override async Task OnInitializedAsync()
     {
+        _globalState = await BaseService.GetGlobalState();
+        
         if (_globalState.OrganizationId != null)
         {
             var parameters = new Dictionary<string, string>
@@ -48,8 +50,8 @@ public partial class Sale
                 { "pageSize", "1000" },
             };
 
-            var companies = await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
-            
+            var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
+
             await HandleFilter();
 
             _companies = companies!.Result;
@@ -59,10 +61,10 @@ public partial class Sale
     private async Task OnOptionSelection(ChangeEventArgs e)
     {
         var value = e.Value?.ToString();
-        
+
         Filter.TransactionOption = value;
     }
-    
+
     private async Task OnCompanySelection(ChangeEventArgs e)
     {
         if (e.Value == null) return;
@@ -70,14 +72,14 @@ public partial class Sale
         Filter.CompanyId = Int32.Parse(e.Value.ToString());
     }
 
-  
+
 
     private async Task HandleFilter()
     {
-        
+
         if (_globalState.OrganizationId is not null)
         {
-            if(_globalState.CompanyId is not null)
+            if (_globalState.CompanyId is not null)
             {
                 string companyId;
                 string transactionOption;
@@ -111,7 +113,7 @@ public partial class Sale
                 { "page", "1" },
                 { "page_size", Filter.PageSize.ToString() },
             };
-                var initialSales = await BaseService.GetAsync<Model.Response.Base.Derived<List<SalesResponseDto>>>("sales/get-sales-records", initialParameters);
+                var initialSales = await BaseService.GetAsync<Derived<List<SalesResponseDto>>>("sales/get-sales-records", initialParameters);
 
 
                 _pagerDto = new PagerDto(initialSales.TotalCount ?? 1, 1, 10);
@@ -127,22 +129,22 @@ public partial class Sale
     private async Task OpenSalesRecord(int salesId)
     {
         var salesRecord = _sales.FirstOrDefault(x => x.Id == salesId);
-   
-        if(salesRecord is null) return;
-        
+
+        if (salesRecord is null) return;
+
         _salesDetails = salesRecord.ProductsDetail.ToList();
 
         _salesRecord = new SalesProductDto
         {
             CustomerFullName = salesRecord.CustomerFullName,
             CashierName = salesRecord.CashierName,
-           TotalAmountAfterDiscount = salesRecord.TotalAmountAfterDiscount,
+            TotalAmountAfterDiscount = salesRecord.TotalAmountAfterDiscount,
         };
 
         OpenSalesRecordDialog = true;
     }
 
-   
+
     private string? x = "";
 
     private void OnStartDateInput(ChangeEventArgs e)
@@ -167,22 +169,22 @@ public partial class Sale
     {
         OpenSalesRecordDialog = false;
     }
-    
+
     private async Task HandlePaginationChange(ChangeEventArgs e)
     {
-        if(e.Value == null) return;
-        
+        if (e.Value == null) return;
+
         var pageSize = int.Parse(e.Value.ToString()!);
 
         Filter.PageSize = pageSize;
-	    
+
         await OnPagination(1);
     }
 
     private async Task OnPagination(int pageNumber)
     {
         var pageSize = Filter.PageSize;
-	    
+
         var parameters = new Dictionary<string, string>
         {
             { "company_id", Filter.CompanyId.ToString()! },
@@ -192,8 +194,8 @@ public partial class Sale
             { "page", pageNumber.ToString() },
             { "page_size", pageSize.ToString() },
         };
-        
-        var sales = await BaseService.GetAsync<Model.Response.Base.Derived<List<SalesResponseDto>>>("sales/get-sales-records", parameters);
+
+        var sales = await BaseService.GetAsync<Derived<List<SalesResponseDto>>>("sales/get-sales-records", parameters);
 
         _pagerDto = new PagerDto(sales.TotalCount ?? 1, pageNumber, pageSize);
 

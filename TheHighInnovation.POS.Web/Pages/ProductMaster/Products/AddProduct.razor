@@ -1,12 +1,13 @@
 ﻿@page "/add-product"
 @using Blazored.Typeahead
 @using System.Text.Json
-@using TheHighInnovation.POS.Model.Request.VendorManagement
-@using TheHighInnovation.POS.Model.Response.Base
+@using TheHighInnovation.POS.Web.Model.Request.VendorManagement
+@using TheHighInnovation.POS.Web.Model.Response.Base
 @using TheHighInnovation.POS.Web.Services.Alert
 @using TheHighInnovation.POS.Web.Services.Base
 @inject BaseService BaseService
 @inject SweetAlert SweetAlertService
+@inject NavigationManager NavManager
 
 
 <div class="AddProducttContainer container pt-5">
@@ -243,7 +244,6 @@
     private ProductFormList productFormList = new();
     private List<ProductStoreDTO> productStore = new List<ProductStoreDTO>();
     private bool IsShowSku = false;
-    @inject NavigationManager NavManager
     protected override async Task OnInitializedAsync()
     {
         await FetchCategories();

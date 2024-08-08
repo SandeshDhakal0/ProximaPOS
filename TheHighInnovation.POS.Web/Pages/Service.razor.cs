@@ -1,12 +1,12 @@
 ﻿using System.Net.Http.Json;
 using System.Text.Json;
 using Application.DTOs.Product;
-using TheHighInnovation.POS.Model.Request.Service;
-using TheHighInnovation.POS.Model.Response.Base;
-using TheHighInnovation.POS.Model.Response.Category;
-using TheHighInnovation.POS.Model.Response.Company;
-using TheHighInnovation.POS.Model.Response.Product;
-using TheHighInnovation.POS.Model.Response.Service;
+using TheHighInnovation.POS.Web.Model.Request.Service;
+using TheHighInnovation.POS.Web.Model.Response.Base;
+using TheHighInnovation.POS.Web.Model.Response.Category;
+using TheHighInnovation.POS.Web.Model.Response.Company;
+using TheHighInnovation.POS.Web.Model.Response.Product;
+using TheHighInnovation.POS.Web.Model.Response.Service;
 
 namespace TheHighInnovation.POS.Web.Pages;
 

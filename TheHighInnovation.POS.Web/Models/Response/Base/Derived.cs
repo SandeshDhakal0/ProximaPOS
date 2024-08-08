@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Response.Base;
+﻿namespace TheHighInnovation.POS.Web.Model.Response.Base;
 
 public class Derived<T>: Base<T>
 {

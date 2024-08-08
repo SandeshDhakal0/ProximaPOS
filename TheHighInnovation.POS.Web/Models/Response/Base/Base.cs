@@ -1,6 +1,6 @@
 ﻿using System.Net;
 
-namespace TheHighInnovation.POS.Model.Response.Base;
+namespace TheHighInnovation.POS.Web.Model.Response.Base;
 
 public abstract class Base<T>
 {

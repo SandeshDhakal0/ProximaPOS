@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using System.Text.Json;
-using TheHighInnovation.POS.Model.Request.Filter;
-using TheHighInnovation.POS.Model.Request.VendorManagement;
+using TheHighInnovation.POS.Web.Model.Request.Filter;
+using TheHighInnovation.POS.Web.Model.Request.VendorManagement;
 using TheHighInnovation.POS.Web.Models;
 
 namespace TheHighInnovation.POS.Web.Pages
@@ -25,6 +25,7 @@ namespace TheHighInnovation.POS.Web.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            GlobalState = await BaseService.GetGlobalState();
             StateHasChanged();
             vendorFilter.IsActive = true;
            await LoadVendorsAsync(1);
@@ -51,7 +52,7 @@ namespace TheHighInnovation.POS.Web.Pages
                         { "p_pan_no", vendorFilter.PanVat },
                     };
 
-                   var vendorList = await BaseService.GetAsync<Model.Response.Base.Derived<List<VendorList>>>("VendorManagement/get-vendors-list", parameters);
+                   var vendorList = await BaseService.GetAsync<Derived<List<VendorList>>>("VendorManagement/get-vendors-list", parameters);
 
                     if (vendorList != null && vendorList.Result != null)
                     {
@@ -85,7 +86,7 @@ namespace TheHighInnovation.POS.Web.Pages
                 {"vendorId", vendorId.ToString()},
             };
                
-                var list = await BaseService.GetAsync<Model.Response.Base.Derived<List<VendorListId>>>("VendorManagement/get-vendor-by-id", parameters);
+                var list = await BaseService.GetAsync<Derived<List<VendorListId>>>("VendorManagement/get-vendor-by-id", parameters);
                 if (list != null && list.Result != null)
                 {
                     _vendorRequestDto = new VendorRequestDto
@@ -124,13 +125,10 @@ namespace TheHighInnovation.POS.Web.Pages
 
                 if (alert && vendorId > 0)
                 {
-                    var result = await BaseService.DeleteAsyncWithId<Model.Response.Base.Derived<bool>>("VendorManagement/inactive-vendor", vendorId, status);
-                    if (result != null)
-                    {
-                        await SweetAlertService.Alert("Success", "Vendor status updated", "success");
-                        _vendorRequestDto.IsActive = true;
-                        await OnInitializedAsync();
-                    }
+                    await BaseService.DeleteAsyncWithId("VendorManagement/inactive-vendor", vendorId, status);
+                    await SweetAlertService.Alert("Success", "Vendor status updated", "success");
+                    _vendorRequestDto.IsActive = true;
+                    await OnInitializedAsync();
                 }
             }
             catch (Exception ex)
@@ -182,7 +180,7 @@ namespace TheHighInnovation.POS.Web.Pages
                 var jsonRequest = JsonSerializer.Serialize(vendor);
                 var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
                 var apiEndpoint = "VendorManagement/upsert-vendor";
-                var result = await BaseService.PostAsync<Model.Response.Base.Derived<object>>(apiEndpoint, content);     
+                var result = await BaseService.PostAsync<Derived<object>>(apiEndpoint, content);     
                 if (result.Status == "Success")
                 {
                     _openaddvendordialogue = false;

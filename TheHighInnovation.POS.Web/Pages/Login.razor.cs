@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
 using BlazorBootstrap;
 using Microsoft.AspNetCore.Components;
-using TheHighInnovation.POS.Model.Request.Authentication;
-using TheHighInnovation.POS.Model.Response.Authentication;
+using TheHighInnovation.POS.Web.Model.Request.Authentication;
+using TheHighInnovation.POS.Web.Model.Response.Authentication;
 using TheHighInnovation.POS.Web.Models;
 
 namespace TheHighInnovation.POS.Web.Pages;
@@ -30,7 +30,7 @@ public partial class Login
             var jsonRequest = JsonSerializer.Serialize(loginRequest);
             var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-            var authResult = await BaseService.PostAsync<Model.Response.Base.Derived<LoginResponseDto>>("authenticate/login", content);
+            var authResult = await BaseService.PostAsync<Derived<LoginResponseDto>>("authenticate/login", content);
 
             await LocalStorage.SetItemAsync("access_token", authResult?.Result.Token ?? "");
 
@@ -57,6 +57,7 @@ public partial class Login
                 : "/cashier-corner";
 
             GlobalState.PageNumber = navigation == "/admin-dashboard" ? 1 : 0;
+            
             NavigationManager.NavigateTo(navigation);
         }
         catch (Exception ex)

@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Response.Hold;
+﻿namespace TheHighInnovation.POS.Web.Model.Response.Hold;
 
 public class HoldTableResponseDto
 {

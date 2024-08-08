@@ -1,0 +1,295 @@
+﻿.dashboardpage {
+    background-color: #ECECEB;
+    margin: 2% 0 0 -2%;
+    height: 100%;
+    width: 99.5vw;
+}
+
+.page-heading {
+    font-size: 35px;
+    font-weight: 300;
+    padding: 20px 10px 0 15px;
+}
+
+.container-fluid {
+    background-color: #ECECEB;
+}
+
+.outer-row {
+    display: flex;
+    gap: 20px;
+}
+
+.cards-left {
+    background-color: #ffffff;
+    width: 30%;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.first-row {
+    display: grid;
+    width: 100%;
+    grid-template-columns: auto auto auto auto;
+    gap: 2%;
+}
+
+.small-cards {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 10px 25px;
+
+}
+
+
+.TotalSaleAmt, .BarSaleAmt, .Expenses {
+    font-size: 32px;
+    text-align: center;
+    font-weight: 500;
+    color: #14AD5A;
+}
+.Expenses {
+    color: #E72929;
+}
+    .sales {
+        background-color: #ffffff;
+        width: 100%;
+        border-radius: 15px;
+        padding: 10px;
+        margin: 10px 0;
+    }
+.linegraph {
+    width:100%;
+   height:30%;
+}
+.heading {
+    font-size: 36px;
+    font-weight: 300;
+    text-align: center;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.revenue,
+.salesby,
+.snapshoots,
+.top-selling,
+.employees-status,
+.money-distribution {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px;
+
+}
+    .top-selling,
+    .employees-status,
+    .money-distribution{
+        margin-bottom:9% !important;
+    }
+    .r-title {
+        text-align: center;
+        font-size: 22px;
+        font-weight: 400;
+    }
+
+.amt-1,
+.amt-2 {
+    font-size: 36px;
+    font-weight: 400;
+    text-align: center;
+    padding: 0 0 10% 0;
+}
+
+.amt-1 {
+    color: #14AD5A;
+    line-height: 15px;
+}
+
+.amt-2 {
+    color: red;
+    line-height: 15px;
+}
+
+.rev-btn1,
+.rev-btn2,
+.rev-btn3,
+.rev-btn4 {
+    height: 3vh;
+    width: 40%;
+    padding: 2px;
+    color: #fff;
+    border-radius: 10px;
+    display: inline-block;
+    text-align: center;
+    line-height: 20px;
+}
+
+.rev-btn1 {
+    background-color: #14AD5A;
+    margin-right: 5px;
+}
+
+.rev-btn2 {
+    background-color: #14AD5A;
+    margin-left: 5px;
+}
+
+.rev-btn3,
+.rev-btn4 {
+    background-color: #ABBFE0;
+}
+
+.rev-btn3 {
+    margin-right: 5px;
+}
+
+.rev-btn4 {
+    margin-left: 5px;
+}
+
+.rev-sec {
+    padding: 10px 0 20px 0;
+}
+
+.dropdown {
+    padding: 10px;
+}
+
+.row-heading {
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.two-btn {
+    text-align: center;
+}
+
+.individual-progress {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+}
+
+    .individual-progress .icon-col {
+        flex: 0 0 5%;
+    }
+
+    .individual-progress .progress-col {
+        flex: 0 0 70%;
+    }
+
+    .individual-progress .day-col {
+        flex: 0 0 25%;
+        text-align: center;
+    }
+
+.chart,
+.pie-chart,
+.line-graph {
+    padding: 10px;
+}
+
+.chart {
+    width: 60%;
+    margin-left: 20%;
+}
+
+.pie-chart {
+    width: 60%;
+    margin-left: 20%;
+}
+
+.line-graph {
+    margin-left: 15%;
+}
+
+.small-cards table,
+.salesby-table,
+.snapshoots table,
+.top-selling table {
+    width: 100%;
+}
+
+    .small-cards table td {
+        background-color: #ffffff;
+    }
+
+.salesby-table,
+.snapshoots table,
+.top-selling table {
+    border-collapse: collapse;
+}
+
+    .salesby-table th,
+    .salesby-table td,
+    .snapshoots table th,
+    .snapshoots table td,
+    .top-selling table th,
+    .top-selling table td {
+        padding: 8px;
+        text-align: left;
+    }
+
+.top-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    
+}
+
+.btn-group:hover .dropdown-menu {
+    display: block;
+    position:absolute;
+}
+
+.dropdown-menu li {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+    .dropdown-menu li:hover {
+        background-color: #f0f0f0;
+    }
+
+.icon {
+    flex: 0 0 5%;
+}
+
+.rev-brk {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(auto, 1fr));
+    gap: 2%;
+}
+
+.text {
+    flex: 1;
+    font-size:20px;
+    font-weight:400;
+    text-align: center;
+}
+.OccupancyRate{
+    font-size:32px;
+    font-weight:500;
+    text-align:center;
+}
+.ellipsis {
+    flex: 0 0 5%;
+}
+
+.label,
+.value {
+    flex: 1;
+    font-size: 18px;
+}

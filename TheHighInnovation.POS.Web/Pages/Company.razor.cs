@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Components;
 using System.Text.Json;
-using TheHighInnovation.POS.Model;
-using TheHighInnovation.POS.Model.Request.Company;
-using TheHighInnovation.POS.Model.Request.Filter;
-using TheHighInnovation.POS.Model.Response.Company;
-using TheHighInnovation.POS.Model.Response.Organization;
+using TheHighInnovation.POS.Web.Model;
+using TheHighInnovation.POS.Web.Model.Request.Company;
+using TheHighInnovation.POS.Web.Model.Request.Filter;
+using TheHighInnovation.POS.Web.Model.Response.Company;
+using TheHighInnovation.POS.Web.Model.Response.Organization;
 using TheHighInnovation.POS.Web.Models;
 
 namespace TheHighInnovation.POS.Web.Pages;
@@ -38,6 +38,8 @@ public partial class Company
     
     protected override async Task OnInitializedAsync()
     {
+	    _globalState = await BaseService.GetGlobalState();
+	    
 	    Filter.PageSize = 5;
 
 		if (_globalState.OrganizationId != null)
@@ -49,14 +51,14 @@ public partial class Company
 			    { "pageSize", Filter.PageSize.ToString() },
 		    };
 
-			var organizations = await BaseService.GetAsync<Model.Response.Base.Derived<OrganizationResponseDto>>("organization", parameters);
+			var organizations = await BaseService.GetAsync<Derived<OrganizationResponseDto>>("organization", parameters);
 
 			_organizations = new()
             {
 				organizations.Result
 			};
 
-			var companies = await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
+			var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
 
 			_pagerDto = new PagerDto(companies.TotalCount ?? 1, 1, 5);
 
@@ -72,11 +74,11 @@ public partial class Company
 		        { "pageSize", Filter.PageSize.ToString() },
 	        };
 
-	        var organizations = await BaseService.GetAsync<Model.Response.Base.Derived<List<OrganizationResponseDto>>>("organization");
+	        var organizations = await BaseService.GetAsync<Derived<List<OrganizationResponseDto>>>("organization");
 
 	        _organizations = organizations.Result;
 	        
-			var companies = await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
+			var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
 
 			_pagerDto = new PagerDto(companies.TotalCount ?? 1, 1, 10);
 
@@ -108,7 +110,7 @@ public partial class Company
 			    { "pageSize", pageSize.ToString() },
 		    };
 
-		    var companies = await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
+		    var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
 
 		    _pagerDto = new PagerDto(companies.TotalCount ?? 1, pageNumber, pageSize);
 
@@ -124,7 +126,7 @@ public partial class Company
 			    { "pageSize", pageSize.ToString() },
 		    };
 		    
-		    var companies = await BaseService.GetAsync<Model.Response.Base.Derived<List<CompanyResponseDto>>>("company", parameters);
+		    var companies = await BaseService.GetAsync<Derived<List<CompanyResponseDto>>>("company", parameters);
 		    
 		    _pagerDto = new PagerDto(companies.TotalCount ?? 1, pageNumber, pageSize);
 
@@ -149,7 +151,7 @@ public partial class Company
                 { "companyId", companyId.Value.ToString() },
             };
 
-            var result = (await BaseService.GetAsync<Model.Response.Base.Derived<CompanyResponseDto>>("company", parameters))?.Result;
+            var result = (await BaseService.GetAsync<Derived<CompanyResponseDto>>("company", parameters))?.Result;
 
             _companyModel = new CompanyRequestDto()
             {
@@ -186,7 +188,7 @@ public partial class Company
 
 			    var content = new StringContent(jsonRequest, System.Text.Encoding.UTF8, "application/json");
 
-			    await BaseService.PostAsync<Model.Response.Base.Derived<object>>("company", content);
+			    await BaseService.PostAsync<Derived<object>>("company", content);
 
 			    _showUpsertCompanyDialog = false;
             

@@ -1,4 +1,4 @@
-﻿namespace TheHighInnovation.POS.Model.Response.Employee;
+﻿namespace TheHighInnovation.POS.Web.Model.Response.Employee;
 
 public class EmployeeResponseDto
 {
