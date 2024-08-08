@@ -69,7 +69,7 @@
                     }
                 </div>
 
- <div class="container-fluid">
+    <div class="container-fluid">
 
           @*          <div class="row inputsrow">
                        <div class="col-4 vendorname">
@@ -92,27 +92,29 @@
                    <div class=" inputsrow">
                        <div class="vendorname">
                            <label>Vendor Name:</label>
-                <input @bind="_vendorRequestDto.CompanyName" />
-                       </div>
-                       <div class=" panvatvendor">
-                           <label>Pan/Vat:</label>
-                <input @bind="_vendorRequestDto.PanVatNo" />
+                    <input @bind="_vendorRequestDto.CompanyName" />
+                           </div>
+                           <div class=" panvatvendor">
+                               <label>Pan/Vat:</label>
+                    <input @bind="_vendorRequestDto.PanVatNo" />
 
                        </div>
-            <div class="isavtivevendor">
-                <input type="checkbox" id="myCheckbox" @bind="_vendorRequestDto.IsActive" @bind:event="oninput" name="myCheckbox">
-                <label for="myCheckbox">IsActive</label>
-                <button class="searchbutotn" @onclick="HandleSearch">
-                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <div class="isavtivevendor">
+                        <input type="checkbox" id="myCheckbox" @bind="_vendorRequestDto.IsActive" @bind:event="oninput" name="myCheckbox">
+                        <label for="myCheckbox">IsActive</label>
+                        <button class="searchbutotn" @onclick="HandleSearch">
+                            <i class="fa fa-search" aria-hidden="true"></i>
                     
-                </button>
-            </div>
+                        </button>
+                    </div>
                    </div>
+    </div>
+
 
         @if (vendorFilter.IsInitialized)
         {
             
-                           <div class="row cardsrow">
+                          <div class="row cardsrow">
 
                        @if (_vendorList != null)
                             {
@@ -123,12 +125,13 @@
                    
                                     <div class="actionpart">
                                         <div class="iconpart">
-                                    <div class="card-head d-flex">
+                                            <div class="card-head d-flex">
                        
-                                        <i class="fa fa-bookmark" aria-hidden="true"></i>
-                              </div>
+                                                <i class="fa fa-bookmark" aria-hidden="true"></i>
+                                            </div>
+                                      </div>
 
-                              <div class="buttonpart">
+                                     <div class="buttonpart">
                                         @if(@item.IsActive == true)
                                         {
                                          @*    <span class="activepart d-flex" @onclick="() =>DeleteVendor(item.Id,false)"><p>IActive</p></span> *@
@@ -141,17 +144,13 @@
                                            @*      <span class="threedots d-flex"><i class="fa-solid fa-ellipsis"></i></span> *@
                                                 }
                                                 <div class="threedots d-flex" @onclick="() =>GetVendorById(item.Id)"><i class="fa-solid fa-ellipsis"></i></div>
-                                                </div>
+                                                </div>                                
                                     </div>
-
 
 
                                     <div class="card-body">
                                         <div class="nameandcashier">
                                             <span class="name">@item.CompanyName</span>
-
-                                   
-                                               @*  <span class="cashier">@item.Pan_VatNo</span> *@
                                         </div>
 
 
@@ -185,11 +184,20 @@
                                         </div>                                        
                                     </div>
                                 
-                        </div> 
-                            }
+                          </div> 
+                            
+           
+
+
+
                         }
-                   </div>
-          
+
+
+                        }
+                    </div>
+
+                 
+
             
                         @if (_pagerDto.TotalPages > 0)
                         {
@@ -244,9 +252,10 @@
                                 </div>
                             </div>
 
+
                         }
+                      
                    }
 
- </div>
- </div>
-     
+
+</div>

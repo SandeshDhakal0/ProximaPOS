@@ -165,15 +165,23 @@ input[type="checkbox"] {
 }
 
 .actionpart{
-    display:flex;
+/*    display:flex;
     gap:9vw;
     padding:0 5px;
+*/
+display:grid;
+grid-template-columns:repeat(2, 1fr);
+max-width:95%;
+}
+    .actionpart{
 
-}
-.buttonpart{
-    display:flex;
-    gap:15px;
-}
+    }
+    .buttonpart {
+ /*       display: flex;
+        gap: 15px;*/
+ display:grid;
+ grid-template-columns:repeat(2, 1fr);
+    }
 .activepart {
     color: #fff;
     background-color: #14AD5A;
