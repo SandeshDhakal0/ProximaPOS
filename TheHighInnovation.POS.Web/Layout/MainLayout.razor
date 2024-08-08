@@ -1,63 +1,38 @@
-﻿@using Blazored.LocalStorage
+﻿@using BlazorBootstrap
+@using Blazored.LocalStorage
 @using TheHighInnovation.POS.Web.Services.Base
 @inherits LayoutComponentBase
 @inject BaseService BaseService
 @inject NavigationManager NavigationManager
 @inject ILocalStorageService LocalStorageService
+
 <div class="mainpage">
     <CascadingValue Value="@_globalState">
         @if (_globalState.UserId != 0)
         {
             <header>
-                <NavMenu />
+                <NavMenu /> 
             </header>
 
-            @if (_globalState.RoleType == 0)
+            @if (_globalState.RoleType == 0) 
             {
-                @if (_globalState.PageNumber == 1)
-                {
-                    <div class="row">
+                <div class="row">
+                    @if (ShowSidebar) 
+                    {
                         <div class="col-2">
                             <div class="sidebar">
-                                <NavPanel />
+                                <NavPanel /> 
                             </div>
                         </div>
-                        <div class="col-10">
-                            <main>
-                                <article class="content px-4">
-                                    @Body
-                                </article>
-                            </main>
-                        </div>
-                    </div>
-                }
-                else if (_globalState.PageNumber == 4)
-                {
-                    <div class="row">
-                        <div class="col-2">
-                            <div class="sidebar">
-                                <NavPanel />
-                            </div>
-                        </div>
-                        <div class="col-10">
-                            <main>
-                                <article class="content px-4">
-                                    @Body
-                                </article>
-                            </main>
-                        </div>
-                    </div>
-                }
-                else
-                {
-                    <div class="col-12">
+                    }
+                    <div class="col-@(ShowSidebar ? "10" : "12")">
                         <main>
                             <article class="content px-4">
                                 @Body
                             </article>
                         </main>
                     </div>
-                }
+                </div>
             }
             else
             {
@@ -84,6 +59,9 @@
         <div class="footer">
             <Footer />
         </div>
-        <ReloadComponent />
+       <div class="d-flex justify-content-center">
+    <Spinner Type="SpinnerType.Border" />
+</div>
+
     </CascadingValue>
 </div>

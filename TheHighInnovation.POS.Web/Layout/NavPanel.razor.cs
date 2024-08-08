@@ -11,6 +11,8 @@ public partial class NavPanel
 
     private bool _isDropdownOpen = false;
 
+    [Parameter] public string LayoutName { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
 	    _globalState = await BaseService.GetGlobalState();

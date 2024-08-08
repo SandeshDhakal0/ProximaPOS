@@ -35,7 +35,10 @@
 	}
 
 
-	@if (_globalState.PageNumber == 4)
+	
+	@if (NavManager.Uri.Contains("/vendor") || NavManager.Uri.Contains("/inventory-category") || NavManager.Uri.Contains("/inventory-unit")
+			|| NavManager.Uri.Contains("/product-service") || NavManager.Uri.Contains("/productmanagement") ||
+			NavManager.Uri.Contains("/kharidkhata") || NavManager.Uri.Contains("/bikrikhata"))
 	{
 		<div class="nav-item px-3 navedit">
 			<NavLink class="nav-link" href="vendor" Match="NavLinkMatch.All">
@@ -88,7 +91,9 @@
 		</div>
 	}
 
-	else
+	
+	
+	@if (NavManager.Uri.Contains("/category") || NavManager.Uri.Contains("/product") || NavManager.Uri.Contains("/employees"))
 	{
 		<div class="nav-item px-3 navedit">
 			<NavLink class="nav-link" href="category" Match="NavLinkMatch.All">

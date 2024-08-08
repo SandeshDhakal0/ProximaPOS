@@ -50,7 +50,7 @@
     protected override async Task OnInitializedAsync()
     {
         _globalState = await baseService.GetGlobalState();
-        
+
         await FetchLandingScreen();
     }
 
@@ -69,7 +69,9 @@
         if (_actionMapping.ContainsKey(actionName))
         {
             await _actionMapping[actionName]();
+            
         }
+        
     }
 
     // private Task SwitchToCashierPanel()
@@ -81,42 +83,42 @@
 
     private Task SwitchToReservation()
     {
-        _globalState.PageNumber = 3;
+        //_globalState.PageNumber = 3;
         NavManager.NavigateTo("/reservation");
         return Task.CompletedTask;
     }
 
     private Task SwitchToAdmin()
     {
-        _globalState.PageNumber = 1;
+       // _globalState.PageNumber = 1;
         NavManager.NavigateTo("/category");
         return Task.CompletedTask;
     }
 
     private Task SwitchToInventory()
     {
-        _globalState.PageNumber = 4;
+       // _globalState.PageNumber = 4;
         NavManager.NavigateTo("/vendor");
         return Task.CompletedTask;
     }
 
     private Task SwitchToSales()
     {
-        _globalState.PageNumber = 5;
+      //  _globalState.PageNumber = 5;
         NavManager.NavigateTo("/sale");
         return Task.CompletedTask;
     }
 
     private Task SwitchToDashboard()
     {
-        _globalState.PageNumber = 6;
+      //  _globalState.PageNumber = 6;
         NavManager.NavigateTo("/admin-dashboard");
         return Task.CompletedTask;
     }
 
     private Task SwitchToDashboardRestro()
     {
-        _globalState.PageNumber = 6;
+        //_globalState.PageNumber = 6;
         NavManager.NavigateTo("/restro-dashboard");
         return Task.CompletedTask;
     }
