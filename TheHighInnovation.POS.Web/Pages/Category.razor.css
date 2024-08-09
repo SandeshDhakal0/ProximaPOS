@@ -46,6 +46,9 @@
 .toppart{
     display:grid;
     grid-template-columns:repeat(2, 1fr);
+    align-items:center;
+
+
 }
 .topheading{
     font-size:30px;
@@ -143,7 +146,6 @@
 .table thead, .tablediv thead th {
     font-size: 16px;
     font-weight: 500;
-    color: #110a57;
 }
 
 .tablediv {
@@ -199,6 +201,7 @@
 }
 .lasttd{
     text-align:center;
+
 }
 
 
@@ -240,9 +243,84 @@
     margin-left:10px;
 }
 /*Media querry*/
+@media screen and (max-width: 2304px) {
+    /*.categorypage {
+        margin-top: 5%;
+    }
+    .tablediv tbody{
+        max-height:54vh;
+    }
+
+    .topheading {
+        font-size: 50px;
+    }
+
+    .addcatogerybtn {
+        font-size: 28px;
+        height: 7vh;
+    }
+
+    .inputsearch {
+        height: 3.5vw;
+        width: 60vh;
+        font-size: 30px;
+    }
+
+    .searchbutton {
+        height: 3.5vw;
+        width: 7vh;
+    }
+
+        .searchbutton i {
+            font-size: 30px;
+        }
+
+    th {
+        font-size: 26px !important
+    }
+
+    .table tr {
+        height: 3vw;
+        display: flex;
+        align-items: center;
+        padding: 20px 0 20px 20px;
+    }
+
+    .table td {
+        height: 3vw;
+        padding: 20px 0 20px 20px;
+        font-size: 24px;
+    }
+
+    .selecttext {
+        font-size: 24px;
+    }
+
+    .selectcompany {
+        font-size: 26px;
+        padding: 5px;
+    }
+
+    pagination {
+        width: 100%;
+    }
+*/
+}
+
+    
+
+}
+@media screen and (max-width: 1920px) {
+
+}
+@media screen and (max-width: 1440px) {
+}
+@media screen and (max-width: 1280px) {
+}
+
 @media screen and (max-width: 1260px) {
     .addcatogerybtn {
-        width: 40%;
+/*        width: 40%;*/
         font-size:18px;
     }
     .inputsearch{
@@ -255,12 +333,15 @@
     }
 }
 @media screen and (max-width: 1112px){
-    .addcatogerybtn{
+ /*   .addcatogerybtn{
         width:45%;
-    }
+    }*/
 
 }
 @media screen and (max-width: 1024px) {
+/*    .tablediv tbody{
+        max-height:45vh;
+    }*/
     .inputsearch{
         width:300px;
     }
@@ -287,16 +368,44 @@
         font-size:14px;
         height:45px;
     }
+    .page-link{
+        padding:5px 8px;
+    }
+    .tablediv tbody{
+        height:45vh;
+    }
+
 
 }
 
 
     @media screen and (max-width: 768px) {
+        .categorypage{
+            margin-top:5%;
+        }
         .addcatogerybtn{
             line-height:1;
-            height:40px;
+            height:35px;
             width:40%;
+            font-size:12px;
 
+        }
+        .inputsearch {
+            width: 250px;
+            height: 35px;
+        }
+
+        .searchbutton {
+            height: 35px;
+        }
+        .tablediv tbody{
+            max-height:48vh;
+        }
+        .tablediv{
+            margin-top:3%;
+        }
+        .table thead th{
+            font-size:14px;
         }
         .table{
             font-size:12px;
@@ -307,4 +416,24 @@
         .selecttext{
  
         }
+        .page-link{
+            padding:5px 8px;
+        }
     }
+@media screen and (max-width: 640px) {
+    .categorypage{
+        margin-top:6%;
+    }
+    .topheading{
+        font-size:24px;
+    }
+    .tablediv tbody {
+        max-height: 48vh;
+    }
+    .page-link{
+        padding:5px 8px;
+    }
+    .inputsearch{
+        width:230px;
+    }
+}
