@@ -1,499 +1,414 @@
 ﻿@page "/admin-dashboard"
+@inject BaseService BaseService
 @using TheHighInnovation.POS.Web.Services.Base
-@using TheHighInnovation.POS.Web.Model.Response.Dashboard
-@using TheHighInnovation.POS.Web.Model.Response.Organization
-@using TheHighInnovation.POS.Web.Model
-@using TheHighInnovation.POS.Web.Models
-
-
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
+@using TheHighInnovation.POS.Web.Layout.Charts
+@using TheHighInnovation.POS.Web.Models.Dashboard
 <div class="dashboardpage">
-
     <h2 class="page-heading">WELCOME TO PROXIMA</h2>
-
     <div class="container-fluid top-container">
         <div class="row outer-row">
             <div class="col-3 cards-left">
                 <div class="rev-sec">
                     <p class="r-title">Revenue</p>
-                    <p class="amt-1">RS 1234516.66</p>
+                    <p class="amt-1">Rs @DashboardRecords?.TotalRevenue</p>
                     <div class="two-btn">
                         <span class="rev-btn1">88.88%</span> <span class="rev-btn2">Rs 54321</span> <br />
                     </div>
                 </div>
                 <div class="rev-sec">
-                    <p class="r-title">Non Operting Revenue</p>
-                    <p class="amt-2">Rs 5433211.66</p>
+                    <p class="r-title">Non Operating Revenue</p>
+                    <p class="amt-2">Rs @DashboardRecords?.TotalPettyCash</p>
                     <div class="two-btn">
                         <span class="rev-btn3"> 88.88%</span> <span class="rev-btn4">Rs 54321</span>
                     </div>
                 </div>
             </div>
-
             <div class="col-9 cards_right">
                 <div class="row first-row">
                     <div class="col small-cards">
                         <div class="row">
                             <div class="col-3"><i class="fa-solid fa-comments-dollar"></i></div>
                             <div class="col-6">
-                                <p>Total Sale</p>
+                                <p>Total Sales</p>
                             </div>
                             <div class="col-3"><i class="fa-solid fa-ellipsis-vertical"></i></div>
                         </div>
-
                         <div class="row">
-                            <div class="col">room Sale</div>
-                            <div class="col">RS 2000</div>
-                        </div>
-                        <div class="row">
-                            <div class="col">Room Sale</div>
-                            <div class="col">Rs 2000</div>
+                            <div class="col">Rs @DashboardRecords?.TotalSales</div>
                         </div>
                     </div>
                     <div class="col small-cards">
                         <div class="row">
                             <div class="col-3"><i class="fa-solid fa-comments-dollar"></i></div>
                             <div class="col-6">
-                                <p>Total Sale</p>
+                                <p>Bar Sales</p>
                             </div>
                             <div class="col-3"><i class="fa-solid fa-ellipsis-vertical"></i></div>
                         </div>
                         <div class="row">
-                            <div class="col">room Sale</div>
-                            <div class="col">RS 2000</div>
-                        </div>
-                        <div class="row">
-                            <div class="col">Room Sale</div>
-                            <div class="col">Rs 2000</div>
+                            <div class="col">Rs @DashboardRecords?.BarSales</div>
                         </div>
                     </div>
                     <div class="col small-cards">
                         <div class="row">
                             <div class="col-3"><i class="fa-solid fa-comments-dollar"></i></div>
                             <div class="col-6">
-                                <p>Total Sale</p>
+                                <p>Total Inventory</p>
                             </div>
                             <div class="col-3"><i class="fa-solid fa-ellipsis-vertical"></i></div>
                         </div>
                         <div class="row">
-                            <div class="col">room Sale</div>
-                            <div class="col">RS 2000</div>
+                            <div class="col">In Rupees</div>
+                            <div class="col">Rs @DashboardRecords?.TotalInventoryRupees</div>
                         </div>
                         <div class="row">
-                            <div class="col">Room Sale</div>
-                            <div class="col">Rs 2000</div>
+                            <div class="col">In Units</div>
+                            <div class="col">Rs @DashboardRecords?.TotalInventoryUnits</div>
                         </div>
                     </div>
-                    <div class="col small-cards-l">
+                    <div class="col small-cards">
                         <div class="row">
                             <div class="col-3"><i class="fa-solid fa-comments-dollar"></i></div>
                             <div class="col-6">
-                                <p>Total Sale</p>
+                                <p>Order Status</p>
                             </div>
                             <div class="col-3"><i class="fa-solid fa-ellipsis-vertical"></i></div>
                         </div>
                         <div class="row">
-                            <div class="col">room Sale</div>
-                            <div class="col">RS 2000</div>
+                            <div class="col">Total Orders</div>
+                            <div class="col">Rs @DashboardRecords?.OrderStatusTotal</div>
                         </div>
                         <div class="row">
-                            <div class="col">Room Sale</div>
-                            <div class="col">Rs 2000</div>
+                            <div class="col">Total Returns</div>
+                            <div class="col">Rs @DashboardRecords?.OrderStatusReturn</div>
                         </div>
                     </div>
                 </div>
-
                 <div class="row second-row">
                     <div class="col small-cards">
                         <div class="row">
                             <div class="col-3"><i class="fa-solid fa-comments-dollar"></i></div>
                             <div class="col-6">
-                                <p>Total Sale</p>
+                                <p>Expenses</p>
                             </div>
                             <div class="col-3"><i class="fa-solid fa-ellipsis-vertical"></i></div>
                         </div>
                         <div class="row">
-                            <div class="col">room Sale</div>
-                            <div class="col">RS 2000</div>
-                        </div>
-                        <div class="row">
-                            <div class="col">Room Sale</div>
-                            <div class="col">Rs 2000</div>
+                            <div class="col">Rs @DashboardRecords?.PettyCash</div>
                         </div>
                     </div>
                     <div class="col small-cards">
                         <div class="row">
                             <div class="col-3"><i class="fa-solid fa-comments-dollar"></i></div>
                             <div class="col-6">
-                                <p>Total Sale</p>
+                                <p>Occupancy Rate</p>
                             </div>
                             <div class="col-3"><i class="fa-solid fa-ellipsis-vertical"></i></div>
                         </div>
                         <div class="row">
-                            <div class="col">room Sale</div>
-                            <div class="col">RS 2000</div>
-                        </div>
-                        <div class="row">
-                            <div class="col">Room Sale</div>
-                            <div class="col">Rs 2000</div>
+                            <div class="col">@DashboardRecords?.OccupancyRate % </div>
                         </div>
                     </div>
                     <div class="col small-cards">
                         <div class="row">
                             <div class="col-3"><i class="fa-solid fa-comments-dollar"></i></div>
                             <div class="col-6">
-                                <p>Total Sale</p>
+                                <p>Restaurant Overview</p>
                             </div>
                             <div class="col-3"><i class="fa-solid fa-ellipsis-vertical"></i></div>
                         </div>
                         <div class="row">
-                            <div class="col">room Sale</div>
-                            <div class="col">RS 2000</div>
+                            <div class="col">Table Sales</div>
+                            <div class="col">Rs @DashboardRecords?.RestroOverviewTableSales</div>
                         </div>
                         <div class="row">
-                            <div class="col">Room Sale</div>
-                            <div class="col">Rs 2000</div>
+                            <div class="col">Online Sales</div>
+                            <div class="col">Rs @DashboardRecords?.RestroOverviewOnlineSales</div>
                         </div>
                     </div>
-                    <div class="col small-cards-l">
+                    <div class="col small-cards">
                         <div class="row">
                             <div class="col-3"><i class="fa-solid fa-comments-dollar"></i></div>
                             <div class="col-6">
-                                <p>Total Sale</p>
+                                <p>Customer Status</p>
                             </div>
                             <div class="col-3"><i class="fa-solid fa-ellipsis-vertical"></i></div>
                         </div>
                         <div class="row">
-                            <div class="col">room Sale</div>
-                            <div class="col">RS 2000</div>
+                            <div class="col">Table Order</div>
+                            <div class="col">Rs @DashboardRecords?.CustomerStatusOrder</div>
                         </div>
                         <div class="row">
-                            <div class="col">Room Sale</div>
-                            <div class="col">Rs 2000</div>
+                            <div class="col">Online & Takeaway</div>
+                            <div class="col">Rs @DashboardRecords?.CustomerStatusOnline</div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
-
-
-    @*
-    =============================================================================================
-    *@
-
-
-
-
-
     <div class="container-fluid">
         <div class="sales">
-              <div class="row top-row">
-                   <div class="firstdivsales">
+            <div class="row top-row">
+                <div class="firstdivsales">
                     <p class="row-heading">SALES TREND</p>
-                   </div>
-
-                       <div class="seconddivsales">
-                          <div class="dropdown">
-                                <div class="btn-group">
-                                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                category
-                                  </button>
-                                     <ul class="dropdown-menu">
-                                         <li>i</li>
-                                          <li>my</li>
-                                      </ul>
-                                   </div>
-                              </div>
+                </div>
+                <div class="seconddivsales">
+                    <div class="dropdown">
+                        <div class="btn-group">
+                            <button class="btn btn-secondary btn-sm form-control" type="button" @onclick="() => GetSalesAndProfitRecords(Daily)">
+                                Daily
+                            </button>
+                            <button class="btn btn-secondary btn-sm form-control" type="button" @onclick="() => GetSalesAndProfitRecords(Weekly)">
+                                Weekly
+                            </button>
+                            <button class="btn btn-secondary btn-sm form-control" type="button" @onclick="() => GetSalesAndProfitRecords(Monthly)">
+                                Monthly
+                            </button>
+                            <button class="btn btn-secondary btn-sm form-control" type="button" @onclick="() => GetSalesAndProfitRecords()">
+                                Yearly
+                            </button>
+                        </div>
                     </div>
                 </div>
-            <div class="bar-graph">       
-                <BarGraph></BarGraph>
+            </div>
+            <div class="bar-graph">
+                @if (SalesRecords != null && IsSalesChartRendered)
+                {
+                    <ApexLineChart TItem="@MoneySalesDto"
+                                   Data="@SalesRecords"
+                                   Title="Sales Over Time"
+                                   SeriesName="Sales Amount"
+                                   XValueSelector="e => e.Period"
+                                   YValueSelector="e => e.Amount"/>
+                }
             </div>
         </div>
-
-
-
-       <div class="container-fluid">
-        <div class=" rev-brk">
-
-        @* 1st 11111111111111111111111111111111111111111111*@
-            <div class="col revenue">
-                    <p class="row-heading">REVENUE BREAKDOWN</p>
-                <div class="chart">
-                    <ChartComponent></ChartComponent>
+        <div class="container-fluid">
+            <div class=" rev-brk">
+                <div class="col revenue">
+                    <p class="row-heading">MONEY DISTRIBUTION</p>
+                    <select class="form-control" @onchange="(e) => HandleFilterChange(e, MoneyDistribution)">
+                        <option value=@Daily>@Daily</option>
+                        <option value=@Weekly>@Weekly</option>
+                        <option value=@Monthly>@Monthly</option>
+                        <option value=@Yearly>@Yearly</option>
+                    </select>
+                    <div class="chart">
+                        @if (MoneyDistributionRecords != null && IsMoneyDistributionChartRendered)
+                        {
+                            <ApexPieChart TItem="@MoneyDistributionDto"
+                                          Data="@MoneyDistributionRecords"
+                                          Title="Sales Over Time"
+                                          SeriesName="Sales Amount"
+                                          XValueSelector="e => e.TransactionOption"
+                                          YValueSelector="e => e.Percentage"/>
+                        }
+                    </div>
                 </div>
-            </div>
-
-                @* 1111111111111111111111111111111111111111 *@
-
-
-
-                @* 2nd 2222222222222 *@
-            <div class="col salesby">
-                <div class="row top-row">
-                   <div class="first div">
-                    <p class="row-heading">SALES BY</p>
-                   </div>
-
-                       <div class="seconddiv">
-                          <div class="dropdown">
+                <div class="col salesby">
+                    <div class="row top-row">
+                        <div class="first div">
+                            <p class="row-heading">TOP SELLING PRODUCTS</p>
+                        </div>
+                        <div class="seconddiv">
+                            <div class="dropdown">
                                 <div class="btn-group">
-                                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                category
-                                  </button>
-                                     <ul class="dropdown-menu">
-                                         <li>i</li>
-                                          <li>my</li>
-                                      </ul>
-                                   </div>
-                              </div>
+                                    <select class="form-control" @onchange="(e) => HandleFilterChange(e, TopSellingRecord)">
+                                        <option value=@Daily>@Daily</option>
+                                        <option value=@Weekly>@Weekly</option>
+                                        <option value=@Monthly>@Monthly</option>
+                                        <option value=@Yearly>@Yearly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <table class="table table-borderless salesby-table">
+                        <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Amount</th>
+                        </tr>
+                        </thead>
+                        @if (TopSellingRecords != null)
+                        {
+                            foreach (var record in TopSellingRecords)
+                            {
+                                <tr>
+                                    <td>@record.ProductName</td>
+                                    <td>@record.Quantity</td>
+                                    <td>@record.TotalAmount</td>
+                                </tr>
+                            }
+                        }
+                    </table>
                 </div>
-                <table class="table table-borderless salesby-table">
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Qty</th>
-                        <th>Amount</th>
-                    </tr>
-                    <tr>
-                        <td>Khukuri Rum</td>
-                        <td>12</td>
-                        <td>10500</td>
-                    </tr>
-
-                    <tr>
-                        <td>Khukuri Rum</td>
-                        <td>12</td>
-                        <td>10500</td>
-                    </tr>
-                    <tr>
-                        <td>Khukuri Rum</td>
-                        <td>12</td>
-                        <td>10500</td>
-                    </tr>
-                    <tr>
-                        <td>Khukuri Rum</td>
-                        <td>12</td>
-                        <td>10500</td>
-                    </tr>
-                </table>
-            </div>
-            @* 222222222222222222 *@
-
-            @*      Snap shoot 3rd 33333333333333333333333333333333333333333333333333333333333333 *@
-
-            <div class="col snapshoots">
-             
-                <div class="row top-row">
-                   <div class="first div">
-                    <p class="row-heading">SNAPSHOOTS</p>
-                   </div>
-
-                       <div class="seconddiv">
-                          <div class="dropdown">
+                <div class="col snapshoots">
+                    <div class="row top-row">
+                        <div class="first div">
+                            <p class="row-heading">SNAPSHOOTS</p>
+                        </div>
+                        <div class="seconddiv">
+                            <div class="dropdown">
                                 <div class="btn-group">
-                                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                category
-                                  </button>
-                                     <ul class="dropdown-menu">
-                                         <li>i</li>
-                                          <li>my</li>
-                                      </ul>
-                                   </div>
-                              </div>
+                                    <select class="form-control" @onchange="(e) => HandleFilterChange(e, Snapshots)">
+                                        <option value=@Weekly>@Weekly</option>
+                                        <option value=@Monthly>@Monthly</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <table class="table table-borderless">
+                        <tr> 
+                            <td><i class="fa-regular fa-calendar-days"></i></td>
+                            <td>Most Walking Day</td>
+                            <td>@SnapshotRecords?.MostWorkingDay</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fa-regular fa-calendar-days"></i></td>
+                            <td>Average Discount</td>
+                            <td>@SnapshotRecords?.AvgDiscount</td>
+                        </tr>
+                           <tr>
+                            <td><i class="fa-regular fa-calendar-days"></i></td>
+                            <td>Average Order Cost</td>
+                            <td>@SnapshotRecords?.AvgTotalAmountAfterDiscount</td>
+                        </tr>
+                    </table>
                 </div>
-                <table class="table table-borderless">
-                    <tr> 
-                        <td><i class="fa-regular fa-calendar-days"></i></td>
-                        <td>Most walkind day</td>
-                        <td>Friday</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa-regular fa-calendar-days"></i></td>
-                        <td>Most walkind day</td>
-                        <td>Friday</td>
-                    </tr>
-                       <tr>
-                        <td><i class="fa-regular fa-calendar-days"></i></td>
-                        <td>Most walkind day</td>
-                        <td>Friday</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa-regular fa-calendar-days"></i></td>
-                        <td>Most walkind day</td>
-                        <td>Friday</td>
-                    </tr>
-                    <tr>
-                        <td><i class="fa-regular fa-calendar-days"></i></td>
-                        <td>Most walkind day</td>
-                        <td>Friday</td>
-                    </tr>
-                </table>
+                </div>
             </div>
-
-            @* 3333333333333333333333333333333333333333333333            33333 3 3 3 33  33 33 3 *@
-
-
-
-          </div>
-       </div>
-
-
-    <div class="container-fluid">
-    <div class=" rev-brk1">
-
-
-        @* Money distribution pie chart 4th 4444444444444444444 *@
-        <div class=" money-distribution">
-                    <div class="">
-                        <p class="row-heading">MONEY DISTRIBUTION</p>
-                    </div>
-                    <div class="pie-chart">
-                        <PieChart></PieChart>
-                    </div>
-        </div>
-        @* 4444444 4 4 44          4 4 44 4444 44444444     44444444444444444444444 *@
-
-
-        @*EMPLOYEE Status  5TH 5555555555555555555555555555555 5555555555 555555555555555555555555555 5*@
-        <div class=" employees-status">
-         <div class="">
-            <p class="row-heading">EMPLOYEES STATUS</p>
-            </div>
-            <div class="employee-progress">
-                <div class="row individual-progress">
-                <div class="col-1 icon-col">
-                    <i class="fa-solid fa-person"></i>
-                </div>
-                <div class="col-8 progress-col">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 80%;">
-
+            <div class="container-fluid">
+                <div class=" rev-brk1">
+                    <div class=" money-distribution">
+                        <div class="">
+                            <p class="row-heading">REVENUE BREAKDOWN</p>
+                        </div>
+                        <div class="pie-chart">
                         </div>
                     </div>
-                </div>
-                <div class="col-3 day-col">
-                    <span>291/365</span>
-                </div>
-              </div>
+                    <div class=" employees-status">
+                        <div class="">
+                            <p class="row-heading">EMPLOYEES STATUS</p>
+                        </div>
+                        <div class="employee-progress">
                             <div class="row individual-progress">
-                <div class="col-1 icon-col">
-                    <i class="fa-solid fa-person"></i>
-                </div>
-                <div class="col-8 progress-col">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 99%;">
-                 
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3 day-col">
-                    <span>361/365</span>
-                </div>
-              </div>
+                                <div class="col-1 icon-col">
+                                    <i class="fa-solid fa-person"></i>
+                                </div>
+                                <div class="col-8 progress-col">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                            aria-valuemax="100" style="width: 80%;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 day-col">
+                                    <span>291/365</span>
+                                </div>
+                            </div>
                             <div class="row individual-progress">
-                <div class="col-1 icon-col">
-                    <i class="fa-solid fa-person"></i>
-                </div>
-                <div class="col-8 progress-col">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 10%;">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3 day-col">
-                    <span>36/365</span>
-                </div>
-              </div>
-               <div class="row individual-progress">
-                <div class="col-1 icon-col">
-                    <i class="fa-solid fa-person"></i>
-                </div>
-                <div class="col-8 progress-col">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 10%;">
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3 day-col">
-                    <span>36/365</span>
-                </div>
-                  </div>
+                                <div class="col-1 icon-col">
+                                    <i class="fa-solid fa-person"></i>
+                                </div>
+                                <div class="col-8 progress-col">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                            aria-valuemax="100" style="width: 99%;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 day-col">
+                                    <span>361/365</span>
+                                </div>
+                            </div>
                             <div class="row individual-progress">
-                <div class="col-1 icon-col">
-                    <i class="fa-solid fa-person"></i>
-                </div>
-                <div class="col-8 progress-col">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 30%;">
-                        
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3 day-col">
-                    <span>109/365</span>
-                </div>
-             </div>
+                                <div class="col-1 icon-col">
+                                    <i class="fa-solid fa-person"></i>
+                                </div>
+                                <div class="col-8 progress-col">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                            aria-valuemax="100" style="width: 10%;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 day-col">
+                                    <span>36/365</span>
+                                </div>
+                            </div>
                             <div class="row individual-progress">
-                <div class="col-1 icon-col">
-                    <i class="fa-solid fa-person"></i>
-                </div>
-                <div class="col-8 progress-col">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 90%;">
-                
-                        </div>
+                                <div class="col-1 icon-col">
+                                    <i class="fa-solid fa-person"></i>
+                                </div>
+                                <div class="col-8 progress-col">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                            aria-valuemax="100" style="width: 10%;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 day-col">
+                                    <span>36/365</span>
+                                </div>
+                            </div>
+                            <div class="row individual-progress">
+                                <div class="col-1 icon-col">
+                                    <i class="fa-solid fa-person"></i>
+                                </div>
+                                <div class="col-8 progress-col">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                             aria-valuemax="100" style="width: 30%;">
+                                    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-3 day-col">
+                                    <span>109/365</span>
+                                </div>
+                            </div>
+                            <div class="row individual-progress">
+                                <div class="col-1 icon-col">
+                                    <i class="fa-solid fa-person"></i>
+                                </div>
+                                <div class="col-8 progress-col">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                                            aria-valuemax="100" style="width: 90%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="col-3 day-col">
+                                <span>328/365</span>
+                            </div>
+                         </div>
                     </div>
-                </div>
-                <div class="col-3 day-col">
-                    <span>328/365</span>
-                </div>
-             </div>
-        </div>
-
-      </div> 
-      @*5555 5 5 55 5 5 5 55 5   5TH 5555555555555555555555555555555 5555555555 555555555555555555555555555 5*@
-
-
-      @* tOP sELLING 6TH 666666666666666666666666666666666666666666666666666666666666666*@
-        <div class="col top-selling">
-           <div class="row top-row">
-                   <div class="first div">
-                    <p class="row-heading">TOP SELLING</p>
-                   </div>
-
-                       <div class="seconddiv">
-                          <div class="dropdown">
+                </div> 
+                <div class="col top-selling">
+                    <div class="row top-row">
+                        <div class="first div">
+                            <p class="row-heading">TOP SELLING</p>
+                        </div>
+                        <div class="seconddiv">
+                            <div class="dropdown">
                                 <div class="btn-group">
-                                  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                category
-                                  </button>
-                                     <ul class="dropdown-menu">
-                                         <li>i</li>
-                                          <li>my</li>
-                                      </ul>
-                                   </div>
-                              </div>
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Category
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>i</li>
+                                        <li>my</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-          <table class="table table-borderlesss">
+                    <table class="table table-borderlesss">
                         <tr>
                             <th>Product Name</th>
                             <th>Qty</th>
@@ -524,47 +439,9 @@
                             <td>12</td>
                             <td>10500</td>
                         </tr>
-          </table>
-        </div>  
-        @* 666666666666666666666666 666666666666666666666666666666666666666666666666666666666666666*@
-
-
-
-
-
-
+                  </table>
+                </div>  
+            </div>
         </div>
-   </div>
-
     </div>
-
 </div>
-
-@inject BaseService BaseService
-
-@code {
-    [CascadingParameter]
-    private GlobalState GlobalState { get; set; }
-
-    private DashboardTransactionDto DashboardTransactionDto { get; set; } = new();
-
-    protected override async Task OnInitializedAsync()
-    {
-        GlobalState = await BaseService.GetGlobalState();
-        
-        if (GlobalState.CompanyId is not null)
-        {
-            var parameters = new Dictionary<string, string>
-{
-{ "companyId", GlobalState.CompanyId.ToString() },
-};
-
-            var result = await
-            BaseService.GetAsync<Derived<List<DashboardTransactionDto>>>("dashboard/get-sales-records",
-            parameters);
-
-            DashboardTransactionDto = result?.Result.FirstOrDefault() ?? new();
-
-        }
-    }
-}

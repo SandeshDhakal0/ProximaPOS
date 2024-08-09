@@ -1,0 +1,34 @@
+﻿@typeparam TItem where TItem : class
+
+<DemoContainer>
+    <ApexChart TItem="TItem"
+               Title="@Title"
+               Options="Options">
+        <ApexPointSeries TItem="TItem"
+                         Items="Data"
+                         Name="@SeriesName"
+                         SeriesType="SeriesType.Pie"
+                         XValue="@(e => XValueSelector(e))"
+                         YValue="@(e => YValueSelector(e))"
+                         ShowDataLabels />
+    </ApexChart>
+</DemoContainer>
+
+@code {
+    [Parameter] public IEnumerable<TItem> Data { get; set; }
+    [Parameter] public string Title { get; set; } = "Pie Chart";
+    [Parameter] public string SeriesName { get; set; } = "Series";
+    [Parameter] public Func<TItem, string> XValueSelector { get; set; }
+    [Parameter] public Func<TItem, decimal> YValueSelector { get; set; }
+
+    public ApexChartOptions<TItem> Options { get; set; } = new();
+
+    protected override void OnInitialized()
+    {
+        Options.DataLabels = new DataLabels
+        {
+            Formatter = @"function(value, { seriesIndex, w }) {
+                return w.config.series[seriesIndex];}"
+        };
+    }
+}
