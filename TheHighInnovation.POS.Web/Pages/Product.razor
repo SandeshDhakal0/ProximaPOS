@@ -1,4 +1,4 @@
-﻿@page "/product"
+﻿ @page "/product"
 @using TheHighInnovation.POS.Web.Model.Response.Product
 @using TheHighInnovation.POS.Web.Services.Base
 @inject BaseService BaseService
@@ -67,9 +67,9 @@
 			<button type="button" value="Search" @onclick="HandleFilter" data-bs-toggle="tooltip" data-bs-placement="top" title="Click here, to search records" class=" searchbutton">
 				<i class="fa-solid fa-magnifying-glass"></i>
 			</button>
-			<button type="submit" value="Search" data-bs-toggle="tooltip" data-bs-placement="top" title="Click here, to clear" class=" clearbutton clearbutton2">
+			@* <button type="submit" value="Search" data-bs-toggle="tooltip" data-bs-placement="top" title="Click here, to clear" class=" clearbutton clearbutton2">
 				<span></span><i class="fa-solid fa-eraser"></i>
-			</button>
+			</button> *@
 		</div>
 	</div>
 
@@ -106,7 +106,7 @@
 								 	<td class="td1">
 										<div class="row">
 											<div class="col-3">
-												<div style="background-color: @product.ProductImageUrl; height:40px;width:40px;"></div>
+												<div style="background-color: @product.ProductImageUrl; height:40px;width:40px;border-radius:50%!important;"></div>
 											</div>
 											<div class="col-9 titleanddesc">
 												<p class="producttitle">@product.Title</p>

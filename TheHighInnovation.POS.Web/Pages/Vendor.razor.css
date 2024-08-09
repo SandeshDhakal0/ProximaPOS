@@ -4,9 +4,6 @@
 
 }
 
-
-
-
 .headingpart {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -31,16 +28,6 @@
     color: #000000;
     font-size: 20px;
 }
-
-
-
-
-
-
-
-
-
-
 
 
 .vendordropdown {
@@ -76,13 +63,12 @@
 }
 
 .vendorcard {
-    padding: 20px;
-background-color:#ECECEB;
-    /*height:35vh;*/
+    height:40vh;
+    padding: 15px;
+    background-color:#ECECEB;
     border: none;
     margin:2%;
-    border-radius: 10px;
-/*    background-color: var(--vendor--cardcolor);*/
+
    
 }
 
@@ -123,8 +109,6 @@ padding-bottom:20px;
     color: #0C2144;
 }
 
-.isavtivevendor {
-}
 
 .selecttext {
     margin-left: -4vw;
@@ -159,6 +143,8 @@ input[type="checkbox"] {
     border: none;
     border-radius: 5px;
     font-size: 18px;
+    text-align:center;
+    align-items:center;
 }
 .activepart:hover {
     background-color: #14AD5A;
@@ -167,23 +153,25 @@ input[type="checkbox"] {
 .actionpart{
     display:grid;
     grid-template-columns:repeat(2, 1fr);
+    align-items:center;
 
 
 }
+
 .vendordate{
     justify-content:end;
     text-align:end;
 
 }
-.actionpart {
-}
+
     .buttonpart {
         display: flex;
-
-justify-content:end;
-
-
+        justify-content:end;
+        align-content:center;
+        align-items:center;
+        gap:20%;
     }
+
 .activepart {
     color: #fff;
     background-color: #14AD5A;
@@ -192,8 +180,8 @@ justify-content:end;
     font-weight: 500;
     font-size: 12px;
 
-    height:35px;
-    width:75px;
+    height:30px;
+    width:70px;
 }
 
 
@@ -204,8 +192,8 @@ justify-content:end;
     border-radius: 10px;
     font-weight: 500;
     font-size: 12px;
-    height: 35px;
-    width: 75px;
+    height: 30px;
+    width: 70px;
 }
 
 
@@ -220,14 +208,13 @@ justify-content:end;
 
 .nameandcashier {
     text-align: center;
-    margin:15px 0 ;
+    margin:25px 0 ;
   
 }
 
 .name {
     font-weight: 600;
     font-size: 16px;
-/*    margin-bottom:20px;*/
 }
 
 .cashier {
@@ -237,8 +224,7 @@ justify-content:end;
 }
 
 .nesteddiv {
-   /* height:150px;*/
-   height:100%;
+   height:90%;
     font-size: 12px;
     font-weight: 600;
     background-color: #ffffff;
@@ -306,32 +292,44 @@ justify-content:end;
 /*media quary=====================================================================================================*/
 @media screen and (max-width: 1632px) {
     .vendorcard{
-        height:40vh;
+        /*height:40vh;*/
     }
-    .actionpart{
-  
+/*
+    .nameandcashier .name{
+        font-size:18px;
     }
-    .buttonpart{
-        gap:25%;
+    .nesteddiv{
+        font-size:14px;
     }
-    .nameandcashier{
-        padding:10px 0 15px 0;
+    .activepart, .notactivepart{
+        font-size:12px;
+        height:35px;
+        width:75px;
+
     }
+    .vendorname input, .panvatvendor input{
+        width:12vw;
+    }
+    .searchbutotn i{
+        font-size:20px;
+        
+    }
+    .categoryheading{
+        font-size:40px;
+        font-weight:400;
+    }*/
 }
- @media screen and (max-width: 1504px){
+ @media screen and (max-width: 1505px){
      .vendorcard{
-         height:44vh;
+         height:39vh;
      }
 }
 @media screen and (max-width: 1451px) {
     .vendorcard{
             height:45vh;
         }
-        .actionpart{
-
-        }
         .buttonpart{
-            gap:20%;
+            /*gap:20%;*/
         }
 
     }
@@ -348,26 +346,19 @@ justify-content:end;
         }
     @media screen and (max-width: 1254px){
         .vendorcard{
-            height:49vh;
+            /*height:49vh;*/
+            height:50vh;
         }
-        .actionpart{
-  
-        }
+        
         .buttonpart{
-            gap:15px;
+        /*    gap:15px;*/
         }
        
     }
-@media screen and (max-width: 1254px){
 
-}
    @media screen and (max-width: 1200px) {
-    .actionpart {
-
-    }
-
     .buttonpart {
-        gap: 15px;
+        /*gap: 15px;*/
     }
   
 
@@ -408,12 +399,9 @@ justify-content:end;
         align-items: center;
     }
 
-    .actionpart {
-
-    }
-
+ 
     .nameandcashier {
-        padding: 5px 0 10px 0;
+        /*padding: 5px 0 10px 0;*/
     }
 
     .name {
@@ -474,7 +462,7 @@ justify-content:end;
 
 
         .nameandcashier {
-            padding: 0 0 5px 0;
+            /*padding: 0 0 5px 0;*/
         }
 
         .inputsrow {
