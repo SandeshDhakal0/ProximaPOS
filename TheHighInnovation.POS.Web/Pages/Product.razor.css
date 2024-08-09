@@ -184,6 +184,7 @@
 
     .table th, .table td {
         font-size: 16px;
+        width:10%;
         font-weight: 500;
     }
 
@@ -203,7 +204,7 @@
 thead {
     border: none;
 }
-    .table td {
+/*    .table td {
         width: 9%;
     }
 
@@ -213,7 +214,7 @@ thead {
 
 .table .th1 {
     width: 34%;
-}
+}*/
 
 
 

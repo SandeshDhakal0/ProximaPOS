@@ -3,11 +3,14 @@
 @using TheHighInnovation.POS.Web.Model.Response.Dashboard
 @using TheHighInnovation.POS.Web.Model.Response.Organization
 @using TheHighInnovation.POS.Web.Models
-
+@using TheHighInnovation.POS.Web.Models.Response.DashbordRestro
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js">
     
 </script>
+@if (GetAdminDashboardData != null)
+{
+
 
 <div class="dashboardpage container-fluid">
     <h2 class="page-heading">WELCOME TO PROXIMA</h2>
@@ -17,14 +20,14 @@
             <div class="cards-left">
                 <div class="rev-sec">
                     <p class="r-title">Total Revenue</p>
-                    <p class="amt-1">Rs. 528,976.82</p>
+                    <p class="amt-1">@GetAdminDashboardData.total_revenue</p>
                     <div class="two-btn">
                         <span class="rev-btn1">88.88%</span> <span class="rev-btn2">Rs. 54321</span> <br />
                     </div>
                 </div>
                 <div class="rev-sec">
                     <p class="r-title">Total Expenses</p>
-                    <p class="amt-2">Rs 59,976.82</p>
+                    <p class="amt-2">@GetAdminDashboardData.total_petty_cash</p>
                     <div class="two-btn">
                         <span class="rev-btn3">88.88%</span> <span class="rev-btn4">Rs 54321</span>
                     </div>
@@ -42,7 +45,7 @@
                             </div>
                             
                             <div class="">
-                        <p class="TotalSaleAmt">Rs 2,34,400</p>
+                            <p class="TotalSaleAmt">@GetAdminDashboardData.total_sales</p>
                             </div>
                         </div>
                     </div>
@@ -55,7 +58,7 @@
                             </div>
                            
                             <div>
-                        <p class="BarSaleAmt">Rs 2,34,400</p>
+                            <p class="BarSaleAmt">@GetAdminDashboardData.bar_sales</p>
                             </div>
                         </div>
                     </div>
@@ -68,11 +71,11 @@
                             </div>
                             <div class="row">
                                 <div class="label">In Rupees</div>
-                                <div class="value">RS 2000</div>
+                            <div class="value">@GetAdminDashboardData.total_inventory_rupees</div>
                             </div>
                             <div class="row">
                                 <div class="label">In Units</div>
-                                <div class="value">20 pcs</div>
+                            <div class="value">@GetAdminDashboardData.total_inventory_units</div>
                             </div>
                         </div>
                     </div>
@@ -84,12 +87,12 @@
                                 <div class="ellipsis"><i class="fa-solid fa-ellipsis-vertical"></i></div>
                             </div>
                             <div class="row">
-                                <div class="label">Room Sale</div>
-                                <div class="value">RS 2000</div>
+                                <div class="label">Total Order</div>
+                            <div class="value">@GetAdminDashboardData.order_status_total</div>
                             </div>
                             <div class="row">
-                                <div class="label">Room Sale</div>
-                                <div class="value">Rs 2000</div>
+                                <div class="label">Total Return</div>
+                            <div class="value">@GetAdminDashboardData.order_status_return</div>
                             </div>
                         </div>
                     </div>
@@ -102,7 +105,7 @@
                                 <div class="ellipsis"><i class="fa-solid fa-ellipsis-vertical"></i></div>
                             </div>
                             <div class="Expenses">
-                             <p>Rs. 28,900</p>
+                            <p>@GetAdminDashboardData.petty_cash</p>
                             </div>
                         </div>
                     </div>
@@ -114,7 +117,8 @@
                                 <div class="ellipsis"><i class="fa-solid fa-ellipsis-vertical"></i></div>
                             </div>
                             <div class="OccupancyRate">
-                              <p>59%</p>
+                            <p>@GetAdminDashboardData.occupancy_rate.ToString("F2")</p>
+
                             </div>
                         </div>
                     </div>
@@ -127,11 +131,11 @@
                             </div>
                             <div class="row">
                                 <div class="label">Table Sales</div>
-                                <div class="value">RS 2000</div>
+                            <div class="value">@GetAdminDashboardData.restro_overview_table_sales</div>
                             </div>
                             <div class="row">
                                 <div class="label">Online Sales</div>
-                                <div class="value">Rs 2000</div>
+                            <div class="value">@GetAdminDashboardData.restro_overview_online_sales</div>
                             </div>
                         </div>
                     </div>
@@ -144,11 +148,11 @@
                             </div>
                             <div class="row">
                                 <div class="label">Table Order</div>
-                                <div class="value">50</div>
+                            <div class="value">@GetAdminDashboardData.customer_status_order</div>
                             </div>
                             <div class="row">
                                 <div class="label">Online & To-Go</div>
-                                <div class="value">20</div>
+                            <div class="value">@GetAdminDashboardData.customer_status_online</div>
                             </div>
                         </div>
                     </div>
@@ -353,6 +357,7 @@
                             <span>109/365</span>
                         </div>
                     </div>
+                  
                     <div class="individual-progress">
                         <div class="icon-col">
                             <i class="fa-solid fa-person"></i>
@@ -411,9 +416,9 @@
                         <td>10500</td>
                     </tr>
                     <tr>
-                        <td>Khukuri Rum</td>
+                        <td></td>
                         <td>12</td>
-                        <td>10500</td>
+                        <td></td>
                     </tr>
                 </table>
             </div>
@@ -421,7 +426,7 @@
     </div>
 </div>
 
-
+}
 @inject BaseService BaseService
 
 @code {
@@ -429,24 +434,47 @@
     private GlobalState GlobalState { get; set; }
 
     private DashboardTransactionDto DashboardTransactionDto { get; set; } = new();
+    private DashboardRestroResponse GetAdminDashboardData { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
         GlobalState = await BaseService.GetGlobalState();
+       await FetchDashboardData();
 
-        if (GlobalState.CompanyId is not null)
+        // if (GlobalState.CompanyId is not null)
+        // {
+        //     var parameters = new Dictionary<string, string>
+
+
+        //         {
+        //         { "companyId", GlobalState.CompanyId.ToString() },
+        //         };
+
+        //     var result = await
+        //     BaseService.GetAsync<Derived<List<DashboardTransactionDto>>>("dashboard/get-sales-records",
+        //     parameters);
+
+        //     DashboardTransactionDto = result?.Result.FirstOrDefault() ?? new();
+
+        // }
+    }
+    private async Task FetchDashboardData()
+    {
+        try
         {
-            var parameters = new Dictionary<string, string>
-{
-{ "companyId", GlobalState.CompanyId.ToString() },
-};
-
-            var result = await
-            BaseService.GetAsync<Derived<List<DashboardTransactionDto>>>("dashboard/get-sales-records",
-            parameters);
-
-            DashboardTransactionDto = result?.Result.FirstOrDefault() ?? new();
-
+          
+            var eachData = await BaseService.GetAsync<Derived<DashboardRestroResponse>>("dashboard/get-admin-dashboard-data");
+            if (eachData != null)
+            {
+                GetAdminDashboardData = eachData.Result;
+                
+            }
+           
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching dashboard data: {ex.Message}");
         }
     }
+
 }
