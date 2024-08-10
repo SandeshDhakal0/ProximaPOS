@@ -25,23 +25,6 @@
         <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
     </ItemGroup>
 
-    <ItemGroup>
-      <_ContentIncludedByDefault Remove="wwwroot\css\app.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
-      <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
-      <_ContentIncludedByDefault Remove="Pages\KharidKhata\KharidKhata.razor" />
-      <_ContentIncludedByDefault Remove="Pages\ProductMaster\InventoryCategory.razor" />
-      <_ContentIncludedByDefault Remove="Pages\ProductMaster\InventoryRecords.razor" />
-      <_ContentIncludedByDefault Remove="Pages\ProductMaster\Products\AddProduct.razor" />
-      <_ContentIncludedByDefault Remove="Pages\ProductMaster\Products\Datepicker.razor" />
-      <_ContentIncludedByDefault Remove="Pages\ProductMaster\Products\ProductService.razor" />
-      <_ContentIncludedByDefault Remove="Pages\ProductMaster\PurchaseReceipt.razor" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Include="Layout\BikriKhata\BikriKhata.razor" />
-      <None Include="Layout\DateFilter\BsMonthSelection.razor" />
-      <None Include="Layout\DateFilter\BsYearSelection.razor" />
-    </ItemGroup>
+   
 
 </Project>
