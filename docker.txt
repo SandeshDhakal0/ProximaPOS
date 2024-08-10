@@ -1,0 +1,27 @@
+# Stage 1: Build the Blazor WebAssembly application
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+# Copy the solution file and project files
+COPY TheHighInnovation.POS.WEB.sln ./
+COPY TheHighInnovation.POS.Web/*.csproj ./TheHighInnovation.POS.Web/
+
+# Restore dependencies
+RUN dotnet restore
+
+# Copy the remaining source files
+COPY TheHighInnovation.POS.Web/. ./TheHighInnovation.POS.Web/
+
+# Build the application
+WORKDIR /src/TheHighInnovation.POS.Web
+RUN dotnet publish -c Release -o /app/publish
+
+# Stage 2: Create the runtime image using a static file server
+FROM nginx:alpine AS runtime
+COPY --from=build /app/publish /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx to serve the Blazor WebAssembly application
+CMD ["nginx", "-g", "daemon off;"]

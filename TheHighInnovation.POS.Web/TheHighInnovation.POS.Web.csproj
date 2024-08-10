@@ -42,19 +42,7 @@
       <None Include="Layout\BikriKhata\BikriKhata.razor" />
       <None Include="Layout\DateFilter\BsMonthSelection.razor" />
       <None Include="Layout\DateFilter\BsYearSelection.razor" />
-      <None Remove="Layout\Graphs\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Compile Remove="Layout\Graphs\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <EmbeddedResource Remove="Layout\Graphs\**" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Content Remove="Layout\Graphs\**" />
+      <None Include="Layout\Charts\**" />
     </ItemGroup>
 
 </Project>
