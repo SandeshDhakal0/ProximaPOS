@@ -1,34 +1,11 @@
-# Stage 1: Build the application
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
-
-# Copy the solution file and project files
-COPY TheHighInnovation.POS.WEB.sln ./
-COPY TheHighInnovation.POS.Web/*.csproj ./TheHighInnovation.POS.Web/
-
-# Restore dependencies
-RUN dotnet restore
-
-# Copy the remaining source files
-COPY . .
-
-# Build the application without optimizations for faster builds
-WORKDIR /src/TheHighInnovation.POS.Web
-RUN dotnet publish -c Debug -o /app/publish
-
-# List the contents of the publish directory for debugging
-RUN ls /app/publish
-
-# Stage 2: Create the runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
 WORKDIR /app
-COPY --from=build /app/publish .
-
-# List the contents of the app directory for debugging
-RUN ls /app
-
-# Expose port 80
+COPY . ./ 
+WORKDIR /app/TheHighInnovation.POS.WEB
+RUN dotnet restore
+RUN dotnet publish -c Release -o /out /p:UseAppHost=false 
+FROM nginx:latest 
+WORKDIR /usr/share/nginx/html
+COPY --from=build-env /out/wwwroot . 
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
-
-# Set the entry point for the application
-ENTRYPOINT ["dotnet", "TheHighInnovation.POS.WEB.dll"]

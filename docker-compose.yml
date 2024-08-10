@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  webapp:
+    image: thehighinnovation.pos.web:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5005:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
