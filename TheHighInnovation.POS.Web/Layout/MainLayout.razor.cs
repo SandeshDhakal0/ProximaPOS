@@ -40,6 +40,7 @@ public partial class MainLayout
             _globalState.IsSuperAdmin = result.IsSuperAdmin;
 
             DetermineSidebarVisibility(NavigationManager.Uri);
+            NavigationManager.NavigateTo("/landing-page");
         }
         else
         {
