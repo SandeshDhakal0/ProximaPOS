@@ -3,16 +3,6 @@
 @using TheHighInnovation.POS.Web.Services.Base
 @inject BaseService BaseService
 <div class="employeepage">
-    @* <div class="row mt-3 mb-3">
-        <div class="col-4">
-            <h3>Employee Index</h3>
-        </div>
-        <div class="col-8 text-end">
-            <button class="addemployeebtn" type="button" @onclick="() => OpenUpsertEmployeeDialog()">
-                Add a new employee
-            </button>
-        </div>
-    </div> *@
     <div class="toppart">
         <div class="topheading">
             <p>Employee Index</p>
@@ -75,21 +65,7 @@
             </form>
         </div>
     </div> *@
-@*     @if (Filter.IsInitialized)
-    {
-            <div class="chooseentries col-6">
-                @if (_pagerDto.TotalPages > 0)
-                {
-                    <span class="selecttext">Current Entries:</span>
-                    <select class="selectcompany" @onchange="HandlePaginationChange">
-                        <option value="5">5</option>
-                        <option value="10">10</option>
-                        <option value="15">15</option>
-                        <option value="20">20</option>
-                    </select>
-              
-                }
-            </div> *@
+
 
 
 

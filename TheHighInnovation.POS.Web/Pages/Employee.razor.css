@@ -207,15 +207,262 @@ table td{
 
 
 
-/*Media querry*/
+/*============================================Media querry==========================================*/
+
+@media only screen and (min-width: 1920px) {
+    .employeepage {
+        margin-top: 4%;
+    }
+
+    .tablediv tbody {
+        max-height: 52vh;
+    }
+
+    .topheading {
+        font-size: 50px;
+    }
+
+    .addcatogerybtn {
+        font-size: 28px;
+        height: 7vh;
+    }
+
+    .inputsearch {
+        height: 7vh;
+        width: 30vw;
+        font-size: 30px;
+    }
+
+    .searchbutton {
+        height: 7vh;
+        width: 3.5vw;
+    }
+
+        .searchbutton i {
+            font-size: 30px;
+        }
+
+    th {
+        font-size: 26px !important
+    }
+
+    .table tr {
+        height: 3vw;
+        align-items: center;
+        padding: 20px 0 20px 20px;
+    }
+
+    .table td {
+        height: 3vw;
+        padding: 20px 0 20px 20px;
+        font-size: 24px;
+    }
+
+    .selecttext {
+        font-size: 24px;
+    }
+
+    .selectcompany {
+        font-size: 26px;
+        padding: 5px;
+    }
+
+    pagination {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1919px) {
+
+    .employeepage {
+        margin-top: 4%;
+    }
+
+    .tablediv tbody {
+        max-height: 50vh;
+    }
+
+    .topheading {
+        font-size: 40px;
+    }
+
+    .addcatogerybtn {
+        font-size: 24px;
+        height: 8vh;
+    }
+
+    .inputsearch {
+        height: 7vh;
+        width: 30vw;
+        font-size: 28px;
+    }
+
+    .searchbutton {
+        height: 7vh;
+        width: 3.5vw;
+    }
+
+        .searchbutton i {
+            font-size: 28px;
+        }
+
+    .tablediv thead th {
+        font-size: 24px;
+    }
+
+
+    .table td {
+        font-size: 22px;
+    }
+
+    .selecttext {
+        font-size: 22px;
+    }
+
+    .selectcompany {
+        font-size: 24px;
+    }
+
+    .tablediv tbody {
+        max-height: 50vh;
+    }
+}
+
+@media screen and (max-width: 1700px) {
+    .employeepage {
+        margin-top: 5%;
+    }
+
+    .topheading {
+        font-size: 35px;
+    }
+
+    .addcatogerybtn {
+        font-size: 22px;
+        height: 7vh;
+    }
+
+    .inputsearch {
+        height: 7vh;
+        width: 30vw;
+        font-size: 24px;
+    }
+
+    .searchbutton {
+        height: 7vh;
+        width: 3.5vw;
+    }
+
+        .searchbutton i {
+            font-size: 22px;
+        }
+
+    .tablediv thead th, .selectcompany {
+        font-size: 20px;
+    }
+
+
+    .table td, .selecttext {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 1500px) {
+    .employeepage {
+        margin-top: 4%;
+    }
+
+    .topheading {
+        font-size: 30px;
+    }
+
+    .addcatogerybtn {
+        font-size: 20px;
+        height: 7vh;
+    }
+
+    .inputsearch {
+        height: 7vh;
+        width: 30vw;
+        font-size: 22px;
+    }
+
+    .searchbutton {
+        height: 7vh;
+        width: 3.5vw;
+    }
+
+        .searchbutton i {
+            font-size: 20px;
+        }
+
+    .tablediv thead th, .selectcompany {
+        font-size: 18px;
+    }
+
+
+    .table td, .selecttext {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+
+    .topheading {
+        font-size: 30px;
+    }
+
+    .addcatogerybtn {
+        font-size: 18px;
+        font-weight: 400;
+        height: 50px;
+        width: 35%;
+    }
+
+    .inputsearch {
+        width: 30vw;
+        height: 7vh;
+    }
+
+    .searchbutton {
+        width: 3.5vw;
+        height: 7vh;
+    }
+
+        .searchbutton i {
+        }
+
+    .tablediv thead th {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    .tablediv tbody {
+        max-height: 50vh;
+    }
+
+    .colorbg {
+        height: 40px;
+        width: 40px;
+    }
+
+    .selecttext {
+        font-size: 16px;
+    }
+
+    .selectcompany {
+        width: 3vw;
+        height: 4vh;
+    }
+}
+
 @media screen and (max-width: 1260px) {
     .addcatogerybtn {
-        width: 40%;
         font-size: 18px;
     }
 
     .inputsearch {
-        width: 350px;
+        width: 30vw;
     }
 
     .colorbg {
@@ -224,19 +471,41 @@ table td{
     }
 }
 
-@media screen and (max-width: 1112px) {
+.inputsearch {
+    font-size: 18px;
+}
+
+@media screen and (max-width: 1235px) {
     .addcatogerybtn {
-        width: 45%;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 1115px) {
+    .addcatogerybtn {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 1056px) {
+    .addcatogerybtn {
+        width: 36%;
+        font-size: 14px;
     }
 }
 
 @media screen and (max-width: 1024px) {
+
     .inputsearch {
         width: 300px;
     }
 
+    .searchbutton {
+        width: 4.5vw;
+    }
+
     .addcatogerybtn {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .topheading {
@@ -244,7 +513,7 @@ table td{
     }
 }
 
-@media screen and (max-width: 885px) {
+@media screen and (max-width: 986px) {
     .employeepage {
         margin-top: 5%;
     }
@@ -262,21 +531,66 @@ table td{
         font-size: 14px;
         height: 45px;
     }
-}
-@media screen and (max-width: 789px) {
-    .addcatogerybtn {
-        line-height: 1;
-        height: 40px;
-        width: 40%;
+
+    .page-link {
+        padding: 5px 8px;
     }
 
+    .tablediv tbody {
+        height: 45vh;
+    }
+
+    .table td {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 955px) {
+    .addcatogerybtn {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 866px) {
+    .addcatogerybtn {
+        width: 45%;
+        font-size: 14px;
+    }
 }
 
 @media screen and (max-width: 768px) {
+    .employeepage{
+        margin-top: 6%;
+    }
+
+    .topheading {
+        font-size: 26px;
+    }
+
     .addcatogerybtn {
-        line-height: 1;
-        height: 40px;
-        width: 40%;
+        width: 50%;
+        font-size: 14px;
+    }
+
+    .inputsearch {
+        width: 250px;
+        height: 35px;
+    }
+
+    .searchbutton {
+        height: 35px;
+    }
+
+    .tablediv tbody {
+        max-height: 48vh;
+    }
+
+    .tablediv {
+        margin-top: 3%;
+    }
+
+    .table thead th {
+        font-size: 14px;
     }
 
     .table {
@@ -288,5 +602,42 @@ table td{
         }
 
     .selecttext {
+    }
+
+    .page-link {
+        padding: 5px 8px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .employeepage {
+        margin-top: 6%;
+    }
+    .addcatogerybtn{
+        width:60%;
+        line-height:1;
+    }
+    .searchbutton{
+        width:5.5vw;
+    }
+    .searchbutton i{
+
+        font-size:16px;
+    }
+
+    .topheading {
+        font-size: 24px;
+    }
+
+    .tablediv tbody {
+        max-height: 48vh;
+    }
+
+    .page-link {
+        padding: 5px 8px;
+    }
+
+    .inputsearch {
+        width: 230px;
     }
 }
